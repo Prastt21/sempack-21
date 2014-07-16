@@ -66,14 +66,14 @@
                                 <li class="user-header bg-light-blue">
                                     <img src="<?php echo base_url('assets/img/avatar3.png'); ?>" class="img-circle" alt="User Image" />
                                     <p>
-                                        <?php echo $DATA_LOGIN['NAMA_LENGKAP'] != null ? $DATA_LOGIN['NAMA_LENGKAP'] : 'Nama'; ?>
-                                        <small><?php echo $DATA_LOGIN['NAMA_LEVEL'] != null ? $DATA_LOGIN['NAMA_LEVEL'] : 'Level'; ?></small>
+                                        <?php echo $DATA_LOGIN['Nama_Pengguna'] != null ? $DATA_LOGIN['Nama_Pengguna'] : 'Nama'; ?>
+                                        <small><?php echo $DATA_LOGIN['Nama_Level'] != null ? $DATA_LOGIN['Nama_Level'] : 'Level'; ?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="<?php echo base_url('profil/user/' . $DATA_LOGIN['ID_PENGGUNA']); ?>" class="btn btn-default btn-flat">Profil</a>
+                                        <a href="<?php echo base_url('profil/user/' . $DATA_LOGIN['Id_Pengguna']); ?>" class="btn btn-default btn-flat">Profil</a>
                                     </div>
                                 </li>
                             </ul>
