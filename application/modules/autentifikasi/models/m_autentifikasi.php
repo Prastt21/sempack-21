@@ -17,9 +17,9 @@ class m_autentifikasi extends CI_Model {
 
     function cek_pengguna($params) {
         $sql = 'SELECT a.*,b.*
-            FROM loginuser a 
-            JOIN leveluser b ON a.Id_Level = b.Id_Level
-            WHERE a.Username = ? AND a.Password = ?';
+            FROM pengguna a 
+            JOIN sys_level b ON a.Id_Level = b.Id_Level
+            WHERE a.NIK_NIM = ? AND a.Password = ?';
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();

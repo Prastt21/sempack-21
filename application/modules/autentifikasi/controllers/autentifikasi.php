@@ -32,8 +32,8 @@ class autentifikasi extends CI_Controller {
             //load library form validation
             $this->load->library('form_validation');
 
-            $this->form_validation->set_rules('username', 'username', 'required|trim');
-            $this->form_validation->set_rules('password', 'password', 'required|trim');
+            $this->form_validation->set_rules('NIK_NIM', 'username', 'required|trim');
+            $this->form_validation->set_rules('Password', 'password', 'required|trim');
             if ($this->form_validation->run() !== false) {
                 //load model
                 $this->load->model('m_autentifikasi');
@@ -41,11 +41,10 @@ class autentifikasi extends CI_Controller {
                 $kunci = md5($this->input->post('password', true));
                 $r_login = $this->m_autentifikasi->cek_pengguna(array($pengguna, $kunci));
                 if (is_array($r_login)) {
-                    $this->sesi->set_nama_lengkap('Nama Lengkap');
-                    $this->sesi->set_nama_pengguna('Nama Pengguna');
-                    $this->sesi->set_id($r_login['Id_Login']);
-                    $this->sesi->set_level('ADMINISTRATOR');
-                    $this->sesi->set_nama_level('Nama Level');
+                    $this->sesi->set_nama_pengguna($r_login['Nama_Pengguna']);
+                    $this->sesi->set_id($r_login['Id_Pengguna']);
+                    $this->sesi->set_level($r_login['Id_Level']);
+                    $this->sesi->set_nama_level($r_login['Nama_Level']);
                     $this->sesi->set_portal($r_login['Portal_Level']);
                     $this->sesi->do_login();
                     redirect($r_login['Portal_Level']);
