@@ -4,7 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left info">
-                <p>Assalamu'alaikum, <?php echo $DATA_LOGIN['Nama_Pengguna']; ?></p>
+                <p>Assalamu'alaikum, <?php echo $DATA_LOGIN['NAMA_PENGGUNA']; ?></p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
