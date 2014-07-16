@@ -14,7 +14,6 @@ class m_autentifikasi extends CI_Model {
     public function __construct() {
         parent::__construct();
     }
-
     function cek_pengguna($params) {
         $sql = 'SELECT a.*,b.*
             FROM pengguna a 
