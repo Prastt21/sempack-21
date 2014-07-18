@@ -41,8 +41,8 @@ class autentifikasi extends CI_Controller {
                 $kunci = md5($this->input->post('password', true));
                 $r_login = $this->m_autentifikasi->cek_pengguna(array($pengguna, $kunci));
                 if (is_array($r_login)) {
-                    $this->sesi->set_nama_pengguna($r_login['NIK_NIM']);
-                    $this->sesi->set_nama_lengkap($r_login['Nama_Pengguna']);
+                    $this->sesi->set_nama_pengguna($r_login['Nama_Pengguna']);
+                    $this->sesi->set_nama_lengkap($r_login['NIK_NIM']);
                     $this->sesi->set_id($r_login['Id_Pengguna']);
                     $this->sesi->set_level($r_login['Id_Level']);
                     $this->sesi->set_nama_level($r_login['Nama_Level']);

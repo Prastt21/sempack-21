@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Waktu pembuatan: 16. Juli 2014 jam 10:07
+-- Waktu pembuatan: 18. Juli 2014 jam 16:19
 -- Versi Server: 5.1.41
 -- Versi PHP: 5.3.1
 
@@ -26,9 +26,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `asuransi` (
-  `Id_Asuransi` char(5) NOT NULL,
+  `Id_Asuransi` int(10) NOT NULL AUTO_INCREMENT,
   `Jenis_Asuransi` enum('KECELAKAAN','SAKIT') NOT NULL,
-  `Id_Pengguna` char(5) NOT NULL,
+  `Id_Pengguna` int(10) NOT NULL,
   `Nama_RS` varchar(100) NOT NULL,
   `Alamat_RS` varchar(150) NOT NULL,
   `Tanggal_Masuk` date NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Santunan` int(15) DEFAULT NULL,
   PRIMARY KEY (`Id_Asuransi`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data untuk tabel `asuransi`
@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
 --
 
 CREATE TABLE IF NOT EXISTS `aula` (
-  `Id_Pinjam_Aula` char(5) NOT NULL,
-  `Id_Pengguna` char(5) NOT NULL,
+  `Id_Pinjam_Aula` int(10) NOT NULL AUTO_INCREMENT,
+  `Id_Pengguna` int(10) NOT NULL,
   `Nama_Kegiatan` varchar(100) NOT NULL,
   `Ketua_Organisasi` varchar(100) NOT NULL,
   `Peserta` varchar(100) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Status_Penggunaan` int(1) NOT NULL,
   PRIMARY KEY (`Id_Pinjam_Aula`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data untuk tabel `aula`
@@ -78,11 +78,11 @@ CREATE TABLE IF NOT EXISTS `aula` (
 --
 
 CREATE TABLE IF NOT EXISTS `beasiswa` (
-  `Id_Beasiswa` char(5) NOT NULL,
-  `Id_JB` char(5) NOT NULL,
-  `Id_Pengguna` char(5) NOT NULL,
-  `Id_Ortu` char(5) NOT NULL,
-  `Id_Jurusan` char(5) NOT NULL,
+  `Id_Beasiswa` int(10) NOT NULL AUTO_INCREMENT,
+  `Id_JB` int(10) NOT NULL,
+  `Id_Pengguna` int(10) NOT NULL,
+  `Id_Ortu` int(10) NOT NULL,
+  `Id_Jurusan` int(10) NOT NULL,
   `Jenjang` enum('D3','S1') NOT NULL,
   `Alamat_Sekarang` varchar(150) NOT NULL,
   `Nama_PT` set('STMIK AMIKOM YOGYAKARTA') DEFAULT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   KEY `Id_Pengguna` (`Id_Pengguna`),
   KEY `Id_Ortu` (`Id_Ortu`),
   KEY `Id_Jurusan` (`Id_Jurusan`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data untuk tabel `beasiswa`
@@ -110,19 +110,22 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
 --
 
 CREATE TABLE IF NOT EXISTS `informasi` (
-  `Id_Informasi` char(5) NOT NULL,
-  `Id_Pengguna` char(5) NOT NULL,
+  `Id_Informasi` int(10) NOT NULL AUTO_INCREMENT,
+  `Id_Pengguna` int(10) NOT NULL,
   `Judul_Info` varchar(200) NOT NULL,
   `Isi_Info` varchar(1000) NOT NULL,
   `Jenis_Info` enum('Aula','Beasiswa','Asuransi') NOT NULL,
-  `Tanggal_info` datetime NOT NULL,
+  `Tanggal_info` datetime DEFAULT NULL,
   PRIMARY KEY (`Id_Informasi`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data untuk tabel `informasi`
 --
 
+INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`, `Jenis_Info`, `Tanggal_info`) VALUES
+(1, 1, 'judul', 'isi', 'Beasiswa', NULL),
+(2, 1, 'judul yang kedua', 'isi yang kedua', 'Aula', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,19 +134,19 @@ CREATE TABLE IF NOT EXISTS `informasi` (
 --
 
 CREATE TABLE IF NOT EXISTS `jenis_beasiswa` (
-  `Id_JB` char(5) NOT NULL,
+  `Id_JB` int(10) NOT NULL AUTO_INCREMENT,
   `Jenis_Beasiswa` varchar(10) DEFAULT NULL,
   `Warna_Beasiswa` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`Id_JB`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data untuk tabel `jenis_beasiswa`
 --
 
 INSERT INTO `jenis_beasiswa` (`Id_JB`, `Jenis_Beasiswa`, `Warna_Beasiswa`) VALUES
-('JB001', 'PPA', NULL),
-('JB002', 'BBP/PPA', NULL);
+(1, 'PPA', NULL),
+(2, 'BBP/PPA', NULL);
 
 -- --------------------------------------------------------
 
@@ -152,22 +155,22 @@ INSERT INTO `jenis_beasiswa` (`Id_JB`, `Jenis_Beasiswa`, `Warna_Beasiswa`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `jurusan` (
-  `Id_Jurusan` char(5) NOT NULL,
+  `Id_Jurusan` int(10) NOT NULL AUTO_INCREMENT,
   `Nama_Jurusan` varchar(30) NOT NULL,
   `Singkatan_Jurusan` char(4) DEFAULT NULL,
   `Warna_Jurusan` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`Id_Jurusan`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data untuk tabel `jurusan`
 --
 
 INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna_Jurusan`) VALUES
-('JR001', 'S1 Teknik Informatika', 'S1TI', '#7ef4f9'),
-('JR002', 'D3 Teknik Informatika', 'D3TI', '#BADBF3'),
-('JR003', 'S1 Sistem Informasi', 'S1SI', '#FF5B5B'),
-('JR004', 'D3 Manajemen Informatika', 'D3MI', '#EFA0A0');
+(1, 'S1 Teknik Informatika', 'S1TI', '#7ef4f9'),
+(2, 'D3 Teknik Informatika', 'D3TI', '#BADBF3'),
+(3, 'S1 Sistem Informasi', 'S1SI', '#FF5B5B'),
+(4, 'D3 Manajemen Informatika', 'D3MI', '#EFA0A0');
 
 -- --------------------------------------------------------
 
@@ -176,8 +179,8 @@ INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna
 --
 
 CREATE TABLE IF NOT EXISTS `keterangan_ortu` (
-  `Id_Ortu` char(5) NOT NULL,
-  `Id_Pengguna` char(5) NOT NULL,
+  `Id_Ortu` int(10) NOT NULL AUTO_INCREMENT,
+  `Id_Pengguna` int(10) NOT NULL,
   `Nama_Ortu` varchar(100) NOT NULL,
   `Alamat_Ortu` varchar(150) NOT NULL,
   `No_Telp_Ortu` int(15) NOT NULL,
@@ -186,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `keterangan_ortu` (
   `Jml_Tanggungan` int(2) DEFAULT NULL,
   PRIMARY KEY (`Id_Ortu`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data untuk tabel `keterangan_ortu`
@@ -200,8 +203,8 @@ CREATE TABLE IF NOT EXISTS `keterangan_ortu` (
 --
 
 CREATE TABLE IF NOT EXISTS `pendaftaran_asuransi` (
-  `Id_Pengguna` char(5) NOT NULL,
-  `Id_Periode` int(1) NOT NULL,
+  `Id_Pengguna` int(10) NOT NULL,
+  `Id_Periode` int(10) NOT NULL,
   `Tanggal_Daftar_Asuransi` datetime NOT NULL,
   `Id_Asuransi` char(5) NOT NULL,
   `Status_Asuransi` int(1) NOT NULL,
@@ -221,10 +224,10 @@ CREATE TABLE IF NOT EXISTS `pendaftaran_asuransi` (
 --
 
 CREATE TABLE IF NOT EXISTS `pendaftaran_beasiswa` (
-  `Id_Pengguna` char(5) NOT NULL,
-  `Id_Periode` int(1) NOT NULL,
+  `Id_Pengguna` int(10) NOT NULL,
+  `Id_Periode` int(10) NOT NULL,
   `Tanggal_Daftar_Beasiswa` datetime NOT NULL,
-  `Id_Beasiswa` char(5) NOT NULL,
+  `Id_Beasiswa` int(10) NOT NULL,
   `Status_Beasiswa` int(1) NOT NULL,
   KEY `Id_Pengguna` (`Id_Pengguna`),
   KEY `Id_Beasiswa` (`Id_Beasiswa`)
@@ -242,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `pendaftaran_beasiswa` (
 --
 
 CREATE TABLE IF NOT EXISTS `pengguna` (
-  `Id_Pengguna` char(5) NOT NULL,
+  `Id_Pengguna` int(10) NOT NULL AUTO_INCREMENT,
   `Id_Level` int(1) NOT NULL,
   `Nama_Pengguna` varchar(150) NOT NULL,
   `Status_Pengguna` enum('MAHASISWA','KARYAWAN') NOT NULL,
@@ -253,20 +256,21 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
   `Alamat` varchar(400) NOT NULL,
   `Tempat_Lahir` varchar(20) NOT NULL,
   `Tanggal_Lahir` date NOT NULL,
+  `Email` varchar(20) NOT NULL,
   `Online` int(1) NOT NULL,
   `Sesi` datetime NOT NULL,
   `Catatan` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`Id_Pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data untuk tabel `pengguna`
 --
 
-INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Online`, `Sesi`, `Catatan`) VALUES
-('PNG01', 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', 0, '0000-00-00 00:00:00', NULL),
-('PNG02', 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'PRIA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', 0, '0000-00-00 00:00:00', NULL),
-('PNG03', 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', 'b30ba880fba567a1dc4cb2306db6195b', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', 0, '0000-00-00 00:00:00', NULL);
+INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Email`, `Online`, `Sesi`, `Catatan`) VALUES
+(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', '', 0, '0000-00-00 00:00:00', NULL),
+(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'PRIA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', '', 0, '0000-00-00 00:00:00', NULL),
+(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', 'b30ba880fba567a1dc4cb2306db6195b', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', 0, '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -275,10 +279,10 @@ INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Peng
 --
 
 CREATE TABLE IF NOT EXISTS `periode` (
-  `Id_Periode` int(1) NOT NULL,
+  `Id_Periode` int(10) NOT NULL AUTO_INCREMENT,
   `Tahun` int(4) NOT NULL,
   PRIMARY KEY (`Id_Periode`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data untuk tabel `periode`
@@ -295,15 +299,15 @@ INSERT INTO `periode` (`Id_Periode`, `Tahun`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `request` (
-  `Id_Request` char(5) NOT NULL,
-  `Id_Pengguna` char(5) NOT NULL,
+  `Id_Request` int(10) NOT NULL AUTO_INCREMENT,
+  `Id_Pengguna` int(10) NOT NULL,
   `Req_Tanya` varchar(200) NOT NULL,
   `Tgl_Tanya` date NOT NULL,
   `Req_Jawab` varchar(200) NOT NULL,
   `Tgl_Jawab` date NOT NULL,
   PRIMARY KEY (`Id_Request`),
   KEY `Id_Operator` (`Id_Pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data untuk tabel `request`
@@ -438,14 +442,14 @@ CREATE TABLE IF NOT EXISTS `sys_menu` (
   `mdb` int(11) DEFAULT '1',
   `mdd` datetime DEFAULT NULL,
   PRIMARY KEY (`id_menu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data untuk tabel `sys_menu`
 --
 
 INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`, `deskripsi`, `link`, `icon`, `mdb`, `mdd`) VALUES
-(1, 'Dashboard', 1, 1, 0, 'Dashboard', 'dashboard', NULL, 1, NULL),
+(1, 'Dashboard', 1, 1, 0, 'Dashboard', 'dashboard', '<i class= "fa fa-dashboard"></i>', 1, NULL),
 (2, 'Data Operator', 1, 2, 0, 'Data Operator', 'data_operator', '<i class= "fa fa-users"></i>', 1, NULL),
 (3, 'Manajemen Data', 1, 3, 0, 'Manajemen Data', NULL, '<i class= "fa fa-book"></i>', 1, NULL),
 (4, 'Peminjaman Aula', 1, 1, 3, 'Data Peminjaman Aula', 'peminjaman_aula', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
@@ -460,7 +464,7 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (13, 'Informasi', 1, 1, 12, 'Data Informasi', 'data_informasi', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
 (14, 'Kalender', 1, 2, 12, 'Kalender', 'kalender', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
 (15, 'Statistik', 1, 3, 12, 'Statistik', 'statistik', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
-(16, 'Request Pengguna', 1, 5, 0, 'Request Pengguna', 'request_pengguna', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
+(16, 'Request Pengguna', 1, 5, 0, 'Request Pengguna', 'request_pengguna', '<i class= "fa fa-github-square"></i>', 1, NULL),
 (17, 'Laporan-Laporan', 1, 6, 0, 'Laporan - Laporan', 'laporan_laporan', '<i class= "fa fa-phone-square"></i>', 1, NULL),
 (18, 'List Data Peminjaman Aula', 1, 1, 17, 'List Peminjaman Aula', 'list_peminjaman_aula', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
 (19, 'List Pendaftaran Beasiswa', 1, 2, 17, 'List Pendaftaran Beasiswa', 'list_pendaftaran_beasiswa', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
@@ -472,7 +476,7 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (25, 'More Pages', 1, 11, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
 (26, 'User Profile', 1, 1, 25, 'User Profil', 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL),
 (27, 'Login&Register', 1, 2, 25, 'login and Register', 'login_registers', '<i class= "fa fa-caret-square-o-right"></i>', 1, NULL),
-(28, 'Dashboard', 1, 1, 0, 'Dashboard Operator', 'dashboard', NULL, 1, NULL),
+(28, 'Dashboard', 1, 1, 0, 'Dashboard Operator', 'dashboard', '<i class= "fa fa-dashboard"></i>', 1, NULL),
 (29, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', 'informasi', '<i class= "fa fa-building-o"></i>', 1, NULL),
 (30, 'Data Peminjaman Aula', 1, 3, 0, 'Data Peminjaman Aula', 'data_peminjaman_aula', '<i class= "fa fa-credit-card"></i>', 1, NULL),
 (31, 'Data Pendaftaran Beasiswa', 1, 4, 0, 'Data Pendaftaran Beasiswa', 'data_pendaftaran_beasiswa', '<i class= "fa fa-gift"></i>', 1, NULL),
@@ -480,15 +484,14 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (33, 'More Pages', 1, 7, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
 (34, 'Profil Operator', 1, 8, 35, 'Profil Operator', 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL),
 (35, 'Request Pengguna', 1, 6, 0, 'Request Pengguna', 'request_pengguna', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
-(36, 'Dashboard', 1, 1, 0, NULL, NULL, NULL, 1, NULL),
-(37, 'Berita dan Informasi', 1, 2, 0, NULL, NULL, NULL, 1, NULL),
-(38, 'Submit Pendaftaran', 1, 3, 0, NULL, NULL, NULL, 1, NULL),
-(39, 'Peminjaman Aula BSC', 1, 4, 38, NULL, NULL, NULL, 1, NULL),
-(40, 'Pendaftaran Beasiswa', 1, 5, 38, NULL, NULL, NULL, 1, NULL),
-(41, 'Pendaftaran Rujukan Asuransi', 1, 6, 38, NULL, NULL, NULL, 1, NULL),
-(42, 'More Pages', 1, 7, 0, NULL, NULL, NULL, 1, NULL),
-(43, 'Profil Pengguna', 1, 8, 42, NULL, NULL, NULL, 1, NULL),
-(44, '', NULL, NULL, 0, NULL, NULL, NULL, 1, NULL);
+(36, 'Dashboard', 1, 1, 0, 'Dashboard', NULL, '<i class= "fa fa-dashboard"></i>', 1, NULL),
+(37, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', NULL, NULL, 1, NULL),
+(38, 'Submit Pendaftaran', 1, 3, 0, 'Submit Pendaftaran', NULL, NULL, 1, NULL),
+(39, 'Peminjaman Aula BSC', 1, 4, 38, 'Peminjaman Aula BSC', NULL, NULL, 1, NULL),
+(40, 'Pendaftaran Beasiswa', 1, 5, 38, 'Pendaftaran Beasiswa', NULL, NULL, 1, NULL),
+(41, 'Pendaftaran Rujukan Asuransi', 1, 6, 38, 'Pendaftaran Rujukan Asuransi', NULL, NULL, 1, NULL),
+(42, 'More Pages', 1, 7, 0, 'More Pages', NULL, NULL, 1, NULL),
+(43, 'Profil Pengguna', 1, 8, 42, NULL, NULL, NULL, 1, NULL);
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -528,7 +531,7 @@ ALTER TABLE `pendaftaran_beasiswa`
 -- Ketidakleluasaan untuk tabel `sys_level_menu`
 --
 ALTER TABLE `sys_level_menu`
-  ADD CONSTRAINT `sys_level_menu_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `sys_menu` (`id_menu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sys_level_menu_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `sys_menu` (`id_menu`),
   ADD CONSTRAINT `sys_level_menu_ibfk_2` FOREIGN KEY (`id_level`) REFERENCES `sys_level` (`Id_Level`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
