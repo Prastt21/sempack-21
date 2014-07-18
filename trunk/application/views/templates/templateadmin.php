@@ -47,19 +47,13 @@
                         <li class="grey">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-tasks"></i>
-                                Nama Operator
-                            </a>
-                        </li>
-                        <li class="grey">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <i class="icon-tasks"></i>
                                 Bantuan
                             </a>
                         </li>
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Nama Lengkap<i class="caret"></i></span>
+                                <span><?php echo $DATA_LOGIN['NAMA_PENGGUNA'] != null ? $DATA_LOGIN['NAMA_PENGGUNA'] : 'Nama'; ?><i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
