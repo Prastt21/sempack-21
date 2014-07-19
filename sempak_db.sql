@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Waktu pembuatan: 18. Juli 2014 jam 16:19
+-- Waktu pembuatan: 19. Juli 2014 jam 23:21
 -- Versi Server: 5.1.41
 -- Versi PHP: 5.3.1
 
@@ -37,12 +37,14 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Santunan` int(15) DEFAULT NULL,
   PRIMARY KEY (`Id_Asuransi`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data untuk tabel `asuransi`
 --
 
+INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS`, `Alamat_RS`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`) VALUES
+(1, 'KECELAKAAN', 4, 'RS. dr.Sardjito', 'Jalan Kamboja Kompleks UGM', '0000-00-00', '0000-00-00', 500000, NULL);
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Waktu_Pinjam` time NOT NULL,
   `Tanggal_Selesai` date NOT NULL,
   `Waktu_Selesai` time NOT NULL,
-  `Status_Penggunaan` int(1) NOT NULL,
+  `Status_Penggunaan` enum('Terverifikasi','Waiting','Expired') NOT NULL,
   PRIMARY KEY (`Id_Pinjam_Aula`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -117,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `informasi` (
   `Jenis_Info` enum('Aula','Beasiswa','Asuransi') NOT NULL,
   `Tanggal_info` datetime DEFAULT NULL,
   PRIMARY KEY (`Id_Informasi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data untuk tabel `informasi`
@@ -125,7 +127,10 @@ CREATE TABLE IF NOT EXISTS `informasi` (
 
 INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`, `Jenis_Info`, `Tanggal_info`) VALUES
 (1, 1, 'judul', 'isi', 'Beasiswa', NULL),
-(2, 1, 'judul yang kedua', 'isi yang kedua', 'Aula', NULL);
+(2, 1, 'judul yang kedua', 'isi yang kedua', 'Aula', NULL),
+(3, 1, 'hdfhdf', 'fhdfhd', 'Aula', NULL),
+(4, 1, 'xz', 'aa', 'Aula', NULL),
+(5, 1, 'sdfbsjhdbfksj', 'fbkdjafbakjsn', 'Aula', NULL);
 
 -- --------------------------------------------------------
 
@@ -167,10 +172,7 @@ CREATE TABLE IF NOT EXISTS `jurusan` (
 --
 
 INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna_Jurusan`) VALUES
-(1, 'S1 Teknik Informatika', 'S1TI', '#7ef4f9'),
-(2, 'D3 Teknik Informatika', 'D3TI', '#BADBF3'),
-(3, 'S1 Sistem Informasi', 'S1SI', '#FF5B5B'),
-(4, 'D3 Manajemen Informatika', 'D3MI', '#EFA0A0');
+(1, 'dsv', 'dsvd', '#20B2AA');
 
 -- --------------------------------------------------------
 
@@ -180,21 +182,21 @@ INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna
 
 CREATE TABLE IF NOT EXISTS `keterangan_ortu` (
   `Id_Ortu` int(10) NOT NULL AUTO_INCREMENT,
-  `Id_Pengguna` int(10) NOT NULL,
   `Nama_Ortu` varchar(100) NOT NULL,
   `Alamat_Ortu` varchar(150) NOT NULL,
   `No_Telp_Ortu` int(15) NOT NULL,
   `Pekerjaan_Ortu` enum('PNS','PEGAWAI SWASTA','WIRASWASTA','TNI/POLRI','NELAYAN/PETANI','LAINNYA') DEFAULT NULL,
   `Penghasilan_Ortu` int(15) DEFAULT NULL,
   `Jml_Tanggungan` int(2) DEFAULT NULL,
-  PRIMARY KEY (`Id_Ortu`),
-  KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`Id_Ortu`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data untuk tabel `keterangan_ortu`
 --
 
+INSERT INTO `keterangan_ortu` (`Id_Ortu`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_Ortu`, `Pekerjaan_Ortu`, `Penghasilan_Ortu`, `Jml_Tanggungan`) VALUES
+(1, 'dkgbskjd', 'sjhdvam', 9889, 'LAINNYA', 45555, 5);
 
 -- --------------------------------------------------------
 
@@ -246,6 +248,7 @@ CREATE TABLE IF NOT EXISTS `pendaftaran_beasiswa` (
 
 CREATE TABLE IF NOT EXISTS `pengguna` (
   `Id_Pengguna` int(10) NOT NULL AUTO_INCREMENT,
+  `Id_Ortu` int(10) NOT NULL,
   `Id_Level` int(1) NOT NULL,
   `Nama_Pengguna` varchar(150) NOT NULL,
   `Status_Pengguna` enum('MAHASISWA','KARYAWAN') NOT NULL,
@@ -261,16 +264,17 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
   `Sesi` datetime NOT NULL,
   `Catatan` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data untuk tabel `pengguna`
 --
 
-INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Email`, `Online`, `Sesi`, `Catatan`) VALUES
-(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', '', 0, '0000-00-00 00:00:00', NULL),
-(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'PRIA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', '', 0, '0000-00-00 00:00:00', NULL),
-(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', 'b30ba880fba567a1dc4cb2306db6195b', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', 0, '0000-00-00 00:00:00', NULL);
+INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Ortu`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Email`, `Online`, `Sesi`, `Catatan`) VALUES
+(1, 1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', 'prastt21@gmail.com', 0, '0000-00-00 00:00:00', NULL),
+(2, 0, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'PRIA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', '', 0, '0000-00-00 00:00:00', NULL),
+(3, 1, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', 'b30ba880fba567a1dc4cb2306db6195b', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', 0, '0000-00-00 00:00:00', NULL),
+(4, 1, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '', '', 'PRIA', 0, '', '', '0000-00-00', '', 0, '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -289,8 +293,7 @@ CREATE TABLE IF NOT EXISTS `periode` (
 --
 
 INSERT INTO `periode` (`Id_Periode`, `Tahun`) VALUES
-(1, 2013),
-(2, 2014);
+(1, 2016);
 
 -- --------------------------------------------------------
 
@@ -508,12 +511,6 @@ ALTER TABLE `asuransi`
 --
 ALTER TABLE `aula`
   ADD CONSTRAINT `aula_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
-
---
--- Ketidakleluasaan untuk tabel `keterangan_ortu`
---
-ALTER TABLE `keterangan_ortu`
-  ADD CONSTRAINT `keterangan_ortu_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
 
 --
 -- Ketidakleluasaan untuk tabel `pendaftaran_asuransi`

@@ -41,13 +41,19 @@
                         <li class="grey">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-tasks"></i>
-                                Note Operator</span>
+                                <span> Periode </span>
                             </a>
                         </li>
                         <li class="grey">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-tasks"></i>
-                                Bantuan
+                                <span> Note Operator</span>
+                            </a>
+                        </li>
+                        <li class="grey">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="icon-tasks"></i>
+                                <span>Bantuan</span>
                             </a>
                         </li>
                         <li class="dropdown user user-menu">
