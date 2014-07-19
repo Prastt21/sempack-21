@@ -5,10 +5,13 @@ if (!defined('BASEPATH'))
 
 require_once APPPATH . 'controllers/operator_base.php';
 
-class manajemen_data extends operator_base {
+class config_request extends operator_base {
 
     public function index() {
-        parent::display('v_manajemen_data');
+        parent::display('v_config_request');
     }
 
 }
+
+/* End of file welcome.php */
+/* Location: ./application/controllers/welcome.php */
