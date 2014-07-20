@@ -1,29 +1,24 @@
 <?php
 	
 	if(isset($_POST['simpan'])){
-		$this->sistem->update_request_sistem($_POST['status_request'],$_POST['hapus_request']);
-		echo '<script type="text/javascript">jAlert("<center>Konfigurasi tersimpan.</center>", "Informasi", function(r) {
+		$this->sistem->update_pengumuman($_POST['pengumuman_admin']);
+		echo '<script type="text/javascript">jAlert("<center>Data tersimpan.</center>", "Informasi", function(r) {
 				if(r == true) {
-						window.location.replace(base+"config_request/v_config_request");
+						window.location.replace(base+"config_sistem/v_config_sistem");
 				}
 		});</script>';
 	}
-
-	if($sistem->StatusRequest_Sistem == "AKTIF"){
-		$statusaktif = "selected";
-	} else {
-		$statusaktif2 = "selected";
-	}
 ?>
+
 <section class="content-header">
     <h1>
-        Konfigurasi Request Pengguna
-        <small>Optimasi Request Pengguna</small>
+        Pengumuman Admin
+        <small>Konfigurasi Pengumuaman</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Operator</li>
-        <li class="active">Konfigurasi Request Pengguna</li>
+        <li>Admin</li>
+        <li class="active">Konfigurasi Pengumuaman</li>
     </ol>
     <!-- Main content -->
 </section>
@@ -31,7 +26,7 @@
     <div class="row">
         <div class="col-xs-8">
             <div class="box box-primary">
-                <div class="box-header"><h3 class="box-title">Konfigurasi Request Pengguna</h3></div>
+                <div class="box-header"><h3 class="box-title">Konfigurasi Pengumuaman</h3></div>
                 <div class="box-body">
                   
                         <div class="row">
@@ -45,23 +40,12 @@
                     
                     <form class="form-horizontal" action="<?php echo base_url(); ?>" id="form-tambah-pengguna" method="post">
                         <div class="form-group">
-                            <label for="status-request" class="col-lg-3 control-label">Status Request</label>
+                            <label for="pengumuman-admin" class="col-lg-3 control-label">Pengumuman Admin</label>
                             <div class="col-lg-5">
-                                <select name="status_request" class="form-control input-sm" value="<?php echo $sistem->StatusRequest_Sistem; ?>" style="width: 150px;">
-                                    <option></option>
-                                    <option value="AKTIF" <?php echo @$statusaktif; ?> >AKTIF </option>
-                                    <option value="TIDAK AKTIF"  <?php echo @$statusaktif2; ?> >TIDAK AKTIF</option>
-                                </select>
+                                <textarea name="pengumuman-admin" maxlength="100" class="form-control input-sm" placeholder="Pengumuman Admin"><?php echo $sistem->Pengumuman_; ?></textarea>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                        
-                        <div class="form-group">
-                            <label for="hapust-request" class="col-lg-3 control-label">Hapus Request Otomatis </label>
-                            <div class="col-lg-5">
-                                <input type="text" name="hapus_request" maxlength="20" class="form-control input-sm" placeholder="Hapus Request">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                        
+                        </div>                       
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
@@ -90,7 +74,15 @@
                         <li>
                             Kolom Nama Operator<br>
                             Kolom nama operator merupakan nama lengkap operator sistem  Terdiri minimal 3 karakter dengan maksimal 20 karakter.  Dalam kolom ini SPASI akan dihilangkan.  Kolom ini tidak boleh kosong.
-                        </li>                      
+                        </li>
+                        <li>
+                            Kolom Status Operator<br>
+                            Kolom status oerator disi dengan status operator saat ini.  Terdiri minimal 8 karakter dengan maksimal 20 karakter.  Untuk memastikan saat pengisian, kolom kata kunci harus sama dengan kolom ulangi kata kunci.  Kolom ini tidak boleh kosong.
+                        </li>
+                        <li>
+                            Kolom Username<br>
+                            Kolom username digunakan untuk masuk ke dalam sistem.  Kolom ini tidak boleh kosong.
+                        </li>                        
                     </ol>
                 </div>
             </div>

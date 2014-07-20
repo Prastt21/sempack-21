@@ -1,3 +1,22 @@
+<?php
+	
+	if(isset($_POST['simpan'])){
+		$this->sistem->update_sistem($_POST['status_sistem'], $_POST['periode_sistem']);
+		echo '<script type="text/javascript">jAlert("<center>Data tersimpan.</center>", "Informasi", function(r) {
+				if(r == true) {
+						window.location.replace(base+"config_sistem/v_config_sistem");
+				}
+		});</script>';
+	}
+
+	if($sistem->Status_Sistem == "AKTIF"){
+		$statusaktif = "selected";
+	} else {
+		$statusaktif2 = "selected";
+	}	
+	
+?>
+
 <section class="content-header">
     <h1>
         Konfigurasi Sistem
@@ -30,10 +49,10 @@
                         <div class="form-group">
                             <label for="status-sistem" class="col-lg-3 control-label">Status Sistem</label>
                             <div class="col-lg-5">
-                                <select name="status_sistem" class="form-control input-sm" style="width: 150px;">
+                                <select name="status_sistem" class="form-control input-sm" value="<?php echo $sistem->Status_Sistem; ?>" style="width: 150px;">
                                     <option></option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Non-Aktif">Non Aktif</option>
+                                    <option value="AKTIF" <?php echo @$statusaktif; ?> >AKTIF</option>
+                                    <option value="TIDAK AKTIF" <?php echo @$statusaktif2; ?> >TIDAK AKTIF</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
@@ -43,38 +62,19 @@
                             <div class="col-lg-5">
                                 <select name="periode_sistem" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="Aula">Aula</option>
-                                    <option value="Beasiswa">Beasiswa</option>
-                                    <option value="Asuransi">Asuransi</option>
+                                    <?php
+                                    if (isset($rs_periode)):
+                                        foreach ($rs_periode as $dt_periode):
+                                            ?>
+                                            <option value="<?php echo $dt_periode['Id_Periode']; ?>"><?php echo $dt_periode['Tahun']; ?></option>
+                                            <?php
+                                        endforeach;
+                                    endif;
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="pengumuman-sistem" class="col-lg-3 control-label">Pengumuman Sistem</label>
-                            <div class="col-lg-5">
-                                <textarea name="pengumuman_sistem" maxlength="100" class="form-control input-sm" placeholder="Pengumuman"></textarea>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="konfigurasi-khusus" class="col-lg-3 control-label">Konfigurasi Khusus</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="konfigurasi_khusus" maxlength="100" class="form-control input-sm" placeholder="Konfigurasi Khusus">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="status-request" class="col-lg-3 control-label">Status Request</label>
-                            <div class="col-lg-5">
-                                <select name="status_request" class="form-control input-sm" style="width: 150px;">
-                                    <option></option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Non-Aktif">Non Aktif</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
+                        </div>                       
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
