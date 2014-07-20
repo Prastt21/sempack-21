@@ -70,19 +70,7 @@
                         <li>
                             Kolom Level Operator<br>
                             Kolom level operator diisi dengan level sesuai dengan operasi sistem.  Terdiri minimal 3 karakter dengan maksimal 100 karakter.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Nama Operator<br>
-                            Kolom nama operator merupakan nama lengkap operator sistem  Terdiri minimal 3 karakter dengan maksimal 20 karakter.  Dalam kolom ini SPASI akan dihilangkan.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Status Operator<br>
-                            Kolom status oerator disi dengan status operator saat ini.  Terdiri minimal 8 karakter dengan maksimal 20 karakter.  Untuk memastikan saat pengisian, kolom kata kunci harus sama dengan kolom ulangi kata kunci.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Username<br>
-                            Kolom username digunakan untuk masuk ke dalam sistem.  Kolom ini tidak boleh kosong.
-                        </li>                        
+                        </li>                       
                     </ol>
                 </div>
             </div>
