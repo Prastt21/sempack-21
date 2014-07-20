@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Waktu pembuatan: 19. Juli 2014 jam 23:21
--- Versi Server: 5.1.41
--- Versi PHP: 5.3.1
+-- Generation Time: Jul 20, 2014 at 03:17 PM
+-- Server version: 5.1.41
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -22,7 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `asuransi`
+-- Table structure for table `asuransi`
 --
 
 CREATE TABLE IF NOT EXISTS `asuransi` (
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data untuk tabel `asuransi`
+-- Dumping data for table `asuransi`
 --
 
 INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS`, `Alamat_RS`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`) VALUES
@@ -49,7 +49,7 @@ INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `aula`
+-- Table structure for table `aula`
 --
 
 CREATE TABLE IF NOT EXISTS `aula` (
@@ -69,14 +69,14 @@ CREATE TABLE IF NOT EXISTS `aula` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data untuk tabel `aula`
+-- Dumping data for table `aula`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `beasiswa`
+-- Table structure for table `beasiswa`
 --
 
 CREATE TABLE IF NOT EXISTS `beasiswa` (
@@ -101,14 +101,14 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data untuk tabel `beasiswa`
+-- Dumping data for table `beasiswa`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `informasi`
+-- Table structure for table `informasi`
 --
 
 CREATE TABLE IF NOT EXISTS `informasi` (
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `informasi` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data untuk tabel `informasi`
+-- Dumping data for table `informasi`
 --
 
 INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`, `Jenis_Info`, `Tanggal_info`) VALUES
@@ -135,7 +135,7 @@ INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_beasiswa`
+-- Table structure for table `jenis_beasiswa`
 --
 
 CREATE TABLE IF NOT EXISTS `jenis_beasiswa` (
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `jenis_beasiswa` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data untuk tabel `jenis_beasiswa`
+-- Dumping data for table `jenis_beasiswa`
 --
 
 INSERT INTO `jenis_beasiswa` (`Id_JB`, `Jenis_Beasiswa`, `Warna_Beasiswa`) VALUES
@@ -156,7 +156,7 @@ INSERT INTO `jenis_beasiswa` (`Id_JB`, `Jenis_Beasiswa`, `Warna_Beasiswa`) VALUE
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jurusan`
+-- Table structure for table `jurusan`
 --
 
 CREATE TABLE IF NOT EXISTS `jurusan` (
@@ -165,10 +165,10 @@ CREATE TABLE IF NOT EXISTS `jurusan` (
   `Singkatan_Jurusan` char(4) DEFAULT NULL,
   `Warna_Jurusan` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`Id_Jurusan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data untuk tabel `jurusan`
+-- Dumping data for table `jurusan`
 --
 
 INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna_Jurusan`) VALUES
@@ -177,7 +177,7 @@ INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `keterangan_ortu`
+-- Table structure for table `keterangan_ortu`
 --
 
 CREATE TABLE IF NOT EXISTS `keterangan_ortu` (
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `keterangan_ortu` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data untuk tabel `keterangan_ortu`
+-- Dumping data for table `keterangan_ortu`
 --
 
 INSERT INTO `keterangan_ortu` (`Id_Ortu`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_Ortu`, `Pekerjaan_Ortu`, `Penghasilan_Ortu`, `Jml_Tanggungan`) VALUES
@@ -201,7 +201,7 @@ INSERT INTO `keterangan_ortu` (`Id_Ortu`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_O
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pendaftaran_asuransi`
+-- Table structure for table `pendaftaran_asuransi`
 --
 
 CREATE TABLE IF NOT EXISTS `pendaftaran_asuransi` (
@@ -215,14 +215,14 @@ CREATE TABLE IF NOT EXISTS `pendaftaran_asuransi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pendaftaran_asuransi`
+-- Dumping data for table `pendaftaran_asuransi`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pendaftaran_beasiswa`
+-- Table structure for table `pendaftaran_beasiswa`
 --
 
 CREATE TABLE IF NOT EXISTS `pendaftaran_beasiswa` (
@@ -236,14 +236,14 @@ CREATE TABLE IF NOT EXISTS `pendaftaran_beasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pendaftaran_beasiswa`
+-- Dumping data for table `pendaftaran_beasiswa`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengguna`
+-- Table structure for table `pengguna`
 --
 
 CREATE TABLE IF NOT EXISTS `pengguna` (
@@ -264,10 +264,10 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
   `Sesi` datetime NOT NULL,
   `Catatan` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data untuk tabel `pengguna`
+-- Dumping data for table `pengguna`
 --
 
 INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Ortu`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Email`, `Online`, `Sesi`, `Catatan`) VALUES
@@ -279,17 +279,17 @@ INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Ortu`, `Id_Level`, `Nama_Pengguna`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `periode`
+-- Table structure for table `periode`
 --
 
 CREATE TABLE IF NOT EXISTS `periode` (
   `Id_Periode` int(10) NOT NULL AUTO_INCREMENT,
   `Tahun` int(4) NOT NULL,
   PRIMARY KEY (`Id_Periode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data untuk tabel `periode`
+-- Dumping data for table `periode`
 --
 
 INSERT INTO `periode` (`Id_Periode`, `Tahun`) VALUES
@@ -298,51 +298,28 @@ INSERT INTO `periode` (`Id_Periode`, `Tahun`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `request`
---
-
-CREATE TABLE IF NOT EXISTS `request` (
-  `Id_Request` int(10) NOT NULL AUTO_INCREMENT,
-  `Id_Pengguna` int(10) NOT NULL,
-  `Req_Tanya` varchar(200) NOT NULL,
-  `Tgl_Tanya` date NOT NULL,
-  `Req_Jawab` varchar(200) NOT NULL,
-  `Tgl_Jawab` date NOT NULL,
-  PRIMARY KEY (`Id_Request`),
-  KEY `Id_Operator` (`Id_Pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data untuk tabel `request`
---
-
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `sistem`
+-- Table structure for table `sistem`
 --
 
 CREATE TABLE IF NOT EXISTS `sistem` (
   `Status_Sistem` enum('AKTIF','TIDAK AKTIF') NOT NULL,
   `Id_Periode` int(1) NOT NULL,
   `Pengumuman_Sistem` varchar(500) NOT NULL,
-  `KonfKhusus_Sistem` varchar(100) DEFAULT NULL,
   `StatusRequest_Sistem` enum('AKTIF','TIDAK AKTIF') NOT NULL,
   `KarReq_Sistem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sistem`
+-- Dumping data for table `sistem`
 --
 
-INSERT INTO `sistem` (`Status_Sistem`, `Id_Periode`, `Pengumuman_Sistem`, `KonfKhusus_Sistem`, `StatusRequest_Sistem`, `KarReq_Sistem`) VALUES
-('AKTIF', 2, 'Periode Sistem Saat Ini Adalah Tahun 2014', 'theme="blue"', 'AKTIF', 20000);
+INSERT INTO `sistem` (`Status_Sistem`, `Id_Periode`, `Pengumuman_Sistem`, `StatusRequest_Sistem`, `KarReq_Sistem`) VALUES
+('AKTIF', 2, 'Periode Sistem Saat Ini Adalah Tahun 2014', 'AKTIF', 20000);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sys_level`
+-- Table structure for table `sys_level`
 --
 
 CREATE TABLE IF NOT EXISTS `sys_level` (
@@ -354,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `sys_level` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data untuk tabel `sys_level`
+-- Dumping data for table `sys_level`
 --
 
 INSERT INTO `sys_level` (`Id_Level`, `Nama_Level`, `Deskripsi_Level`, `Portal_Level`) VALUES
@@ -365,7 +342,7 @@ INSERT INTO `sys_level` (`Id_Level`, `Nama_Level`, `Deskripsi_Level`, `Portal_Le
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sys_level_menu`
+-- Table structure for table `sys_level_menu`
 --
 
 CREATE TABLE IF NOT EXISTS `sys_level_menu` (
@@ -379,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `sys_level_menu` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
--- Dumping data untuk tabel `sys_level_menu`
+-- Dumping data for table `sys_level_menu`
 --
 
 INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VALUES
@@ -430,7 +407,7 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sys_menu`
+-- Table structure for table `sys_menu`
 --
 
 CREATE TABLE IF NOT EXISTS `sys_menu` (
@@ -448,7 +425,7 @@ CREATE TABLE IF NOT EXISTS `sys_menu` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
--- Dumping data untuk tabel `sys_menu`
+-- Dumping data for table `sys_menu`
 --
 
 INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`, `deskripsi`, `link`, `icon`, `mdb`, `mdd`) VALUES
@@ -497,35 +474,35 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (43, 'Profil Pengguna', 1, 8, 42, NULL, NULL, NULL, 1, NULL);
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `asuransi`
+-- Constraints for table `asuransi`
 --
 ALTER TABLE `asuransi`
   ADD CONSTRAINT `asuransi_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
 
 --
--- Ketidakleluasaan untuk tabel `aula`
+-- Constraints for table `aula`
 --
 ALTER TABLE `aula`
   ADD CONSTRAINT `aula_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
 
 --
--- Ketidakleluasaan untuk tabel `pendaftaran_asuransi`
+-- Constraints for table `pendaftaran_asuransi`
 --
 ALTER TABLE `pendaftaran_asuransi`
   ADD CONSTRAINT `pendaftaran_asuransi_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
 
 --
--- Ketidakleluasaan untuk tabel `pendaftaran_beasiswa`
+-- Constraints for table `pendaftaran_beasiswa`
 --
 ALTER TABLE `pendaftaran_beasiswa`
   ADD CONSTRAINT `pendaftaran_beasiswa_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
 
 --
--- Ketidakleluasaan untuk tabel `sys_level_menu`
+-- Constraints for table `sys_level_menu`
 --
 ALTER TABLE `sys_level_menu`
   ADD CONSTRAINT `sys_level_menu_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `sys_menu` (`id_menu`),
