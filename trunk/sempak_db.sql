@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2014 at 03:17 PM
+-- Generation Time: Jul 20, 2014 at 10:59 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -273,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
 INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Ortu`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Email`, `Online`, `Sesi`, `Catatan`) VALUES
 (1, 1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', 'prastt21@gmail.com', 0, '0000-00-00 00:00:00', NULL),
 (2, 0, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'PRIA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', '', 0, '0000-00-00 00:00:00', NULL),
-(3, 1, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', 'b30ba880fba567a1dc4cb2306db6195b', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', 0, '0000-00-00 00:00:00', NULL),
+(3, 1, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', 0, '0000-00-00 00:00:00', NULL),
 (4, 1, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '', '', 'PRIA', 0, '', '', '0000-00-00', '', 0, '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
@@ -337,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `sys_level` (
 INSERT INTO `sys_level` (`Id_Level`, `Nama_Level`, `Deskripsi_Level`, `Portal_Level`) VALUES
 (1, 'ADMINISTRATOR', 'Super User', 'dashboard'),
 (2, 'OPERATOR', 'Operator', 'dashboard'),
-(3, 'PENGGUNA', 'Mahasiswa dan Karyawan', 'dashboard_pengguna');
+(3, 'PENGGUNA', 'Mahasiswa dan Karyawan', 'dashboard');
 
 -- --------------------------------------------------------
 
@@ -387,7 +387,7 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 (28, 1, 25, '1111'),
 (29, 1, 26, '1111'),
 (30, 1, 27, '1111'),
-(31, 2, 28, '1111'),
+(31, 2, 1, '1111'),
 (32, 2, 29, '1111'),
 (33, 2, 30, '0110'),
 (34, 2, 31, '0110'),
@@ -395,7 +395,7 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 (36, 2, 33, '1111'),
 (37, 2, 34, '1111'),
 (38, 2, 35, '1111'),
-(39, 3, 36, '0100'),
+(39, 3, 1, '0100'),
 (40, 3, 37, '0100'),
 (41, 3, 38, '1100'),
 (42, 3, 39, '1100'),
@@ -455,23 +455,23 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (24, 'Manajemen Basisdata', 1, 10, 0, 'Manajemen Basisdata', 'manajemen_basisdata', '<i class= "fa fa-shield"></i>', 1, NULL),
 (25, 'More Pages', 1, 11, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
 (26, 'User Profile', 1, 1, 25, 'User Profil', 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL),
-(27, 'Login&Register', 1, 2, 25, 'login and Register', 'login_registers', '<i class= "fa fa-caret-square-o-right"></i>', 1, NULL),
+(27, 'Registrasi User', 1, 2, 25, 'login and Register', 'login_registers', '<i class= "fa fa-caret-square-o-right"></i>', 1, NULL),
 (28, 'Dashboard', 1, 1, 0, 'Dashboard Operator', 'dashboard', '<i class= "fa fa-dashboard"></i>', 1, NULL),
 (29, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', 'informasi', '<i class= "fa fa-building-o"></i>', 1, NULL),
 (30, 'Data Peminjaman Aula', 1, 3, 0, 'Data Peminjaman Aula', 'data_peminjaman_aula', '<i class= "fa fa-credit-card"></i>', 1, NULL),
 (31, 'Data Pendaftaran Beasiswa', 1, 4, 0, 'Data Pendaftaran Beasiswa', 'data_pendaftaran_beasiswa', '<i class= "fa fa-gift"></i>', 1, NULL),
-(32, 'Data Rujukan Asuransi', 1, 5, 0, 'Data Rujukan Asuransi', 'data_rujukan_asuransi', '<i class= "fa-medkit"></i>', 1, NULL),
-(33, 'More Pages', 1, 7, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
-(34, 'Profil Operator', 1, 8, 35, 'Profil Operator', 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL),
-(35, 'Request Pengguna', 1, 6, 0, 'Request Pengguna', 'request_pengguna', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
-(36, 'Dashboard', 1, 1, 0, 'Dashboard', NULL, '<i class= "fa fa-dashboard"></i>', 1, NULL),
-(37, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', NULL, NULL, 1, NULL),
+(32, 'Data Rujukan Asuransi', 1, 5, 0, 'Data Rujukan Asuransi', 'data_rujukan_asuransi', '<i class= "fa fa-medkit"></i>', 1, NULL),
+(33, 'Request Pengguna', 1, 6, 0, 'Request Pengguna', 'request_pengguna', '<i class= "fa fa-github-square"></i>', 1, NULL),
+(34, 'More Pages', 1, 7, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
+(35, 'User Profil', 1, 8, 34, 'Profil Operator', 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL),
+(36, 'Dashboard', 1, 1, 0, 'Dashboard', 'dashboard', '<i class= "fa fa-dashboard"></i>', 1, NULL),
+(37, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', 'informasi', '<i class= "fa fa-building-o"></i>', 1, NULL),
 (38, 'Submit Pendaftaran', 1, 3, 0, 'Submit Pendaftaran', NULL, NULL, 1, NULL),
-(39, 'Peminjaman Aula BSC', 1, 4, 38, 'Peminjaman Aula BSC', NULL, NULL, 1, NULL),
-(40, 'Pendaftaran Beasiswa', 1, 5, 38, 'Pendaftaran Beasiswa', NULL, NULL, 1, NULL),
-(41, 'Pendaftaran Rujukan Asuransi', 1, 6, 38, 'Pendaftaran Rujukan Asuransi', NULL, NULL, 1, NULL),
-(42, 'More Pages', 1, 7, 0, 'More Pages', NULL, NULL, 1, NULL),
-(43, 'Profil Pengguna', 1, 8, 42, NULL, NULL, NULL, 1, NULL);
+(39, 'Peminjaman Aula BSC', 1, 4, 38, 'Peminjaman Aula BSC', 'pendaftaran_peminjaman_aula', '<i class= "fa fa-credit-card"></i>', 1, NULL),
+(40, 'Pendaftaran Beasiswa', 1, 5, 38, 'Pendaftaran Beasiswa', 'pendaftaran_beasiswa', '<i class= "fa fa-gift"></i>', 1, NULL),
+(41, 'Pendaftaran Rujukan', 1, 6, 38, 'Pendaftaran Rujukan Asuransi', 'pendaftaran_rujukan_asuransi', '<i class= "fa fa-medkit"></i>', 1, NULL),
+(42, 'More Pages', 1, 7, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
+(43, 'User Profil', 1, 8, 42, NULL, 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL);
 
 --
 -- Constraints for dumped tables
