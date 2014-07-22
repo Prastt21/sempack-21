@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
         Ubah Data
-        <small>Ubah Data Operator <?php echo $result_operator['nama_operator']; ?></small>
+        <small>Ubah Data Operator <?php echo $result_operator['Nama_Pengguna']; ?></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -16,23 +16,20 @@
             <div class="box box-primary">
                 <div class="box-header"><h3 class="box-title">Data Operator</h3></div>
                 <div class="box-body">
-                    <div class="alert alert-danger alert-dismissable" id="div-alert" style="display: none;">
-                        <i class="fa fa-ban"></i>
-                        <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                        <span id="alert-value"></span>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url('data_operator/proses_ubah_data_operator'); ?>" id="form-tambah-pengguna" onsubmit="return false">
-                        <input type="hidden" name="id_pengguna" value="<?php echo $result_operator['id_pengguna']; ?>">
+                    <!--template untuk notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
+                    <form class="form-horizontal" action="<?php echo base_url('data_operator/proses_ubah_data_operator'); ?>" id="form-tambah-pengguna" method="post">
+                        <input name="id_pengguna" type="hidden" value="<?php echo set_value('id_pengguna', $result_operator['Id_Pengguna']); ?>">
                         <div class="form-group">
                             <label for="kata-kunci" class="col-lg-3 control-label">Level Operator</label>
                             <div class="col-lg-5">
                                 <select name="level" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
                                     <?php
-                                    if (isset($level)):
-                                        foreach ($level as $dt_level):
+                                    if (isset($rs_level)):
+                                        foreach ($rs_level as $dt_level):
                                             ?>
-                                            <option value="<?php echo $dt_level->id_level; ?>"><?php echo $dt_level->nama_level; ?></option>
+                                            <option value="<?php echo $dt_level['Id_Level']; ?>" <?php echo set_value('level', $result_operator['Id_Level']) == $dt_level['Id_Level'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_level['Nama_Level']; ?></option>
                                             <?php
                                         endforeach;
                                     endif;
@@ -44,7 +41,7 @@
                         <div class="form-group">
                             <label for="nama-operator" class="col-lg-3 control-label">Nama Operator</label>
                             <div class="col-lg-5">
-                                <input type="text" name="nama_operator" maxlength="100" class="form-control input-sm" placeholder="Nama Operator">
+                                <input type="text" name="nama_operator" maxlength="100" class="form-control input-sm" placeholder="Nama Operator" value="<?php echo set_value('nama_operator', $result_operator['Nama_Pengguna']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -53,15 +50,8 @@
                             <div class="col-lg-5">
                                 <select name="status" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <?php
-                                    if (isset($status)):
-                                        foreach ($status as $dt_status):
-                                            ?>
-                                            <option value="<?php echo $dt_status->id_status; ?>"><?php echo $dt_level->nama_level; ?></option>
-                                            <?php
-                                        endforeach;
-                                    endif;
-                                    ?>
+                                    <option value="MAHASISWA" <?php echo set_value('status', $result_operator['Status_Pengguna']) == 'MAHASISWA' ? 'selected="selected"' : ''; ?>>Mahasiswa</option>
+                                    <option value="KARYAWAN" <?php echo set_value('status', $result_operator['Status_Pengguna']) == 'KARYAWAN' ? 'selected="selected"' : ''; ?>>Karyawan</option>                                    
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
@@ -69,63 +59,67 @@
                         <div class="form-group">
                             <label for="username" class="col-lg-3 control-label">Username</label>
                             <div class="col-lg-5">
-                                <input type="text" name="username" maxlength="20" class="form-control input-sm" placeholder="Username">
+                                <input type="text" name="username" maxlength="20" class="form-control input-sm" placeholder="Username" value="<?php echo set_value('username', $result_operator['NIK_NIM']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="no-password" class="col-lg-3 control-label">Password</label>
                             <div class="col-lg-5">
-                                <input type="password" name="password" maxlength="20" class="form-control input-sm" placeholder="Password" id="password">
+                                <input type="password" name="password" maxlength="20" class="form-control input-sm" placeholder="Password" id="password" value="<?php echo set_value('password'); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="no-password" class="col-lg-3 control-label">Ulangi Password</label>
                             <div class="col-lg-5">
-                                <input type="password" name="ulangi_password" maxlength="20" class="form-control input-sm" placeholder="Ulangi Password">
+                                <input type="password" name="ulangi_password" maxlength="20" class="form-control input-sm" placeholder="Ulangi Password" value="<?php echo set_value('ulangi_password'); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="jenis-kelamin" class="col-lg-3 control-label">Jenis Kelamin</label>
                             <div class="col-lg-5">
-                                <input type="text" name="jenis_kelamin" maxlength="20" class="form-control input-sm" placeholder="Jenis Kelamin">
+                                <select name="jenis_kelamin" class="form-control input-sm" style="width: 150px;">
+                                    <option></option>
+                                    <option value="PRIA" <?php echo set_value('jenis_kelamin', $result_operator['Gender']) == 'PRIA' ? 'selected="selected"' : ''; ?>>Pria</option>
+                                    <option value="WANITA" <?php echo set_value('jenis_kelamin', $result_operator['Gender']) == 'WANITA' ? 'selected="selected"' : ''; ?>>Wanita</option>                                    
+                                </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="no-telephone" class="col-lg-3 control-label">No Telephone</label>
                             <div class="col-lg-5">
-                                <input type="text" name="telephone" maxlength="20" class="form-control input-sm" placeholder="Telephone">
+                                <input type="text" name="telephone" maxlength="20" class="form-control input-sm" placeholder="Telephone" value="<?php echo set_value('telephone', $result_operator['No_Telp']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="alamat" class="col-lg-3 control-label">Alamat</label>
                             <div class="col-lg-5">
-                                <textarea name="alamat" class="form-control" placeholder="Alamat Operator"></textarea>
+                                <textarea name="alamat" class="form-control" placeholder="Alamat Operator"><?php echo set_value('alamat', $result_operator['Alamat']); ?></textarea>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="tempat-lahir" class="col-lg-3 control-label">Tempat Lahir</label>
                             <div class="col-lg-5">
-                                <input type="text" name="tempat_lahir" style="width: 150px;" maxlength="15" class="form-control input-sm" placeholder="Tempat Lahir">
+                                <input type="text" name="tempat_lahir" style="width: 150px;" maxlength="15" class="form-control input-sm" placeholder="Tempat Lahir" value="<?php echo set_value('tempat_lahir', $result_operator['Tempat_Lahir']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="tanggal-lahir" class="col-lg-3 control-label">Tanggal Lahir</label>
                             <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="tanggal" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
+                                <div class="bfh-datepicker" data-name="tanggal" data-placeholder='tanggal' data-format="y-m-d" data-date="<?php echo set_value('tanggal', $result_operator['Tanggal_Lahir']); ?>"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="email" class="col-lg-3 control-label">Email Operator</label>
                             <div class="col-lg-5">
-                                <input type="text" name="email" maxlength="100" class="form-control input-sm" placeholder="Email Operator">
+                                <input type="text" name="email" maxlength="100" class="form-control input-sm" placeholder="Email Operator" value="<?php echo set_value('email', $result_operator['Email']); ?>">
                             </div>
                             <div class="col-lg-3"></div>
                         </div>

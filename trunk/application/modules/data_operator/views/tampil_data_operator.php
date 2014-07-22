@@ -33,20 +33,9 @@
                             </div>
                         </div>
                     </div>
-                    <?php
-                    if ($this->session->flashdata('pesan')) {
-                        $pesan = $this->session->flashdata('pesan');
-                     ?>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert <?php echo $pesan['css']; ?> alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"> <?php echo $pesan['psn']; ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
                     <div class="row" style="height: 10px"></div>
+                    <!--template untuk notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
@@ -80,7 +69,7 @@
                                         <td><?php echo $dt_operator['Tanggal_Lahir']; ?></td>
                                         <td><?php echo $dt_operator['Email']; ?></td>
                                         <td align="center"><a href="<?php echo base_url('data_operator/ubah_data_operator/' . $dt_operator['Id_Pengguna']); ?>"><i class="fa fa-edit"></i> ubah </a>
-                                            | <a class="tombol-hapus" href="#" data-id="<?php echo $dt_operator['Id_Pengguna']; ?>"><i class="fa fa-times"></i> hapus </a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('data_operator/hapus_data_operator/' . $dt_operator['Id_Pengguna']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')"><i class="fa fa-times"></i> hapus </a>
                                         </td>
                                     </tr>
                                     <?php
