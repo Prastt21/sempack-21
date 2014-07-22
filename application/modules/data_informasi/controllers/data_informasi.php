@@ -10,6 +10,7 @@ class data_informasi extends operator_base {
     var $batas = 15;
 
     public function index($offset = 0) {
+        //control hak akses read
         $this->_set_page_role('r');
         //load model
         $this->load->model('m_data_informasi');
@@ -26,7 +27,7 @@ class data_informasi extends operator_base {
     }
 
     function tambah_data_informasi() {
-        //control hak akses
+        //control hak akses create
         $this->_set_page_role('c');
         $this->load->library('Form_validation');
         //load javascript + css untuk tanggal 
@@ -77,7 +78,7 @@ class data_informasi extends operator_base {
     }
 
     function ubah_data_informasi($id = '') {
-        //control hak akses
+        //control hak akses update
         $this->_set_page_role('u');
         //set validasi id
         if (empty($id))
@@ -141,6 +142,8 @@ class data_informasi extends operator_base {
     }
 
     function hapus_data_informasi($id = '') {
+        //control hak akses delete
+        $this->_set_page_role('d');
         if (empty($id))
             redirect('data_informasi');
         //load model
