@@ -33,27 +33,16 @@
                             </div>
                         </div>
                     </div>
-                    <?php
-                    if ($this->session->flashdata('pesan')) {
-                        $pesan = $this->session->flashdata('pesan');
-                     ?>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert <?php echo $pesan['css']; ?> alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"> <?php echo $pesan['psn']; ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
                     <div class="row" style="height: 10px"></div>
+                    <!--load template untuk notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
                                 <td width="5%" align="center">No</td>
-                                <td width="40%">Nama Jurusan</td>
-                                <td width="25%">Singkatan Jurusan</td>
-                                <td width="15%">Warna Jurusan</td>                                
+                                <td width="30%">Nama Jurusan</td>
+                                <td width="15%">Singkatan Jurusan</td>
+                                <td width="15%">Warna Jurusan</td>                                                              
                             </tr>
                         </thead>
                         <tbody>
@@ -66,9 +55,9 @@
                                         <td align="center"><?php echo++$a ?></td>
                                         <td><?php echo $dt_jurusan['Nama_Jurusan']; ?></td>
                                         <td><?php echo $dt_jurusan['Singkatan_Jurusan']; ?></td>
-                                        <td><?php echo $dt_jurusan['Warna_Jurusan']; ?></td>                                      
+                                        <td><?php echo $dt_jurusan['Warna_Jurusan']; ?></td>                                        
                                         <td align="center"><a href="<?php echo base_url('jurusan/ubah_jurusan/' . $dt_jurusan['Id_Jurusan']); ?>"><i class="fa fa-edit"></i> ubah </a>
-                                            | <a class="tombol-hapus" href="#" data-id="<?php echo $dt_jurusan['Id_Jurusan']; ?>"><i class="fa fa-times"></i> hapus </a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('jurusan/hapus_jurusan/' . $dt_jurusan['Id_Jurusan']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')"><i class="fa fa-times"></i> hapus </a>
                                         </td>
                                     </tr>
                                     <?php
