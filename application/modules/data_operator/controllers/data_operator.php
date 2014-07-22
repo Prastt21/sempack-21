@@ -155,9 +155,6 @@ class data_operator extends operator_base {
                 $this->input->post('email', TRUE),
                 $this->input->post('id_pengguna')
             );
-//            echo '<pre>';
-//            print_r($parameter);
-//            exit();
             //jika password diisi , berarti ada perubahan password
             if ($this->input->post('password') != null && $this->input->post('ulangi_password') != null) {
                 if ($this->m_data_operator->update_password_operator(array(md5($this->input->post('password')), $this->input->post('id_pengguna')))) {
