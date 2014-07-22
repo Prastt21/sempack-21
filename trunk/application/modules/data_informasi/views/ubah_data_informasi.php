@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
         Ubah Data
-        <small>Ubah Data Informasi <?php echo $result_informasi['judul_informasi']; ?></small>
+        <small>Ubah Data Informasi <?php echo $result_informasi['Judul_Info']; ?></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -16,24 +16,21 @@
             <div class="box box-primary">
                 <div class="box-header"><h3 class="box-title">Data Informasi</h3></div>
                 <div class="box-body">
-                    <div class="alert alert-danger alert-dismissable" id="div-alert" style="display: none;">
-                        <i class="fa fa-ban"></i>
-                        <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                        <span id="alert-value"></span>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url('data_informasi/ubah_data_informasi'); ?>" id="form-tambah-pengguna" onsubmit="return false">
-                        <input type="hidden" name="id_informasi" value="<?php echo $result_informasi['id_informasi']; ?>">
+                    <!--load template notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
+                    <form class="form-horizontal" action="<?php echo base_url('data_informasi/proses_ubah_data_informasi'); ?>" id="form-tambah-pengguna" method="post">
+                        <input type="hidden" name="id_informasi" value="<?php echo set_value('id_informasi', $result_informasi['Id_Informasi']); ?>">
                         <div class="form-group">
                             <label for="judul-informasi" class="col-lg-3 control-label">Judul</label>
                             <div class="col-lg-5">
-                                <input type="text" name="judul_informasi" maxlength="100" class="form-control input-sm" placeholder="Judul Informasi">
+                                <input type="text" name="judul_informasi" maxlength="100" class="form-control input-sm" placeholder="Judul Informasi" value="<?php echo set_value('judul_informasi', $result_informasi['Judul_Info']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="isi-informasi" class="col-lg-3 control-label">Isi Informasi</label>
                             <div class="col-lg-5">
-                                <textarea name="isi_informasi" maxlength="100" class="form-control input-sm" placeholder="Isi Informasi"></textarea>
+                                <textarea name="isi_informasi" maxlength="100" class="form-control input-sm" placeholder="Isi Informasi"><?php echo set_value('isi_informasi', $result_informasi['Isi_Info']); ?></textarea>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -42,27 +39,21 @@
                             <div class="col-lg-5">
                                 <select name="jenis" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="Aula">Aula</option>
-                                    <option value="Beasiswa">Beasiswa</option>
-                                    <option value="Asuransi">Asuransi</option>
+                                    <option value="Aula" <?php echo set_value('jenis', $result_informasi['Jenis_Info']) == 'Aula' ? 'selected = "selected"' : '' ?>>Aula</option>
+                                    <option value="Beasiswa" <?php echo set_value('jenis', $result_informasi['Jenis_Info']) == 'Beasiswa' ? 'selected = "selected"' : '' ?>>Beasiswa</option>
+                                    <option value="Asuransi" <?php echo set_value('jenis', $result_informasi['Jenis_Info']) == 'Asuransi' ? 'selected = "selected"' : '' ?>>Asuransi</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
-                                  
+
                         <div class="form-group">
                             <label for="tanggal-informasi" class="col-lg-3 control-label">Tanggal Informasi</label>
                             <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="tanggal" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
+                                <div class="bfh-datepicker" data-name="tanggal" data-placeholder='tanggal' data-format="y-m-d" data-date="<?php echo set_value('tanggal', $result_informasi['Tanggal_info']); ?>"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>                        
-                        <div class="form-group">
-                            <div class="col-lg-offset-3 col-lg-5">
-                                <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
-                                <a href="#" class="btn btn-default confirm">Batal</a>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>

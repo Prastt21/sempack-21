@@ -138,4 +138,23 @@ class operator_base extends CI_Controller {
             redirect('autentifikasi');
     }
 
+    protected function notification($status = '', $message = '') {
+        if (!empty($status) && !empty($message)) {
+            $data['status'] = $status;
+            $data['message'] = $message;
+            $this->session->set_flashdata('FORM_NOTIFICATION', $data);
+        }
+    }
+
+    protected function remove_last_field() {
+        $this->session->unset_userdata('VAL_FIELD');
+    }
+
+    protected function form_notification($status = '', $message = '') {
+        if (!empty($status) && !empty($message)) {
+            $FORM_NOTIFICATION['STATUS'] = $status;
+            $FORM_NOTIFICATION['MESSAGE'] = $message;
+        }
+    }
+
 }

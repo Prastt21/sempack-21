@@ -26,6 +26,9 @@
         <link href="<?php echo base_url('assets/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="<?php echo base_url('assets/css/AdminLTE.css'); ?>" rel="stylesheet" type="text/css" />
+        <?php
+        echo isset($FILE_CSS) ? $FILE_CSS : '';
+        ?>
     </head>
     <body class="skin-blue">
         <header class="header">
@@ -103,8 +106,6 @@
         <script src="<?php echo base_url('assets/js/jquery-2.1.0.min.js'); ?>"></script>
         <!-- Bootstrap -->
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-        <!-- jQuery UI 1.10.3 -->
-        <script src="<?php //echo base_url('assets/js/jquery-ui-1.10.3.min.js');               ?>" type="text/javascript"></script>
         <!-- jQuery Alerts -->
         <script src="<?php echo base_url('assets/js/plugins/alertify/alertify.js'); ?>" type="text/javascript"></script>
         <!-- Sparkline -->
@@ -119,5 +120,9 @@
         <script src="<?php echo base_url('assets/js/plugins/iCheck/icheck.min.js'); ?>" type="text/javascript"></script>
         <!-- AdminLTE App -->
         <script src="<?php echo base_url('assets/js/AdminLTE/app.js'); ?>" type="text/javascript"></script>
+        <?php
+        echo isset($FILE_JS) ? $FILE_JS : '';
+        isset($TPL_FOOTER) ? $this->load->view($TPL_FOOTER) : '';
+        ?>
     </body>
 </html>
