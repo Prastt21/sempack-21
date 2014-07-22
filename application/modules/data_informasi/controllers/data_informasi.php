@@ -11,8 +11,11 @@ class data_informasi extends operator_base {
 
     public function index($offset = 0) {
         $this->_set_page_role('r');
+        //load model
         $this->load->model('m_data_informasi');
+        //load library
         $this->load->library('bagi_halaman');
+
         $data['rs_informasi'] = $this->m_data_informasi->ambil_data_informasi(array(intval($offset), $this->batas));
         $data['total_data'] = $this->m_data_informasi->count_all_data();
         $data['jml_data'] = count($data['rs_informasi']);
@@ -25,82 +28,132 @@ class data_informasi extends operator_base {
     function tambah_data_informasi() {
         //control hak akses
         $this->_set_page_role('c');
-        if ($this->input->post('simpan') != '') {
-            //jika tombol simpan dipencet
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('judul_informasi', 'Judul Informasi', 'required|trim');
-            $this->form_validation->set_rules('isi_informasi', 'Isi Informasi', 'required|trim');
-            $this->form_validation->set_rules('jenis', 'Jenis Informasi', 'required|trim');
-
-            if ($this->form_validation->run() === FALSE) {
-                $pesan['css'] = 'alert-error';
-                $pesan['psn'] = validation_errors();
-                $this->session->set_flashdata('pesan', $pesan);
-                parent::display('tambah_data_informasi');
-            } else {
-                $this->load->model('m_data_informasi');
-                $parameter = array(
-                    $this->sesi->get_data_login('ID_PENGGUNA'),
-                    $this->input->post('judul_informasi'),
-                    $this->input->post('isi_informasi'),
-                    $this->input->post('jenis')
-                );
-                if ($this->m_data_informasi->tambah_data_informasi($parameter)) {
-                    //jika berhasil insert
-                    //pesan sukses untuk ditampilkan dalam view
-                    $pesan['css'] = 'alert-success';
-                    $pesan['psn'] = 'Informasi berhasil ditambahkan!';
-                } else {
-                    //jika gagal
-                }
-                $this->session->set_flashdata('pesan', $pesan);
-                redirect('data_informasi');
-            }
-        } else {
-            //jika tidak dipencet
-            parent::display('tambah_data_informasi');
-        }
+        $this->load->library('Form_validation');
+        //load javascript + css untuk tanggal 
+        $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
+        $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
+        parent::display('tambah_data_informasi');
     }
-    function ubah_data_informasi() {
+
+    function proses_tambah_data_informasi() {
+        //validasi tombol simpan, jika tidak ditekan maka redirect ke tampilan tambah informasi
+        if ($this->input->post('simpan') == null)
+            redirect('data_informasi/tambah_data_informasi');
+        //load form validation
+        $this->load->library('Form_validation');
+        //set aturan validasi
+        $this->form_validation->set_rules('judul_informasi', 'Judul Informasi', 'required|trim');
+        $this->form_validation->set_rules('isi_informasi', 'Isi Informasi', 'required|trim');
+        $this->form_validation->set_rules('jenis', 'Jenis Informasi', 'required|trim');
+        $this->form_validation->set_rules('tanggal', 'Tanggal Informasi', 'required');
+        //menjalankan validasi
+        if ($this->form_validation->run() === FALSE) {
+            //jika validasi ada yang eror, kirim notifikasi ke view
+            $this->notification('error', validation_errors());
+            $this->form_validation->keep_data();
+            //redirect ke tampilan tambah data informasi
+            redirect('data_informasi/tambah_data_informasi');
+        } else {
+            //load model
+            $this->load->model('m_data_informasi');
+            //set parameter array
+            $parameter = array(
+                $this->sesi->get_data_login('ID_PENGGUNA'),
+                $this->input->post('judul_informasi'),
+                $this->input->post('isi_informasi'),
+                $this->input->post('jenis'),
+                $this->input->post('tanggal')
+            );
+            if ($this->m_data_informasi->tambah_data_informasi($parameter)) {
+                //jika sukses kirim pesan ke view
+                $this->notification('success', 'Data informasi berhasil ditambahkan');
+            } else {
+                //jika gagal kirim pesan ke view
+                $this->notification('error', 'Data informasi gagal ditambahkan');
+            }
+        }
+        //redirect ke list informasi
+        redirect('data_informasi');
+    }
+
+    function ubah_data_informasi($id = '') {
         //control hak akses
         $this->_set_page_role('u');
-        if ($this->input->post('simpan') != '') {
-            //jika tombol simpan dipencet
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('judul_informasi', 'Judul Informasi', 'required|trim');
-            $this->form_validation->set_rules('isi_informasi', 'Isi Informasi', 'required|trim');
-            $this->form_validation->set_rules('jenis', 'Jenis Informasi', 'required|trim');
-            $idi = $this->input->post('Id_Informasi', TRUE);
-            
-            if ($this->form_validation->run() === FALSE) {
-                $pesan['css'] = 'alert-error';
-                $pesan['psn'] = validation_errors();
-                $this->session->set_flashdata('pesan', $pesan);
-                redirect('data_informasi/ubah_data_informasi' . $idi);
-                parent::display('ubah_data_informasi');
-            } else {
-                $this->load->model('m_data_informasi');
-                $parameter = array(
-                    $this->sesi->get_data_login('ID_PENGGUNA'),
-                    $informasi['Judul_Info'] = ucfirst($this->input->post('judul_informasi', TRUE)),
-                    $informasi['Isi_Info'] = $this->input->post('isi_informasi', TRUE),
-                    $informasi['Jenis_Info'] = $this->input->post('jenis', TRUE)                
-                );
-                if ($this->m_data_informasi->tambah_data_informasi($parameter)) {
-                    //jika berhasil insert
-                    //pesan sukses untuk ditampilkan dalam view
-                    $pesan['css'] = 'alert-success';
-                    $pesan['psn'] = 'Informasi berhasil disimpan!';
-                } else {
-                    //jika gagal
-                }
-                $this->session->set_flashdata('pesan', $pesan);
-                redirect('data_informasi');
-            }
+        //set validasi id
+        if (empty($id))
+            redirect('data_informasi');
+        //load javascript + css untuk tanggal 
+        $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
+        $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
+        //load library form validation
+        $this->load->library('form_validation');
+        //load model
+        $this->load->model('m_data_informasi');
+        //ambil data informasi berdasarkan id informasi
+        $data['result_informasi'] = $this->m_data_informasi->get_data_informasi_by_id($id);
+        //jika tidak dipencet
+        parent::display('ubah_data_informasi', $data);
+    }
+
+    function proses_ubah_data_informasi() {
+        //set validasi tombol simpan
+        if ($this->input->post('simpan') == null)
+            redirect('data_informasi');
+        //load library form validation
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('judul_informasi', 'Judul Informasi', 'required|trim');
+        $this->form_validation->set_rules('isi_informasi', 'Isi Informasi', 'required|trim');
+        $this->form_validation->set_rules('jenis', 'Jenis Informasi', 'required|trim');
+        $this->form_validation->set_rules('tanggal', 'Tanggal Informasi', 'required');
+        $this->form_validation->set_rules('id_informasi', 'ID Informasi', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            //set pesan notifikasi eror
+            $this->notification('error', validation_errors());
+            //data form disimpan biar nanti user ga masukin lagi
+            $this->form_validation->keep_data();
+            //kembalikan lagi ke form ubah data dengan parameter id_informasi
+            redirect('data_informasi/ubah_data_informasi/' . $this->input->post('id_informasi'));
         } else {
-            //jika tidak dipencet
-            parent::display('ubah_data_informasi');
+            //jika validasi sukses
+            $this->load->model('m_data_informasi');
+            $parameter = array(
+                $this->sesi->get_data_login('ID_PENGGUNA'),
+                $this->input->post('judul_informasi'),
+                $this->input->post('isi_informasi'),
+                $this->input->post('jenis'),
+                $this->input->post('tanggal'),
+                $this->input->post('id_informasi')
+            );
+            if ($this->m_data_informasi->ubah_data_informasi($parameter)) {
+                //jika berhasil insert
+                $this->notification('success', 'Data berhasil dirubah');
+                //arahkan kembali ke form edit
+                redirect('data_informasi/ubah_data_informasi/' . $this->input->post('id_informasi'));
+            } else {
+                //jika gagal
+                $this->notification('error', 'Data gagal dirubah');
+                //arahkan kembali ke form edit
+                redirect('data_informasi/ubah_data_informasi/' . $this->input->post('id_informasi'));
+            }
+            redirect('data_informasi');
         }
+    }
+
+    function hapus_data_informasi($id = '') {
+        if (empty($id))
+            redirect('data_informasi');
+        //load model
+        $this->load->model('m_data_informasi');
+        if ($this->m_data_informasi->hapus_data_informasi($id)) {
+            //jika berhasil menghapus
+            $this->notification('success', 'Data berhasil dihapus');
+        } else {
+            //jika gagal menghapus
+            $this->notification('error', 'Data gagal dihapus');
+        }
+        //kembalikan ke halaman list informasi
+        redirect('data_informasi');
     }
 
 }

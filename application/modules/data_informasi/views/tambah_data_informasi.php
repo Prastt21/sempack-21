@@ -3,38 +3,38 @@
     <script language="javascript" type="text/javascript" src="tinymcpuk-0.3/tiny_mce.js"></script>
     <script language="javascript" type="text/javascript">
         tinyMCE.init({
-            mode : "textareas",//exact or textareas
-            theme : "advanced",//simple
-            plugins : "youtube,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,zoom,flash,searchreplace,print,paste,directionality,fullscreen,noneditable,contextmenu",
-            theme_advanced_buttons1_add_before : "",
-            theme_advanced_buttons1_add : "fontsizeselect",
-            theme_advanced_buttons2_add : "preview,forecolor",
+            mode: "textareas", //exact or textareas
+            theme: "advanced", //simple
+            plugins: "youtube,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,zoom,flash,searchreplace,print,paste,directionality,fullscreen,noneditable,contextmenu",
+            theme_advanced_buttons1_add_before: "",
+            theme_advanced_buttons1_add: "fontsizeselect",
+            theme_advanced_buttons2_add: "preview,forecolor",
             theme_advanced_buttons2_add_before: "pastetext,pasteword,emotions,print,",
-            theme_advanced_buttons3_add_before : "tablecontrols",
-            theme_advanced_buttons3_add : "fullscreen",
-            theme_advanced_toolbar_location : "top",
-            theme_advanced_toolbar_align : "left",
-            theme_advanced_statusbar_location : "bottom",
-            plugin_insertdate_dateFormat : "%Y-%m-%d",
-            plugin_insertdate_timeFormat : "%H:%M:%S",
-            extended_valid_elements : "hr[class|width|size|noshade]",
-            file_browser_callback : "fileBrowserCallBack",
-            paste_use_dialog : false,
-            theme_advanced_resizing : true,
-            theme_advanced_resize_horizontal : false,
-            theme_advanced_link_targets : "_something=My somthing;_something2=My somthing2;_something3=My somthing3;",
-            media_strict : false,
-            apply_source_formatting : true
+            theme_advanced_buttons3_add_before: "tablecontrols",
+            theme_advanced_buttons3_add: "fullscreen",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_toolbar_align: "left",
+            theme_advanced_statusbar_location: "bottom",
+            plugin_insertdate_dateFormat: "%Y-%m-%d",
+            plugin_insertdate_timeFormat: "%H:%M:%S",
+            extended_valid_elements: "hr[class|width|size|noshade]",
+            file_browser_callback: "fileBrowserCallBack",
+            paste_use_dialog: false,
+            theme_advanced_resizing: true,
+            theme_advanced_resize_horizontal: false,
+            theme_advanced_link_targets: "_something=My somthing;_something2=My somthing2;_something3=My somthing3;",
+            media_strict: false,
+            apply_source_formatting: true
         });
 
         function fileBrowserCallBack(field_name, url, type, win) {
             var connector = "../../filemanager/browser.html?Connector=connectors/php/connector.php";
             var enableAutoTypeSelection = true;
-		
+
             var cType;
             tinymcpuk_field = field_name;
             tinymcpuk = win;
-		
+
             switch (type) {
                 case "image":
                     cType = "Image";
@@ -46,11 +46,11 @@
                     cType = "File";
                     break;
             }
-		
+
             if (enableAutoTypeSelection && cType) {
                 connector += "&Type=" + cType;
             }
-		
+
             window.open(connector, "tinymcpuk", "modal,width=600,height=400");
         }
     </script>
@@ -74,28 +74,19 @@
             <div class="box box-primary">
                 <div class="box-header"><h3 class="box-title">Data Informasi</h3></div>
                 <div class="box-body">
-                  
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert alert-error alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"></span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    <form class="form-horizontal" action="<?php echo base_url('data_informasi/tambah_data_informasi'); ?>" id="form-tambah-pengguna" method="post">
+                    <?php $this->load->view('templates/notification'); ?>
+                    <form class="form-horizontal" action="<?php echo base_url('data_informasi/proses_tambah_data_informasi'); ?>" id="form-tambah-pengguna" method="post">
                         <div class="form-group">
                             <label for="judul-informasi" class="col-lg-3 control-label">Judul</label>
                             <div class="col-lg-5">
-                                <input type="text" name="judul_informasi" maxlength="100" class="form-control input-sm" placeholder="Judul Informasi">
+                                <input type="text" name="judul_informasi" maxlength="100" class="form-control input-sm" placeholder="Judul Informasi" value="<?php echo set_value('judul_informasi', ''); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="isi-informasi" class="col-lg-3 control-label">Isi Informasi</label>
                             <div class="col-lg-5">
-                                <textarea name="isi_informasi" maxlength="100" class="form-control input-sm" placeholder="Isi Informasi"></textarea>
+                                <textarea name="isi_informasi" maxlength="100" class="form-control input-sm" placeholder="Isi Informasi"><?php echo set_value('isi_informasi', ''); ?></textarea>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -104,9 +95,9 @@
                             <div class="col-lg-5">
                                 <select name="jenis" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="Aula">Aula</option>
-                                    <option value="Beasiswa">Beasiswa</option>
-                                    <option value="Asuransi">Asuransi</option>
+                                    <option value="Aula" <?php echo set_value('jenis') == 'Aula' ? 'selected = "selected"' : '' ?>>Aula</option>
+                                    <option value="Beasiswa" <?php echo set_value('jenis') == 'Beasiswa' ? 'selected = "selected"' : '' ?>>Beasiswa</option>
+                                    <option value="Asuransi" <?php echo set_value('jenis') == 'Asuransi' ? 'selected = "selected"' : '' ?>>Asuransi</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
@@ -162,30 +153,6 @@
                         <li>
                             Kolom Ulangi Password<br>
                             Kolom Ulangi Password diisi dengan mengulang password sesui password diinputkan pertama.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Jenis Kelamin<br>
-                            Kolom Jenis Kelamin diisi dengan jenis kelamin perator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom No Telephone<br>
-                            Kolom No Telephone operator yang sedang aktif.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Alamat<br>
-                            Kolom alamat operator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tempat Lahir<br>
-                            Kolom tempat lahir disi dengan tempat dimana operator diahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tanggal Lahir<br>
-                            Kolom tanggal lahir disi tanggal operator pernah dilahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Email<br>
-                            Kolom email diisi dengan email pengguna jika ada.  Kolom ini boleh kosong, namun dalam pengisian harus menggunakan format email. misal : <em>contoh@email.com</em>
                         </li>
                     </ol>
                 </div>
