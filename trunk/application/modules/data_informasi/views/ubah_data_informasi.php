@@ -89,39 +89,7 @@
                         <li>
                             Kolom Username<br>
                             Kolom username digunakan untuk masuk ke dalam sistem.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Password<br>
-                            Kolom password diisi dengan password operator.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Ulangi Password<br>
-                            Kolom Ulangi Password diisi dengan mengulang password sesui password diinputkan pertama.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Jenis Kelamin<br>
-                            Kolom Jenis Kelamin diisi dengan jenis kelamin perator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom No Telephone<br>
-                            Kolom No Telephone operator yang sedang aktif.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Alamat<br>
-                            Kolom alamat operator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tempat Lahir<br>
-                            Kolom tempat lahir disi dengan tempat dimana operator diahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tanggal Lahir<br>
-                            Kolom tanggal lahir disi tanggal operator pernah dilahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Email<br>
-                            Kolom email diisi dengan email pengguna jika ada.  Kolom ini boleh kosong, namun dalam pengisian harus menggunakan format email. misal : <em>contoh@email.com</em>
-                        </li>
+                        </li>                        
                     </ol>
                 </div>
             </div>

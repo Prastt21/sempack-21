@@ -16,13 +16,8 @@
             <div class="box box-primary">
                 <div class="box-header"><h3 class="box-title">Data Jurusan</h3></div>
                 <div class="box-body">
-                    <div class="alert alert-danger alert-dismissable" id="div-alert" style="display: none;">
-                        <i class="fa fa-ban"></i>
-                        <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                        <span id="alert-value"></span>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url('jurusan/tambah_jurusan'); ?>" id="form-tambah-pengguna" method="post">
-                        
+                    <?php $this->load->view('templates/notification'); ?>
+                    <form class="form-horizontal" action="<?php echo base_url('jurusan/proses_tambah_jurusan'); ?>" id="form-tambah-pengguna" method="post">
                         <div class="form-group">
                             <label for="nama-jurusan" class="col-lg-3 control-label">Nama Jurusan</label>
                             <div class="col-lg-5">
@@ -42,14 +37,14 @@
                             <div class="col-lg-5">
                                 <select name="warna_jurusan" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="#20B2AA">Lightseagreen</option>
-                                    <option value="#87CEFA">Lightskyblue</option>
-                                    <option value="#778899">Lightslategray</option>
-                                    <option value="#B0C4DE">Lightsteelblue</option>
+                                    <option value="#20B2AA" <?php echo set_value('warna_jurusan') == '#20B2AA' ? 'selected = "selected"' : '' ?>>Lightseagreen</option>
+                                    <option value="#87CEFA" <?php echo set_value('warna_jurusan') == '#87CEFA' ? 'selected = "selected"' : '' ?>>Lightskyblue</option>
+                                    <option value="#778899" <?php echo set_value('warna_jurusan') == '#778899' ? 'selected = "selected"' : '' ?>>Lightslategray</option>
+                                    <option value="#B0C4DE" <?php echo set_value('warna_jurusan') == '#B0C4DE' ? 'selected = "selected"' : '' ?>>Lightsteelblue</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                        
+                        </div>                                                
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
@@ -85,7 +80,11 @@
                         <li>
                             Kolom Username<br>
                             Kolom username digunakan untuk masuk ke dalam sistem.  Kolom ini tidak boleh kosong.
-                        </li>                        
+                        </li>
+                        <li>
+                            Kolom Ulangi Password<br>
+                            Kolom Ulangi Password diisi dengan mengulang password sesui password diinputkan pertama.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
+                        </li>
                     </ol>
                 </div>
             </div>

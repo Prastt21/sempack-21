@@ -12,7 +12,7 @@ class m_jurusan extends CI_Model {
     }
 
     function ambil_jurusan($parameter) {
-        $sql = 'SELECT * FROM jurusan LIMIT ?,?';
+        $sql = 'SELECT * FROM Jurusan LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -22,7 +22,7 @@ class m_jurusan extends CI_Model {
             return false;
         }
     }
-    
+
     function count_all_data() {
         $sql = "SELECT COUNT(Id_Jurusan)'total' FROM jurusan";
         $query = $this->db->query($sql);
@@ -34,14 +34,26 @@ class m_jurusan extends CI_Model {
             return false;
         }
     }
-    
-    function ubah_data_informasi(){
-        $sql = 'UPDATE informasi (Id_Pengguna,Judul_Info, Isi_info, Jenis_Info) WHERE(?,?,?,?)';
+
+    function get_jurusan_by_id($parameter) {
+        $sql = "SELECT * FROM jurusan WHERE Id_Jurusan = ?";
+        $query = $this->db->query($sql, $parameter);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    function ubah_jurusan($parameter) {
+        $sql = 'UPDATE jurusan SET Nama_Jurusan=?, Singkatan_Jurusan=?, Warna_Jurusan=? WHERE Id_Jurusan = ?';
         return $this->db->query($sql, $parameter);
     }
-    
+
     function hapus_data_informasi($params) {
-        $sql = 'DELETE FROM informasi WHERE id_informasi = ?';
+        $sql = 'DELETE FROM jurusan WHERE Id_Jurusan = ?';
         return $this->db->query($sql, $params);
     }
 

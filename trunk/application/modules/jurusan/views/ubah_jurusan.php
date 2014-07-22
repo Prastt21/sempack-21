@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
         Ubah Data
-        <small>Ubah Data Operator <?php echo $result_operator['nama_operator']; ?></small>
+        <small>Ubah Data Jurusan <?php echo $result_jurusan['Nama_Jurusan']; ?></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Operator</li>
-        <li class="active">Tambah Operator</li>
+        <li>Jurusan</li>
+        <li class="active">Tambah Jurusan</li>
     </ol>
     <!-- Main content -->
 </section>
@@ -14,121 +14,39 @@
     <div class="row">
         <div class="col-xs-8">
             <div class="box box-primary">
-                <div class="box-header"><h3 class="box-title">Data Operator</h3></div>
+                <div class="box-header"><h3 class="box-title">Data Jurusan</h3></div>
                 <div class="box-body">
-                    <div class="alert alert-danger alert-dismissable" id="div-alert" style="display: none;">
-                        <i class="fa fa-ban"></i>
-                        <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                        <span id="alert-value"></span>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url('data_operator/proses_ubah_data_operator'); ?>" id="form-tambah-pengguna" onsubmit="return false">
-                        <input type="hidden" name="id_pengguna" value="<?php echo $result_operator['id_pengguna']; ?>">
+                    <!--load template notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
+                    <form class="form-horizontal" action="<?php echo base_url('jurusan/proses_ubah_jurusan'); ?>" id="form-tambah-pengguna" method="post">
+                        <input type="hidden" name="id_jurusan" value="<?php echo set_value('id_jurusan', $result_jurusan['Id_Jurusan']); ?>">
                         <div class="form-group">
-                            <label for="kata-kunci" class="col-lg-3 control-label">Level Operator</label>
+                            <label for="nama-jurusan" class="col-lg-3 control-label">Jurusan</label>
                             <div class="col-lg-5">
-                                <select name="level" class="form-control input-sm" style="width: 150px;">
+                                <input type="text" name="nama_jurusan" maxlength="100" class="form-control input-sm" placeholder="Nama Jurusan" value="<?php echo set_value('nama_jurusan', $result_jurusan['Nama_Jurusan']); ?>">
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="singkatan-jurusan" class="col-lg-3 control-label"> Singkatan Jurusan</label>
+                            <div class="col-lg-5">
+                                <input type="text" name="singkatan_jurusan" maxlength="100" class="form-control input-sm" placeholder="Singkatan Jurusan" value="<?php echo set_value('singkatan_jurusan', $result_jurusan['Singkatan_Jurusan']); ?>">
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="warna-jurusan" class="col-lg-3 control-label">Jenis Informasi</label>
+                            <div class="col-lg-5">
+                                <select name="warna_jurusan" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <?php
-                                    if (isset($level)):
-                                        foreach ($level as $dt_level):
-                                            ?>
-                                            <option value="<?php echo $dt_level->id_level; ?>"><?php echo $dt_level->nama_level; ?></option>
-                                            <?php
-                                        endforeach;
-                                    endif;
-                                    ?>
+                                    <option value="#20B2AA" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#20B2AA' ? 'selected = "selected"' : '' ?>>Lightseagreen</option>
+                                    <option value="#87CEFA" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#87CEFA' ? 'selected = "selected"' : '' ?>>Lightskyblue</option>
+                                    <option value="#778899" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#778899' ? 'selected = "selected"' : '' ?>>Lightslategray</option>
+                                    <option value="#B0C4DE" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#B0C4DE' ? 'selected = "selected"' : '' ?>>Lightsteelblue</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="nama-operator" class="col-lg-3 control-label">Nama Operator</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="nama_operator" maxlength="100" class="form-control input-sm" placeholder="Nama Operator">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="status-operator" class="col-lg-3 control-label">Status Operator</label>
-                            <div class="col-lg-5">
-                                <select name="status" class="form-control input-sm" style="width: 150px;">
-                                    <option></option>
-                                    <?php
-                                    if (isset($status)):
-                                        foreach ($status as $dt_status):
-                                            ?>
-                                            <option value="<?php echo $dt_status->id_status; ?>"><?php echo $dt_level->nama_level; ?></option>
-                                            <?php
-                                        endforeach;
-                                    endif;
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="username" class="col-lg-3 control-label">Username</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="username" maxlength="20" class="form-control input-sm" placeholder="Username">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="no-password" class="col-lg-3 control-label">Password</label>
-                            <div class="col-lg-5">
-                                <input type="password" name="password" maxlength="20" class="form-control input-sm" placeholder="Password" id="password">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="no-password" class="col-lg-3 control-label">Ulangi Password</label>
-                            <div class="col-lg-5">
-                                <input type="password" name="ulangi_password" maxlength="20" class="form-control input-sm" placeholder="Ulangi Password">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="jenis-kelamin" class="col-lg-3 control-label">Jenis Kelamin</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="jenis_kelamin" maxlength="20" class="form-control input-sm" placeholder="Jenis Kelamin">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="no-telephone" class="col-lg-3 control-label">No Telephone</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="telephone" maxlength="20" class="form-control input-sm" placeholder="Telephone">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="alamat" class="col-lg-3 control-label">Alamat</label>
-                            <div class="col-lg-5">
-                                <textarea name="alamat" class="form-control" placeholder="Alamat Operator"></textarea>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tempat-lahir" class="col-lg-3 control-label">Tempat Lahir</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="tempat_lahir" style="width: 150px;" maxlength="15" class="form-control input-sm" placeholder="Tempat Lahir">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal-lahir" class="col-lg-3 control-label">Tanggal Lahir</label>
-                            <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="tanggal" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-lg-3 control-label">Email Operator</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="email" maxlength="100" class="form-control input-sm" placeholder="Email Operator">
-                            </div>
-                            <div class="col-lg-3"></div>
-                        </div>
+                        </div>                        
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
@@ -164,39 +82,7 @@
                         <li>
                             Kolom Username<br>
                             Kolom username digunakan untuk masuk ke dalam sistem.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Password<br>
-                            Kolom password diisi dengan password operator.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Ulangi Password<br>
-                            Kolom Ulangi Password diisi dengan mengulang password sesui password diinputkan pertama.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Jenis Kelamin<br>
-                            Kolom Jenis Kelamin diisi dengan jenis kelamin perator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom No Telephone<br>
-                            Kolom No Telephone operator yang sedang aktif.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Alamat<br>
-                            Kolom alamat operator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tempat Lahir<br>
-                            Kolom tempat lahir disi dengan tempat dimana operator diahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tanggal Lahir<br>
-                            Kolom tanggal lahir disi tanggal operator pernah dilahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Email<br>
-                            Kolom email diisi dengan email pengguna jika ada.  Kolom ini boleh kosong, namun dalam pengisian harus menggunakan format email. misal : <em>contoh@email.com</em>
-                        </li>
+                        </li>                        
                     </ol>
                 </div>
             </div>
