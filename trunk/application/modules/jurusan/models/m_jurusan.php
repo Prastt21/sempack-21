@@ -7,7 +7,7 @@ class m_jurusan extends CI_Model {
     }
 
     function tambah_jurusan($parameter) {
-        $sql = 'INSERT INTO jurusan (Id_Jurusan,Nama_Jurusan, Singkatan_Jurusan, Warna_Jurusan) VALUES (?,?,?,?)';
+        $sql = 'INSERT INTO jurusan (Nama_Jurusan, Singkatan_Jurusan, Warna_Jurusan) VALUES (?,?,?)';
         return $this->db->query($sql, $parameter);
     }
 
@@ -52,7 +52,7 @@ class m_jurusan extends CI_Model {
         return $this->db->query($sql, $parameter);
     }
 
-    function hapus_data_informasi($params) {
+    function hapus_jurusan($params) {
         $sql = 'DELETE FROM jurusan WHERE Id_Jurusan = ?';
         return $this->db->query($sql, $params);
     }

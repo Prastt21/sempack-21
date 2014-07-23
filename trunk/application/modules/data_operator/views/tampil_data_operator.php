@@ -40,13 +40,13 @@
                         <thead>
                             <tr>
                                 <td width="3%" align="center">No</td>
-                                <td width="10%">Level Operator</td>
-                                <td width="13%">Nama Operator</td>
+                                <td width="10%">Level</td>
+                                <td width="15%">Nama</td>
                                 <td width="8%">Status</td>
-                                <td width="7%">Username</td>
-                                <td width="7%">JK</td>
+                                <td width="9%">Username</td>
+                                <td width="5%">JK</td>
                                 <td width="10%">No Telephone</td>
-                                <td width="10%">Alamat</td>
+                                <td width="14%">Alamat</td>
                                 <td width="9%">Tanggal Lahir</td>
                                 <td width="10%">Email</td>
                             </tr>
@@ -68,8 +68,8 @@
                                         <td><?php echo $dt_operator['Alamat'] ?></td>
                                         <td><?php echo $dt_operator['Tanggal_Lahir']; ?></td>
                                         <td><?php echo $dt_operator['Email']; ?></td>
-                                        <td align="center"><a href="<?php echo base_url('data_operator/ubah_data_operator/' . $dt_operator['Id_Pengguna']); ?>"><i class="fa fa-edit"></i> ubah </a>
-                                            | <a class="tombol-hapus" href="<?php echo base_url('data_operator/hapus_data_operator/' . $dt_operator['Id_Pengguna']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')"><i class="fa fa-times"></i> hapus </a>
+                                        <td align="center"><a href="<?php echo base_url('data_operator/ubah_data_operator/' . $dt_operator['Id_Pengguna']); ?>" title="ubah data"><i class="fa fa-edit"></i></a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('data_operator/hapus_data_operator/' . $dt_operator['Id_Pengguna']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <?php

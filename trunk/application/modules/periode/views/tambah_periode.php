@@ -63,7 +63,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Operator</li>
+        <li>Periode</li>
         <li class="active">Tambah Periode</li>
     </ol>
     <!-- Main content -->
@@ -74,25 +74,22 @@
             <div class="box box-primary">
                 <div class="box-header"><h3 class="box-title">Data Periode</h3></div>
                 <div class="box-body">
-                  
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert alert-error alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"></span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    <form class="form-horizontal" action="<?php echo base_url('periode/tambah_periode'); ?>" id="form-tambah-pengguna" method="post">
+                    <?php $this->load->view('templates/notification'); ?>
+                    <form class="form-horizontal" action="<?php echo base_url('periode/proses_tambah_periode'); ?>" id="form-tambah-pengguna" method="post">
                         <div class="form-group">
                             <label for="tahun-periode" class="col-lg-3 control-label">Tahun Periode</label>
                             <div class="col-lg-5">
-                                <input type="text" name="tahun_periode" maxlength="100" class="form-control input-sm" placeholder="Tahun Periode">
+                                <input type="text" name="tahun_periode" maxlength="20" class="form-control input-sm" placeholder="Tahun Periode">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
-                                                
+                        <div class="form-group">
+                            <label for="keterangan-periode" class="col-lg-3 control-label">Keterangan</label>
+                            <div class="col-lg-5">
+                                <textarea name="keterangan" maxlength="100" class="form-control input-sm" placeholder="Keterangan"></textarea>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>                                              
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
@@ -116,8 +113,23 @@
                         <li>
                             Kolom Level Operator<br>
                             Kolom level operator diisi dengan level sesuai dengan operasi sistem.  Terdiri minimal 3 karakter dengan maksimal 100 karakter.  Kolom ini tidak boleh kosong.
-                        </li>                
-                        
+                        </li>
+                        <li>
+                            Kolom Nama Operator<br>
+                            Kolom nama operator merupakan nama lengkap operator sistem  Terdiri minimal 3 karakter dengan maksimal 20 karakter.  Dalam kolom ini SPASI akan dihilangkan.  Kolom ini tidak boleh kosong.
+                        </li>
+                        <li>
+                            Kolom Status Operator<br>
+                            Kolom status oerator disi dengan status operator saat ini.  Terdiri minimal 8 karakter dengan maksimal 20 karakter.  Untuk memastikan saat pengisian, kolom kata kunci harus sama dengan kolom ulangi kata kunci.  Kolom ini tidak boleh kosong.
+                        </li>
+                        <li>
+                            Kolom Username<br>
+                            Kolom username digunakan untuk masuk ke dalam sistem.  Kolom ini tidak boleh kosong.
+                        </li>
+                        <li>
+                            Kolom Ulangi Password<br>
+                            Kolom Ulangi Password diisi dengan mengulang password sesui password diinputkan pertama.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
+                        </li>
                     </ol>
                 </div>
             </div>

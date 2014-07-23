@@ -40,10 +40,10 @@
                         <thead>
                             <tr>
                                 <td width="5%" align="center">No</td>
-                                <td width="30%">Judul Informasi</td>
-                                <td width="15%">Jenis Informasi</td>
-                                <td width="15%">Tanggal Informasi</td>
-                                <td width="15%">Operator Posting</td>                                
+                                <td width="50%">Judul Informasi</td>
+                                <td width="13%">Jenis Informasi</td>
+                                <td width="13%">Tanggal Informasi</td>
+                                <td width="13%">Operator Posting</td>                                
                             </tr>
                         </thead>
                         <tbody>
@@ -58,8 +58,8 @@
                                         <td><?php echo $dt_informasi['Jenis_Info']; ?></td>
                                         <td><?php echo $dt_informasi['Tanggal_info']; ?></td>
                                         <td><?php echo $dt_informasi['Nama_Pengguna']; ?></td>                                        
-                                        <td align="center"><a href="<?php echo base_url('data_informasi/ubah_data_informasi/' . $dt_informasi['Id_Informasi']); ?>"><i class="fa fa-edit"></i> ubah </a>
-                                            | <a class="tombol-hapus" href="<?php echo base_url('data_informasi/hapus_data_informasi/' . $dt_informasi['Id_Informasi']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')"><i class="fa fa-times"></i> hapus </a>
+                                        <td align="center"><a href="<?php echo base_url('data_informasi/ubah_data_informasi/' . $dt_informasi['Id_Informasi']); ?>" title="ubah data"><i class="fa fa-edit"></i></a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('data_informasi/hapus_data_informasi/' . $dt_informasi['Id_Informasi']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <?php

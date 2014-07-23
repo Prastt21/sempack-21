@@ -8,7 +8,6 @@
         <li class="active">Rujukan Asuransi</li>
     </ol>
     <!-- Main content -->
-
 </section>
 <section class="content">
     <div class="row">
@@ -33,32 +32,23 @@
                             </div>
                         </div>
                     </div>
-                    <?php
-                    if ($this->session->flashdata('pesan')) {
-                        $pesan = $this->session->flashdata('pesan');
-                     ?>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert <?php echo $pesan['css']; ?> alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"> <?php echo $pesan['psn']; ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
                     <div class="row" style="height: 10px"></div>
+                    <!--load template untuk notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
                                 <td width="3%" align="center">No</td>
                                 <td width="8%">Jenis Asuransi</td>
-                                <td width="15%">Nama Perujuk</td>
-                                <td width="10%">Rumah Sakit</td>
+                                <td width="12%">Nama Perujuk</td>
+                                <td width="11%">Rumah Sakit</td>
                                 <td width="12%">Alamat Rumah Sakit</td>
-                                <td width="11%">Tanggal Masuk</td>
-                                <td width="11%">Tanggal Keluar</td>
-                                <td width="9%">Total Biaya</td>
-                                <td width="9%">Santunan</td>                                
+                                <td width="8%">Tgl Daftar</td>
+                                <td width="8%">Tgl Masuk</td>
+                                <td width="8%">Tgl Keluar</td>
+                                <td width="8%">Total Biaya</td>
+                                <td width="8%">Santunan</td>
+                                <td width="9%">Status</td>                                
                             </tr>
                         </thead>
                         <tbody>
@@ -73,13 +63,14 @@
                                         <td><?php echo $dt_rujukan_asuransi['Nama_Pengguna']; ?></td>
                                         <td><?php echo $dt_rujukan_asuransi['Nama_RS']; ?></td>
                                         <td><?php echo $dt_rujukan_asuransi['Alamat_RS']; ?></td>
+                                        <td><?php echo $dt_rujukan_asuransi['Tanggal_Daftar']; ?></td>
                                         <td><?php echo $dt_rujukan_asuransi['Tanggal_Masuk']; ?></td>
                                         <td><?php echo $dt_rujukan_asuransi['Tanggal_Keluar']; ?></td>
                                         <td><?php echo $dt_rujukan_asuransi['Total_Biaya']; ?></td>
                                         <td><?php echo $dt_rujukan_asuransi['Santunan']; ?></td>
-                                        
-                                        <td align="center"><a href="<?php echo base_url('rujukan_asuransi/ubah_rujukan_asuransi/' . $dt_rujukan_asuransi['Id_Asuransi']); ?>"><i class="fa fa-edit"></i> ubah </a>
-                                            | <a class="tombol-hapus" href="#" data-id="<?php echo $dt_rujukan_asuransi['Id_Asuransi']; ?>"><i class="fa fa-times"></i> hapus </a>
+                                        <td><?php echo $dt_rujukan_asuransi['Status_Asuransi']; ?></td>
+                                        <td align="center"><a href="<?php echo base_url('rujukan_asuransi/ubah_rujukan_asuransi/' . $dt_rujukan_asuransi['Id_Asuransi']); ?>" title="ubah data"><i class="fa fa-edit"></i></a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('data_informasi/hapus_data_informasi/' . $dt_rujukan_asuransi['Id_Asuransi']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <?php

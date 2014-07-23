@@ -17,7 +17,7 @@
                 <div class="box-header">
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                    <div class="row">                   
+                    <div class="row">
                         <div class="col-xs-4">
                             <div class="input-group input-group-sm">
                                 <input class="form-control" type="text">
@@ -32,33 +32,21 @@
                             </div>
                         </div>
                     </div>
-                    <?php
-                    if ($this->session->flashdata('pesan')) {
-                        $pesan = $this->session->flashdata('pesan');
-                     ?>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert <?php echo $pesan['css']; ?> alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"> <?php echo $pesan['psn']; ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
                     <div class="row" style="height: 10px"></div>
+                    <!--load template untuk notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
                                 <td width="5%" align="center">No</td>
-                                <td width="15%">Nama Orang Tua</td>
+                                <td width="12%">Nama Orang Tua</td>
                                 <td width="15%">Nama Pengguna</td>
                                 <td width="10%">Username</td>
                                 <td width="10%">JK</td>
                                 <td width="10%">No Telp</td>
                                 <td width="15%">Alamat</td>
                                 <td width="10%">Tanggal Lahir</td>
-                                <td width="10%">Email</td>
-                                                                
+                                <td width="13%">Email</td>                                                              
                             </tr>
                         </thead>
                         <tbody>
@@ -76,7 +64,7 @@
                                         <td><?php echo $dt_pengguna['No_Telp']; ?></td>
                                         <td><?php echo $dt_pengguna['Alamat']; ?></td>
                                         <td><?php echo $dt_pengguna['Tanggal_Lahir']; ?></td>
-                                        <td><?php echo $dt_pengguna['Email']; ?></td>                                      
+                                        <td><?php echo $dt_pengguna['Email']; ?></td>
                                     </tr>
                                     <?php
                                 endforeach;

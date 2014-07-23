@@ -8,7 +8,6 @@
         <li class="active">Keterangan Orang Tua</li>
     </ol>
     <!-- Main content -->
-
 </section>
 <section class="content">
     <div class="row">
@@ -17,7 +16,7 @@
                 <div class="box-header">
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                    <div class="row">                        
+                    <div class="row">
                         <div class="col-xs-4">
                             <div class="input-group input-group-sm">
                                 <input class="form-control" type="text">
@@ -33,6 +32,8 @@
                         </div>
                     </div>
                     <div class="row" style="height: 10px"></div>
+                    <!--load template untuk notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
@@ -43,24 +44,24 @@
                                 <td width="10%">No Telephone</td>
                                 <td width="15%">Pekerjaaan </td>
                                 <td width="15%">Penghasilan</td>
-                                <td width="10%">Jumlah Tanggungan</td>                                
+                                <td width="10%">Jumlah Tanggungan</td>                                                              
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             if (isset($rs_keterangan_orang_tua)) {
                                 $a = isset($awal) ? $awal : 0;
-                                foreach ($rs_keterangan_orang_tua as $dt_keterangan_ortu):
+                                foreach ($rs_keterangan_orang_tua as $dt_keterangan_orang_tua):
                                     ?>
                                     <tr>
                                         <td align="center"><?php echo++$a ?></td>
-                                        <td><?php echo $dt_keterangan_ortu['Nama_Pengguna']; ?></td>
-                                        <td><?php echo $dt_keterangan_ortu['Nama_Ortu']; ?></td>
-                                        <td><?php echo $dt_keterangan_ortu['Alamat_Ortu']; ?></td>
-                                        <td><?php echo $dt_keterangan_ortu['No_Telp_Ortu']; ?></td>                                        
-                                        <td><?php echo $dt_keterangan_ortu['Pekerjaan_Ortu']; ?></td>
-                                        <td><?php echo $dt_keterangan_ortu['Penghasilan_Ortu']; ?></td>
-                                        <td><?php echo $dt_keterangan_ortu['Jml_Tanggungan']; ?></td>                                        
+                                        <td><?php echo $dt_keterangan_orang_tua['Nama_Pengguna']; ?></td>
+                                        <td><?php echo $dt_keterangan_orang_tua['Nama_Ortu']; ?></td>
+                                        <td><?php echo $dt_keterangan_orang_tua['Alamat_Ortu']; ?></td>
+                                        <td><?php echo $dt_keterangan_orang_tua['No_Telp_Ortu']; ?></td>                                        
+                                        <td><?php echo $dt_keterangan_orang_tua['Pekerjaan_Ortu']; ?></td>
+                                        <td><?php echo $dt_keterangan_orang_tua['Penghasilan_Ortu']; ?></td>
+                                        <td><?php echo $dt_keterangan_orang_tua['Jml_Tanggungan']; ?></td>
                                     </tr>
                                     <?php
                                 endforeach;
