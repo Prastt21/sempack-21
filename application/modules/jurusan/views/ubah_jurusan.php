@@ -35,14 +35,14 @@
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
-                            <label for="warna-jurusan" class="col-lg-3 control-label">Jenis Informasi</label>
+                            <label for="warna-jurusan" class="col-lg-3 control-label">Warna Jurusan</label>
                             <div class="col-lg-5">
                                 <select name="warna_jurusan" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="#20B2AA" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#20B2AA' ? 'selected = "selected"' : '' ?>>Lightseagreen</option>
-                                    <option value="#87CEFA" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#87CEFA' ? 'selected = "selected"' : '' ?>>Lightskyblue</option>
-                                    <option value="#778899" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#778899' ? 'selected = "selected"' : '' ?>>Lightslategray</option>
-                                    <option value="#B0C4DE" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#B0C4DE' ? 'selected = "selected"' : '' ?>>Lightsteelblue</option>
+                                    <option value="#FF0000" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#FF0000' ? 'selected = "selected"' : '' ?>>Merah</option>
+                                    <option value="#0000FF" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#0000FF' ? 'selected = "selected"' : '' ?>>Biru</option>
+                                    <option value="#A52A2A" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#A52A2A' ? 'selected = "selected"' : '' ?>>Coklat</option>
+                                    <option value="#808080" <?php echo set_value('warna_jurusan', $result_jurusan['Warna_Jurusan']) == '#808080' ? 'selected = "selected"' : '' ?>>Abu-Abu</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>

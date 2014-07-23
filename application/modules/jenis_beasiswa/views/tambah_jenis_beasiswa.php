@@ -1,61 +1,3 @@
-<head>
-    <!-- TinyMCE -->
-    <script language="javascript" type="text/javascript" src="tinymcpuk-0.3/tiny_mce.js"></script>
-    <script language="javascript" type="text/javascript">
-        tinyMCE.init({
-            mode : "textareas",//exact or textareas
-            theme : "advanced",//simple
-            plugins : "youtube,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,zoom,flash,searchreplace,print,paste,directionality,fullscreen,noneditable,contextmenu",
-            theme_advanced_buttons1_add_before : "",
-            theme_advanced_buttons1_add : "fontsizeselect",
-            theme_advanced_buttons2_add : "preview,forecolor",
-            theme_advanced_buttons2_add_before: "pastetext,pasteword,emotions,print,",
-            theme_advanced_buttons3_add_before : "tablecontrols",
-            theme_advanced_buttons3_add : "fullscreen",
-            theme_advanced_toolbar_location : "top",
-            theme_advanced_toolbar_align : "left",
-            theme_advanced_statusbar_location : "bottom",
-            plugin_insertdate_dateFormat : "%Y-%m-%d",
-            plugin_insertdate_timeFormat : "%H:%M:%S",
-            extended_valid_elements : "hr[class|width|size|noshade]",
-            file_browser_callback : "fileBrowserCallBack",
-            paste_use_dialog : false,
-            theme_advanced_resizing : true,
-            theme_advanced_resize_horizontal : false,
-            theme_advanced_link_targets : "_something=My somthing;_something2=My somthing2;_something3=My somthing3;",
-            media_strict : false,
-            apply_source_formatting : true
-        });
-
-        function fileBrowserCallBack(field_name, url, type, win) {
-            var connector = "../../filemanager/browser.html?Connector=connectors/php/connector.php";
-            var enableAutoTypeSelection = true;
-		
-            var cType;
-            tinymcpuk_field = field_name;
-            tinymcpuk = win;
-		
-            switch (type) {
-                case "image":
-                    cType = "Image";
-                    break;
-                case "flash":
-                    cType = "Flash";
-                    break;
-                case "file":
-                    cType = "File";
-                    break;
-            }
-		
-            if (enableAutoTypeSelection && cType) {
-                connector += "&Type=" + cType;
-            }
-		
-            window.open(connector, "tinymcpuk", "modal,width=600,height=400");
-        }
-    </script>
-    <!-- /TinyMCE -->
-</head>
 <section class="content-header">
     <h1>
         Tambah Data
@@ -72,33 +14,38 @@
     <div class="row">
         <div class="col-xs-8">
             <div class="box box-primary">
-                <div class="box-header"><h3 class="box-title">Data Jenis Beasiswa</h3></div>
+                <div class="box-header"><h3 class="box-title">Data Jurusan</h3></div>
                 <div class="box-body">
-                  
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert alert-error alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"></span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    <form class="form-horizontal" action="<?php echo base_url('jenis_beasiswa/tambah_jenis_beasiswa'); ?>" id="form-tambah-pengguna" method="post">
+                    <?php $this->load->view('templates/notification'); ?>
+                    <form class="form-horizontal" action="<?php echo base_url('jenis_beasiswa/proses_tambah_jenis_beasiswa'); ?>" id="form-tambah-pengguna" method="post">
                         <div class="form-group">
+                          <div class="form-group">
                             <label for="jenis-beasiswa" class="col-lg-3 control-label">Jenis beasiswa</label>
                             <div class="col-lg-5">
                                 <input type="text" name="jenis_beasiswa" maxlength="100" class="form-control input-sm" placeholder="jenis_beasiswa">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
+                        </div>                            
                         <div class="form-group">
                             <label for="warna-beasiswa" class="col-lg-3 control-label">Warna Beasiswa</label>
                             <div class="col-lg-5">
-                                <input type="text" name="warna_beasiswa" maxlength="100" class="form-control input-sm" placeholder="Warna_Beasiswa">
+                                <select name="warna_beasiswa" class="form-control input-sm" style="width: 150px;">
+                                    <option></option>
+                                    <option value="#FF0000" <?php echo set_value('warna_beasiswa') == '#FF0000' ? 'selected = "selected"' : '' ?>>Merah</option>
+                                    <option value="#FFFF00" <?php echo set_value('warna_beasiswa') == '#FFFF00' ? 'selected = "selected"' : '' ?>>Kuning</option>
+                                    <option value="#008000" <?php echo set_value('warna_beasiswa') == '#008000' ? 'selected = "selected"' : '' ?>>Hijau</option>
+                                    <option value="#800080" <?php echo set_value('warna_beasiswa') == '#800080' ? 'selected = "selected"' : '' ?>>Ungu</option>
+                                </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                       
+                        </div> 
+                        <div class="form-group">
+                            <label for="keterangan-beasiswa" class="col-lg-3 control-label">Keterangan</label>
+                            <div class="col-lg-5">
+                                <textarea name="keterangan" maxlength="100" class="form-control input-sm" placeholder="Keterangan"><?php echo set_value('keterangan', ''); ?></textarea>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
@@ -107,6 +54,7 @@
                         </div>
                     </form>
                 </div>
+            </div>
             </div>
         </div>
         <div class="col-xs-4">
@@ -126,6 +74,14 @@
                         <li>
                             Kolom Nama Operator<br>
                             Kolom nama operator merupakan nama lengkap operator sistem  Terdiri minimal 3 karakter dengan maksimal 20 karakter.  Dalam kolom ini SPASI akan dihilangkan.  Kolom ini tidak boleh kosong.
+                        </li>
+                        <li>
+                            Kolom Status Operator<br>
+                            Kolom status oerator disi dengan status operator saat ini.  Terdiri minimal 8 karakter dengan maksimal 20 karakter.  Untuk memastikan saat pengisian, kolom kata kunci harus sama dengan kolom ulangi kata kunci.  Kolom ini tidak boleh kosong.
+                        </li>
+                        <li>
+                            Kolom Username<br>
+                            Kolom username digunakan untuk masuk ke dalam sistem.  Kolom ini tidak boleh kosong.
                         </li>
                     </ol>
                 </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2014 at 10:59 PM
+-- Generation Time: Jul 23, 2014 at 03:37 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -31,20 +31,23 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Id_Pengguna` int(10) NOT NULL,
   `Nama_RS` varchar(100) NOT NULL,
   `Alamat_RS` varchar(150) NOT NULL,
+  `Kronologi` text NOT NULL,
+  `Tanggal_Daftar` date NOT NULL,
   `Tanggal_Masuk` date NOT NULL,
   `Tanggal_Keluar` date NOT NULL,
   `Total_Biaya` int(15) NOT NULL,
   `Santunan` int(15) DEFAULT NULL,
+  `Status_Asuransi` enum('TERVERIFIKASI','WAITING') DEFAULT NULL,
   PRIMARY KEY (`Id_Asuransi`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `asuransi`
 --
 
-INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS`, `Alamat_RS`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`) VALUES
-(1, 'KECELAKAAN', 4, 'RS. dr.Sardjito', 'Jalan Kamboja Kompleks UGM', '0000-00-00', '0000-00-00', 500000, NULL);
+INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS`, `Alamat_RS`, `Kronologi`, `Tanggal_Daftar`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`, `Status_Asuransi`) VALUES
+(1, 'KECELAKAAN', 4, 'RS. dr.Sardjito', 'Jalan Kamboja Kompleks UGM', '', '0000-00-00', '0000-00-00', '0000-00-00', 500000, NULL, 'TERVERIFIKASI');
 
 -- --------------------------------------------------------
 
@@ -63,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Waktu_Pinjam` time NOT NULL,
   `Tanggal_Selesai` date NOT NULL,
   `Waktu_Selesai` time NOT NULL,
-  `Status_Penggunaan` enum('Terverifikasi','Waiting','Expired') NOT NULL,
+  `Status_Penggunaan` enum('Terverifikasi','Waiting','Expired') DEFAULT NULL,
   PRIMARY KEY (`Id_Pinjam_Aula`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -87,12 +90,15 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   `Id_Jurusan` int(10) NOT NULL,
   `Jenjang` enum('D3','S1') NOT NULL,
   `Alamat_Sekarang` varchar(150) NOT NULL,
-  `Nama_PT` set('STMIK AMIKOM YOGYAKARTA') DEFAULT NULL,
+  `Nama_PT` set('STMIK AMIKOM YOGYAKARTA') NOT NULL,
   `Semester` int(1) NOT NULL,
   `IPK` decimal(4,0) NOT NULL,
   `Prestasi` varchar(500) DEFAULT NULL,
   `Alasan` varchar(500) NOT NULL,
+  `BANK` set('MUAMALAT') NOT NULL,
   `No_Rekening` int(10) NOT NULL,
+  `Tanggal_Daftar` date DEFAULT NULL,
+  `Status_Beasiswa` enum('Terverifikasi','Waiting') DEFAULT NULL,
   PRIMARY KEY (`Id_Beasiswa`),
   KEY `Id_JB` (`Id_JB`),
   KEY `Id_Pengguna` (`Id_Pengguna`),
@@ -115,11 +121,11 @@ CREATE TABLE IF NOT EXISTS `informasi` (
   `Id_Informasi` int(10) NOT NULL AUTO_INCREMENT,
   `Id_Pengguna` int(10) NOT NULL,
   `Judul_Info` varchar(200) NOT NULL,
-  `Isi_Info` varchar(1000) NOT NULL,
+  `Isi_Info` text NOT NULL,
   `Jenis_Info` enum('Aula','Beasiswa','Asuransi') NOT NULL,
-  `Tanggal_info` datetime DEFAULT NULL,
+  `Tanggal_info` date DEFAULT NULL,
   PRIMARY KEY (`Id_Informasi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `informasi`
@@ -128,9 +134,8 @@ CREATE TABLE IF NOT EXISTS `informasi` (
 INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`, `Jenis_Info`, `Tanggal_info`) VALUES
 (1, 1, 'judul', 'isi', 'Beasiswa', NULL),
 (2, 1, 'judul yang kedua', 'isi yang kedua', 'Aula', NULL),
-(3, 1, 'hdfhdf', 'fhdfhd', 'Aula', NULL),
-(4, 1, 'xz', 'aa', 'Aula', NULL),
-(5, 1, 'sdfbsjhdbfksj', 'fbkdjafbakjsn', 'Aula', NULL);
+(3, 1, 'hdfhdf', 'fhdfhd', 'Aula', '2014-07-23'),
+(4, 1, 'k', 't', 'Aula', '2014-07-01');
 
 -- --------------------------------------------------------
 
@@ -140,18 +145,20 @@ INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`
 
 CREATE TABLE IF NOT EXISTS `jenis_beasiswa` (
   `Id_JB` int(10) NOT NULL AUTO_INCREMENT,
-  `Jenis_Beasiswa` varchar(10) DEFAULT NULL,
+  `Jenis_Beasiswa` varchar(10) NOT NULL,
   `Warna_Beasiswa` varchar(10) DEFAULT NULL,
+  `Keterangan` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`Id_JB`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `jenis_beasiswa`
 --
 
-INSERT INTO `jenis_beasiswa` (`Id_JB`, `Jenis_Beasiswa`, `Warna_Beasiswa`) VALUES
-(1, 'PPA', NULL),
-(2, 'BBP/PPA', NULL);
+INSERT INTO `jenis_beasiswa` (`Id_JB`, `Jenis_Beasiswa`, `Warna_Beasiswa`, `Keterangan`) VALUES
+(1, 'PPA', '#FF0000', 'Beasiswa untuk Mahasiswa yang Berprestasi dibidang akademik dan organisasi'),
+(2, 'BBP/PPA', '#FFFF00', 'Beasiswa Bantuan Biaya Pendidikan'),
+(3, 'Muamalat', '#800080', 'Beasiswa dari Bank Muamalat Khusus Semester 1 dan 2');
 
 -- --------------------------------------------------------
 
@@ -161,18 +168,20 @@ INSERT INTO `jenis_beasiswa` (`Id_JB`, `Jenis_Beasiswa`, `Warna_Beasiswa`) VALUE
 
 CREATE TABLE IF NOT EXISTS `jurusan` (
   `Id_Jurusan` int(10) NOT NULL AUTO_INCREMENT,
-  `Nama_Jurusan` varchar(30) NOT NULL,
-  `Singkatan_Jurusan` char(4) DEFAULT NULL,
+  `Nama_Jurusan` varchar(50) NOT NULL,
+  `Singkatan_Jurusan` char(4) NOT NULL,
   `Warna_Jurusan` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`Id_Jurusan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `jurusan`
 --
 
 INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna_Jurusan`) VALUES
-(1, 'dsv', 'dsvd', '#20B2AA');
+(1, 'S1 Sistem Informasi', 'S1SI', '#0000FF'),
+(4, 'S1 Teknik Informatika', 'S1TI', '#FF0000'),
+(5, 'D3 Manajemen Informatika', 'D3MI', '#FF0000');
 
 -- --------------------------------------------------------
 
@@ -184,10 +193,10 @@ CREATE TABLE IF NOT EXISTS `keterangan_ortu` (
   `Id_Ortu` int(10) NOT NULL AUTO_INCREMENT,
   `Nama_Ortu` varchar(100) NOT NULL,
   `Alamat_Ortu` varchar(150) NOT NULL,
-  `No_Telp_Ortu` int(15) NOT NULL,
-  `Pekerjaan_Ortu` enum('PNS','PEGAWAI SWASTA','WIRASWASTA','TNI/POLRI','NELAYAN/PETANI','LAINNYA') DEFAULT NULL,
-  `Penghasilan_Ortu` int(15) DEFAULT NULL,
-  `Jml_Tanggungan` int(2) DEFAULT NULL,
+  `No_Telp_Ortu` int(15) DEFAULT NULL,
+  `Pekerjaan_Ortu` enum('PNS','PEGAWAI SWASTA','WIRASWASTA','TNI/POLRI','NELAYAN/PETANI','LAINNYA') NOT NULL,
+  `Penghasilan_Ortu` int(15) NOT NULL,
+  `Jml_Tanggungan` int(2) NOT NULL,
   PRIMARY KEY (`Id_Ortu`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -207,9 +216,7 @@ INSERT INTO `keterangan_ortu` (`Id_Ortu`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_O
 CREATE TABLE IF NOT EXISTS `pendaftaran_asuransi` (
   `Id_Pengguna` int(10) NOT NULL,
   `Id_Periode` int(10) NOT NULL,
-  `Tanggal_Daftar_Asuransi` datetime NOT NULL,
-  `Id_Asuransi` char(5) NOT NULL,
-  `Status_Asuransi` int(1) NOT NULL,
+  `Id_Asuransi` int(10) NOT NULL,
   KEY `Id_Pengguna` (`Id_Pengguna`),
   KEY `Id_Asuransi` (`Id_Asuransi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -228,9 +235,7 @@ CREATE TABLE IF NOT EXISTS `pendaftaran_asuransi` (
 CREATE TABLE IF NOT EXISTS `pendaftaran_beasiswa` (
   `Id_Pengguna` int(10) NOT NULL,
   `Id_Periode` int(10) NOT NULL,
-  `Tanggal_Daftar_Beasiswa` datetime NOT NULL,
   `Id_Beasiswa` int(10) NOT NULL,
-  `Status_Beasiswa` int(1) NOT NULL,
   KEY `Id_Pengguna` (`Id_Pengguna`),
   KEY `Id_Beasiswa` (`Id_Beasiswa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -248,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `pendaftaran_beasiswa` (
 
 CREATE TABLE IF NOT EXISTS `pengguna` (
   `Id_Pengguna` int(10) NOT NULL AUTO_INCREMENT,
-  `Id_Ortu` int(10) NOT NULL,
+  `Id_Ortu` int(10) DEFAULT NULL,
   `Id_Level` int(1) NOT NULL,
   `Nama_Pengguna` varchar(150) NOT NULL,
   `Status_Pengguna` enum('MAHASISWA','KARYAWAN') NOT NULL,
@@ -272,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
 
 INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Ortu`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Email`, `Online`, `Sesi`, `Catatan`) VALUES
 (1, 1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', 'prastt21@gmail.com', 0, '0000-00-00 00:00:00', NULL),
-(2, 0, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'PRIA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', '', 0, '0000-00-00 00:00:00', NULL),
+(2, 0, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', 'aku@masiyak.com', 0, '0000-00-00 00:00:00', NULL),
 (3, 1, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', 0, '0000-00-00 00:00:00', NULL),
 (4, 1, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '', '', 'PRIA', 0, '', '', '0000-00-00', '', 0, '0000-00-00 00:00:00', NULL);
 
@@ -285,15 +290,16 @@ INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Ortu`, `Id_Level`, `Nama_Pengguna`, `
 CREATE TABLE IF NOT EXISTS `periode` (
   `Id_Periode` int(10) NOT NULL AUTO_INCREMENT,
   `Tahun` int(4) NOT NULL,
+  `Keterangan` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`Id_Periode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `periode`
 --
 
-INSERT INTO `periode` (`Id_Periode`, `Tahun`) VALUES
-(1, 2016);
+INSERT INTO `periode` (`Id_Periode`, `Tahun`, `Keterangan`) VALUES
+(2, 2014, 'Tahun Pemilu');
 
 -- --------------------------------------------------------
 
@@ -303,8 +309,8 @@ INSERT INTO `periode` (`Id_Periode`, `Tahun`) VALUES
 
 CREATE TABLE IF NOT EXISTS `sistem` (
   `Status_Sistem` enum('AKTIF','TIDAK AKTIF') NOT NULL,
-  `Id_Periode` int(1) NOT NULL,
-  `Pengumuman_Sistem` varchar(500) NOT NULL,
+  `Id_Periode` int(10) NOT NULL,
+  `Pengumuman_Sistem` text NOT NULL,
   `StatusRequest_Sistem` enum('AKTIF','TIDAK AKTIF') NOT NULL,
   `KarReq_Sistem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

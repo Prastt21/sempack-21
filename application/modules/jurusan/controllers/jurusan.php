@@ -58,7 +58,7 @@ class jurusan extends operator_base {
             $this->load->model('m_jurusan');
             //set parameter array
             $parameter = array(
-                $this->sesi->get_data_login('ID_PENGGUNA'),
+                //$this->sesi->get_data_login('ID_PENGGUNA'),
                 $this->input->post('nama_jurusan'),
                 $this->input->post('singkatan_jurusan'),
                 $this->input->post('warna_jurusan')
@@ -116,10 +116,11 @@ class jurusan extends operator_base {
             //jika validasi sukses
             $this->load->model('m_jurusan');
             $parameter = array(
-                $this->sesi->get_data_login('ID_PENGGUNA'),
+                //$this->sesi->get_data_login('ID_PENGGUNA'),
                 $this->input->post('nama_jurusan'),
                 $this->input->post('singkatan_jurusan'),
-                $this->input->post('warna_jurusan')
+                $this->input->post('warna_jurusan'),
+                $this->input->post('id_jurusan')
             );
             if ($this->m_jurusan->ubah_jurusan($parameter)) {
                 //jika berhasil insert

@@ -3,16 +3,20 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-    require_once APPPATH . 'controllers/operator_base.php';
-    
+require_once APPPATH . 'controllers/operator_base.php';
+
 class pengguna extends operator_base {
 
     var $batas = 15;
 
-    function index($offset = 0) {
+    public function index($offset = 0) {
+        //control hak akses read
         $this->_set_page_role('r');
+        //load model
         $this->load->model('m_pengguna');
+        //load library
         $this->load->library('bagi_halaman');
+
         $data['rs_pengguna'] = $this->m_pengguna->ambil_pengguna(array(intval($offset), $this->batas));
         $data['total_data'] = $this->m_pengguna->count_all_data();
         $data['jml_data'] = count($data['rs_pengguna']);
@@ -22,4 +26,3 @@ class pengguna extends operator_base {
         parent::display('tampil_pengguna', $data);
     }
 }
-?>

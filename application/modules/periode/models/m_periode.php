@@ -7,7 +7,7 @@ class m_periode extends CI_Model {
     }
 
     function tambah_periode($parameter) {
-        $sql = 'INSERT INTO periode (Id_Periode,Tahun) VALUES (?,?)';
+        $sql = 'INSERT INTO periode (Tahun,Keterangan) VALUES (?,?)';
         return $this->db->query($sql, $parameter);
     }
 
@@ -22,9 +22,9 @@ class m_periode extends CI_Model {
             return false;
         }
     }
-    
+
     function count_all_data() {
-        $sql = "SELECT COUNT(Id_Periode)'total' FROM Periode";
+        $sql = "SELECT COUNT(Id_Periode)'total' FROM periode";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -34,14 +34,26 @@ class m_periode extends CI_Model {
             return false;
         }
     }
-    
-    function ubah_data_informasi(){
-        $sql = 'UPDATE informasi (Id_Pengguna,Judul_Info, Isi_info, Jenis_Info) WHERE(?,?,?,?)';
+
+    function get_periode_by_id($parameter) {
+        $sql = "SELECT * FROM periode WHERE Id_Periode = ?";
+        $query = $this->db->query($sql, $parameter);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    function ubah_periode($parameter) {
+        $sql = 'UPDATE periode SET Tahun=?, Keterangan=? WHERE Id_Periode = ?';
         return $this->db->query($sql, $parameter);
     }
-    
-    function hapus_data_informasi($params) {
-        $sql = 'DELETE FROM informasi WHERE id_informasi = ?';
+
+    function hapus_periode($params) {
+        $sql = 'DELETE FROM periode WHERE Id_Periode = ?';
         return $this->db->query($sql, $params);
     }
 

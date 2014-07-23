@@ -33,25 +33,15 @@
                             </div>
                         </div>
                     </div>
-                    <?php
-                    if ($this->session->flashdata('pesan')) {
-                        $pesan = $this->session->flashdata('pesan');
-                     ?>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert <?php echo $pesan['css']; ?> alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"> <?php echo $pesan['psn']; ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
                     <div class="row" style="height: 10px"></div>
+                    <!--load template untuk notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
                                 <td width="5%" align="center">No</td>
-                                <td width="80%">Daftar Tahun Periode</td>                                                             
+                                <td width="30%">Daftar Tahun Periode</td>
+                                <td width="60%">Keterangan</td>                               
                             </tr>
                         </thead>
                         <tbody>
@@ -62,9 +52,10 @@
                                     ?>
                                     <tr>
                                         <td align="center"><?php echo++$a ?></td>
-                                        <td><?php echo $dt_periode['Tahun']; ?></td>                                      
-                                        <td align="center"><a href="<?php echo base_url('periode/ubah_periode/' . $dt_periode['Id_Periode']); ?>"><i class="fa fa-edit"></i> ubah </a>
-                                            | <a class="tombol-hapus" href="#" data-id="<?php echo $dt_periode['Id_Periode']; ?>"><i class="fa fa-times"></i> hapus </a>
+                                        <td><?php echo $dt_periode['Tahun']; ?></td>
+                                        <td><?php echo $dt_periode['Keterangan']; ?></td>                                       
+                                        <td align="center"><a href="<?php echo base_url('periode/ubah_periode/' . $dt_periode['Id_Periode']); ?>" title="ubah data"><i class="fa fa-edit"></i>  </a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('periode/hapus_periode/' . $dt_periode['Id_Periode']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <?php

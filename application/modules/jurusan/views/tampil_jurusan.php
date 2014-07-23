@@ -40,8 +40,8 @@
                         <thead>
                             <tr>
                                 <td width="5%" align="center">No</td>
-                                <td width="30%">Nama Jurusan</td>
-                                <td width="15%">Singkatan Jurusan</td>
+                                <td width="55%">Nama Jurusan</td>
+                                <td width="20%">Singkatan Jurusan</td>
                                 <td width="15%">Warna Jurusan</td>                                                              
                             </tr>
                         </thead>
@@ -56,8 +56,8 @@
                                         <td><?php echo $dt_jurusan['Nama_Jurusan']; ?></td>
                                         <td><?php echo $dt_jurusan['Singkatan_Jurusan']; ?></td>
                                         <td><?php echo $dt_jurusan['Warna_Jurusan']; ?></td>                                        
-                                        <td align="center"><a href="<?php echo base_url('jurusan/ubah_jurusan/' . $dt_jurusan['Id_Jurusan']); ?>"><i class="fa fa-edit"></i> ubah </a>
-                                            | <a class="tombol-hapus" href="<?php echo base_url('jurusan/hapus_jurusan/' . $dt_jurusan['Id_Jurusan']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')"><i class="fa fa-times"></i> hapus </a>
+                                        <td align="center"><a href="<?php echo base_url('jurusan/ubah_jurusan/' . $dt_jurusan['Id_Jurusan']); ?>" title="ubah data"><i class="fa fa-edit"></i></a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('jurusan/hapus_jurusan/' . $dt_jurusan['Id_Jurusan']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <?php
