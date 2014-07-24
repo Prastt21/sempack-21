@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
-        Tambah Data
-        <small>Tambah Data Beasiswa</small>
+        Ubah Data
+        <small>Ubah Beasiswa <?php echo $result_beasiswa['Jenjang']; ?></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -16,9 +16,10 @@
             <div class="box box-primary">
                 <div class="box-header"><h3 class="box-title">Data Beasiswa</h3></div>
                 <div class="box-body">
-                    <!--template untuk notifikasi-->
+                    <!--load template notifikasi-->
                     <?php $this->load->view('templates/notification'); ?>
-                    <form class="form-horizontal" action="<?php echo base_url('beasiswa/proses_tambah_beasiswa'); ?>" id="form-tambah-pengguna" method="post">
+                    <form class="form-horizontal" action="<?php echo base_url('beasiswa/proses_ubah_beasiswa'); ?>" id="form-tambah-pengguna" method="post">
+                        <input type="hidden" name="id_beasiswa" value="<?php echo set_value('id_beasiswa', $result_beasiswa['Id_Beasiswa']); ?>">
                         <div class="form-group">
                             <label for="jenis-beasiswa" class="col-lg-3 control-label">Jenis Beasiswa</label>
                             <div class="col-lg-5">
@@ -28,7 +29,7 @@
                                     if (isset($rs_jenis_beasiswa)):
                                         foreach ($rs_jenis_beasiswa as $dt_jenis_beasiswa):
                                             ?>
-                                            <option value="<?php echo $dt_jenis_beasiswa['Id_JB']; ?>" <?php echo set_value('jenis_beasiswa') == $dt_jenis_beasiswa['Id_JB'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jenis_beasiswa['Jenis_Beasiswa']; ?></option>
+                                            <option value="<?php echo $dt_jenis_beasiswa['Id_Beasiswa']; ?>" <?php echo set_value('jenis_beasiswa', $result_jenis_beasiswa['Id_Beasiswa']) == $dt_jenis_beasiswa['Id_Beasiswa'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jenis_beasiswa['Jenis_Beasiswa']; ?></option>
                                             <?php
                                         endforeach;
                                     endif;
@@ -46,7 +47,7 @@
                                     if (isset($rs_jurusan)):
                                         foreach ($rs_jurusan as $dt_jurusan):
                                             ?>
-                                            <option value="<?php echo $dt_jurusan['Id_Jurusan']; ?>" <?php echo set_value('jurusan') == $dt_jurusan['Id_Jurusan'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jurusan['Nama_Jurusan']; ?></option>
+                                            <option value="<?php echo $dt_jurusan['Id_Jurusan']; ?>" <?php echo set_value('jurusan', $result_jurusan['Id_Jurusan']) == $dt_jurusan['Id_Jurusan'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jurusan['Nama_Jurusan']; ?></option>
                                             <?php
                                         endforeach;
                                     endif;
@@ -60,8 +61,8 @@
                             <div class="col-lg-5">
                                 <select name="jenjang" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="DIPLOMA 3" <?php echo set_value('jenjang') == 'DIPLOMA 3' ? 'selected="selected"' : ''; ?>>DIPLOMA 3</option>
-                                    <option value="STRATA 1" <?php echo set_value('jenjang') == 'STRATA 1' ? 'selected="selected"' : ''; ?>>STRATA 1</option>                                    
+                                    <option value="DIPLOMA 3" <?php echo set_value('jenjang' == 'DIPLOMA 3', $result_beasiswa['Jenjang']) == 'DIPLOMA 3' ? 'selected="selected"' : ''; ?>>DIPLOMA 3</option>
+                                    <option value="STRATA 1" <?php echo set_value('jenjang' == 'STRATA 1' , $result_beasiswa['Jenjang']) == 'STRATA 1'? 'selected="selected"' : ''; ?>>STRATA 1</option>                                    
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
@@ -69,7 +70,7 @@
                         <div class="form-group">
                             <label for="alamat-sekarang" class="col-lg-3 control-label">Alamat Sekarang</label>
                             <div class="col-lg-5">
-                                <textarea name="alamat_sekarang" class="form-control" placeholder="Alamat Sekarang"><?php echo set_value('alamat_sekarang', ''); ?></textarea>
+                                <textarea name="alamat_sekarang" class="form-control" placeholder="Alamat Sekarang"><?php echo set_value('alamat_sekarang', $result_beasiswa['Alamat_Sekarang']); ?></textarea>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -78,7 +79,7 @@
                             <div class="col-lg-5">
                                 <select name="nama_pt" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="STMIK AMIKOM YOGYAKARTA" <?php echo set_value('nama_pt') == 'STMIK AMIKOM YOGYAKARTA' ? 'selected="selected"' : ''; ?>>STMIK AMIKOM YOGYAKARTA</option>
+                                    <option value="STMIK AMIKOM YOGYAKARTA" <?php echo set_value('nama_pt', $result_beasiswa['Nama_PT']) == 'STMIK AMIKOM YOGYAKARTA' ? 'selected="selected"' : ''; ?>>STMIK AMIKOM YOGYAKARTA</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
@@ -88,9 +89,9 @@
                             <div class="col-lg-5">
                                 <select name="semester" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="2" <?php echo set_value('semester') == '2' ? 'selected="selected"' : ''; ?>>2</option>
-                                    <option value="4" <?php echo set_value('semester') == '4' ? 'selected="selected"' : ''; ?>>4</option>                                    
-                                    <option value="6" <?php echo set_value('semester') == '6' ? 'selected="selected"' : ''; ?>>6</option>
+                                    <option value="2" <?php echo set_value('semester', $result_beasiswa['Semester']) == '2' ? 'selected="selected"' : ''; ?>>2</option>
+                                    <option value="4" <?php echo set_value('semester', $result_beasiswa['Semester']) == '4' ? 'selected="selected"' : ''; ?>>4</option>                                    
+                                    <option value="6" <?php echo set_value('semester', $result_beasiswa['Semester']) == '6' ? 'selected="selected"' : ''; ?>>6</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
@@ -98,21 +99,21 @@
                         <div class="form-group">
                             <label for="ipk-beasiswa" class="col-lg-3 control-label">Indeks Prestasi Komulatif</label>
                             <div class="col-lg-5">
-                                <input type="text" name="ipk" maxlength="100" class="form-control input-sm" placeholder="IPK" value="<?php echo set_value('ipk'); ?>">
+                                <input type="text" name="ipk" maxlength="10" class="form-control input-sm" placeholder="IPK" value="<?php echo set_value('ipk', $result_beasiswa['IPK']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="prestasi-beasiswa" class="col-lg-3 control-label">Prestasi</label>
                             <div class="col-lg-5">
-                                <textarea name="prestasi" class="form-control" placeholder="Prestasi"><?php echo set_value('prestasi', ''); ?></textarea>
+                                <textarea name="prestasi" class="form-control" placeholder="Prestasi"><?php echo set_value('prestasi', $result_beasiswa['Prestasi']); ?></textarea>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="alasan-beasiswa" class="col-lg-3 control-label">Alasan</label>
                             <div class="col-lg-5">
-                                <textarea name="alasan" class="form-control" placeholder="Alasan"><?php echo set_value('alasan', ''); ?></textarea>
+                                <textarea name="alasan" class="form-control" placeholder="Alasan"><?php echo set_value('alasan', $result_beasiswa['Alasan']); ?></textarea>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -121,7 +122,7 @@
                             <div class="col-lg-5">
                                 <select name="bank" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="MUAMALAT" <?php echo set_value('bank') == 'MUAMALAT' ? 'selected="selected"' : ''; ?>>MUAMALAT</option>
+                                    <option value="MUAMALAT" <?php echo set_value('bank', $result_beasiswa['BANK']) == 'MUAMALAT' ? 'selected="selected"' : ''; ?>>MUAMALAT</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
@@ -129,14 +130,14 @@
                         <div class="form-group">
                             <label for="no-rekening" class="col-lg-3 control-label">No Rekening</label>
                             <div class="col-lg-5">
-                                <input type="text" name="no_rekening" maxlength="100" class="form-control input-sm" placeholder="No Rekening" value="<?php echo set_value('no_rekening'); ?>">
+                                <input type="text" name="no_rekening" maxlength="100" class="form-control input-sm" placeholder="No Rekening" value="<?php echo set_value('no_rekening', $result_beasiswa['No_Rekening']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="tanggal-daftar" class="col-lg-3 control-label">Tanggal Daftar</label>
                             <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="tanggal_daftar" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
+                                <div class="bfh-datepicker" data-name="tanggal_daftar" data-placeholder='tanggal' data-format="y-m-d" data-date="<?php echo set_value('tanggal_selesai', $result_beasiswa['Tanggal_Daftar']); ?>"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div> 
@@ -145,12 +146,12 @@
                             <div class="col-lg-5">
                                 <select name="status_beasiswa" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="TERVERIFIKASI" <?php echo set_value('status_beasiswa') == 'TERVERIFIKASI' ? 'selected="selected"' : ''; ?>>TERVERIFIKASI</option>
-                                    <option value="WAITING" <?php echo set_value('status_beasiswa') == 'WAITING' ? 'selected="selected"' : ''; ?>>WAITING</option>                                    
+                                    <option value="TERVERIFIKASI" <?php echo set_value('status_beasiswa', $result_beasiswa['Status_Beasiswa']) == 'TERVERIFIKASI' ? 'selected="selected"' : ''; ?>>TERVERIFIKASI</option>
+                                    <option value="WAITING" <?php echo set_value('status_beasiswa', $result_beasiswa['Status_Beasiswa']) == 'WAITING' ? 'selected="selected"' : ''; ?>>WAITING</option>                                    
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
+                        </div>                      
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
@@ -186,39 +187,7 @@
                         <li>
                             Kolom Username<br>
                             Kolom username digunakan untuk masuk ke dalam sistem.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Password<br>
-                            Kolom password diisi dengan password operator.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Ulangi Password<br>
-                            Kolom Ulangi Password diisi dengan mengulang password sesui password diinputkan pertama.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Jenis Kelamin<br>
-                            Kolom Jenis Kelamin diisi dengan jenis kelamin perator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom No Telephone<br>
-                            Kolom No Telephone operator yang sedang aktif.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Alamat<br>
-                            Kolom alamat operator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tempat Lahir<br>
-                            Kolom tempat lahir disi dengan tempat dimana operator diahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tanggal Lahir<br>
-                            Kolom tanggal lahir disi tanggal operator pernah dilahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Email<br>
-                            Kolom email diisi dengan email pengguna jika ada.  Kolom ini boleh kosong, namun dalam pengisian harus menggunakan format email. misal : <em>contoh@email.com</em>
-                        </li>
+                        </li>                        
                     </ol>
                 </div>
             </div>
