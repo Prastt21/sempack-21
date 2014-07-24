@@ -51,8 +51,8 @@ class rujukan_asuransi extends operator_base {
             $this->form_validation->set_rules('tanggal_daftar', 'Tanggal Daftar', 'required|trim');
             $this->form_validation->set_rules('tanggal_masuk', 'Tanggal Masuk', 'required|trim');
             $this->form_validation->set_rules('tanggal_keluar', 'Tanggal Keluar', 'required|trim');
-            $this->form_validation->set_rules('total_biaya', 'Alamat Rumah Sakit', 'required|trim');
-            $this->form_validation->set_rules('santunan', 'santunan', 'required|trim');
+            $this->form_validation->set_rules('total_biaya', 'Total Biaya', 'required|trim');
+            $this->form_validation->set_rules('santunan', 'Santunan', 'required|trim');
             $this->form_validation->set_rules('status_asuransi', 'Status Asuransi', 'required|trim');            
         //menjalankan validasi
         if ($this->form_validation->run() === FALSE) {
@@ -66,8 +66,9 @@ class rujukan_asuransi extends operator_base {
             $this->load->model('m_rujukan_asuransi');
             //set parameter array
             $parameter = array(
-                $this->sesi->get_data_login('ID_PENGGUNA'),
+                
                 $this->input->post('jenis_asuransi'),
+                $this->sesi->get_data_login('ID_PENGGUNA'),
                 $this->input->post('nama_rs'),
                 $this->input->post('alamat_rs'),
                 $this->input->post('kronologi'),
@@ -116,7 +117,7 @@ class rujukan_asuransi extends operator_base {
         //load library form validation
         $this->load->library('form_validation');
         $this->form_validation->set_rules('jenis_asuransi', 'Jenis Asuransi', 'required|trim');
-        $this->form_validation->set_rules('nama_perujuk', 'Nama Perujuk', 'required|trim');
+        //$this->form_validation->set_rules('nama_perujuk', 'Nama Perujuk', 'required|trim');
         $this->form_validation->set_rules('nama_rs', 'Nama Rumah Sakit', 'required|trim');
         $this->form_validation->set_rules('alamat_rs', 'Alamat Rumah Sakit', 'required|trim');
         $this->form_validation->set_rules('kronologi', 'Kronologi', 'required|trim');
@@ -138,9 +139,9 @@ class rujukan_asuransi extends operator_base {
         } else {
             //jika validasi sukses
             $this->load->model('m_rujukan_asuransi');
-            $parameter = array(
-                $this->sesi->get_data_login('ID_PENGGUNA'),
+            $parameter = array(                
                 $this->input->post('jenis_asuransi'),
+                $this->sesi->get_data_login('ID_PENGGUNA'),
                 $this->input->post('nama_rs'),
                 $this->input->post('alamat_rs'),
                 $this->input->post('kronologi'),

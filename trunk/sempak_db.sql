@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 23, 2014 at 03:37 PM
+-- Generation Time: Jul 24, 2014 at 04:37 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -40,14 +40,14 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Status_Asuransi` enum('TERVERIFIKASI','WAITING') DEFAULT NULL,
   PRIMARY KEY (`Id_Asuransi`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `asuransi`
 --
 
 INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS`, `Alamat_RS`, `Kronologi`, `Tanggal_Daftar`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`, `Status_Asuransi`) VALUES
-(1, 'KECELAKAAN', 4, 'RS. dr.Sardjito', 'Jalan Kamboja Kompleks UGM', '', '0000-00-00', '0000-00-00', '0000-00-00', 500000, NULL, 'TERVERIFIKASI');
+(8, 'SAKIT', 1, 'sdsdsdsdsds', 'ddsds', 'ddddd', '2014-07-23', '2014-07-23', '2014-07-23', 2147483647, 2147483647, 'WAITING');
 
 -- --------------------------------------------------------
 
@@ -66,15 +66,17 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Waktu_Pinjam` time NOT NULL,
   `Tanggal_Selesai` date NOT NULL,
   `Waktu_Selesai` time NOT NULL,
-  `Status_Penggunaan` enum('Terverifikasi','Waiting','Expired') DEFAULT NULL,
+  `Status_Penggunaan` enum('TERVERIFIKASI','WAITING','EXPIRED') DEFAULT NULL,
   PRIMARY KEY (`Id_Pinjam_Aula`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `aula`
 --
 
+INSERT INTO `aula` (`Id_Pinjam_Aula`, `Id_Pengguna`, `Nama_Kegiatan`, `Ketua_Organisasi`, `Peserta`, `Jml_Peserta`, `Tanggal_Pinjam`, `Waktu_Pinjam`, `Tanggal_Selesai`, `Waktu_Selesai`, `Status_Penggunaan`) VALUES
+(1, 1, 'dfsdg', 'gsdg', 'gg', 12, '2014-07-24', '00:20:14', '2014-07-24', '00:20:14', 'TERVERIFIKASI');
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   `Id_Pengguna` int(10) NOT NULL,
   `Id_Ortu` int(10) NOT NULL,
   `Id_Jurusan` int(10) NOT NULL,
-  `Jenjang` enum('D3','S1') NOT NULL,
+  `Jenjang` enum('DIPLOMA 3','STRATA 1') NOT NULL,
   `Alamat_Sekarang` varchar(150) NOT NULL,
   `Nama_PT` set('STMIK AMIKOM YOGYAKARTA') NOT NULL,
   `Semester` int(1) NOT NULL,
@@ -98,18 +100,20 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   `BANK` set('MUAMALAT') NOT NULL,
   `No_Rekening` int(10) NOT NULL,
   `Tanggal_Daftar` date DEFAULT NULL,
-  `Status_Beasiswa` enum('Terverifikasi','Waiting') DEFAULT NULL,
+  `Status_Beasiswa` enum('TERVERIFIKASI','WAITING') DEFAULT NULL,
   PRIMARY KEY (`Id_Beasiswa`),
   KEY `Id_JB` (`Id_JB`),
   KEY `Id_Pengguna` (`Id_Pengguna`),
   KEY `Id_Ortu` (`Id_Ortu`),
   KEY `Id_Jurusan` (`Id_Jurusan`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `beasiswa`
 --
 
+INSERT INTO `beasiswa` (`Id_Beasiswa`, `Id_JB`, `Id_Pengguna`, `Id_Ortu`, `Id_Jurusan`, `Jenjang`, `Alamat_Sekarang`, `Nama_PT`, `Semester`, `IPK`, `Prestasi`, `Alasan`, `BANK`, `No_Rekening`, `Tanggal_Daftar`, `Status_Beasiswa`) VALUES
+(2, 0, 1, 0, 1, 'DIPLOMA 3', 'yogya', 'STMIK AMIKOM YOGYAKARTA', 6, '4', 't', 'r', 'MUAMALAT', 54321, '2014-07-16', 'WAITING');
 
 -- --------------------------------------------------------
 
@@ -172,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `jurusan` (
   `Singkatan_Jurusan` char(4) NOT NULL,
   `Warna_Jurusan` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`Id_Jurusan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `jurusan`
@@ -181,7 +185,8 @@ CREATE TABLE IF NOT EXISTS `jurusan` (
 INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna_Jurusan`) VALUES
 (1, 'S1 Sistem Informasi', 'S1SI', '#0000FF'),
 (4, 'S1 Teknik Informatika', 'S1TI', '#FF0000'),
-(5, 'D3 Manajemen Informatika', 'D3MI', '#FF0000');
+(5, 'D3 Manajemen Informatika', 'D3MI', '#FF0000'),
+(6, 'D3 Teknik Informatika', 'D3TI', '#A52A2A');
 
 -- --------------------------------------------------------
 

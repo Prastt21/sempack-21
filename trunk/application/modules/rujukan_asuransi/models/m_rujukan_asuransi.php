@@ -8,7 +8,7 @@ class m_rujukan_asuransi extends CI_Model {
 
     function tambah_rujukan_asuransi($parameter) {
         $sql = 'INSERT INTO asuransi (Jenis_Asuransi,Id_Pengguna,Nama_RS,Alamat_RS,Kronologi,Tanggal_Daftar,
-            Tanggal_Masuk,Tanggal_Keluar,Santunan,Status_Asuransi) VALUES (?,?,?,?,?,?,?,?,?,?)';
+            Tanggal_Masuk,Tanggal_Keluar,Total_Biaya,Santunan,Status_Asuransi) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
         return $this->db->query($sql, $parameter);
     }
 

@@ -8,7 +8,6 @@
         <li class="active">Peminjaman Aula</li>
     </ol>
     <!-- Main content -->
-
 </section>
 <section class="content">
     <div class="row">
@@ -33,20 +32,9 @@
                             </div>
                         </div>
                     </div>
-                    <?php
-                    if ($this->session->flashdata('pesan')) {
-                        $pesan = $this->session->flashdata('pesan');
-                     ?>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert <?php echo $pesan['css']; ?> alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"> <?php echo $pesan['psn']; ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
                     <div class="row" style="height: 10px"></div>
+                    <!--load template untuk notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
@@ -54,13 +42,13 @@
                                 <td width="8%">Nama Peminjam</td>
                                 <td width="15%">Nama Kegiatan</td>
                                 <td width="10%">Ketua Organisasi</td>
-                                <td width="12%">Peserta</td>
-                                <td width="8%">Jumlah Peserta</td>
-                                <td width="11%">Tanggal Pinjam</td>
-                                <td width="11%">Waktu Pinjam</td>
-                                <td width="11%">Tanggal Selesai</td>
-                                <td width="11%">Waktu Selesai</td>
-                                <td width="9%">Status Penggunaan</td>                                
+                                <td width="11%">Peserta</td>
+                                <td width="7%">Jml Peserta</td>
+                                <td width="8%">Tgl Pinjam</td>
+                                <td width="8%">Wkt Pinjam</td>
+                                <td width="8%">Tgl Selesai</td>
+                                <td width="8%">Wkt Selesai</td>
+                                <td width="9%">Status Penggunaan</td>                               
                             </tr>
                         </thead>
                         <tbody>
@@ -81,9 +69,8 @@
                                         <td><?php echo $dt_peminjaman_aula['Tanggal_Selesai']; ?></td>
                                         <td><?php echo $dt_peminjaman_aula['Waktu_Selesai']; ?></td>
                                         <td><?php echo $dt_peminjaman_aula['Status_Penggunaan']; ?></td>
-                                        
-                                        <td align="center"><a href="<?php echo base_url('peminjaman_aula/ubah_peminjaman_aula/' . $dt_peminjaman_aula['Id_Pinjam_Aula']); ?>"><i class="fa fa-edit"></i> ubah </a>
-                                            | <a class="tombol-hapus" href="#" data-id="<?php echo $dt_peminjaman_aula['Id_Pinjam_Aula']; ?>"><i class="fa fa-times"></i> hapus </a>
+                                        <td align="center"><a href="<?php echo base_url('peminjaman_aula/ubah_peminjaman_aula/' . $dt_peminjaman_aula['Id_Pinjam_Aula']); ?>" title="ubah data"><i class="fa fa-edit"></i></a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('peminjaman_aula/hapus_peminjaman_aula/' . $dt_peminjaman_aula['Id_Pinjam_Aula']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <?php

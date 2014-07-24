@@ -70,7 +70,7 @@
                                         <td><?php echo $dt_rujukan_asuransi['Santunan']; ?></td>
                                         <td><?php echo $dt_rujukan_asuransi['Status_Asuransi']; ?></td>
                                         <td align="center"><a href="<?php echo base_url('rujukan_asuransi/ubah_rujukan_asuransi/' . $dt_rujukan_asuransi['Id_Asuransi']); ?>" title="ubah data"><i class="fa fa-edit"></i></a>
-                                            | <a class="tombol-hapus" href="<?php echo base_url('data_informasi/hapus_data_informasi/' . $dt_rujukan_asuransi['Id_Asuransi']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('rujukan_asuransi/hapus_rujukan_asuransi/' . $dt_rujukan_asuransi['Id_Asuransi']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <?php
