@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
         Ubah Data
-        <small>Ubah Beasiswa <?php echo $result_beasiswa['Jenjang']; ?></small>
+        <small>Ubah Beasiswa <?php echo $result_beasiswa['Id_Pengguna']; ?></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -29,7 +29,7 @@
                                     if (isset($rs_jenis_beasiswa)):
                                         foreach ($rs_jenis_beasiswa as $dt_jenis_beasiswa):
                                             ?>
-                                            <option value="<?php echo $dt_jenis_beasiswa['Id_Beasiswa']; ?>" <?php echo set_value('jenis_beasiswa', $result_jenis_beasiswa['Id_Beasiswa']) == $dt_jenis_beasiswa['Id_Beasiswa'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jenis_beasiswa['Jenis_Beasiswa']; ?></option>
+                                            <option value="<?php echo $dt_jenis_beasiswa['Id_JB']; ?>" <?php echo set_value('jenis_beasiswa', $result_beasiswa['Id_JB']) == $dt_jenis_beasiswa['Id_JB'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jenis_beasiswa['Jenis_Beasiswa']; ?></option>
                                             <?php
                                         endforeach;
                                     endif;
@@ -47,7 +47,7 @@
                                     if (isset($rs_jurusan)):
                                         foreach ($rs_jurusan as $dt_jurusan):
                                             ?>
-                                            <option value="<?php echo $dt_jurusan['Id_Jurusan']; ?>" <?php echo set_value('jurusan', $result_jurusan['Id_Jurusan']) == $dt_jurusan['Id_Jurusan'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jurusan['Nama_Jurusan']; ?></option>
+                                            <option value="<?php echo $dt_jurusan['Id_Jurusan']; ?>" <?php echo set_value('jurusan', $result_beasiswa['Id_Jurusan']) == $dt_jurusan['Id_Jurusan'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jurusan['Nama_Jurusan']; ?></option>
                                             <?php
                                         endforeach;
                                     endif;
@@ -77,10 +77,7 @@
                         <div class="form-group">
                             <label for="nama-pt" class="col-lg-3 control-label">Perguruan Tinggi</label>
                             <div class="col-lg-5">
-                                <select name="nama_pt" class="form-control input-sm" style="width: 150px;">
-                                    <option></option>
-                                    <option value="STMIK AMIKOM YOGYAKARTA" <?php echo set_value('nama_pt', $result_beasiswa['Nama_PT']) == 'STMIK AMIKOM YOGYAKARTA' ? 'selected="selected"' : ''; ?>>STMIK AMIKOM YOGYAKARTA</option>
-                                </select>
+                               <input type="text" name="nama_pt" maxlength="100" value="STMIK AMIKOM YOGYAKARTA"  disabled="" class="form-control input-sm" placeholder="Nama_PT" value="<?php echo set_value('nama_pt', $result_beasiswa['Nama_PT']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -120,10 +117,7 @@
                         <div class="form-group">
                             <label for="bank-beasiswa" class="col-lg-3 control-label">BANK Rekening</label>
                             <div class="col-lg-5">
-                                <select name="bank" class="form-control input-sm" style="width: 150px;">
-                                    <option></option>
-                                    <option value="MUAMALAT" <?php echo set_value('bank', $result_beasiswa['BANK']) == 'MUAMALAT' ? 'selected="selected"' : ''; ?>>MUAMALAT</option>
-                                </select>
+                               <input type="text" name="bank" maxlength="100" value="MUAMALAT"  disabled="" class="form-control input-sm" placeholder="BANK" value="<?php echo set_value('bank', $result_beasiswa['BANK']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>

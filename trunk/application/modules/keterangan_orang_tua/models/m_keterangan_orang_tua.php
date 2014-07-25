@@ -7,10 +7,9 @@ class m_keterangan_orang_tua extends CI_Model {
     }  
 
     function ambil_keterangan_orang_tua($parameter) {
-        $sql = 'SELECT b.Nama_Pengguna,a.Nama_Ortu,a.Alamat_Ortu,a.No_Telp_Ortu,a.Pekerjaan_Ortu,
-                a.Penghasilan_Ortu,a.Jml_Tanggungan FROM keterangan_ortu a
-                INNER JOIN pengguna b ON b.Id_Ortu = a.Id_Ortu
-                WHERE b.Id_Level LIKE 3 LIMIT ?,?';
+        $sql = 'SELECT Nama_Pengguna,Nama_Ortu,Alamat_Ortu,No_Telp_Ortu,Pekerjaan_Ortu,
+                Penghasilan_Ortu,Jml_Tanggungan FROM Pengguna
+                WHERE Id_Level LIKE 3 LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -22,9 +21,8 @@ class m_keterangan_orang_tua extends CI_Model {
     }
 
     function count_all_data() {
-        $sql = "SELECT COUNT(Id_Pengguna)'total' FROM (keterangan_ortu a
-                INNER JOIN pengguna b ON b.Id_Ortu = a.Id_Ortu)
-                WHERE b.Id_Level LIKE '3'";
+        $sql = "SELECT COUNT(Id_Pengguna)'total' FROM Pengguna
+                WHERE Id_Level LIKE '3'";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -36,7 +34,7 @@ class m_keterangan_orang_tua extends CI_Model {
     }
 
     function get_keterangan_orang_tua_by_id($parameter) {
-        $sql = "SELECT * FROM keterangan_ortu WHERE Id_Ortu = ?";
+        $sql = "SELECT * FROM Pengguna WHERE Id_Pengguna = ?";
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();

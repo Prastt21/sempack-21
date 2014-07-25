@@ -38,15 +38,16 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" align="center">No</td>
-                                <td width="12%">Nama Orang Tua</td>
-                                <td width="15%">Nama Pengguna</td>
-                                <td width="10%">Username</td>
-                                <td width="10%">JK</td>
+                                <td width="5%" align="center">No</td>                                
+                                <td width="15%">Nama Pengguna</td>                                
+                                <td width="7%">JK</td>
+                                <td width="8%">Status</td>
+                                <td width="8%">Username</td>
                                 <td width="10%">No Telp</td>
-                                <td width="15%">Alamat</td>
+                                <td width="13%">Alamat</td>
                                 <td width="10%">Tanggal Lahir</td>
-                                <td width="13%">Email</td>                                                              
+                                <td width="13%">Email</td>
+                                <td width="13%">Nama Orang Tua</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,14 +58,15 @@
                                     ?>
                                     <tr>
                                         <td align="center"><?php echo++$a ?></td>
-                                        <td><?php echo $dt_pengguna['Nama_Ortu']; ?></td>
                                         <td><?php echo $dt_pengguna['Nama_Pengguna']; ?></td>
-                                        <td><?php echo $dt_pengguna['NIK_NIM']; ?></td>
                                         <td><?php echo $dt_pengguna['Gender']; ?></td>
+                                        <td><?php echo $dt_pengguna['Status_Pengguna']; ?></td>
+                                        <td><?php echo $dt_pengguna['NIK_NIM']; ?></td>
                                         <td><?php echo $dt_pengguna['No_Telp']; ?></td>
                                         <td><?php echo $dt_pengguna['Alamat']; ?></td>
                                         <td><?php echo $dt_pengguna['Tanggal_Lahir']; ?></td>
                                         <td><?php echo $dt_pengguna['Email']; ?></td>
+                                        <td><?php echo $dt_pengguna['Nama_Ortu']; ?></td>
                                     </tr>
                                     <?php
                                 endforeach;

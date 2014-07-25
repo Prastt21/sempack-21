@@ -52,8 +52,8 @@ class rujukan_asuransi extends operator_base {
             $this->form_validation->set_rules('tanggal_masuk', 'Tanggal Masuk', 'required|trim');
             $this->form_validation->set_rules('tanggal_keluar', 'Tanggal Keluar', 'required|trim');
             $this->form_validation->set_rules('total_biaya', 'Total Biaya', 'required|trim');
-            $this->form_validation->set_rules('santunan', 'Santunan', 'required|trim');
-            $this->form_validation->set_rules('status_asuransi', 'Status Asuransi', 'required|trim');            
+            //$this->form_validation->set_rules('santunan', 'Santunan', 'required|trim');
+            //$this->form_validation->set_rules('status_asuransi', 'Status Asuransi', 'required|trim');            
         //menjalankan validasi
         if ($this->form_validation->run() === FALSE) {
             //jika validasi ada yang eror, kirim notifikasi ke view
@@ -124,7 +124,7 @@ class rujukan_asuransi extends operator_base {
         $this->form_validation->set_rules('tanggal_daftar', 'Tanggal Daftar', 'required|trim');
         $this->form_validation->set_rules('tanggal_masuk', 'Tanggal Masuk', 'required|trim');
         $this->form_validation->set_rules('tanggal_keluar', 'Tanggal Keluar', 'required|trim');
-        $this->form_validation->set_rules('total_biaya', 'Alamat Rumah Sakit', 'required|trim');
+        $this->form_validation->set_rules('total_biaya', 'Total Biaya', 'required|trim');
         $this->form_validation->set_rules('santunan', 'Santunan', 'required|trim');
         $this->form_validation->set_rules('status_asuransi', 'Status Asuransi', 'required|trim');
         $this->form_validation->set_rules('id_asuransi', 'ID Asuransi', 'required');

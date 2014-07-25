@@ -8,7 +8,10 @@ require_once APPPATH . 'controllers/operator_base.php';
 class config_sistem extends operator_base {
 
     public function index() {
-        parent::display('v_config_sistem');
+        $this->_set_page_role('c');
+        $this->load->model('m_config_sistem');       
+        $data['rs_periode'] = $this->m_config_sistem->ambil_data_periode();        
+        parent::display('v_config_sistem', $data);
     }
 
 }
