@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 24, 2014 at 04:37 PM
+-- Generation Time: Jul 25, 2014 at 02:18 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -37,17 +37,18 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Tanggal_Keluar` date NOT NULL,
   `Total_Biaya` int(15) NOT NULL,
   `Santunan` int(15) DEFAULT NULL,
-  `Status_Asuransi` enum('TERVERIFIKASI','WAITING') DEFAULT NULL,
+  `Status_Asuransi` enum('TERVERIFIKASI','WAITING') DEFAULT 'WAITING',
   PRIMARY KEY (`Id_Asuransi`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `asuransi`
 --
 
 INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS`, `Alamat_RS`, `Kronologi`, `Tanggal_Daftar`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`, `Status_Asuransi`) VALUES
-(8, 'SAKIT', 1, 'sdsdsdsdsds', 'ddsds', 'ddddd', '2014-07-23', '2014-07-23', '2014-07-23', 2147483647, 2147483647, 'WAITING');
+(8, 'KECELAKAAN', 1, 'sdsdsdsdsds', 'ddsds', 'ddddd', '2014-07-01', '2014-07-23', '2014-07-26', 6, 67777, 'WAITING'),
+(9, 'KECELAKAAN', 1, 'csc', 'cscs', 'cscsc', '2014-07-25', '2014-07-25', '2014-07-25', 344444, 4555555, 'WAITING');
 
 -- --------------------------------------------------------
 
@@ -66,17 +67,17 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Waktu_Pinjam` time NOT NULL,
   `Tanggal_Selesai` date NOT NULL,
   `Waktu_Selesai` time NOT NULL,
-  `Status_Penggunaan` enum('TERVERIFIKASI','WAITING','EXPIRED') DEFAULT NULL,
+  `Status_Penggunaan` enum('TERVERIFIKASI','WAITING','EXPIRED') DEFAULT 'WAITING',
   PRIMARY KEY (`Id_Pinjam_Aula`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `aula`
 --
 
 INSERT INTO `aula` (`Id_Pinjam_Aula`, `Id_Pengguna`, `Nama_Kegiatan`, `Ketua_Organisasi`, `Peserta`, `Jml_Peserta`, `Tanggal_Pinjam`, `Waktu_Pinjam`, `Tanggal_Selesai`, `Waktu_Selesai`, `Status_Penggunaan`) VALUES
-(1, 1, 'dfsdg', 'gsdg', 'gg', 12, '2014-07-24', '00:20:14', '2014-07-24', '00:20:14', 'TERVERIFIKASI');
+(1, 2, 'dfsdg', 'gsdg', 'gg', 14, '2014-07-24', '10:42:00', '2014-07-24', '10:42:00', 'TERVERIFIKASI');
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,6 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   `Id_Beasiswa` int(10) NOT NULL AUTO_INCREMENT,
   `Id_JB` int(10) NOT NULL,
   `Id_Pengguna` int(10) NOT NULL,
-  `Id_Ortu` int(10) NOT NULL,
   `Id_Jurusan` int(10) NOT NULL,
   `Jenjang` enum('DIPLOMA 3','STRATA 1') NOT NULL,
   `Alamat_Sekarang` varchar(150) NOT NULL,
@@ -100,20 +100,20 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   `BANK` set('MUAMALAT') NOT NULL,
   `No_Rekening` int(10) NOT NULL,
   `Tanggal_Daftar` date DEFAULT NULL,
-  `Status_Beasiswa` enum('TERVERIFIKASI','WAITING') DEFAULT NULL,
+  `Status_Beasiswa` enum('TERVERIFIKASI','WAITING') DEFAULT 'WAITING',
   PRIMARY KEY (`Id_Beasiswa`),
   KEY `Id_JB` (`Id_JB`),
   KEY `Id_Pengguna` (`Id_Pengguna`),
-  KEY `Id_Ortu` (`Id_Ortu`),
   KEY `Id_Jurusan` (`Id_Jurusan`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `beasiswa`
 --
 
-INSERT INTO `beasiswa` (`Id_Beasiswa`, `Id_JB`, `Id_Pengguna`, `Id_Ortu`, `Id_Jurusan`, `Jenjang`, `Alamat_Sekarang`, `Nama_PT`, `Semester`, `IPK`, `Prestasi`, `Alasan`, `BANK`, `No_Rekening`, `Tanggal_Daftar`, `Status_Beasiswa`) VALUES
-(2, 0, 1, 0, 1, 'DIPLOMA 3', 'yogya', 'STMIK AMIKOM YOGYAKARTA', 6, '4', 't', 'r', 'MUAMALAT', 54321, '2014-07-16', 'WAITING');
+INSERT INTO `beasiswa` (`Id_Beasiswa`, `Id_JB`, `Id_Pengguna`, `Id_Jurusan`, `Jenjang`, `Alamat_Sekarang`, `Nama_PT`, `Semester`, `IPK`, `Prestasi`, `Alasan`, `BANK`, `No_Rekening`, `Tanggal_Daftar`, `Status_Beasiswa`) VALUES
+(6, 3, 1, 1, 'STRATA 1', 'errrrr', 'STMIK AMIKOM YOGYAKARTA', 2, '4', 'r', 't', 'MUAMALAT', 45555, '2014-07-24', 'WAITING'),
+(5, 2, 1, 1, 'DIPLOMA 3', 'dds', 'STMIK AMIKOM YOGYAKARTA', 4, '1', 'd', 'f', 'MUAMALAT', 3, '2014-07-24', 'TERVERIFIKASI');
 
 -- --------------------------------------------------------
 
@@ -191,30 +191,6 @@ INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna
 -- --------------------------------------------------------
 
 --
--- Table structure for table `keterangan_ortu`
---
-
-CREATE TABLE IF NOT EXISTS `keterangan_ortu` (
-  `Id_Ortu` int(10) NOT NULL AUTO_INCREMENT,
-  `Nama_Ortu` varchar(100) NOT NULL,
-  `Alamat_Ortu` varchar(150) NOT NULL,
-  `No_Telp_Ortu` int(15) DEFAULT NULL,
-  `Pekerjaan_Ortu` enum('PNS','PEGAWAI SWASTA','WIRASWASTA','TNI/POLRI','NELAYAN/PETANI','LAINNYA') NOT NULL,
-  `Penghasilan_Ortu` int(15) NOT NULL,
-  `Jml_Tanggungan` int(2) NOT NULL,
-  PRIMARY KEY (`Id_Ortu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `keterangan_ortu`
---
-
-INSERT INTO `keterangan_ortu` (`Id_Ortu`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_Ortu`, `Pekerjaan_Ortu`, `Penghasilan_Ortu`, `Jml_Tanggungan`) VALUES
-(1, 'dkgbskjd', 'sjhdvam', 9889, 'LAINNYA', 45555, 5);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pendaftaran_asuransi`
 --
 
@@ -258,7 +234,6 @@ CREATE TABLE IF NOT EXISTS `pendaftaran_beasiswa` (
 
 CREATE TABLE IF NOT EXISTS `pengguna` (
   `Id_Pengguna` int(10) NOT NULL AUTO_INCREMENT,
-  `Id_Ortu` int(10) DEFAULT NULL,
   `Id_Level` int(1) NOT NULL,
   `Nama_Pengguna` varchar(150) NOT NULL,
   `Status_Pengguna` enum('MAHASISWA','KARYAWAN') NOT NULL,
@@ -269,6 +244,12 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
   `Alamat` varchar(400) NOT NULL,
   `Tempat_Lahir` varchar(20) NOT NULL,
   `Tanggal_Lahir` date NOT NULL,
+  `Nama_Ortu` varchar(100) NOT NULL,
+  `Alamat_Ortu` varchar(200) NOT NULL,
+  `No_Telp_Ortu` int(15) DEFAULT NULL,
+  `Pekerjaan_Ortu` enum('PNS','PEGAWAI SWASTA','WIRASWASTA','TNI/POLRI','NELAYAN/PETANI','LAINNYA') NOT NULL,
+  `Penghasilan_Ortu` int(20) NOT NULL,
+  `Jml_Tanggungan` int(3) NOT NULL,
   `Email` varchar(20) NOT NULL,
   `Online` int(1) NOT NULL,
   `Sesi` datetime NOT NULL,
@@ -280,11 +261,11 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
 -- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Ortu`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Email`, `Online`, `Sesi`, `Catatan`) VALUES
-(1, 1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', 'prastt21@gmail.com', 0, '0000-00-00 00:00:00', NULL),
-(2, 0, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', 'aku@masiyak.com', 0, '0000-00-00 00:00:00', NULL),
-(3, 1, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', 0, '0000-00-00 00:00:00', NULL),
-(4, 1, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '', '', 'PRIA', 0, '', '', '0000-00-00', '', 0, '0000-00-00 00:00:00', NULL);
+INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_Ortu`, `Pekerjaan_Ortu`, `Penghasilan_Ortu`, `Jml_Tanggungan`, `Email`, `Online`, `Sesi`, `Catatan`) VALUES
+(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', '', '', NULL, 'PNS', 0, 0, 'prastt21@gmail.com', 0, '0000-00-00 00:00:00', NULL),
+(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', '', '', NULL, 'PNS', 0, 0, 'aku@masiyak.com', 0, '0000-00-00 00:00:00', NULL),
+(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', '', NULL, 'PNS', 0, 0, '', 0, '0000-00-00 00:00:00', NULL),
+(4, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '', '', 'PRIA', 0, '', '', '0000-00-00', '', '', NULL, 'PNS', 0, 0, '', 0, '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -400,7 +381,7 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 (30, 1, 27, '1111'),
 (31, 2, 1, '1111'),
 (32, 2, 29, '1111'),
-(33, 2, 30, '0110'),
+(33, 2, 30, '0111'),
 (34, 2, 31, '0110'),
 (35, 2, 32, '0110'),
 (36, 2, 33, '1111'),

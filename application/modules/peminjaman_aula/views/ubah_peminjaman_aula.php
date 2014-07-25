@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <label for="waktu-pinjam" class="col-lg-3 control-label">Waktu Pinjam</label>
                             <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="waktu_pinjam" data-placeholder='waktu' data-format="y-m-d" data-date="today"></div>
+                                <div class="bfh-timepicker" data-name="waktu_pinjam" data-placeholder='waktu' data-format="y-m-d" data-date="today"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -72,7 +72,7 @@
                         <div class="form-group">
                             <label for="waktu-selesai" class="col-lg-3 control-label">Waktu Selesai</label>
                             <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="waktu_selesai" data-placeholder='waktu' data-format="y-m-d" data-date="today"></div>
+                                <div class="bfh-timepicker" data-name="waktu_selesai" data-placeholder='waktu' data-format="y-m-d" data-date="today"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>                       

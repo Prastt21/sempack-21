@@ -7,10 +7,9 @@ class m_pengguna extends CI_Model {
     }  
 
     function ambil_pengguna($parameter) {
-        $sql = 'SELECT a.Nama_Ortu,b.Nama_Pengguna,b.NIK_NIM,b.Gender,b.No_Telp,b.Alamat,
-                b.Tanggal_Lahir, b.Email FROM keterangan_ortu a
-                INNER JOIN pengguna b ON a.Id_Ortu = b.Id_Ortu
-                WHERE b.Id_Level LIKE 3 LIMIT ?,?';
+        $sql = 'SELECT Nama_Pengguna,Gender,Status_Pengguna,NIK_NIM,
+                No_Telp,Alamat,Tanggal_Lahir,Email,Nama_Ortu
+                FROM Pengguna WHERE Id_Level LIKE 3 LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

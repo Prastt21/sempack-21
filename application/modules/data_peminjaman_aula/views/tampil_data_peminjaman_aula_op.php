@@ -1,11 +1,11 @@
 <section class="content-header">
     <h1>
-        Beasiswa
-        <small>Data Beasiswa</small>
+        Peminjaman Aula
+        <small>Data Peminjaman Aula</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Beasiswa</li>
+        <li class="active">Peminjaman Aula</li>
     </ol>
     <!-- Main content -->
 </section>
@@ -16,8 +16,7 @@
                 <div class="box-header">
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                    <div class="row">
-                        <div class="col-xs-2"><a href="<?php echo base_url('beasiswa/tambah_beasiswa'); ?>" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> Tambah Data</a></div>
+                    <div class="row">                       
                         <div class="col-xs-4">
                             <div class="input-group input-group-sm">
                                 <input class="form-control" type="text">
@@ -38,35 +37,39 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" align="center">No</td>
-                                <td width="10%">Beasiswa</td>
-                                <td width="20%">Pendaftar</td>                                
-                                <td width="15%">Jurusan</td>
-                                <td width="5%">Semester</td>
-                                <td width="5%">IPK</td>
-                                <td width="10%">No Rekening</td>
-                                <td width="10%">Tanggal Daftar</td>
-                                <td width="10%">Status </td>                               
+                                <td width="3%" align="center">No</td>
+                                <td width="8%">Operator</td>
+                                <td width="15%">Nama Kegiatan</td>
+                                <td width="10%">Ketua Organisasi</td>
+                                <td width="10%">Peserta</td>
+                                <td width="5%">Jml Peserta</td>
+                                <td width="8%">Tgl Pinjam</td>
+                                <td width="8%">Wkt Pinjam</td>
+                                <td width="8%">Tgl Selesai</td>
+                                <td width="8%">Wkt Selesai</td>
+                                <td width="9%">Status Penggunaan</td>                               
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            if (isset($rs_beasiswa)) {
+                            if (isset($rs_data_peminjaman_aula)) {
                                 $a = isset($awal) ? $awal : 0;
-                                foreach ($rs_beasiswa as $dt_beasiswa):
+                                foreach ($rs_data_peminjaman_aula as $dt_data_peminjaman_aula):
                                     ?>
                                     <tr>
                                         <td align="center"><?php echo++$a ?></td>
-                                        <td><?php echo $dt_beasiswa['Jenis_Beasiswa']; ?></td>
-                                        <td><?php echo $dt_beasiswa['Nama_Pengguna']; ?></td>                                        
-                                        <td><?php echo $dt_beasiswa['Nama_Jurusan']; ?></td>
-                                        <td><?php echo $dt_beasiswa['Semester']; ?></td>
-                                        <td><?php echo $dt_beasiswa['IPK']; ?></td>
-                                        <td><?php echo $dt_beasiswa['No_Rekening']; ?></td>
-                                        <td><?php echo $dt_beasiswa['Tanggal_Daftar']; ?></td>
-                                        <td><?php echo $dt_beasiswa['Status_Beasiswa']; ?></td>
-                                        <td align="center"><a href="<?php echo base_url('beasiswa/ubah_beasiswa/' . $dt_beasiswa['Id_Beasiswa']); ?>" title="ubah data"><i class="fa fa-edit"></i></a>
-                                            | <a class="tombol-hapus" href="<?php echo base_url('beasiswa/hapus_beasiswa/' . $dt_beasiswa['Id_Beasiswa']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
+                                        <td><?php echo $dt_data_peminjaman_aula['Nama_Pengguna']; ?></td>
+                                        <td><?php echo $dt_data_peminjaman_aula['Nama_Kegiatan']; ?></td>
+                                        <td><?php echo $dt_data_peminjaman_aula['Ketua_Organisasi']; ?></td>
+                                        <td><?php echo $dt_data_peminjaman_aula['Peserta']; ?></td>
+                                        <td><?php echo $dt_data_peminjaman_aula['Jml_Peserta']; ?></td>
+                                        <td><?php echo $dt_data_peminjaman_aula['Tanggal_Pinjam']; ?></td>
+                                        <td><?php echo $dt_data_peminjaman_aula['Waktu_Pinjam']; ?></td>
+                                        <td><?php echo $dt_data_peminjaman_aula['Tanggal_Selesai']; ?></td>
+                                        <td><?php echo $dt_data_peminjaman_aula['Waktu_Selesai']; ?></td>
+                                        <td><?php echo $dt_data_peminjaman_aula['Status_Penggunaan']; ?></td>
+                                        <td align="center"><a href="<?php echo base_url('data_peminjaman_aula/ubah_data_peminjaman_aula/' . $dt_data_peminjaman_aula['Id_Pinjam_Aula']); ?>" title="ubah data"><i class="fa fa-edit"></i></a>
+                                            | <a class="tombol-hapus" href="<?php echo base_url('data_peminjaman_aula/hapus_data_peminjaman_aula/' . $dt_data_peminjaman_aula['Id_Pinjam_Aula']); ?>" onclick="return confirm('Apakah Anda yakin akan menghapus data ini?')" title="hapus data"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <?php

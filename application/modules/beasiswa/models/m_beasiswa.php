@@ -7,17 +7,16 @@ class m_beasiswa extends CI_Model {
     }
 
     function tambah_beasiswa($parameter) {
-        $sql = 'INSERT INTO beasiswa (Id_JB,Id_Pengguna,Id_Ortu,Id_Jurusan,Jenjang,Alamat_Sekarang,
+        $sql = 'INSERT INTO beasiswa (Id_JB,Id_Pengguna,Id_Jurusan,Jenjang,Alamat_Sekarang,
                 Nama_PT,Semester,IPK,Prestasi,Alasan,BANK,No_Rekening,Tanggal_Daftar,Status_Beasiswa) 
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
         return $this->db->query($sql, $parameter);
     }
 
     function ambil_beasiswa($parameter) {
-        $sql = 'SELECT beasiswa.*, jenis_beasiswa.*,pengguna.*,keterangan_ortu.*,jurusan.* 
+        $sql = 'SELECT beasiswa.*, jenis_beasiswa.*,pengguna.*,jurusan.* 
                 FROM beasiswa JOIN jenis_beasiswa ON beasiswa.id_jb=jenis_beasiswa.id_jb
-                JOIN pengguna ON beasiswa.id_pengguna=pengguna.id_pengguna
-		JOIN keterangan_ortu ON beasiswa.id_ortu=keterangan_ortu.id_ortu
+                JOIN pengguna ON beasiswa.id_pengguna=pengguna.id_pengguna		
 		JOIN jurusan ON beasiswa.id_jurusan=jurusan.id_jurusan
                 LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
@@ -77,7 +76,7 @@ class m_beasiswa extends CI_Model {
     }
 
     function ubah_beasiswa($parameter) {
-        $sql = 'UPDATE beasiswa SET Id_JB=?,Id_Pengguna=?,Id_Ortu=?,Id_Jurusan=?,Jenjang=?,Alamat_Sekarang=?,
+        $sql = 'UPDATE beasiswa SET Id_JB=?,Id_Pengguna=?,Id_Jurusan=?,Jenjang=?,Alamat_Sekarang=?,
             Nama_PT=?,Semester=?,IPK=?,Prestasi=?,Alasan=?,BANK=?,No_Rekening=?,Tanggal_Daftar=?,Status_Beasiswa=?
             WHERE Id_Beasiswa = ?';
         return $this->db->query($sql, $parameter);

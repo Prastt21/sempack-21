@@ -52,7 +52,7 @@ class peminjaman_aula extends operator_base {
             $this->form_validation->set_rules('waktu_pinjam', 'Waktu Pinjam', 'required|trim');
             $this->form_validation->set_rules('tanggal_selesai', 'Tanggal Selesai', 'required|trim');
             $this->form_validation->set_rules('waktu_selesai', 'Waktu Selesai', 'required|trim');
-            $this->form_validation->set_rules('status_penggunaan', 'Status Penggunaan', 'required|trim');           
+            //$this->form_validation->set_rules('status_penggunaan', 'Status Penggunaan', 'required|trim');           
         //menjalankan validasi
         if ($this->form_validation->run() === FALSE) {
             //jika validasi ada yang eror, kirim notifikasi ke view

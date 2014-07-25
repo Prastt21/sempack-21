@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
-        Tambah Data
-        <small>Tambah Data Peminjaman Aula</small>
+        Ubah Data
+        <small>Ubah Peminjaman Aula <?php echo $result_data_peminjaman_aula['Nama_Kegiatan']; ?></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Peminjaman Aula</li>
-        <li class="active">Tambah Peminjaman Aula</li>
+        <li class="active">Ubah Peminjaman Aula</li>
     </ol>
     <!-- Main content -->
 </section>
@@ -16,41 +16,42 @@
             <div class="box box-primary">
                 <div class="box-header"><h3 class="box-title">Data Peminjaman Aula</h3></div>
                 <div class="box-body">
-                    <!--template untuk notifikasi-->
+                    <!--load template notifikasi-->
                     <?php $this->load->view('templates/notification'); ?>
-                    <form class="form-horizontal" action="<?php echo base_url('peminjaman_aula/proses_tambah_peminjaman_aula'); ?>" id="form-tambah-pengguna" method="post">
+                    <form class="form-horizontal" action="<?php echo base_url('data_peminjaman_aula/proses_ubah_data_peminjaman_aula'); ?>" id="form-tambah-pengguna" method="post">
+                        <input type="hidden" name="id_pinjam_aula" value="<?php echo set_value('id_pinjam_aula', $result_data_peminjaman_aula['Id_Pinjam_Aula']); ?>">
                         <div class="form-group">
                             <label for="nama-kegiatan" class="col-lg-3 control-label">Nama Kegiatan</label>
                             <div class="col-lg-5">
-                                <input type="text" name="nama_kegiatan" maxlength="100" class="form-control input-sm" placeholder="Nama Kegiatan" value="<?php echo set_value('nama_kegiatan'); ?>">
+                                <input type="text" name="nama_kegiatan" maxlength="100" class="form-control input-sm" placeholder="Nama Kegiatan" value="<?php echo set_value('nama_kegiatan', $result_data_peminjaman_aula['Nama_Kegiatan']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="ketua-organisasi" class="col-lg-3 control-label">Ketua Organisasi</label>
                             <div class="col-lg-5">
-                                <input type="text" name="ketua_organisasi" maxlength="100" class="form-control input-sm" placeholder="Ketua Organisasi" value="<?php echo set_value('ketua_organisasi'); ?>">
+                                <input type="text" name="ketua_organisasi" maxlength="100" class="form-control input-sm" placeholder="Ketua Organisasi" value="<?php echo set_value('ketua_organisasi', $result_data_peminjaman_aula['Ketua_Organisasi']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="peserta-aula" class="col-lg-3 control-label">Peserta</label>
                             <div class="col-lg-5">
-                                <input type="text" name="peserta" maxlength="100" class="form-control input-sm" placeholder="Peserta" value="<?php echo set_value('peserta'); ?>">
+                                <input type="text" name="peserta" maxlength="100" class="form-control input-sm" placeholder="Peserta" value="<?php echo set_value('peserta', $result_data_peminjaman_aula['Peserta']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>                        
                         <div class="form-group">
                             <label for="jml-peserta" class="col-lg-3 control-label">Jumlah Peserta</label>
                             <div class="col-lg-5">
-                                <input type="text" name="jml_peserta" maxlength="100" class="form-control input-sm" placeholder="Jumlah Peserta" value="<?php echo set_value('jml_peserta'); ?>">
+                                <input type="text" name="jml_peserta" maxlength="100" class="form-control input-sm" placeholder="Jumlah Peserta" value="<?php echo set_value('jml_peserta', $result_data_peminjaman_aula['Jml_Peserta']); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
                             <label for="tanggal-pinjam" class="col-lg-3 control-label">Tanggal Pinjam</label>
                             <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="tanggal_pinjam" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
+                                <div class="bfh-datepicker" data-name="tanggal_pinjam" data-placeholder='tanggal' data-format="y-m-d" data-date="<?php echo set_value('tanggal_pinjam', $result_data_peminjaman_aula['Tanggal_Pinjam']); ?>"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -64,7 +65,7 @@
                         <div class="form-group">
                             <label for="tanggal-selesai" class="col-lg-3 control-label">Tanggal Selesai</label>
                             <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="tanggal_selesai" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
+                                <div class="bfh-datepicker" data-name="tanggal_selesai" data-placeholder='tanggal' data-format="y-m-d" data-date="<?php echo set_value('tanggal_selesai', $result_data_peminjaman_aula['Tanggal_Selesai']); ?>"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -80,13 +81,13 @@
                             <div class="col-lg-5">
                                 <select name="status_penggunaan" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="TERVERIFIKASI" <?php echo set_value('status_penggunaan') == 'TERVERIFIKASI' ? 'selected="selected"' : ''; ?>>TERVERIFIKASI</option>
-                                    <option value="WAITING" <?php echo set_value('status_penggunaan') == 'WAITING' ? 'selected="selected"' : ''; ?>>WAITING</option>                                    
-                                    <option value="EXPIRED" <?php echo set_value('status_penggunaan') == 'EXPIRED' ? 'selected="selected"' : ''; ?>>EXPIRED</option>                                    
+                                    <option value="TERVERIFIKASI" <?php echo set_value('status_penggunaan', $result_data_peminjaman_aula['Status_Penggunaan']) == 'TERVERIFIKASI' ? 'selected = "selected"' : '' ?>>TERVERIFIKASI</option>
+                                    <option value="WAITING" <?php echo set_value('status_penggunaan', $result_data_peminjaman_aula['Status_Penggunaan']) == 'WAITING' ? 'selected = "selected"' : '' ?>>WAITING</option>                                    
+                                    <option value="EXPIRED" <?php echo set_value('status_penggunaan', $result_data_peminjaman_aula['Status_Penggunaan']) == 'EXPIRED' ? 'selected = "selected"' : '' ?>>EXPIRED</option>                                    
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                        
+                        </div>                      
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
@@ -122,39 +123,7 @@
                         <li>
                             Kolom Username<br>
                             Kolom username digunakan untuk masuk ke dalam sistem.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Password<br>
-                            Kolom password diisi dengan password operator.  Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Ulangi Password<br>
-                            Kolom Ulangi Password diisi dengan mengulang password sesui password diinputkan pertama.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Jenis Kelamin<br>
-                            Kolom Jenis Kelamin diisi dengan jenis kelamin perator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom No Telephone<br>
-                            Kolom No Telephone operator yang sedang aktif.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Alamat<br>
-                            Kolom alamat operator saat ini.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tempat Lahir<br>
-                            Kolom tempat lahir disi dengan tempat dimana operator diahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Tanggal Lahir<br>
-                            Kolom tanggal lahir disi tanggal operator pernah dilahirkan.  Minimal terdiri dari 3 karakter, maksimal 12 karakter. Kolom ini tidak boleh kosong.
-                        </li>
-                        <li>
-                            Kolom Email<br>
-                            Kolom email diisi dengan email pengguna jika ada.  Kolom ini boleh kosong, namun dalam pengisian harus menggunakan format email. misal : <em>contoh@email.com</em>
-                        </li>
+                        </li>                        
                     </ol>
                 </div>
             </div>

@@ -8,6 +8,7 @@ require_once APPPATH . 'controllers/operator_base.php';
 class manajemen_basisdata extends operator_base {
 
     public function index() {
+        $this->load->helper('download');
         parent::display('v_manajemen_data');
     }
 

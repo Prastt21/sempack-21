@@ -6,10 +6,9 @@ class m_config_sistem extends CI_Model {
         parent::__construct();
     }
 
-    function ambil_data_periode($parameter) {
-        $sql = 'SELECT Id_Periode,Tahun FROM Periode
-                LIMIT ?,?';
-        $query = $this->db->query($sql, $parameter);
+    function ambil_data_periode() {
+        $sql = 'SELECT Id_Periode,Tahun FROM Periode';
+        $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
             $query->free_result();
