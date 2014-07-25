@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
-        Ubah Data
-        <small>Ubah Data Operator <?php echo $result_operator['nama_operator']; ?></small>
+        Rujukan Asuransi
+        <small>Pendaftaran Rujukan Asuransi</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Operator</li>
-        <li class="active">Tambah Operator</li>
+        <li class="active">Pendaftaran Rujukan Asuransi</li>
     </ol>
     <!-- Main content -->
 </section>
@@ -14,121 +14,89 @@
     <div class="row">
         <div class="col-xs-8">
             <div class="box box-primary">
-                <div class="box-header"><h3 class="box-title">Data Operator</h3></div>
+                <div class="box-header"><h3 class="box-title">Data Rujukan Asuransi</h3></div>
                 <div class="box-body">
-                    <div class="alert alert-danger alert-dismissable" id="div-alert" style="display: none;">
-                        <i class="fa fa-ban"></i>
-                        <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                        <span id="alert-value"></span>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url('data_operator/proses_ubah_data_operator'); ?>" id="form-tambah-pengguna" onsubmit="return false">
-                        <input type="hidden" name="id_pengguna" value="<?php echo $result_operator['id_pengguna']; ?>">
+                    <!--template untuk notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
+                    <form class="form-horizontal" action="<?php echo base_url('pendaftaran_rujukan_asuransi/proses_tambah_pendaftaran_rujukan_asuransi'); ?>" id="form-tambah-pengguna" method="post">
                         <div class="form-group">
-                            <label for="kata-kunci" class="col-lg-3 control-label">Level Operator</label>
+                            <label for="jenis-asuransi" class="col-lg-3 control-label">Jenis Asuransi</label>
                             <div class="col-lg-5">
-                                <select name="level" class="form-control input-sm" style="width: 150px;">
+                                <select name="jenis_asuransi" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <?php
-                                    if (isset($level)):
-                                        foreach ($level as $dt_level):
-                                            ?>
-                                            <option value="<?php echo $dt_level->id_level; ?>"><?php echo $dt_level->nama_level; ?></option>
-                                            <?php
-                                        endforeach;
-                                    endif;
-                                    ?>
+                                    <option value="KECELAKAAN" <?php echo set_value('jenis_asuransi') == 'KECELAKAAN' ? 'selected="selected"' : ''; ?>>KECELAKAAN</option>
+                                    <option value="SAKIT" <?php echo set_value('jenis_asuransi') == 'SAKIT' ? 'selected="selected"' : ''; ?>>SAKIT</option>                                    
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
+                        </div>                                              
                         <div class="form-group">
-                            <label for="nama-operator" class="col-lg-3 control-label">Nama Operator</label>
+                            <label for="nama-rs" class="col-lg-3 control-label">Nama Rumah Sakit</label>
                             <div class="col-lg-5">
-                                <input type="text" name="nama_operator" maxlength="100" class="form-control input-sm" placeholder="Nama Operator">
+                                <input type="text" name="nama_rs" maxlength="100" class="form-control input-sm" placeholder="Nama Rumah Sakit" value="<?php echo set_value('nama_rs'); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
-                            <label for="status-operator" class="col-lg-3 control-label">Status Operator</label>
+                            <label for="alamat-rs" class="col-lg-3 control-label">Alamat Rumah Sakit</label>
                             <div class="col-lg-5">
-                                <select name="status" class="form-control input-sm" style="width: 150px;">
+                                <textarea name="alamat_rs" class="form-control" placeholder="Alamat Rumah Sakit"><?php echo set_value('alamat_rs', ''); ?></textarea>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kronologi-asuransi" class="col-lg-3 control-label">Kronologi Kejadian</label>
+                            <div class="col-lg-5">
+                                <textarea name="kronologi" class="form-control" placeholder="Kronologi"><?php echo set_value('kronologi', ''); ?></textarea>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal-daftar" class="col-lg-3 control-label">Tanggal Daftar</label>
+                            <div class="col-lg-5">
+                                <div class="bfh-datepicker" data-name="tanggal_daftar" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal-masuk" class="col-lg-3 control-label">Tanggal Masuk</label>
+                            <div class="col-lg-5">
+                                <div class="bfh-datepicker" data-name="tanggal_masuk" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal-keluar" class="col-lg-3 control-label">Tanggal Keluar</label>
+                            <div class="col-lg-5">
+                                <div class="bfh-datepicker" data-name="tanggal_keluar" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="total-biaya" class="col-lg-3 control-label">Total Biaya</label>
+                            <div class="col-lg-5">
+                                <input type="text" name="total_biaya" maxlength="20" class="form-control input-sm" placeholder="Total Biaya" value="<?php echo set_value('total_biaya'); ?>">
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="santunan-asuransi" class="col-lg-3 control-label">Santunan</label>
+                            <div class="col-lg-5">
+                                <input type="text" name="santunan" maxlength="20" class="form-control input-sm" placeholder="Santunan" value="<?php echo set_value('santunan'); ?>">
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>                        
+                        <div class="form-group">
+                            <label for="status-asuransi" class="col-lg-3 control-label">Status Asuransi</label>
+                            <div class="col-lg-5">
+                                <select name="status_asuransi" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <?php
-                                    if (isset($status)):
-                                        foreach ($status as $dt_status):
-                                            ?>
-                                            <option value="<?php echo $dt_status->id_status; ?>"><?php echo $dt_level->nama_level; ?></option>
-                                            <?php
-                                        endforeach;
-                                    endif;
-                                    ?>
+                                    <option value="TERVERIFIKASI" <?php echo set_value('status_asuransi') == 'TERVERIFIKASI' ? 'selected="selected"' : ''; ?>>TERVERIFIKASI</option>
+                                    <option value="WAITING" <?php echo set_value('status_asuransi') == 'WAITING' ? 'selected="selected"' : ''; ?>>WAITING</option>                                    
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="username" class="col-lg-3 control-label">Username</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="username" maxlength="20" class="form-control input-sm" placeholder="Username">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="no-password" class="col-lg-3 control-label">Password</label>
-                            <div class="col-lg-5">
-                                <input type="password" name="password" maxlength="20" class="form-control input-sm" placeholder="Password" id="password">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="no-password" class="col-lg-3 control-label">Ulangi Password</label>
-                            <div class="col-lg-5">
-                                <input type="password" name="ulangi_password" maxlength="20" class="form-control input-sm" placeholder="Ulangi Password">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="jenis-kelamin" class="col-lg-3 control-label">Jenis Kelamin</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="jenis_kelamin" maxlength="20" class="form-control input-sm" placeholder="Jenis Kelamin">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="no-telephone" class="col-lg-3 control-label">No Telephone</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="telephone" maxlength="20" class="form-control input-sm" placeholder="Telephone">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="alamat" class="col-lg-3 control-label">Alamat</label>
-                            <div class="col-lg-5">
-                                <textarea name="alamat" class="form-control" placeholder="Alamat Operator"></textarea>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tempat-lahir" class="col-lg-3 control-label">Tempat Lahir</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="tempat_lahir" style="width: 150px;" maxlength="15" class="form-control input-sm" placeholder="Tempat Lahir">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal-lahir" class="col-lg-3 control-label">Tanggal Lahir</label>
-                            <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="tanggal" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-lg-3 control-label">Email Operator</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="email" maxlength="100" class="form-control input-sm" placeholder="Email Operator">
-                            </div>
-                            <div class="col-lg-3"></div>
-                        </div>
+                        </div>                        
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>

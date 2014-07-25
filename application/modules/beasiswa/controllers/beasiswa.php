@@ -187,7 +187,7 @@ class beasiswa extends operator_base {
             redirect('beasiswa');
         //load model
         $this->load->model('m_beasiswa');
-        if ($this->m_data_operator->hapus_beasiswa($id)) {
+        if ($this->m_beasiswa->hapus_beasiswa($id)) {
             //jika berhasil menghapus
             $this->notification('success', 'Data berhasil dihapus');
         } else {
