@@ -22,7 +22,7 @@
         <div class="col-xs-8">
             <div class="box box-info">
                 <div class="box-header">
-                    <h3 class="box-title">Statistik Peminjaman Aula BSC</h3>
+                    <h3 class="box-title">Statistik Operasional Sistem</h3>
                 </div>
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
@@ -55,9 +55,17 @@
                     <div class="box-body">
                         <table class="table" width="100%">
                             <tr>
-                                <td width="45%">Total Penjualan</td>
-                                <td width="5%">:</td>
-                                <td width="50%"></td>
+                            <?php
+                            if (isset($rs_pengumuman)) {                                
+                                foreach ($rs_pengumuman as $dt_pengumuman):
+                                    ?>
+                                    <tr>                                        
+                                        <td><?php echo $dt_pengumuman['Pengumuman_Sistem']; ?></td>
+                                    </tr>
+                                    <?php
+                                endforeach;
+                            }                            
+                            ?>
                             </tr>                            
                         </table>
                     </div>
@@ -66,87 +74,19 @@
             <div class="row">
                 <div class="box box-info">
                     <div class="box-header">
-                        <span class="box-title">Produk Terlaris</span>
+                        <span class="box-title">Login Terakhir Pengguna</span>
                     </div>
                     <div class="box-body">
                         <table class="table table-condensed" width="100%">
                             <tbody>
-                                <?php
-                                if (isset($rs_laris)) {
-                                    $no = 1;
-                                    foreach ($rs_laris as $dt_brg_laris):
-                                        ?>
-                                        <tr>
-                                            <td><?php
-                                                echo $no++ . '. ';
-                                                echo $dt_brg_laris['nama_barang'] . ' ' . $dt_brg_laris['macam'] . ' (' . $dt_brg_laris['jumlah_barang'] . ')'
-                                                ?></td>
-                                        </tr>
-                                        <?php
-                                    endforeach;
-                                }
-                                ?>
+                                
                             </tbody>
                         </table>
-                        Selengkapnya..
+                        Berisi User Yang Sedang Online
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-8">
-            <div class="box box-info">
-                <div class="box-header">
-                    <h3 class="box-title">Statistik Pendaftaran Beasiswa</h3>
-                </div>
-                <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_1" data-toggle="tab" data-identifier="gharian">Harian</a></li>
-                        <li><a href="#tab_2" data-toggle="tab" data-identifier="gbulanan">Bulanan</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab_1">
-                            <div class="box-body chart-responsive">
-                                <div class="chart" id="line-chart-1" style="height: 310px;"></div>
-                            </div><!-- /.box-body -->
-                        </div><!-- /.tab-pane -->
-                        <div class="tab-pane fade" id="tab_2">
-                            <div class="box-body chart-responsive">
-                                <div class="chart" id="line-chart-2" style="height: 310px;"></div>
-                            </div><!-- /.box-body -->
-                        </div><!-- /.tab-pane -->
-                    </div><!-- /.tab-content -->
-                </div><!-- nav-tabs-custom -->
-                <div class="overlay loading-process"></div>
-                <div class="loading-img loading-process"></div>
-            </div><!-- /.box -->
-        </div>
-        <div class="col-xs-8">
-            <div class="box box-info">
-                <div class="box-header">
-                    <h3 class="box-title">Statistik Pengajuan Rujukan Asuransi</h3>
-                </div>
-                <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_1" data-toggle="tab" data-identifier="gharian">Harian</a></li>
-                        <li><a href="#tab_2" data-toggle="tab" data-identifier="gbulanan">Bulanan</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab_1">
-                            <div class="box-body chart-responsive">
-                                <div class="chart" id="line-chart-1" style="height: 310px;"></div>
-                            </div><!-- /.box-body -->
-                        </div><!-- /.tab-pane -->
-                        <div class="tab-pane fade" id="tab_2">
-                            <div class="box-body chart-responsive">
-                                <div class="chart" id="line-chart-2" style="height: 310px;"></div>
-                            </div><!-- /.box-body -->
-                        </div><!-- /.tab-pane -->
-                    </div><!-- /.tab-content -->
-                </div><!-- nav-tabs-custom -->
-                <div class="overlay loading-process"></div>
-                <div class="loading-img loading-process"></div>
-            </div><!-- /.box -->
-        </div>
+        </div>        
     </div>
 </section><!-- /.content -->
 <div class="modal fade" id="modal-registrasi" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

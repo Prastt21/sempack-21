@@ -1,12 +1,12 @@
 <section class="content-header">
     <h1>
-        Tambah Data
-        <small>Tambah Data Peminjaman Aula</small>
+        Beasiswa
+        <small>Pendaftaran Beasiswa</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Peminjaman Aula</li>
-        <li class="active">Tambah Peminjaman Aula</li>
+        <li>Beasiswa</li>
+        <li class="active">Pendaftaran Beasiswa</li>
     </ol>
     <!-- Main content -->
 </section>
@@ -14,36 +14,116 @@
     <div class="row">
         <div class="col-xs-8">
             <div class="box box-primary">
-                <div class="box-header"><h3 class="box-title">Data Peminjaman Aula</h3></div>
+                <div class="box-header"><h3 class="box-title">Data Beasiswa</h3></div>
                 <div class="box-body">
                     <!--template untuk notifikasi-->
                     <?php $this->load->view('templates/notification'); ?>
-                    <form class="form-horizontal" action="<?php echo base_url('peminjaman_aula/proses_tambah_peminjaman_aula'); ?>" id="form-tambah-pengguna" method="post">
+                    <form class="form-horizontal" action="<?php echo base_url('pendaftaran_beasiswa/proses_tambah_pendaftaran_beasiswa'); ?>" id="form-tambah-pengguna" method="post">
                         <div class="form-group">
-                            <label for="nama-kegiatan" class="col-lg-3 control-label">Nama Kegiatan</label>
+                            <label for="jenis-beasiswa" class="col-lg-3 control-label">Jenis Beasiswa</label>
                             <div class="col-lg-5">
-                                <input type="text" name="nama_kegiatan" maxlength="100" class="form-control input-sm" placeholder="Nama Kegiatan" value="<?php echo set_value('nama_kegiatan'); ?>">
+                                <select name="jenis_beasiswa" class="form-control input-sm" style="width: 150px;">
+                                    <option></option>
+                                    <?php
+                                    if (isset($rs_jenis_beasiswa)):
+                                        foreach ($rs_jenis_beasiswa as $dt_jenis_beasiswa):
+                                            ?>
+                                            <option value="<?php echo $dt_jenis_beasiswa['Id_JB']; ?>" <?php echo set_value('jenis_beasiswa') == $dt_jenis_beasiswa['Id_JB'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jenis_beasiswa['Jenis_Beasiswa']; ?></option>
+                                            <?php
+                                        endforeach;
+                                    endif;
+                                    ?>
+                                </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
-                            <label for="ketua-organisasi" class="col-lg-3 control-label">Ketua Organisasi</label>
+                            <label for="jurusan-beasiswa" class="col-lg-3 control-label">Jurusan</label>
                             <div class="col-lg-5">
-                                <input type="text" name="ketua_organisasi" maxlength="100" class="form-control input-sm" placeholder="Ketua Organisasi" value="<?php echo set_value('ketua_organisasi'); ?>">
+                                <select name="jurusan" class="form-control input-sm" style="width: 150px;">
+                                    <option></option>
+                                    <?php
+                                    if (isset($rs_jurusan)):
+                                        foreach ($rs_jurusan as $dt_jurusan):
+                                            ?>
+                                            <option value="<?php echo $dt_jurusan['Id_Jurusan']; ?>" <?php echo set_value('jurusan') == $dt_jurusan['Id_Jurusan'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_jurusan['Nama_Jurusan']; ?></option>
+                                            <?php
+                                        endforeach;
+                                    endif;
+                                    ?>
+                                </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
                         <div class="form-group">
-                            <label for="peserta-aula" class="col-lg-3 control-label">Peserta</label>
+                            <label for="jenjang-beasiswa" class="col-lg-3 control-label">Jenjang</label>
                             <div class="col-lg-5">
-                                <input type="text" name="peserta" maxlength="100" class="form-control input-sm" placeholder="Peserta" value="<?php echo set_value('peserta'); ?>">
+                                <select name="jenjang" class="form-control input-sm" style="width: 150px;">
+                                    <option></option>
+                                    <option value="DIPLOMA 3" <?php echo set_value('jenjang') == 'DIPLOMA 3' ? 'selected="selected"' : ''; ?>>DIPLOMA 3</option>
+                                    <option value="STRATA 1" <?php echo set_value('jenjang') == 'STRATA 1' ? 'selected="selected"' : ''; ?>>STRATA 1</option>                                    
+                                </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                        
+                        </div>
                         <div class="form-group">
-                            <label for="jml-peserta" class="col-lg-3 control-label">Jumlah Peserta</label>
+                            <label for="alamat-sekarang" class="col-lg-3 control-label">Alamat Sekarang</label>
                             <div class="col-lg-5">
-                                <input type="text" name="jml_peserta" maxlength="100" class="form-control input-sm" placeholder="Jumlah Peserta" value="<?php echo set_value('jml_peserta'); ?>">
+                                <textarea name="alamat_sekarang" class="form-control" placeholder="Alamat Sekarang"><?php echo set_value('alamat_sekarang', ''); ?></textarea>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama-pt" class="col-lg-3 control-label">Perguruan Tinggi</label>
+                            <div class="col-lg-5">
+                                <input type="text" name="nama_pt" maxlength="100" value="STMIK AMIKOM YOGYAKARTA"  class="form-control input-sm" placeholder="Nama_PT" value="<?php echo set_value('nama_pt'); ?>">
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="semester-beasiswa" class="col-lg-3 control-label">Semester</label>
+                            <div class="col-lg-5">
+                                <select name="semester" class="form-control input-sm" style="width: 150px;">
+                                    <option></option>
+                                    <option value="2" <?php echo set_value('semester') == '2' ? 'selected="selected"' : ''; ?>>2</option>
+                                    <option value="4" <?php echo set_value('semester') == '4' ? 'selected="selected"' : ''; ?>>4</option>                                    
+                                    <option value="6" <?php echo set_value('semester') == '6' ? 'selected="selected"' : ''; ?>>6</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ipk-beasiswa" class="col-lg-3 control-label">Indeks Prestasi Komulatif</label>
+                            <div class="col-lg-5">
+                                <input type="text" name="ipk" maxlength="100" class="form-control input-sm" placeholder="IPK" value="<?php echo set_value('ipk'); ?>">
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="prestasi-beasiswa" class="col-lg-3 control-label">Prestasi</label>
+                            <div class="col-lg-5">
+                                <textarea name="prestasi" class="form-control" placeholder="Prestasi"><?php echo set_value('prestasi', ''); ?></textarea>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="alasan-beasiswa" class="col-lg-3 control-label">Alasan</label>
+                            <div class="col-lg-5">
+                                <textarea name="alasan" class="form-control" placeholder="Alasan"><?php echo set_value('alasan', ''); ?></textarea>
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bank-beasiswa" class="col-lg-3 control-label">BANK Rekening</label>
+                            <div class="col-lg-5">
+                                <input type="text" name="bank" maxlength="100" value="MUAMALAT"  class="form-control input-sm" placeholder="Bank" value="<?php echo set_value('bank'); ?>">
+                            </div>
+                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="no-rekening" class="col-lg-3 control-label">No Rekening</label>
+                            <div class="col-lg-5">
+                                <input type="text" name="no_rekening" maxlength="100" class="form-control input-sm" placeholder="No Rekening" value="<?php echo set_value('no_rekening'); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -53,47 +133,18 @@
                                 <div class="bfh-datepicker" data-name="tanggal_daftar" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
+                        </div> 
                         <div class="form-group">
-                            <label for="tanggal-pinjam" class="col-lg-3 control-label">Tanggal Pinjam</label>
+                            <label for="status-beasiswa" class="col-lg-3 control-label">Status Beasiswa</label>
                             <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="tanggal_pinjam" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="waktu-pinjam" class="col-lg-3 control-label">Waktu Pinjam</label>
-                            <div class="col-lg-5">
-                                <div class="bfh-timepicker" data-name="waktu_pinjam" data-placeholder='waktu' data-format="y-m-d" data-date="today"></div>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal-selesai" class="col-lg-3 control-label">Tanggal Selesai</label>
-                            <div class="col-lg-5">
-                                <div class="bfh-datepicker" data-name="tanggal_selesai" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="waktu-selesai" class="col-lg-3 control-label">Waktu Selesai</label>
-                            <div class="col-lg-5">
-                                <div class="bfh-timepicker" data-name="waktu_selesai" data-placeholder='waktu' data-format="y-m-d" data-date="today"></div>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                       
-                        <div class="form-group">
-                            <label for="status-penggunaan" class="col-lg-3 control-label">Status Penggunaan</label>
-                            <div class="col-lg-5">
-                                <select name="status_penggunaan" class="form-control input-sm" style="width: 150px;">
+                                <select name="status_beasiswa" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="TERVERIFIKASI" <?php echo set_value('status_penggunaan') == 'TERVERIFIKASI' ? 'selected="selected"' : ''; ?>>TERVERIFIKASI</option>
-                                    <option value="WAITING" <?php echo set_value('status_penggunaan') == 'WAITING' ? 'selected="selected"' : ''; ?>>WAITING</option>                                    
-                                    <option value="EXPIRED" <?php echo set_value('status_penggunaan') == 'EXPIRED' ? 'selected="selected"' : ''; ?>>EXPIRED</option>                                    
+                                    <option value="TERVERIFIKASI" <?php echo set_value('status_beasiswa') == 'TERVERIFIKASI' ? 'selected="selected"' : ''; ?>>TERVERIFIKASI</option>
+                                    <option value="WAITING" <?php echo set_value('status_beasiswa') == 'WAITING' ? 'selected="selected"' : ''; ?>>WAITING</option>                                    
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                        
+                        </div>
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>

@@ -1,24 +1,12 @@
-<?php
-	
-	if(isset($_POST['simpan'])){
-		$this->sistem->update_pengumuman($_POST['pengumuman_admin']);
-		echo '<script type="text/javascript">jAlert("<center>Data tersimpan.</center>", "Informasi", function(r) {
-				if(r == true) {
-						window.location.replace(base+"config_sistem/v_config_sistem");
-				}
-		});</script>';
-	}
-?>
-
 <section class="content-header">
     <h1>
-        Pengumuman Admin
-        <small>Konfigurasi Pengumuaman</small>
+        Pengumuman Sistem
+        <small>Ubah Pengumuman Sistem </small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Admin</li>
-        <li class="active">Konfigurasi Pengumuaman</li>
+        <li>Pengumuman</li>
+        <li class="active">Update Pngumuman</li>
     </ol>
     <!-- Main content -->
 </section>
@@ -26,26 +14,18 @@
     <div class="row">
         <div class="col-xs-8">
             <div class="box box-primary">
-                <div class="box-header"><h3 class="box-title">Konfigurasi Pengumuaman</h3></div>
+                <div class="box-header"><h3 class="box-title">Pengumuman Sistem</h3></div>
                 <div class="box-body">
-                  
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="alert alert-error alert-dismissable" id="div-alert">
-                                    <button class="close" aria-hidden="true" id="alert-close" type="button">×</button>
-                                    <span id="alert-value"></span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    <form class="form-horizontal" action="<?php echo base_url(); ?>" id="form-tambah-pengguna" method="post">
+                    <!--load template notifikasi-->
+                    <?php $this->load->view('templates/notification'); ?>
+                    <form class="form-horizontal" action="<?php echo base_url('config_pengumumancoba/proses_ubah_config_pengumuman'); ?>" id="form-tambah-pengguna" method="post">                        
                         <div class="form-group">
-                            <label for="pengumuman-admin" class="col-lg-3 control-label">Pengumuman Admin</label>
+                            <label for="pengumuman-admin" class="col-lg-3 control-label">Isi Informasi</label>
                             <div class="col-lg-5">
-                                <textarea name="pengumuman-admin" maxlength="100" class="form-control input-sm" placeholder="Pengumuman Admin"><?php echo $sistem->Pengumuman_Sistem; ?></textarea>
+                                <textarea name="pengumuman_admin" maxlength="500" class="form-control input-sm" placeholder="Pengumuman Admin"><?php echo set_value('pengumuman_admin'); ?></textarea>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                       
+                        </div>                                               
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
@@ -56,7 +36,6 @@
                 </div>
             </div>
         </div>
-        
         <div class="col-xs-4">
             <div class="box box-info">
                 <div class="box-header">
@@ -70,8 +49,7 @@
                         <li>
                             Kolom Level Operator<br>
                             Kolom level operator diisi dengan level sesuai dengan operasi sistem.  Terdiri minimal 3 karakter dengan maksimal 100 karakter.  Kolom ini tidak boleh kosong.
-                        </li>                       
-                    </ol>
+                        </li>
                 </div>
             </div>
         </div>

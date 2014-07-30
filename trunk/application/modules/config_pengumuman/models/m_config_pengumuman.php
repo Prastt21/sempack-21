@@ -1,6 +1,6 @@
 <?php
 
-class m_config_request extends CI_Model{
+class m_config_pengumuman extends CI_Model{
     public function __construct() {
         parent::__construct();
     }

@@ -15,6 +15,9 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         //load model
         $this->load->model('m_pendaftaran_rujukan_asuransi');        
         //load library
+        $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
+        $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
+        $this->load->library('Form_validation');
         parent::display('tambah_pendaftaran_rujukan_asuransi');
     }
 
