@@ -1,19 +1,19 @@
 <?php
 
-class m_peminjaman_aula extends CI_Model {
+class m_pendaftaran_peminjaman_aula extends CI_Model {
 
     public function __construct() {
         parent::__construct();
     }
 
-    function tambah_peminjaman_aula($parameter) {
+    function tambah_pendaftaran_peminjaman_aula($parameter) {
         $sql = 'INSERT INTO aula (Id_Pengguna,Nama_Kegiatan,Ketua_Organisasi,Peserta,
                 Jml_Peserta,Tanggal_Daftar,Tanggal_Pinjam,Waktu_Pinjam,Tanggal_Selesai,Waktu_Selesai,Status_Penggunaan) 
-                VALUES (?,?,?,?,?,?,?,?,?,?)';
+                VALUES (?,?,?,?,?,?,?,?,?,?,?)';
         return $this->db->query($sql, $parameter);
     }
 
-    function ambil_peminjaman_aula($parameter) {
+    function ambil_pendaftaran_peminjaman_aula($parameter) {
         $sql = 'SELECT a.*, b.* FROM aula a
                 INNER JOIN pengguna b ON b.Id_Pengguna = a.Id_Pengguna
                 LIMIT ?,?';
@@ -39,7 +39,7 @@ class m_peminjaman_aula extends CI_Model {
         }
     }
 
-    function get_peminjaman_aula_by_id($parameter) {
+    function get_pendaftaran_peminjaman_aula_by_id($parameter) {
         $sql = "SELECT * FROM aula WHERE Id_Pinjam_Aula = ?";
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
@@ -49,18 +49,5 @@ class m_peminjaman_aula extends CI_Model {
         } else {
             return false;
         }
-    }
-
-    function ubah_peminjaman_aula($parameter) {
-        $sql = 'UPDATE aula SET Id_Pengguna=?, Nama_Kegiatan=?, Ketua_Organisasi=?, Peserta=?,
-                Jml_Peserta=?, Tanggal_Daftar=?,Tanggal_Pinjam=?, Waktu_Pinjam=?,Tanggal_Selesai=?,Waktu_Selesai=?,
-                Status_Penggunaan=? WHERE Id_Pinjam_Aula = ?';
-        return $this->db->query($sql, $parameter);
-    }
-
-    function hapus_peminjaman_aula($params) {
-        $sql = 'DELETE FROM aula WHERE id_pinjam_aula = ?';
-        return $this->db->query($sql, $params);
-    }
-
+    }   
 }

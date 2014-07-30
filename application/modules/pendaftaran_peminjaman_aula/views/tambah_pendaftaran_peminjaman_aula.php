@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
-        Tambah Data
-        <small>Tambah Data Peminjaman Aula</small>
+        Peminjaman Aula BSC
+        <small>Pendaftaran Peminjaman Aula</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -18,7 +18,7 @@
                 <div class="box-body">
                     <!--template untuk notifikasi-->
                     <?php $this->load->view('templates/notification'); ?>
-                    <form class="form-horizontal" action="<?php echo base_url('peminjaman_aula/proses_tambah_peminjaman_aula'); ?>" id="form-tambah-pengguna" method="post">
+                    <form class="form-horizontal" action="<?php echo base_url('pendaftaran_peminjaman_aula/proses_tambah_pendaftaran_peminjaman_aula'); ?>" id="form-tambah-pengguna" method="post">
                         <div class="form-group">
                             <label for="nama-kegiatan" class="col-lg-3 control-label">Nama Kegiatan</label>
                             <div class="col-lg-5">
@@ -81,19 +81,7 @@
                                 <div class="bfh-timepicker" data-name="waktu_selesai" data-placeholder='waktu' data-format="y-m-d" data-date="today"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                       
-                        <div class="form-group">
-                            <label for="status-penggunaan" class="col-lg-3 control-label">Status Penggunaan</label>
-                            <div class="col-lg-5">
-                                <select name="status_penggunaan" class="form-control input-sm" style="width: 150px;">
-                                    <option></option>
-                                    <option value="TERVERIFIKASI" <?php echo set_value('status_penggunaan') == 'TERVERIFIKASI' ? 'selected="selected"' : ''; ?>>TERVERIFIKASI</option>
-                                    <option value="WAITING" <?php echo set_value('status_penggunaan') == 'WAITING' ? 'selected="selected"' : ''; ?>>WAITING</option>                                    
-                                    <option value="EXPIRED" <?php echo set_value('status_penggunaan') == 'EXPIRED' ? 'selected="selected"' : ''; ?>>EXPIRED</option>                                    
-                                </select>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                        
+                        </div>                    
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
