@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 25, 2014 at 02:18 PM
+-- Generation Time: Jul 30, 2014 at 10:48 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Status_Asuransi` enum('TERVERIFIKASI','WAITING') DEFAULT 'WAITING',
   PRIMARY KEY (`Id_Asuransi`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `asuransi`
@@ -48,7 +48,8 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
 
 INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS`, `Alamat_RS`, `Kronologi`, `Tanggal_Daftar`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`, `Status_Asuransi`) VALUES
 (8, 'KECELAKAAN', 1, 'sdsdsdsdsds', 'ddsds', 'ddddd', '2014-07-01', '2014-07-23', '2014-07-26', 6, 67777, 'WAITING'),
-(9, 'KECELAKAAN', 1, 'csc', 'cscs', 'cscsc', '2014-07-25', '2014-07-25', '2014-07-25', 344444, 4555555, 'WAITING');
+(9, 'KECELAKAAN', 2, 'csc', 'cscs', 'cscsc', '2014-07-25', '2014-07-25', '2014-07-25', 344444, 2, 'WAITING'),
+(10, 'KECELAKAAN', 3, 'RS Cipto Mangkuwanito', 'Kepooo banget sii luu gaes', 'yaa pokonya gtu laa', '2014-07-25', '2014-07-25', '2014-07-25', 300000, 0, '');
 
 -- --------------------------------------------------------
 
@@ -63,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Ketua_Organisasi` varchar(100) NOT NULL,
   `Peserta` varchar(100) NOT NULL,
   `Jml_Peserta` int(3) NOT NULL,
+  `Tanggal_Daftar` datetime NOT NULL,
   `Tanggal_Pinjam` date NOT NULL,
   `Waktu_Pinjam` time NOT NULL,
   `Tanggal_Selesai` date NOT NULL,
@@ -70,14 +72,16 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Status_Penggunaan` enum('TERVERIFIKASI','WAITING','EXPIRED') DEFAULT 'WAITING',
   PRIMARY KEY (`Id_Pinjam_Aula`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `aula`
 --
 
-INSERT INTO `aula` (`Id_Pinjam_Aula`, `Id_Pengguna`, `Nama_Kegiatan`, `Ketua_Organisasi`, `Peserta`, `Jml_Peserta`, `Tanggal_Pinjam`, `Waktu_Pinjam`, `Tanggal_Selesai`, `Waktu_Selesai`, `Status_Penggunaan`) VALUES
-(1, 2, 'dfsdg', 'gsdg', 'gg', 14, '2014-07-24', '10:42:00', '2014-07-24', '10:42:00', 'TERVERIFIKASI');
+INSERT INTO `aula` (`Id_Pinjam_Aula`, `Id_Pengguna`, `Nama_Kegiatan`, `Ketua_Organisasi`, `Peserta`, `Jml_Peserta`, `Tanggal_Daftar`, `Tanggal_Pinjam`, `Waktu_Pinjam`, `Tanggal_Selesai`, `Waktu_Selesai`, `Status_Penggunaan`) VALUES
+(1, 2, 'dfsdg', 'gsdg', 'gg', 14, '0000-00-00 00:00:00', '2014-07-24', '10:42:00', '2014-07-24', '10:42:00', 'TERVERIFIKASI'),
+(2, 3, 'Ngaji', 'Prast Ganteng', 'Ibu Ibu Khosidahan', 2000, '0000-00-00 00:00:00', '2014-07-27', '23:33:00', '2014-07-31', '23:33:00', ''),
+(3, 1, 'Ahmbohh', 'Nana Chon', 'Dedemit', 23, '2014-07-26 00:00:00', '2014-07-28', '00:42:00', '2014-07-31', '21:42:00', 'TERVERIFIKASI');
 
 -- --------------------------------------------------------
 
@@ -105,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   KEY `Id_JB` (`Id_JB`),
   KEY `Id_Pengguna` (`Id_Pengguna`),
   KEY `Id_Jurusan` (`Id_Jurusan`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `beasiswa`
@@ -113,7 +117,8 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
 
 INSERT INTO `beasiswa` (`Id_Beasiswa`, `Id_JB`, `Id_Pengguna`, `Id_Jurusan`, `Jenjang`, `Alamat_Sekarang`, `Nama_PT`, `Semester`, `IPK`, `Prestasi`, `Alasan`, `BANK`, `No_Rekening`, `Tanggal_Daftar`, `Status_Beasiswa`) VALUES
 (6, 3, 1, 1, 'STRATA 1', 'errrrr', 'STMIK AMIKOM YOGYAKARTA', 2, '4', 'r', 't', 'MUAMALAT', 45555, '2014-07-24', 'WAITING'),
-(5, 2, 1, 1, 'DIPLOMA 3', 'dds', 'STMIK AMIKOM YOGYAKARTA', 4, '1', 'd', 'f', 'MUAMALAT', 3, '2014-07-24', 'TERVERIFIKASI');
+(5, 2, 1, 1, 'DIPLOMA 3', 'dds', 'STMIK AMIKOM YOGYAKARTA', 4, '1', 'd', 'f', 'MUAMALAT', 3, '2014-07-24', 'TERVERIFIKASI'),
+(8, 3, 3, 1, 'DIPLOMA 3', 'f', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'vf', 'f', 'MUAMALAT', 44432322, '2014-07-26', 'WAITING');
 
 -- --------------------------------------------------------
 
@@ -294,11 +299,11 @@ INSERT INTO `periode` (`Id_Periode`, `Tahun`, `Keterangan`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `sistem` (
-  `Status_Sistem` enum('AKTIF','TIDAK AKTIF') NOT NULL,
-  `Id_Periode` int(10) NOT NULL,
-  `Pengumuman_Sistem` text NOT NULL,
-  `StatusRequest_Sistem` enum('AKTIF','TIDAK AKTIF') NOT NULL,
-  `KarReq_Sistem` int(11) NOT NULL
+  `Status_Sistem` enum('AKTIF','TIDAK AKTIF') DEFAULT NULL,
+  `Id_Periode` int(10) DEFAULT NULL,
+  `Pengumuman_Sistem` text,
+  `StatusRequest_Sistem` enum('AKTIF','TIDAK AKTIF') DEFAULT NULL,
+  `KarReq_Sistem` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -306,7 +311,7 @@ CREATE TABLE IF NOT EXISTS `sistem` (
 --
 
 INSERT INTO `sistem` (`Status_Sistem`, `Id_Periode`, `Pengumuman_Sistem`, `StatusRequest_Sistem`, `KarReq_Sistem`) VALUES
-('AKTIF', 2, 'Periode Sistem Saat Ini Adalah Tahun 2014', 'AKTIF', 20000);
+('AKTIF', 2, 'A', 'AKTIF', 20000);
 
 -- --------------------------------------------------------
 
@@ -438,12 +443,12 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (15, 'Statistik', 1, 3, 12, 'Statistik', 'statistik', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
 (16, 'Request Pengguna', 1, 5, 0, 'Request Pengguna', 'request_pengguna', '<i class= "fa fa-github-square"></i>', 1, NULL),
 (17, 'Laporan-Laporan', 1, 6, 0, 'Laporan - Laporan', 'laporan_laporan', '<i class= "fa fa-phone-square"></i>', 1, NULL),
-(18, 'List Data Peminjaman Aula', 1, 1, 17, 'List Peminjaman Aula', 'list_peminjaman_aula', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
-(19, 'List Pendaftaran Beasiswa', 1, 2, 17, 'List Pendaftaran Beasiswa', 'list_pendaftaran_beasiswa', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
-(20, 'List Rujukan Asuransi', 1, 3, 17, 'List Rujukan Asuransi', 'list_rujukan_asuransi', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
+(18, 'List Data Peminjaman Aula', 1, 1, 17, 'List Peminjaman Aula', 'laporan_aula', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
+(19, 'List Pendaftaran Beasiswa', 1, 2, 17, 'List Pendaftaran Beasiswa', 'laporan_beasiswa', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
+(20, 'List Rujukan Asuransi', 1, 3, 17, 'List Rujukan Asuransi', 'laporan_asuransi', '<i class= "fa fa-angle-double-right"></i>', 1, NULL),
 (21, 'Config Sistem', 1, 7, 0, 'Konfigurasi Sistem', 'config_sistem', '<i class= "fa fa-wrench"></i>', 1, NULL),
 (22, 'Config Request', 1, 8, 0, 'Konfigurasi Request Pengguna', 'config_request', '<i class= "fa fa-phone"></i>', 1, NULL),
-(23, 'Config Pengumuman', 1, 9, 0, 'Konfigurasi Pengumuman', 'config_pengumuman', '<i class= "fa fa-bullhorn"></i>', 1, NULL),
+(23, 'Config Pengumuman', 1, 9, 0, 'Konfigurasi Pengumuman', 'config_pengumumancoba', '<i class= "fa fa-bullhorn"></i>', 1, NULL),
 (24, 'Manajemen Basisdata', 1, 10, 0, 'Manajemen Basisdata', 'manajemen_basisdata', '<i class= "fa fa-shield"></i>', 1, NULL),
 (25, 'More Pages', 1, 11, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
 (26, 'User Profile', 1, 1, 25, 'User Profil', 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL),
@@ -451,7 +456,7 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (28, 'Dashboard', 1, 1, 0, 'Dashboard Operator', 'dashboard', '<i class= "fa fa-dashboard"></i>', 1, NULL),
 (29, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', 'informasi', '<i class= "fa fa-building-o"></i>', 1, NULL),
 (30, 'Data Peminjaman Aula', 1, 3, 0, 'Data Peminjaman Aula', 'data_peminjaman_aula', '<i class= "fa fa-credit-card"></i>', 1, NULL),
-(31, 'Data Pendaftaran Beasiswa', 1, 4, 0, 'Data Pendaftaran Beasiswa', 'data_pendaftaran_beasiswa', '<i class= "fa fa-gift"></i>', 1, NULL),
+(31, 'Data Pendaftaran Beasiswa', 1, 4, 0, 'Data Pendaftaran Beasiswa', 'data_beasiswa', '<i class= "fa fa-gift"></i>', 1, NULL),
 (32, 'Data Rujukan Asuransi', 1, 5, 0, 'Data Rujukan Asuransi', 'data_rujukan_asuransi', '<i class= "fa fa-medkit"></i>', 1, NULL),
 (33, 'Request Pengguna', 1, 6, 0, 'Request Pengguna', 'request_pengguna', '<i class= "fa fa-github-square"></i>', 1, NULL),
 (34, 'More Pages', 1, 7, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
