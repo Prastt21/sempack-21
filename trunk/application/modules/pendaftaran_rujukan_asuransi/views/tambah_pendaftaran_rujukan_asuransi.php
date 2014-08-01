@@ -78,25 +78,7 @@
                                 <input type="text" name="total_biaya" maxlength="20" class="form-control input-sm" placeholder="Total Biaya" value="<?php echo set_value('total_biaya'); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="santunan-asuransi" class="col-lg-3 control-label">Santunan</label>
-                            <div class="col-lg-5">
-                                <input type="text" name="santunan" maxlength="20" class="form-control input-sm" placeholder="Santunan" value="<?php echo set_value('santunan'); ?>">
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                        
-                        <div class="form-group">
-                            <label for="status-asuransi" class="col-lg-3 control-label">Status Asuransi</label>
-                            <div class="col-lg-5">
-                                <select name="status_asuransi" class="form-control input-sm" style="width: 150px;">
-                                    <option></option>
-                                    <option value="TERVERIFIKASI" <?php echo set_value('status_asuransi') == 'TERVERIFIKASI' ? 'selected="selected"' : ''; ?>>TERVERIFIKASI</option>
-                                    <option value="WAITING" <?php echo set_value('status_asuransi') == 'WAITING' ? 'selected="selected"' : ''; ?>>WAITING</option>                                    
-                                </select>
-                            </div>
-                            <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                        
+                        </div>                     
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
