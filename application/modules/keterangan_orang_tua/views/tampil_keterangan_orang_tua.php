@@ -43,14 +43,14 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" align="center">No</td>
-                                <td width="15%">Nama Mahasiswa</td>
-                                <td width="15%">Nama Orang Tua</td>                                
-                                <td width="15%">Alamat</td>
-                                <td width="10%">No Telephone</td>
-                                <td width="15%">Pekerjaaan </td>
-                                <td width="15%">Penghasilan</td>
-                                <td width="10%">Jumlah Tanggungan</td>                                                              
+                                <td width="5%" align="center"><b>NO</b></td>
+                                <td width="15%" align="center"><b>MAHASISWA</b></td>
+                                <td width="15%" align="center"><b>ORANG TUA</b></td>                                
+                                <td width="15%" align="center"><b>ALAMAT</b></td>
+                                <td width="10%" align="center"><b>NO TELP</b></td>
+                                <td width="15%" align="center"><b>PEKERJAAN</b></td>
+                                <td width="15%" align="center"><b>PENGHASILAN</b></td>
+                                <td width="10%" align="center"><b>JML TANGGUNGAN</b></td>                                                              
                             </tr>
                         </thead>
                         <tbody>

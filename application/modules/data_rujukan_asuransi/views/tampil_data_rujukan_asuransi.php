@@ -37,17 +37,18 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="3%" align="center">No</td>
-                                <td width="8%">Jenis Asuransi</td>
-                                <td width="12%">Nama Perujuk</td>
-                                <td width="11%">Rumah Sakit</td>
-                                <td width="12%">Alamat Rumah Sakit</td>
-                                <td width="8%">Tgl Daftar</td>
-                                <td width="8%">Tgl Masuk</td>
-                                <td width="8%">Tgl Keluar</td>
-                                <td width="8%">Total Biaya</td>
-                                <td width="8%">Santunan</td>
-                                <td width="9%">Status</td>                                
+                                <td width="3%" align="center"><b>NO</b></td>
+                                <td width="8%" align="center"><b>ASURANSI</b></td>
+                                <td width="12%" align="center"><b>NAMA PERUJUK</b></td>
+                                <td width="11%" align="center"><b>RUMAH SAKIT</b></td>
+                                <td width="12%" align="center"><b>ALAMAT RUMAH SAKIT</b></td>
+                                <td width="8%" align="center"><b>TGL DAFTAR</b></td>
+                                <td width="8%" align="center"><b>TGL MASUK</b></td>
+                                <td width="8%" align="center"><b>TGL KELUAR</b></td>
+                                <td width="8%" align="center"><b>TOTAL BIAYA</b></td>
+                                <td width="8%" align="center"><b>SANTUNAN</b></td>
+                                <td width="9%" align="center"><b>STATUS</b></td>
+                                <td align="center"><b>AKSI</b></td> 
                             </tr>
                         </thead>
                         <tbody>

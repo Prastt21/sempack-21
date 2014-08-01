@@ -44,10 +44,11 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" align="center">No</td>
-                                <td width="25%">Jenis Beasiswa</td>
-                                <td width="15%">Warna Beasiswa</td>
-                                <td width="50%">Keterangan</td>                                                              
+                                <td width="5%" align="center"><b>NO</b></td>
+                                <td width="25%" align="center"><b>JENIS BEASISWA</b></td>
+                                <td width="15%" align="center"><b>WARNA BEASISWA</b></td>
+                                <td width="50%" align="center"><b>KETERANGAN BEASISWA</b></td> 
+                                <td align="center"><b>AKSI</b></td>
                             </tr>
                         </thead>
                         <tbody>

@@ -44,17 +44,18 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="3%" align="center">No</td>
-                                <td width="8%">Nama Peminjam</td>
-                                <td width="15%">Nama Kegiatan</td>
-                                <td width="10%">Ketua Organisasi</td>
-                                <td width="11%">Peserta</td>
-                                <td width="7%">Jml Peserta</td>
-                                <td width="8%">Tgl Pinjam</td>
-                                <td width="8%">Wkt Pinjam</td>
-                                <td width="8%">Tgl Selesai</td>
-                                <td width="8%">Wkt Selesai</td>
-                                <td width="9%">Status Penggunaan</td>                               
+                                <td width="3%" align="center"><b>NO</b></td>
+                                <td width="8%" align="center"><b>PEMINJAM</b></td>
+                                <td width="15%" align="center"><b>NAMA KEGIATAN</b></td>
+                                <td width="10%" align="center"><b>KETUA ORMA</b></td>
+                                <td width="11%" align="center"><b>PESERTA</b></td>
+                                <td width="5%" align="center"><b>JML</b></td>
+                                <td width="8%" align="center"><b>TGL PINJAM</b></td>
+                                <td width="8%" align="center"><b>WKT PINJAM</b></td>
+                                <td width="8%" align="center"><b>TGL SELESAI</b></td>
+                                <td width="8%" align="center"><b>WKT SELESAI</b></td>
+                                <td width="9%" align="center"><b>STATUS</b></td>
+                                <td align="center"><b>AKSI</b></td>
                             </tr>
                         </thead>
                         <tbody>

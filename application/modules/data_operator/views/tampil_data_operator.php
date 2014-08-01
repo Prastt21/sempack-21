@@ -45,16 +45,17 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="3%" align="center">No</td>
-                                <td width="10%">Level</td>
-                                <td width="15%">Nama</td>
-                                <td width="8%">Status</td>
-                                <td width="9%">Username</td>
-                                <td width="5%">JK</td>
-                                <td width="10%">No Telephone</td>
-                                <td width="14%">Alamat</td>
-                                <td width="9%">Tanggal Lahir</td>
-                                <td width="10%">Email</td>
+                                <td width="3%" align="center"><b>NO</b></td>
+                                <td width="10%" align="center"><b>LEVEL</b></td>
+                                <td width="15%" align="center"><b>NAMA</b></td>
+                                <td width="8%" align="center"><b>STATUS</b></td>
+                                <td width="9%" align="center"><b>USERNAME</b></td>
+                                <td width="5%" align="center"><b>JK</b></td>
+                                <td width="10%" align="center"><b>NO TELP</b></td>
+                                <td width="14%" align="center"><b>ALAMAT</b></td>
+                                <td width="9%" align="center"><b>TGL LAHIR</b></td>
+                                <td width="10%" align="center"><b>EMAIL</b></td>
+                                <td align="center"><b>AKSI</b></td>
                             </tr>
                         </thead>
                         <tbody>

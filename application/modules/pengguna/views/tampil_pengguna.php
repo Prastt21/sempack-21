@@ -44,16 +44,16 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" align="center">No</td>                                
-                                <td width="15%">Nama Pengguna</td>                                
-                                <td width="7%">JK</td>
-                                <td width="8%">Status</td>
-                                <td width="8%">Username</td>
-                                <td width="10%">No Telp</td>
-                                <td width="13%">Alamat</td>
-                                <td width="10%">Tanggal Lahir</td>
-                                <td width="13%">Email</td>
-                                <td width="13%">Nama Orang Tua</td>
+                                <td width="5%" align="center"><b>NO</b></td>                                
+                                <td width="15%" align="center"><b>PENGGUNA</b></td>                                
+                                <td width="7%" align="center"><b>JK</b></td>
+                                <td width="8%" align="center"><b>STATUS</b></td>
+                                <td width="8%" align="center"><b>USERNAME</b></td>
+                                <td width="10%" align="center"><b>NO TELP</b></td>
+                                <td width="13%" align="center"><b>ALAMAT</b></td>
+                                <td width="10%" align="center"><b>TGL LAHIR</b></td>
+                                <td width="13%" align="center"><b>EMAIL</b></td>
+                                <td width="13%" align="center"><b>NAMA ORANG TUA</b></td>
                             </tr>
                         </thead>
                         <tbody>

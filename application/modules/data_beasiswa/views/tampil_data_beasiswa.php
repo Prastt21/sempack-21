@@ -37,15 +37,16 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" align="center">No</td>
-                                <td width="10%">Beasiswa</td>
-                                <td width="20%">Pendaftar</td>                                
-                                <td width="15%">Jurusan</td>
-                                <td width="5%">Semester</td>
-                                <td width="5%">IPK</td>
-                                <td width="10%">No Rekening</td>
-                                <td width="10%">Tanggal Daftar</td>
-                                <td width="10%">Status </td>                               
+                                <td width="5%" align="center"><b>NO</b></td>
+                                <td width="10%" align="center"><b>BEASISWA</b></td>
+                                <td width="20%" align="center"><b>PENDAFTAR</b></td>                                
+                                <td width="15%" align="center"><b>JURUSAN</b></td>
+                                <td width="5%" align="center"><b>SMT</b></td>
+                                <td width="5%" align="center"><b>IPK</b></td>
+                                <td width="10%" align="center"><b>NO REKENING</b></td>
+                                <td width="13%" align="center"><b>TGL DAFTAR</b></td>
+                                <td width="10%" align="center"><b>STATUS </b></td> 
+                                <td align="center"><b>AKSI </b></td>                         
                             </tr>
                         </thead>
                         <tbody>

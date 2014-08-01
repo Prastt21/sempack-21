@@ -45,11 +45,12 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" align="center">No</td>
-                                <td width="50%">Judul Informasi</td>
-                                <td width="13%">Jenis Informasi</td>
-                                <td width="13%">Tanggal Informasi</td>
-                                <td width="13%">Operator Posting</td>                                
+                                <td width="5%" align="center"><b>NO</b></td>
+                                <td width="50%" align="center"><b>JUDUL INFORMASI</b></td>
+                                <td width="13%" align="center"><b>JENIS INFORMASI</b></td>
+                                <td width="13%" align="center"><b>TANGGAL POSTING</b></td>
+                                <td width="13%" align="center"><b>OPERATOR</b></td>
+                                <td align="center"><b>AKSI</b></td>
                             </tr>
                         </thead>
                         <tbody>
