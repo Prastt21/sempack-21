@@ -45,9 +45,10 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" align="center">No</td>
-                                <td width="30%">Daftar Tahun Periode</td>
-                                <td width="60%">Keterangan</td>                               
+                                <td width="5%" align="center"><b>NO</b></td>
+                                <td width="30%" align="center"><b>TAHUN PERIODE</b></td>
+                                <td width="60%" align="center"><b>KETERANGAN PERIODE</b></td>                               
+                                <td align="center"><b>AKSI</b></td>
                             </tr>
                         </thead>
                         <tbody>

@@ -45,10 +45,11 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" align="center">No</td>
-                                <td width="55%">Nama Jurusan</td>
-                                <td width="20%">Singkatan Jurusan</td>
-                                <td width="15%">Warna Jurusan</td>                                                              
+                                <td width="5%" align="center"><b>NO</b></td>
+                                <td width="55%" align="center"><b>NAMA JURUSAN</b></td>
+                                <td width="20%"align="center"><b>SINGKATAN JURUSAN</b></td>
+                                <td width="15%"align="center"><b>WARNA JURUSAN</b></td>
+                                <td align="center"><b>AKSI</b></td>
                             </tr>
                         </thead>
                         <tbody>
