@@ -20,7 +20,7 @@
                     <?php $this->load->view('templates/notification'); ?>
                     <form class="form-horizontal" action="<?php echo base_url('config_pengumumancoba/proses_ubah_config_pengumuman'); ?>" id="form-tambah-pengguna" method="post">                        
                         <div class="form-group">
-                            <label for="pengumuman-admin" class="col-lg-3 control-label">Isi Informasi</label>
+                            <label for="pengumuman-admin" class="col-lg-3 control-label">Isi Pengumuman </label>
                             <div class="col-lg-5">
                                 <textarea name="pengumuman_admin" maxlength="500" class="form-control input-sm" placeholder="Pengumuman Admin"><?php echo set_value('pengumuman_admin'); ?></textarea>
                             </div>

@@ -19,20 +19,31 @@ class m_config_sistem extends CI_Model {
     }
 
     function load_current_sistem() {
-        $query = $this->db->query('SELECT Status_Sistem,Pengumuman_Sistem, StatusRequest_Sistem,KarReq_Sistem,
+        $sql =('SELECT Status_Sistem,Pengumuman_Sistem, StatusRequest_Sistem,KarReq_Sistem,
 		Id_Periode,Tahun FROM sistem s 
 		JOIN periode p on p.Id_Periode = s.Id_Periode');
 
         if ($query->num_rows() > 0) {
-            return $query->row();
+            return $sql->row();
         } else {
             return null;
         }
     }
 
-    function update_sistem($status, $periode) {
-        $sql = $this->db->query("UPDATE sistem SET Status_Sistem = '" . $status . "', Id_Periode = '" . $periode . "'");
-        return $this->db->query($sql, $status, $periode);
+    function ubah_sistem() {
+        $sql = ("UPDATE sistem SET Status_Sistem=?, Id_Periode =?");
+        return $this->db->query($sql);
     }
 
+    function get_sistem_by_id($parameter) {
+        $sql = "SELECT a.*,b.* FROM sistem a JOIN periode b  WHERE a.id_periode = b.id_periode";
+        $query = $this->db->query($sql,$parameter);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

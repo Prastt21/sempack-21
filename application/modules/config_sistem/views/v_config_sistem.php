@@ -1,22 +1,3 @@
-<?php
-	
-	if(isset($_POST['simpan'])){
-		$this->sistem->update_sistem($_POST['status_sistem'], $_POST['periode_sistem']);
-		echo '<script type="text/javascript">jAlert("<center>Data tersimpan.</center>", "Informasi", function(r) {
-				if(r == true) {
-						window.location.replace(base+"config_sistem/v_config_sistem");
-				}
-		});</script>';
-	}
-
-	if($sistem->Status_Sistem == "AKTIF"){
-		$statusaktif = "selected";
-	} else {
-		$statusaktif2 = "selected";
-	}	
-	
-?>
-
 <section class="content-header">
     <h1>
         Konfigurasi Sistem
@@ -45,14 +26,14 @@
                             </div>
                         </div>
                     
-                    <form class="form-horizontal" action="<?php echo base_url(); ?>" id="form-tambah-pengguna" method="post">
+                    <form class="form-horizontal" action="<?php echo base_url('config_sistem/proses_ubah_sistem'); ?>" id="form-tambah-pengguna" method="post">
                         <div class="form-group">
                             <label for="status-sistem" class="col-lg-3 control-label">Status Sistem</label>
                             <div class="col-lg-5">
-                                <select name="status_sistem" class="form-control input-sm" value="<?php echo $sistem->Status_Sistem; ?>" style="width: 150px;">
+                                <select name="status_sistem" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
-                                    <option value="AKTIF" <?php echo @$statusaktif; ?> >AKTIF</option>
-                                    <option value="TIDAK AKTIF" <?php echo @$statusaktif2; ?> >TIDAK AKTIF</option>
+                                    <option value="AKTIF"<?php echo set_value('status_sistem') == 'AKTIF' ? 'selected = "selected"' : '' ?>>AKTIF</option>
+                                    <option value="TIDAK AKTIF"<?php echo set_value('status_sistem') == 'TIDAK AKTIF' ? 'selected = "selected"' : '' ?>>TIDAK AKTIF</option>
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
