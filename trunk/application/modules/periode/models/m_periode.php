@@ -56,5 +56,31 @@ class m_periode extends CI_Model {
         $sql = 'DELETE FROM periode WHERE Id_Periode = ?';
         return $this->db->query($sql, $params);
     }
+    //get data
+    function get_list_data($params) {
+        $sql = 'SELECT * FROM periode WHERE tahun LIKE ? ORDER BY tahun ASC LIMIT ?,?';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
+//count search data
+    function count_search_data($params) {
+        $sql = 'SELECT count(id_periode) as jumlah FROM periode WHERE tahun LIKE ? LIMIT 1';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
+        } else {
+            return array();
+        }
+    }
+
 
 }

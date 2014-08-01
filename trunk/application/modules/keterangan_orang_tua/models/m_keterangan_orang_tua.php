@@ -44,5 +44,30 @@ class m_keterangan_orang_tua extends CI_Model {
             return false;
         }
     }
+   //get data
+    function get_list_data($params) {
+        $sql = 'SELECT * FROM pengguna WHERE nama_pengguna LIKE ? AND id_level LIKE 3 
+            ORDER BY nama_pengguna ASC LIMIT ?,?';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
 
+//count search data
+    function count_search_data($params) {
+        $sql = 'SELECT count(id_pengguna) as jumlah FROM pengguna WHERE nama_pengguna LIKE ? AND id_level LIKE 3 LIMIT 1';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
+        } else {
+            return array();
+        }
+    }
 }

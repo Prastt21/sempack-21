@@ -21,10 +21,16 @@
                         <div class="col-xs-2"><a href="<?php echo base_url('periode/tambah_periode'); ?>" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> Tambah Data</a></div>
                         <div class="col-xs-4">
                             <div class="input-group input-group-sm">
-                                <input class="form-control" type="text">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i> cari !</button>
-                                </span>
+                               <form action="<?php echo base_url('periode/cari'); ?>" method="post" class="form-inline" role="form">
+                                <div class="form-group">
+                                    <input class="form-control input-sm" type="text" name="keyword_text" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i> cari !</button>
+                                    </span>
+                                </div>
+                            </form>
                             </div>
                         </div>
                         <div class="col-xs-6">

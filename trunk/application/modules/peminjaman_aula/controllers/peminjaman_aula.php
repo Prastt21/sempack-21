@@ -22,7 +22,10 @@ class peminjaman_aula extends operator_base {
         $data['jml_data'] = count($data['rs_peminjaman_aula']);
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($data['total_data'], $this->batas, 'peminjaman_aula/index');
-
+        
+        //load javascript + css untuk tanggal 
+        $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
+        $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
         parent::display('tampil_peminjaman_aula', $data);
     }
 
@@ -182,6 +185,33 @@ class peminjaman_aula extends operator_base {
         }
         //kembalikan ke halaman list informasi
         redirect('peminjaman_aula');
+    }
+    function cari($offset = 0) {
+        $this->_set_page_role('r');
+        //load library untuk pagination
+        $this->load->library('bagi_halaman');
+        //load model
+        $this->load->model('m_peminjaman_aula');
+        if ($this->input->post() != null) {
+            $keyword = $this->input->post('keyword_text', true);
+            $this->session->set_userdata('keyword_cari', $keyword);
+        } else {
+            $keyword = $this->session->userdata('keyword_cari');
+        }
+        $parameter = array('%' . $keyword . '%', $offset, $this->batas);
+        //ambil data dari database
+        $rs_peminjaman_aula = $this->m_peminjaman_aula->get_list_data($parameter);
+        //menghitung jumlah data tabel keseluruhan
+        $rs_total = $this->m_peminjaman_aula->count_search_data($parameter);
+
+        //ambil nilai untuk dikirim ke view
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'peminjaman_aula/index');
+        $data['peminjaman_aula'] = $rs_peminjaman_aula;
+        $data['total_data'] = $rs_total;
+        $data['jml_data'] = count($rs_peminjaman_aula);
+        $data['awal'] = $offset;
+        $data['keyword'] = $keyword;
+        parent::display('tampil_peminjaman_aula', $data);
     }
 
 }

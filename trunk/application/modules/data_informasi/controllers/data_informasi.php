@@ -158,5 +158,31 @@ class data_informasi extends operator_base {
         //kembalikan ke halaman list informasi
         redirect('data_informasi');
     }
+    function cari($offset = 0) {
+        $this->_set_page_role('r');
+        //load library untuk pagination
+        $this->load->library('bagi_halaman');
+        //load model
+        $this->load->model('m_data_informasi');
+        if ($this->input->post() != null) {
+            $keyword = $this->input->post('keyword_text', true);
+            $this->session->set_userdata('keyword_cari', $keyword);
+        } else {
+            $keyword = $this->session->userdata('keyword_cari');
+        }
+        $parameter = array('%' . $keyword . '%', $offset, $this->batas);
+        //ambil data dari database
+        $rs_data_informasi = $this->m_data_informasi->get_list_data($parameter);
+        //menghitung jumlah data tabel keseluruhan
+        $rs_total = $this->m_data_informasi->count_search_data($parameter);
 
+        //ambil nilai untuk dikirim ke view
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'data_informasi/index');
+        $data['data_informasi'] = $rs_data_informasi;
+        $data['total_data'] = $rs_total;
+        $data['jml_data'] = count($rs_data_informasi);
+        $data['awal'] = $offset;
+        $data['keyword'] = $keyword;
+        parent::display('tampil_data_informasi', $data);
+    }
 }

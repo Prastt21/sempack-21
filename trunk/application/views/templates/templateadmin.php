@@ -44,13 +44,7 @@
                         <li class="grey">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <i class="icon-tasks"></i>
-                                <span> Periode </span>
-                            </a>
-                        </li>
-                        <li class="grey">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <i class="icon-tasks"></i>
-                                <span> Note Operator</span>
+                                <span> Periode : 2014</span>
                             </a>
                         </li>
                         <li class="grey">

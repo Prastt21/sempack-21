@@ -58,5 +58,29 @@ class m_data_informasi extends CI_Model {
         $sql = 'DELETE FROM informasi WHERE id_informasi = ?';
         return $this->db->query($sql, $params);
     }
+    //get data
+    function get_list_data($params) {
+        $sql = 'SELECT * FROM informasi WHERE judul_info LIKE ? ORDER BY judul_info ASC LIMIT ?,?';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
 
+//count search data
+    function count_search_data($params) {
+        $sql = 'SELECT count(id_informasi) as jumlah FROM informasi WHERE judul_info LIKE ? LIMIT 1';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
+        } else {
+            return array();
+        }
+    }
 }
