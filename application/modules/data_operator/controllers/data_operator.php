@@ -194,5 +194,32 @@ class data_operator extends operator_base {
         //kembalikan ke halaman list informasi
         redirect('data_operator');
     }
+    function cari($offset = 0) {
+        $this->_set_page_role('r');
+        //load library untuk pagination
+        $this->load->library('bagi_halaman');
+        //load model
+        $this->load->model('m_data_operator');
+        if ($this->input->post() != null) {
+            $keyword = $this->input->post('keyword_text', true);
+            $this->session->set_userdata('keyword_cari', $keyword);
+        } else {
+            $keyword = $this->session->userdata('keyword_cari');
+        }
+        $parameter = array('%' . $keyword . '%', $offset, $this->batas);
+        //ambil data dari database
+        $rs_data_operator = $this->m_data_operator->get_list_data($parameter);
+        //menghitung jumlah data tabel keseluruhan
+        $rs_total = $this->m_data_operator->count_search_data($parameter);
+
+        //ambil nilai untuk dikirim ke view
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'data_operator/index');
+        $data['data_operator'] = $rs_data_operator;
+        $data['total_data'] = $rs_total;
+        $data['jml_data'] = count($rs_data_operator);
+        $data['awal'] = $offset;
+        $data['keyword'] = $keyword;
+        parent::display('tampil_data_operator', $data);
+    }
 
 }

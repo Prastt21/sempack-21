@@ -19,7 +19,7 @@
                 <div class="box-body">
                     <div class="row">
                         <center>
-                        <div class="col-xs-2"><a href="<?php echo base_url('manajemen_basisdata/download'); ?>" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> BACKUP DATABASE</a></div>
+                        <div class="col-xs-2"><a href="<?php echo base_url('generate_db'); ?>" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> BACKUP DATABASE</a></div>
                         <div class="col-xs-2"><a href="<?php echo base_url('manajemen_basisdata/deletealldata'); ?>" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> KOSONGKAN DATABASE SESUAI TABLE</a></div>
                         </center>
             </div>

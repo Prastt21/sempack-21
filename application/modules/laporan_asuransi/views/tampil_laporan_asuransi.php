@@ -16,7 +16,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-6">
-                            <form class="form-inline" role="form" method="post" action="<?php echo base_url('laporan_pembelian/cari_data'); ?>">
+                            <form class="form-inline" role="form" method="post" action="<?php echo base_url('laporan_asuransi/cari_data'); ?>">
                                 <select class="form-control input-sm" name="bulan">
                                     <?php foreach ($bulan as $key => $nama_bulan) : ?>
                                         <option value="<?php echo $key; ?>"<?php echo $key == $bulan_skr ? 'selected="selected"' : ''; ?>><?php echo $nama_bulan; ?></option>';
@@ -41,8 +41,8 @@
                         <div class="col-xs-4">
                             <div class="btn-group">
                                 <a href="#" class="btn btn-default btn-sm"><i class="fa fa-users"></i> Iki</a>
-                                <a href="<?php echo site_url('laporan_pembelian/cetak'); ?>" class="btn btn-default btn-sm"><i class="fa fa-download"></i> Download</a>
-                                <a href="#" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Cetak</a>
+                                <a href="<?php echo site_url('laporan_asuransi/download'); ?>" class="btn btn-default btn-sm"><i class="fa fa-download"></i> Download</a>
+                                <a href="<?php echo site_url('laporan_asuransi/cetak'); ?>" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Cetak</a>
                             </div>
                         </div>
                     </div>

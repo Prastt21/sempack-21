@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2014 at 10:48 PM
+-- Generation Time: Aug 01, 2014 at 01:56 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -134,17 +134,20 @@ CREATE TABLE IF NOT EXISTS `informasi` (
   `Jenis_Info` enum('Aula','Beasiswa','Asuransi') NOT NULL,
   `Tanggal_info` date DEFAULT NULL,
   PRIMARY KEY (`Id_Informasi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `informasi`
 --
 
 INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`, `Jenis_Info`, `Tanggal_info`) VALUES
-(1, 1, 'judul', 'isi', 'Beasiswa', NULL),
-(2, 1, 'judul yang kedua', 'isi yang kedua', 'Aula', NULL),
-(3, 1, 'hdfhdf', 'fhdfhd', 'Aula', '2014-07-23'),
-(4, 1, 'k', 't', 'Aula', '2014-07-01');
+(1, 1, 'Informasi Pendaftaran Beasiswa PPA dan BBP/PPA', 'Informasi Pendaftaran Beasiswa PPA dan BBP/PPA', 'Beasiswa', '2014-08-01'),
+(2, 1, 'Prosedur Peminjaman Aula BSC', 'Prosedur Peminjaman Aula BSC', 'Aula', NULL),
+(3, 1, 'Informasi Peminjaman Tanggal 21 Agustus 2014', 'Informasi Peminjaman Tanggal 21 Agustus 2014', 'Aula', '2014-07-23'),
+(4, 1, 'Prosedur Pendaftaran Rujukan Asuransi', 'Prosedur Pendaftaran Rujukan Asuransi', 'Asuransi', '2014-07-01'),
+(5, 2, 'Informasi Pendaftaran Beasiswa MUAMALAT 2014', 'Informasi Pendaftaran Beasiswa MUAMALAT 2014', 'Beasiswa', '2014-08-03'),
+(6, 1, 'Biaya Maksimal Rujukan Asuransi', 'Biaya Maksimal Rujukan Asuransi', 'Asuransi', '2014-07-30'),
+(7, 1, 'Prosedur Alih Jenis Rujukan Asuransi', 'Prosedur Alih Jenis Rujukan Asuransi', 'Asuransi', '2014-07-31');
 
 -- --------------------------------------------------------
 
@@ -258,19 +261,19 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
   `Email` varchar(20) NOT NULL,
   `Online` int(1) NOT NULL,
   `Sesi` datetime NOT NULL,
-  `Catatan` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_Ortu`, `Pekerjaan_Ortu`, `Penghasilan_Ortu`, `Jml_Tanggungan`, `Email`, `Online`, `Sesi`, `Catatan`) VALUES
-(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', '', '', NULL, 'PNS', 0, 0, 'prastt21@gmail.com', 0, '0000-00-00 00:00:00', NULL),
-(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', '', '', NULL, 'PNS', 0, 0, 'aku@masiyak.com', 0, '0000-00-00 00:00:00', NULL),
-(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', '', NULL, 'PNS', 0, 0, '', 0, '0000-00-00 00:00:00', NULL),
-(4, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '', '', 'PRIA', 0, '', '', '0000-00-00', '', '', NULL, 'PNS', 0, 0, '', 0, '0000-00-00 00:00:00', NULL);
+INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_Ortu`, `Pekerjaan_Ortu`, `Penghasilan_Ortu`, `Jml_Tanggungan`, `Email`, `Online`, `Sesi`) VALUES
+(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', '', '', NULL, 'PNS', 0, 0, 'prastt21@gmail.com', 0, '0000-00-00 00:00:00'),
+(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', '', '', NULL, 'PNS', 0, 0, 'aku@masiyak.com', 0, '0000-00-00 00:00:00'),
+(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', '', NULL, 'PNS', 0, 0, '', 0, '0000-00-00 00:00:00'),
+(4, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '', '', 'PRIA', 0, '', '', '0000-00-00', '', '', NULL, 'PNS', 0, 0, '', 0, '0000-00-00 00:00:00'),
+(5, 2, 'Agus', 'MAHASISWA', 'agus', '63b573a282e7ac5a0a97cd7bc36fc528', 'PRIA', 2147483647, 'Jogja', 'Jogja', '1990-08-08', '', '', NULL, 'PNS', 0, 0, 'agus@amikom.ac.id', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -393,7 +396,7 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 (37, 2, 34, '1111'),
 (38, 2, 35, '1111'),
 (39, 3, 1, '0100'),
-(40, 3, 37, '0100'),
+(40, 3, 29, '0100'),
 (41, 3, 38, '1100'),
 (42, 3, 39, '1100'),
 (43, 3, 40, '1100'),
@@ -454,7 +457,7 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (26, 'User Profile', 1, 1, 25, 'User Profil', 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL),
 (27, 'Registrasi User', 1, 2, 25, 'login and Register', 'login_registers', '<i class= "fa fa-caret-square-o-right"></i>', 1, NULL),
 (28, 'Dashboard', 1, 1, 0, 'Dashboard Operator', 'dashboard', '<i class= "fa fa-dashboard"></i>', 1, NULL),
-(29, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', 'informasi', '<i class= "fa fa-building-o"></i>', 1, NULL),
+(29, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', 'berita_dan_informasi', '<i class= "fa fa-building-o"></i>', 1, NULL),
 (30, 'Data Peminjaman Aula', 1, 3, 0, 'Data Peminjaman Aula', 'data_peminjaman_aula', '<i class= "fa fa-credit-card"></i>', 1, NULL),
 (31, 'Data Pendaftaran Beasiswa', 1, 4, 0, 'Data Pendaftaran Beasiswa', 'data_beasiswa', '<i class= "fa fa-gift"></i>', 1, NULL),
 (32, 'Data Rujukan Asuransi', 1, 5, 0, 'Data Rujukan Asuransi', 'data_rujukan_asuransi', '<i class= "fa fa-medkit"></i>', 1, NULL),

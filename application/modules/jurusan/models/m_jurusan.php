@@ -56,5 +56,29 @@ class m_jurusan extends CI_Model {
         $sql = 'DELETE FROM jurusan WHERE Id_Jurusan = ?';
         return $this->db->query($sql, $params);
     }
+    //get data
+    function get_list_data($params) {
+        $sql = 'SELECT * FROM jurusan WHERE nama_jurusan LIKE ? ORDER BY nama_jurusan ASC LIMIT ?,?';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
 
+//count search data
+    function count_search_data($params) {
+        $sql = 'SELECT count(id_jurusan) as jumlah FROM jurusan WHERE nama_jurusan LIKE ? LIMIT 1';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
+        } else {
+            return array();
+        }
+    }
 }

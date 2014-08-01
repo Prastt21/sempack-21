@@ -1,6 +1,6 @@
 <head>
     <!-- TinyMCE -->
-    <script language="javascript" type="text/javascript" src="tinymcpuk-0.3/tiny_mce.js"></script>
+    <script language="javascript" type="text/javascript" src="<? echo base_url(); ?>assets/js/tinymcpuk-0.3/tiny_mce.js"></script>
     <script language="javascript" type="text/javascript">
         tinyMCE.init({
             mode: "textareas", //exact or textareas

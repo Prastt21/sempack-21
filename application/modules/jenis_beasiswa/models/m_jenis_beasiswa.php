@@ -56,5 +56,29 @@ class m_jenis_beasiswa extends CI_Model {
         $sql = 'DELETE FROM jenis_beasiswa WHERE Id_JB = ?';
         return $this->db->query($sql, $params);
     }
+    //get data
+    function get_list_data($params) {
+        $sql = 'SELECT * FROM jenis_beasiswa WHERE jenis_beasiswa LIKE ? ORDER BY jenis_beasiswa ASC LIMIT ?,?';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
 
+//count search data
+    function count_search_data($params) {
+        $sql = 'SELECT count(id_jb) as jumlah FROM jenis_beasiswa WHERE jenis_beasiswa LIKE ? LIMIT 1';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
+        } else {
+            return array();
+        }
+    }
 }

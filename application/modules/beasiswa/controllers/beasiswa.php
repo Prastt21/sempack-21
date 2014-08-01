@@ -61,8 +61,6 @@ class beasiswa extends operator_base {
         $this->form_validation->set_rules('no_rekening', 'No Rekening', 'required|trim');
         $this->form_validation->set_rules('tanggal_daftar', 'Tanggal Daftar', 'required|trim');
         //$this->form_validation->set_rules('status_beasiswa', 'Status Beasiswa', 'required|trim');
-
-
         if ($this->form_validation->run() === FALSE) {
             //set notifikasi
             $this->notification('error', validation_errors());
@@ -197,5 +195,34 @@ class beasiswa extends operator_base {
         //kembalikan ke halaman list informasi
         redirect('beasiswa');
     }
+    
+    function cari($offset = 0) {
+        $this->_set_page_role('r');
+        //load library untuk pagination
+        $this->load->library('bagi_halaman');
+        //load model
+        $this->load->model('m_beasiswa');
+        if ($this->input->post() != null) {
+            $keyword = $this->input->post('keyword_text', true);
+            $this->session->set_userdata('keyword_cari', $keyword);
+        } else {
+            $keyword = $this->session->userdata('keyword_cari');
+        }
+        $parameter = array('%' . $keyword . '%', $offset, $this->batas);
+        //ambil data dari database
+        $rs_beasiswa = $this->m_beasiswa->get_list_data($parameter);
+        //menghitung jumlah data tabel keseluruhan
+        $rs_total = $this->m_beasiswa->count_search_data($parameter);
+
+        //ambil nilai untuk dikirim ke view
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'beasiswa/index');
+        $data['beasiswa'] = $rs_beasiswa;
+        $data['total_data'] = $rs_total;
+        $data['jml_data'] = count($rs_beasiswa);
+        $data['awal'] = $offset;
+        $data['keyword'] = $keyword;
+        parent::display('tampil_beasiswa', $data);
+    }
+
 
 }

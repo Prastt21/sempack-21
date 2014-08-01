@@ -18,7 +18,7 @@ function backup_tables($host,$user,$pass,$name,$tables = '*')
 			$tables[] = $row[0];
 		} */
 		$tables = array("asuransi", "aula", "beasiswa", "informasi", "jenis_beasiswa", "jurusan",
-                    "keterangan_ortu", "pendaftaran_asuransi","pendaftaran_beasiswa","pengguna","periode",
+                    "pendaftaran_asuransi","pendaftaran_beasiswa","pengguna","periode",
                     "sistem","sys_level","sys_level_menu","sys_menu");
 	}
 	else

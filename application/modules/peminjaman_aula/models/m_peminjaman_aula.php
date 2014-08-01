@@ -62,5 +62,31 @@ class m_peminjaman_aula extends CI_Model {
         $sql = 'DELETE FROM aula WHERE id_pinjam_aula = ?';
         return $this->db->query($sql, $params);
     }
+    //get data
+    function get_list_data($params) {
+        $sql = 'SELECT * FROM aula 
+                WHERE nama_kegiatan LIKE ? ORDER BY nama_kegiatan ASC LIMIT ?,?';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
 
+//count search data
+    function count_search_data($params) {
+        $sql = 'SELECT count(id_pinjam_aula) as jumlah FROM aula 
+                WHERE nama_kegiatan LIKE ? LIMIT 1';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
+        } else {
+            return array();
+        }
+    }
 }

@@ -81,7 +81,32 @@ class m_data_operator extends CI_Model {
         $sql = 'DELETE FROM pengguna WHERE Id_Pengguna = ?';
         return $this->db->query($sql, $parameter);
     }
+    //get data
+    function get_list_data($params) {
+        $sql = 'SELECT * FROM pengguna WHERE nama_pengguna LIKE ?  AND id_pengguna LIKE 1 OR id_pengguna LIKE 2
+                ORDER BY nama_pengguna ASC LIMIT ?,?';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
 
+//count search data
+    function count_search_data($params) {
+        $sql = 'SELECT count(id_pengguna) as jumlah FROM pengguna WHERE nama_pengguna LIKE ? LIMIT 1';
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
+        } else {
+            return array();
+        }
+    }
 }
 
 ?>

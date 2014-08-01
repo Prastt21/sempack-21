@@ -12,8 +12,8 @@
     <div class="row">
         <div class="col-xs-8">
             <p>
-                <a class="btn btn-app" href="<?php echo base_url(); ?>"><i class="fa fa-shopping-cart"></i> JADWAL PEMINJAMAN AULA</a>
-                <a class="btn btn-app" href="<?php echo base_url(); ?>"><i class="fa fa-truck"></i> LIST PENDAFTAR BEASISWA</a>
+                <a class="btn btn-app" href="<?php echo base_url('jadwal_peminjaman_aula'); ?>"><i class="fa fa-shopping-cart"></i> JADWAL PEMINJAMAN AULA</a>
+                <a class="btn btn-app" href="<?php echo base_url('pendaftar_beasiswa'); ?>"><i class="fa fa-truck"></i> LIST PENDAFTAR BEASISWA</a>
                 <a class="btn btn-app" href="<?php echo base_url(); ?>"><i class="fa fa-truck"></i> LIST PENDAFTAR ASURANSI</a>
             </p>
         </div>

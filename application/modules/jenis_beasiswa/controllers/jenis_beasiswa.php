@@ -155,5 +155,32 @@ class jenis_beasiswa extends operator_base {
         //kembalikan ke halaman list informasi
         redirect('jenis_beasiswa');
     }
+    function cari($offset = 0) {
+        $this->_set_page_role('r');
+        //load library untuk pagination
+        $this->load->library('bagi_halaman');
+        //load model
+        $this->load->model('m_jenis_beasiswa');
+        if ($this->input->post() != null) {
+            $keyword = $this->input->post('keyword_text', true);
+            $this->session->set_userdata('keyword_cari', $keyword);
+        } else {
+            $keyword = $this->session->userdata('keyword_cari');
+        }
+        $parameter = array('%' . $keyword . '%', $offset, $this->batas);
+        //ambil data dari database
+        $rs_jenis_beasiswa = $this->m_jenis_beasiswa->get_list_data($parameter);
+        //menghitung jumlah data tabel keseluruhan
+        $rs_total = $this->m_jenis_beasiswa->count_search_data($parameter);
+
+        //ambil nilai untuk dikirim ke view
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'jenis_beasiswa/index');
+        $data['jenis_beasiswa'] = $rs_jenis_beasiswa;
+        $data['total_data'] = $rs_total;
+        $data['jml_data'] = count($rs_jenis_beasiswa);
+        $data['awal'] = $offset;
+        $data['keyword'] = $keyword;
+        parent::display('tampil_jenis_beasiswa', $data);
+    }
 
 }
