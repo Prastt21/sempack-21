@@ -88,14 +88,20 @@ class pendaftaran_beasiswa extends operator_base {
                 $this->input->post('tanggal_daftar'),
                 $this->input->post('status_beasiswa')
             );
-            if ($this->m_pendaftaran_beasiswa->tambah_pendaftaran_beasiswa($parameter)) {
+            if ($this->m_pendaftaran_beasiswa->cek_pendaftaran_beasiswa_by_id_pengguna($parameter)) {
                 //set notifikasi berhasil
-                $this->notification('success', 'Data berhasil ditambahkan');
+                if ($this->m_pendaftaran_beasiswa->tambah_pendaftaran_beasiswa($parameter)) {
+                     //set notifikasi berhasil
+                     $this->notification('success', 'Data berhasil ditambahkan');
+                 } else {
+                     //set notifikasi gagal
+                     $this->notification('error', 'Data gagal ditambahkan');
+                 }               
             } else {
                 //set notifikasi gagal
-                $this->notification('error', 'Data gagal ditambahkan');
+                 $this->notification('error', 'Anda Sudah Melakukan Pendaftaran Beasiswa Periode Ini');             
             }
-            redirect('pendaftaran_beasiswa');
+            redirect('pendaftaran_beasiswa');                       
         }
     }
 }

@@ -75,15 +75,22 @@ class pendaftaran_peminjaman_aula extends operator_base {
                 $this->input->post('waktu_selesai'),
                 $this->input->post('status_penggunaan')
             );
-            if ($this->m_pendaftaran_peminjaman_aula->tambah_pendaftaran_peminjaman_aula($parameter)) {
+            if ($this->m_pendaftaran_peminjaman_aula->cek_pendaftaran_aula_by_tglPinjam($parameter)) {
                 //jika sukses kirim pesan ke view
-                $this->notification('success', 'Peminjaman Aula berhasil ditambahkan');
+                if ($this->m_pendaftaran_peminjaman_aula->tambah_pendaftaran_peminjaman_aula($parameter)) {
+                    //jika sukses kirim pesan ke view
+                    $this->notification('success', 'Peminjaman Aula berhasil ditambahkan');
+                } else {
+                    //jika gagal kirim pesan ke view
+                    $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
+                }
             } else {
                 //jika gagal kirim pesan ke view
-                $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
-            }
+                $this->notification('error', 'Tanggal Dan Waktu Pinjam Sudah Digunakan, 
+                                    Silahkan Ganti Tanggal Dan Waktu Pinjam');                
+            }            
         }
-        //redirect ke list informasi
+        //redirect ke form
         redirect('pendaftaran_peminjaman_aula');
     }
 }

@@ -73,5 +73,17 @@ class m_pendaftaran_beasiswa extends CI_Model {
         } else {
             return false;
         }
+    }
+    function cek_pendaftaran_beasiswa_by_id_pengguna($parameter) {
+        $sql = "SELECT a.id_pengguna FROM beasiswa b INNER JOIN pengguna a ON a.id_pengguna=b.id_pengguna
+                WHERE a.id_pengguna = 'ID_PENGGUNA'";
+        $query = $this->db->query($sql, $parameter);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return false;
+        }
     }   
 }
