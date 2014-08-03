@@ -74,15 +74,24 @@
             <div class="row">
                 <div class="box box-info">
                     <div class="box-header">
-                        <span class="box-title">Login Terakhir Pengguna</span>
+                        <span class="box-title">Login Terakhir User</span>
                     </div>
                     <div class="box-body">
-                        <table class="table table-condensed" width="100%">
-                            <tbody>
-                                
-                            </tbody>
+                        <table class="table" width="100%">
+                            <tr>
+                            <?php
+                            if (isset($rs_pengumuman)) {                                
+                                foreach ($rs_pengumuman as $dt_pengumuman):
+                                    ?>
+                                    <tr>                                        
+                                        <td><?php echo $dt_pengumuman['Pengumuman_Sistem']; ?></td>
+                                    </tr>
+                                    <?php
+                                endforeach;
+                            }                            
+                            ?>
+                            </tr>                            
                         </table>
-                        Berisi User Yang Sedang Online
                     </div>
                 </div>
             </div>

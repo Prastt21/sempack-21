@@ -101,7 +101,7 @@
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
-                                <a href="#" class="btn btn-default confirm">Batal</a>
+                                <a href="<?php echo base_url('dashboard'); ?>" class="btn btn-default confirm">Batal</a>
                             </div>
                         </div>
                     </form>
