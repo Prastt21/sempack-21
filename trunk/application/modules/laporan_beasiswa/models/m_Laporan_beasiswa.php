@@ -1,24 +1,16 @@
 <?php
 
-class m_beasiswa extends CI_Model {
+class m_laporan_beasiswa extends CI_Model {
 
     public function __construct() {
         parent::__construct();
     }
-
-    function tambah_beasiswa($parameter) {
-        $sql = 'INSERT INTO beasiswa (Id_JB,Id_Pengguna,Id_Jurusan,Jenjang,Alamat_Sekarang,
-                Nama_PT,Semester,IPK,Prestasi,Alasan,BANK,No_Rekening,Tanggal_Daftar,Status_Beasiswa) 
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-        return $this->db->query($sql, $parameter);
-    }
-
-    function ambil_beasiswa($parameter) {
+    function ambil_laporan_beasiswa($parameter) {
         $sql = 'SELECT beasiswa.*, jenis_beasiswa.*,pengguna.*,jurusan.* 
                 FROM beasiswa JOIN jenis_beasiswa ON beasiswa.id_jb=jenis_beasiswa.id_jb
                 JOIN pengguna ON beasiswa.id_pengguna=pengguna.id_pengguna		
-		JOIN jurusan ON beasiswa.id_jurusan=jurusan.id_jurusan
-                LIMIT ?,?';
+		JOIN jurusan ON beasiswa.id_jurusan=jurusan.id_jurusan WHERE MONTH(tanggal_daftar) = ? 
+                AND YEAR(tanggal_daftar) = ? LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -75,16 +67,31 @@ class m_beasiswa extends CI_Model {
         }
     }
 
-    function ubah_beasiswa($parameter) {
-        $sql = 'UPDATE beasiswa SET Id_JB=?,Id_Pengguna=?,Id_Jurusan=?,Jenjang=?,Alamat_Sekarang=?,
-            Nama_PT=?,Semester=?,IPK=?,Prestasi=?,Alasan=?,BANK=?,No_Rekening=?,Tanggal_Daftar=?,Status_Beasiswa=?
-            WHERE Id_Beasiswa = ?';
-        return $this->db->query($sql, $parameter);
+    //ambil total beasiswa pada bulan sekarang
+    function get_total_beasiswa($params) {
+        $sql = "SELECT COUNT(id_beasiswa)'jumlah' FROM beasiswa
+                WHERE MONTH(tanggal_daftar) = ? AND YEAR(tanggal_daftar) = ?";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
+        } else {
+            return array();
+        }
     }
 
-    function hapus_beasiswa($params) {
-        $sql = 'DELETE FROM beasiswa WHERE id_beasiswa = ?';
-        return $this->db->query($sql, $params);
+    //get tahun
+    function get_tahun_beasiswa() {
+        $sql = "SELECT YEAR(tanggal_daftar)'tahun' FROM beasiswa
+                UNION SELECT YEAR(NOW()) FROM beasiswa";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
     }
-
 }

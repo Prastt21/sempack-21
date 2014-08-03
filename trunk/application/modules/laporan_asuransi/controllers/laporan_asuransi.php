@@ -12,13 +12,13 @@ class laporan_asuransi extends operator_base {
         //load model
         $this->load->model('m_laporan_asuransi');
     }
-    var $batas = 15;
 
-    public function index($offset = 0) {
+    public function index() {
         //control hak akses read
         $this->_set_page_role('r');
         //load model
         $this->load->model('m_laporan_asuransi');
+        $this->m_laporan_asuransi->ambil_laporan_asuransi();
         //set data bulan
         $data['bulan'] = array(
             '01' => 'Januari',
@@ -41,9 +41,10 @@ class laporan_asuransi extends operator_base {
         $data['tahun_skr'] = $pencarian_laporan_asuransi['tahun'] != '' ? $pencarian_laporan_asuransi['tahun'] : date('Y');
         $parameter = array($data['bulan_skr'], $data['tahun_skr']);
         //get total pembelian bulan sebelumnya
-        $data['result_total'] = $this->m_laporan_asuransi->get_total_asuransi($parameter);       
+        $data['result_total'] = $this->m_laporan_asuransi->get_total_asuransi($parameter);
         parent::display('tampil_laporan_asuransi', $data);
     }
+
     function cari_data() {
         if ($this->input->post() == '')
             redirect('laporan_asuransi');
@@ -58,39 +59,45 @@ class laporan_asuransi extends operator_base {
         }
         redirect('laporan_asuransi');
     }
-    function download($param) {
-       //load our new PHPExcel library
+
+    function download() {
+        $this->load->model('m_laporan_asuransi');
+        $rs_laporan_asuransi->$this->m_laporan_asuransi->ambil_laporan_asuransi($id);
+        //load our new PHPExcel library
         $this->load->library('excel');
         //name the worksheet
-        $this->excel->getActiveSheet()->setTitle('test worksheet');
+        $this->excel->getActiveSheet()->setTitle('LAPORAN RUJUKAN ASURANSI');
 
-        $this->excel->getActiveSheet()->setCellValue('A1', 'Januari');
-        $this->excel->getActiveSheet()->setCellValue('B1', '2010');
-        $this->excel->getActiveSheet()->setCellValue('A3', 'No');
-        $this->excel->getActiveSheet()->setCellValue('B3', 'Transaksi');
-        $this->excel->getActiveSheet()->setCellValue('D3', 'Nominal');
-        $this->excel->getActiveSheet()->setCellValue('E3', 'Jumlah');
+        $this->excel->getActiveSheet()->setCellValue('B8', 'NO');
+        $this->excel->getActiveSheet()->setCellValue('C8', 'JENIS ASURANSI');
+        $this->excel->getActiveSheet()->setCellValue('D8', 'NAMA PERUJUK');
+        $this->excel->getActiveSheet()->setCellValue('E8', 'NAMA RUMAH SAKIT');
+        $this->excel->getActiveSheet()->setCellValue('F8', 'ALAMAT RUMAH SAKIT');
+        $this->excel->getActiveSheet()->setCellValue('G8', 'KRONOLOGI');
+        $this->excel->getActiveSheet()->setCellValue('H8', 'TANGGAL DAFTAR');
+        $this->excel->getActiveSheet()->setCellValue('I8', 'TANGGAL MASUK');
+        $this->excel->getActiveSheet()->setCellValue('J8', 'TANGGAL KELUAR');
+        $this->excel->getActiveSheet()->setCellValue('K8', 'TOTAL BIAYA');
+        $this->excel->getActiveSheet()->setCellValue('L8', 'SANTUNAN');
+        $this->excel->getActiveSheet()->setCellValue('M8', 'STATUS ASURANSI');
 
-        $saldo = 10500600;
-        $pendapatan = 2000000;
-        $pendapatan_bulan_ini = 0;
-        $b = 5;
-
-        $this->excel->getActiveSheet()->setCellValue('B4', 'Saldo Bulan Lalu');
-        $this->excel->getActiveSheet()->setCellValue('E4', $saldo);
-
-        for ($a = 1; $a < 31; $a++):
-            $saldo += $pendapatan;
-            $pendapatan_bulan_ini += $pendapatan;
-            $this->excel->getActiveSheet()->setCellValue('A' . $b, $a);
-            $this->excel->getActiveSheet()->setCellValue('B' . $b, 'Transaksi' . $a);
-            $this->excel->getActiveSheet()->setCellValue('D' . $b, $pendapatan);
-            $this->excel->getActiveSheet()->setCellValue('E' . $b, $saldo);
-            $b++;
-            $this->excel->getActiveSheet()->setCellValue('B35', 'Pendapatan Bulan Ini');
-            $this->excel->getActiveSheet()->setCellValue('D35', $pendapatan_bulan_ini);
-            $this->excel->getActiveSheet()->setCellValue('E35', $saldo);
-        endfor;
+        if (isset($rs_laporan_asuransi)) {
+            $a = isset($awal) ? $awal : 0;
+            foreach ($rs_laporan_asuransi as $dt_laporan_asuransi):
+                $this->excel->getActiveSheet()->setCellValue('B' . ++$a);
+                $this->excel->getActiveSheet()->setCellValue('C' . $dt_laporan_asuransi['Jenis_Asuransi']);
+                $this->excel->getActiveSheet()->setCellValue('D' . $dt_laporan_asuransi['NAMA_PENGGUNA']);
+                $this->excel->getActiveSheet()->setCellValue('E' . $dt_laporan_asuransi['Nama_RS']);
+                $this->excel->getActiveSheet()->setCellValue('F' . $dt_laporan_asuransi['Alamat_RS']);
+                $this->excel->getActiveSheet()->setCellValue('G' . $dt_laporan_asuransi['Kronologi']);
+                $this->excel->getActiveSheet()->setCellValue('H' . $dt_laporan_asuransi['Tanggal_Daftar']);
+                $this->excel->getActiveSheet()->setCellValue('I' . $dt_laporan_asuransi['Tanggal_Masuk']);
+                $this->excel->getActiveSheet()->setCellValue('J' . $dt_laporan_asuransi['Tanggal_Keluar']);
+                $this->excel->getActiveSheet()->setCellValue('K' . $dt_laporan_asuransi['Total_Biaya']);
+                $this->excel->getActiveSheet()->setCellValue('L' . $dt_laporan_asuransi['Santunan']);
+                $this->excel->getActiveSheet()->setCellValue('M' . $dt_laporan_asuransi['Status_Asuransi']);
+            endforeach;
+        }
 
         $filename = 'Laporan Asuransi.xlsx'; //save our workbook as this file name
         header('Content-Type: application/vnd.ms-excel'); //mime type
@@ -102,7 +109,7 @@ class laporan_asuransi extends operator_base {
         //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-    
+
     function cetak($param) {
         //load our new PHPExcel library
         $this->load->library('pdf');

@@ -31,7 +31,7 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         parent::display('tambah_pendaftaran_rujukan_asuransi');
     }
 
-    function proses_tambah_pendaftaran_rujukan_asuransi() {
+    function proses_tambah_pendaftaran_rujukan_asuransi($id) {
         //validasi tombol simpan, jika tidak ditekan maka redirect ke tampilan tambah informasi
         if ($this->input->post('simpan') == null)
             redirect('pendaftaran_rujukan_asuransi/tambah_pendaftaran_rujukan_asuransi');
@@ -77,6 +77,7 @@ class pendaftaran_rujukan_asuransi extends operator_base {
             if ($this->m_pendaftaran_rujukan_asuransi->tambah_pendaftaran_rujukan_asuransi($parameter)) {
                 //jika sukses kirim pesan ke view
                 $this->notification('success', 'Rujukan Asuransi berhasil ditambahkan');
+                $this->cetak_pendaftaran_aula_by_id($id);
             } else {
                 //jika gagal kirim pesan ke view
                 $this->notification('error', 'Rujukan Asuransi gagal ditambahkan');
@@ -85,4 +86,189 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         //redirect ke list informasi
         redirect('pendaftaran_rujukan_asuransi');
     }
+    function cetak_pendaftaran_aula_by_id($id) {
+        $data_login = $this->session->userdata('sesi_login');
+        $this->load->model('m_pendaftaran_rujukan_asuransi');        
+        $dataasuransibyid = $this->m_pendaftaran_rujukan_asuransi->ambil_pendaftaran_rujukan_asuransi($id);
+
+        $this->load->library('pdf');
+        $this->pdf->SetCreator(PDF_CREATOR);
+        $this->pdf->SetAuthor('SEMPAK');
+        $this->pdf->SetTitle('Lembar Pendafataran Rujukan Asuransi');
+        $this->pdf->SetSubject('Lembar Pendafataran Rujukan Asuransi');
+        $this->pdf->SetKeywords('Lembar Pendafataran Rujukan Asuransi');
+        $this->pdf->setPrintHeader(true);
+        $this->pdf->setPrintFooter(false);
+        // set default header data
+        $this->pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+        // set default monospaced font
+        $this->pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+        $this->pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $this->pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+
+        //set auto page breaks
+        $this->pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+        //set image scale factor
+        $this->pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+        //set some language-dependent strings
+        //       $this->pdf->setLanguageArray($l);
+        // ---------------------------------------------------------
+        // set font
+        $this->pdf->SetFont('times', '', 11);
+
+        // add a page
+        $this->pdf->AddPage('P', 'A4');
+        ob_start();
+        require_once('assets/plugin/tanggal.php');
+        ?>
+        <hr>        
+        <u><p style="text-align: center;">LEMBAR PENDAFTARAN RUJUKAN ASURANSI</p></u>
+        <br><br>
+        <table style="width: 100%;">
+            <tr>
+                <td width="25%">ID Pendaftaran</td>
+                <td width="2%">:</td>
+                <td width="73%"><?php echo '<b>' . $dataasuransibyid->Id_Asuransi . '</b>'; ?></td>
+            </tr>
+            <tr>
+                <td>Nama Perujuk Asuransi</td>
+                <td>:</td>
+                <td><?php echo $data_login->NAMA_PENGGUNA; ?></td>
+            </tr>
+            <tr>
+                <td>Jenis Rujukan Asuransi</td>
+                <td>:</td>
+                <td><?php echo $dataasuransibyid->Jenis_Asuransi; ?></td>
+            </tr>
+            <tr>
+                <td>Nama Rumah Sakit</td>
+                <td>:</td>
+                <td><?php echo $dataasuransibyid->Nama_RS; ?></td>
+            </tr>
+            <tr>
+                <td>Alamat Rumah Sakit</td>
+                <td>:</td>
+                <td><?php echo $dataasuransibyid->Alamat_RS; ?></td>
+            </tr>
+            <tr>
+                <td>Kronologi Kejadian</td>
+                <td>:</td>
+                <td><?php echo $$dataasuransibyid->Kronologi; ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Masuk</td>
+                <td>:</td>
+                <td><?php echo $dataasuransibyid->Tanggal_Masuk; ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Keluar</td>
+                <td>:</td>
+                <td><?php echo $dataasuransibyid->Tanggal_Keluar; ?></td>
+            </tr>
+            <tr>
+                <td>Total Biaya</td>
+                <td>:</td>
+                <td><?php echo $dataasuransibyid->Total_Biaya; ?></td>
+            </tr>
+            <tr>
+                <td>Santunan</td>
+                <td>:</td>
+                <td><?php echo $dataasuransibyid->Santunan; ?></td>
+            </tr>
+            <tr>
+                <td>Status Rujukan Asuransi</td>
+                <td>:</td>
+                <td><?php echo $dataasuransibyid->Status_Asuransi; ?></td>
+            </tr>
+        </table>
+        <br>
+        <p style="text-align: center;">MENYATAKAN</p>
+        <p> Dengan ini mengajukan permohonan santunan asuransi terhadap yang tertera diatas. Berikut telah dilampirkan
+            beberapa persyaratan yang harus saya penuhi.
+        </p>
+        
+        <div style="min-height: 350px"></div>
+        <table>
+            <tr>
+                <td width="25%"><p style="text-align: center;">Orang Tua/ Wali</p></td>
+                <td width="50%"></td>
+                <td width="25%"><p style="text-align: center;">Nama Mahasiswa</p></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td width="25%"><p style="text-align: center;"><?php echo '....................'; ?></p></td>
+                <td width="50%"></td>
+                <td width="25%"><p style="text-align: center;"><?php echo $data_login->NAMA_PENGGUNA; ?></p></td>
+            </tr>
+            <tr>
+                <td width="25%"></td>
+                <td width="50%"><p style="text-align: center;"><?php echo 'Menyetujui,'; ?></p></td>
+                <td width="25%"></td>
+            </tr>
+            <tr>
+                <td width="25%"></td>
+                <td width="50%"><p style="text-align: center;"><?php echo 'Kepala Bagian Kemahasiswaan'; ?></p></td>
+                <td width="25%"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td width="25%"></td>
+                <td width="50%"><p style="text-align: center;"><?php echo 'Suyatmi, SE, MM'; ?></p></td>
+                <td width="25%"></td>
+            </tr>
+            <tr>
+                <td width="25%"></td>
+                <td width="50%"><p style="text-align: center;"><?php echo 'NIK. 190.302.019'; ?></p></td>
+                <td width="25%"></td>
+            </tr>
+        </table>    
+        <?php
+        $konten = ob_get_contents();
+        ob_end_clean();
+        $this->pdf->writeHTML($konten, true, false, true, false, '');
+        $this->pdf->AddPage('P', 'A4');       
+        $this->pdf->Output('Rujukan Asuransi_'.$dataasuransibyid->I.'.pdf', 'I');
+    }
+
 }
