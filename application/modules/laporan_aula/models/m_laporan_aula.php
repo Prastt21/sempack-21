@@ -1,11 +1,11 @@
 <?php
 
-class m_peminjaman_aula extends CI_Model {
+class m_laporan_aula extends CI_Model {
 
     public function __construct() {
         parent::__construct();
     }
-    function ambil_peminjaman_aula($parameter) {
+    function ambil_laporan_aula($parameter) {
         $sql = 'SELECT a.*,b.* FROM aula a INNER JOIN pengguna b WHERE MONTH(tanggal_daftar) = ? 
                     AND YEAR(tanggal_daftar) = ? LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
@@ -30,7 +30,7 @@ class m_peminjaman_aula extends CI_Model {
         }
     }
 
-    function get_peminjaman_aula_by_id($parameter) {
+    function get_laporan_aula_by_id($parameter) {
         $sql = "SELECT * FROM aula WHERE Id_Pinjam_Aula = ?";
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
