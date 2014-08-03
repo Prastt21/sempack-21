@@ -77,20 +77,222 @@ class pendaftaran_peminjaman_aula extends operator_base {
             );
             if ($this->m_pendaftaran_peminjaman_aula->cek_pendaftaran_aula_by_tglPinjam($parameter)) {
                 //jika sukses kirim pesan ke view
+                $this->notification('error', 'Tanggal Dan Waktu Pinjam Sudah Digunakan, 
+                                    Silahkan Ganti Tanggal Dan Waktu Pinjam');
+            } else {
+                //jika gagal kirim pesan ke view
                 if ($this->m_pendaftaran_peminjaman_aula->tambah_pendaftaran_peminjaman_aula($parameter)) {
                     //jika sukses kirim pesan ke view
                     $this->notification('success', 'Peminjaman Aula berhasil ditambahkan');
+                    $this->cetak_pendaftaran_aula_by_id();
                 } else {
                     //jika gagal kirim pesan ke view
                     $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
                 }
-            } else {
-                //jika gagal kirim pesan ke view
-                $this->notification('error', 'Tanggal Dan Waktu Pinjam Sudah Digunakan, 
-                                    Silahkan Ganti Tanggal Dan Waktu Pinjam');                
+                                
             }            
         }
         //redirect ke form
         redirect('pendaftaran_peminjaman_aula');
     }
+    function cetak_pendaftaran_aula_by_id($id) {
+        $data_login = $this->session->userdata('sesi_login');
+        $this->load->model('m_pendaftaran_peminjaman_aula');        
+        $dataaulabyid = $this->m_pendaftaran_peminjaman_aula->ambil_pendaftaran_peminjaman_aula($id);
+
+        $this->load->library('pdf');
+        $this->pdf->SetCreator(PDF_CREATOR);
+        $this->pdf->SetAuthor('SEMPAK');
+        $this->pdf->SetTitle('Lembar Pendafataran Peminjaman AULA BSC');
+        $this->pdf->SetSubject('Lembar Pendafataran Peminjaman AULA BSC');
+        $this->pdf->SetKeywords('Lembar Pendafataran Peminjaman AULA BSC');
+        $this->pdf->setPrintHeader(true);
+        $this->pdf->setPrintFooter(false);
+        // set default header data
+        $this->pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+        // set default monospaced font
+        $this->pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+        $this->pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $this->pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+
+        //set auto page breaks
+        $this->pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+        //set image scale factor
+        $this->pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+        //set some language-dependent strings
+        //       $this->pdf->setLanguageArray($l);
+        // ---------------------------------------------------------
+        // set font
+        $this->pdf->SetFont('times', '', 11);
+
+        // add a page
+        $this->pdf->AddPage('P', 'A4');
+        ob_start();
+        require_once('assets/plugin/tanggal.php');
+        ?>
+        <hr>        
+        <u><p style="text-align: center;">LEMBAR PENDAFTARAN PEMINJAMAN AULA BSC</p></u>
+        <br><br>
+        <table style="width: 100%;">
+            <tr>
+                <td width="25%">ID Pendaftaran</td>
+                <td width="2%">:</td>
+                <td width="73%"><?php echo '<b>' . $dataaulabyid->Id_Pinjam_Aula . '</b>'; ?></td>
+            </tr>
+            <tr>
+                <td>Lampiran</td>
+                <td>:</td>
+                <td><?php echo 'Susunan Acara'; ?></td>
+            </tr>
+            <tr>
+                <td>Hal</td>
+                <td>:</td>
+                <td><?php echo 'Peminjaman AULA BSC'; ?></td>
+            </tr>
+            <tr>
+                <td>Nama Penanggungjawab</td>
+                <td>:</td>
+                <td><?php echo $data_login->NAMA_PENGGUNA; ?></td>
+            </tr>
+            <tr>
+                <td>Nama Kegiatan</td>
+                <td>:</td>
+                <td><?php echo $dataaulabyid->Nama_Kegiatan; ?></td>
+            </tr>
+            <tr>
+                <td>Ketua Organisasi</td>
+                <td>:</td>
+                <td><?php echo $dataaulabyid->Ketua_Organisasi; ?></td>
+            </tr>
+            <tr>
+                <td>Peserta</td>
+                <td>:</td>
+                <td><?php echo $$dataaulabyid->Peserta; ?></td>
+            </tr>
+            <tr>
+                <td>Jumlah Peserta</td>
+                <td>:</td>
+                <td><?php echo $dataaulabyid->Jml_Peserta; ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Pendaftaran</td>
+                <td>:</td>
+                <td><?php echo $dataaulabyid->Tanggal_Daftar; ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Pinjam</td>
+                <td>:</td>
+                <td><?php echo $dataaulabyid->Tanggal_Pinjam; ?></td>
+            </tr>
+            <tr>
+                <td>Waktu Pinjam</td>
+                <td>:</td>
+                <td><?php echo $dataaulabyid->Waktu_Pinjam; ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Selesai</td>
+                <td>:</td>
+                <td><?php echo $dataaulabyid->Tanggal_Selesai; ?></td>
+            </tr>
+            <tr>
+                <td>Waktu Selesai</td>
+                <td>:</td>
+                <td><?php echo $dataaulabyid->Waktu_Selesai; ?></td>
+            </tr>
+            <tr>
+                <td>Status Peminjaman</td>
+                <td>:</td>
+                <td><?php echo $dataaulabyid->Status_Penggunaan; ?></td>
+            </tr>
+        </table>
+        <br>
+        <p style="text-align: center;">MENYATAKAN</p>
+        <p> Akan menjaga dan menaati segala ketentuan dalam tata tertib Peminjaman AULA Bussiness Student 
+            Center STMIK AMIKOM YOGYAKARTA. Dan Apabila saya melanggar, saya siap dikenakan sanksi dan 
+            bertanggungjawab atas pelanggaran yang saya lakukan sebagaimana tertera dalam aturan tersebut diatas</p>
+        
+        <div style="min-height: 350px"></div>
+        <table>
+            <tr>
+                <td width="25%"><p style="text-align: center;">Penanggungjawab Kegiatan</p></td>
+                <td width="50%"></td>
+                <td width="25%"><p style="text-align: center;">Ketua Organisasi</p></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td width="25%"><p style="text-align: center;"><?php echo '....................'; ?></p></td>
+                <td width="50%"></td>
+                <td width="25%"><p style="text-align: center;"><?php echo $dataaulabyid->Ketua_Orma; ?></p></td>
+            </tr>
+            <tr>
+                <td width="25%"></td>
+                <td width="50%"><p style="text-align: center;"><?php echo 'Menyetujui,'; ?></p></td>
+                <td width="25%"></td>
+            </tr>
+            <tr>
+                <td width="25%"></td>
+                <td width="50%"><p style="text-align: center;"><?php echo 'Kepala Bagian Kemahasiswaan'; ?></p></td>
+                <td width="25%"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td width="25%"></td>
+                <td width="50%"><p style="text-align: center;"><?php echo 'Suyatmi, SE, MM'; ?></p></td>
+                <td width="25%"></td>
+            </tr>
+            <tr>
+                <td width="25%"></td>
+                <td width="50%"><p style="text-align: center;"><?php echo 'NIK. 190.302.019'; ?></p></td>
+                <td width="25%"></td>
+            </tr>
+        </table>    
+        <?php
+        $konten = ob_get_contents();
+        ob_end_clean();
+        $this->pdf->writeHTML($konten, true, false, true, false, '');
+        $this->pdf->AddPage('P', 'A4');       
+        $this->pdf->Output('Peminjaman Aula BSC_'.$dataaulabyid->I.'.pdf', 'I');
+    }
+
 }

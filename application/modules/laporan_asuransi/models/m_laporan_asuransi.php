@@ -5,9 +5,9 @@ class m_laporan_asuransi extends CI_Model {
     public function __construct() {
         parent::__construct();
     }
-    
+
     function ambil_laporan_asuransi($parameter) {
-        $sql = 'SELECT * FROM asuransi WHERE MONTH(tanggal_daftar) = ? 
+        $sql = 'SELECT a.*,b.* FROM asuransi a INNER JOIN pengguna b WHERE MONTH(tanggal_daftar) = ? 
                     AND YEAR(tanggal_daftar) = ? LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
@@ -42,7 +42,8 @@ class m_laporan_asuransi extends CI_Model {
             return false;
         }
     }
-    //ambil total pembelian pada bulan sekarang
+
+    //ambil total asuransi pada bulan sekarang
     function get_total_asuransi($params) {
         $sql = "SELECT COUNT(id_asuransi)'jumlah' FROM asuransi
                 WHERE MONTH(tanggal_daftar) = ? AND YEAR(tanggal_daftar) = ?";
@@ -55,6 +56,7 @@ class m_laporan_asuransi extends CI_Model {
             return array();
         }
     }
+
     //get tahun
     function get_tahun_asuransi() {
         $sql = "SELECT YEAR(tanggal_daftar)'tahun' FROM asuransi

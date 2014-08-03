@@ -15,18 +15,18 @@ class Pdf extends TCPDF {
     public function Header() {
         $this->SetFont('times', 'B', 12);
         // Title
-        $this->Cell(0, 8, 'KEMENTERIAN KESEHATAN REPUBLIK INDONESIA', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $this->Cell(0, 8, 'SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         $this->ln(4);
         $this->SetFont('times', '', 12);
-        $this->Cell(0, 8, 'DIREKTORAT JENDERAL PENGENDALIAN PENYAKIT DAN PENYELAMATAN LINGKUNGAN', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $this->Cell(0, 8, 'AMIKOM', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         $this->ln(4);
-        $this->Cell(0, 8, 'LABORATORIUM PENGUJI DAN KALIBRASI', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $this->Cell(0, 8, 'YOGYAKARTA', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         $this->SetFont('times', 'B', 10);
         $this->ln(4);
-        $this->Cell(0, 8, 'BALAI BESAR TEKNIK KESEHATAN LINGKUNGAN DAN PENGENDALIAN PENYAKIT YOGYAKARTA', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $this->Cell(0, 8, 'BIDANG KEMAHASISWAAN', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         $this->SetFont('times', '', 10);
         $this->ln(3);
-        $this->Cell(0, 8, 'Jl. Wonosari KM 7, Wiyoro Lor No. 21, Baturetno, Banguntapan, Bantul, Yogyakarta 551597 telp (0274) 371588 ', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $this->Cell(0, 8, 'Jl. Ring Road Utara Condong Catur, Depok, Sleman, Yogyakarta 551283 telp (0274) 88283 ', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         $this->Ln();
         
     }
