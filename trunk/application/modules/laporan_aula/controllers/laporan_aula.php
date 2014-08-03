@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -110,9 +109,139 @@ class laporan_aula extends operator_base {
         $objWriter->save('php://output');
     }
 
-    function cetak($param) {
-        //load our new PHPExcel library
-        $this->load->library('pdf');
-    }
+    function cetak($id) {
+        $this->load->model('m_laporan_aula');
+        $dataaulabytanggal = $this->m_laporan_aula->ambil_laporan_aula($id);
 
+        $this->load->library('pdf');
+        $this->pdf->SetCreator(PDF_CREATOR);
+        $this->pdf->SetAuthor('SEMPAK');
+        $this->pdf->SetTitle('Laporan Peminjaman AULA BSC');
+        $this->pdf->SetSubject('Laporan Peminjaman AULA BSC');
+        $this->pdf->SetKeywords('Laporan Peminjaman AULA BSC');
+        $this->pdf->setPrintHeader(true);
+        $this->pdf->setPrintFooter(false);
+        // set default header data
+        $this->pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+        // set default monospaced font
+        $this->pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+        $this->pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $this->pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+
+        //set auto page breaks
+        $this->pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+        //set image scale factor
+        $this->pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+        //set some language-dependent strings
+        //       $this->pdf->setLanguageArray($l);
+        // ---------------------------------------------------------
+        // set font
+        $this->pdf->SetFont('times', '', 11);
+
+        // add a page
+        $this->pdf->AddPage('P', 'A4');
+        ob_start();
+        require_once('assets/plugin/tanggal.php');
+        ?>
+        <hr>        
+        <u><p style="text-align: center;">LAPORAN PEMINJAMAN AULA BSC</p></u>
+        <br><br>
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <td align="center"><b>NO</b></td>
+                    <td align="center"><b>PEMINJAM</b></td>
+                    <td align="center"><b>NAMA KEGIATAN</b></td>
+                    <td align="center"><b>KETUA ORGANISASI</b></td>
+                    <td align="center"><b>PESERTA</b></td>
+                    <td align="center"><b>JML PESERTA</b></td>
+                    <td align="center"><b>TANGGAL DAFTAR</b></td>
+                    <td align="center"><b>TANGGAL PINJAM</b></td>
+                    <td align="center"><b>WAKTU PINJAM</b></td>
+                    <td align="center"><b>TANGGAL SELESAI</b></td>
+                    <td align="center"><b>WAKTU SELESAI</b></td>
+                    <td align="center"><b>STATUS</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if (isset($dataaulabytanggal)) {
+                    $a = isset($awal) ? $awal : 0;
+                    foreach ($dataaulabytanggal as $dt_peminjaman_aula):
+                        ?>
+                        <tr>
+                            <td align="center"><?php echo++$a ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Nama_Pengguna']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Nama_Kegiatan']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Ketua_Organisasi']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Peserta']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Jml_Peserta']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Tanggal_Daftar']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Tanggal_Pinjam']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Waktu_Pinjam']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Tanggal_Selesai']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Waktu_Selesai']; ?></td>
+                            <td><?php echo $dt_peminjaman_aula['Status_Penggunaan']; ?></td>                                        
+                        </tr>
+                        <?php
+                    endforeach;
+                    ?>
+                </tbody>
+
+            </table>
+            <br><br>        
+            <div style="min-height: 350px"></div>
+            <table>
+                <tr>
+                    <td width="25%"></td>
+                    <td width="50%"><p style="text-align: center;"><?php echo 'Mengetahui,'; ?></p></td>
+                    <td width="25%"></td>
+                </tr>
+                <tr>
+                    <td width="25%"></td>
+                    <td width="50%"><p style="text-align: center;"><?php echo 'Kepala Bagian Kemahasiswaan'; ?></p></td>
+                    <td width="25%"></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="25%"></td>
+                    <td width="50%"><p style="text-align: center;"><?php echo 'Suyatmi, SE, MM'; ?></p></td>
+                    <td width="25%"></td>
+                </tr>
+                <tr>
+                    <td width="25%"></td>
+                    <td width="50%"><p style="text-align: center;"><?php echo 'NIK. 190.302.019'; ?></p></td>
+                    <td width="25%"></td>
+                </tr>
+            </table>    
+            <?php
+            $konten = ob_get_contents();
+            ob_end_clean();
+            $this->pdf->writeHTML($konten, true, false, true, false, '');
+            $this->pdf->AddPage('P', 'A4');
+            $this->pdf->Output('Peminjaman Aula BSC_' . $dataaulabytanggal->I . '.pdf', 'I');
+        }
+    }
 }
