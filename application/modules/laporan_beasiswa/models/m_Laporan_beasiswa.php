@@ -9,8 +9,8 @@ class m_laporan_beasiswa extends CI_Model {
         $sql = 'SELECT beasiswa.*, jenis_beasiswa.*,pengguna.*,jurusan.* 
                 FROM beasiswa JOIN jenis_beasiswa ON beasiswa.id_jb=jenis_beasiswa.id_jb
                 JOIN pengguna ON beasiswa.id_pengguna=pengguna.id_pengguna		
-		JOIN jurusan ON beasiswa.id_jurusan=jurusan.id_jurusan WHERE MONTH(tanggal_daftar) = ? 
-                AND YEAR(tanggal_daftar) = ? LIMIT ?,?';
+		JOIN jurusan ON beasiswa.id_jurusan=jurusan.id_jurusan WHERE MONTH(beasiswa.tanggal_daftar) = ? 
+                AND YEAR(beasiswa.tanggal_daftar) = ? LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
