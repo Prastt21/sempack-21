@@ -15,7 +15,7 @@ class m_pendaftaran_rujukan_asuransi extends CI_Model {
     function ambil_pendaftaran_rujukan_asuransi($parameter) {
         $sql = 'SELECT a.*, b.* FROM asuransi a
                 INNER JOIN pengguna b ON b.Id_Pengguna = a.Id_Pengguna
-                LIMIT ?,?';
+                ';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();
@@ -38,8 +38,21 @@ class m_pendaftaran_rujukan_asuransi extends CI_Model {
         }
     }
 
-    function get_pendaftaran_rujukan_asuransi_by_id($parameter) {
+    function get_pendaftaran_rujukan_asuransi_by_id($asuransi) {
         $sql = "SELECT * FROM asuransi WHERE Id_Asuransi = ?";
+        $query = $this->db->query($sql, $asuransi);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return false;
+        }
+    }
+    
+    function hasil_pendaftaran_rujukan_asuransi($parameter) {
+        $sql = 'SELECT a.*,b.* FROM asuransi a
+                INNER JOIN pengguna b ON b.Id_Pengguna = a.Id_Pengguna';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -48,5 +61,5 @@ class m_pendaftaran_rujukan_asuransi extends CI_Model {
         } else {
             return false;
         }
-    }    
+    }
 }
