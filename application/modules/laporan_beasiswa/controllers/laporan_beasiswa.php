@@ -13,12 +13,12 @@ class laporan_beasiswa extends operator_base {
         $this->load->model('m_laporan_beasiswa');
     }
 
-    public function index() {
+    public function index($offset = 0,$data=0) {
         //control hak akses read
         $this->_set_page_role('r');
         //load model
         $this->load->model('m_laporan_beasiswa');
-        $this->m_laporan_beasiswa->ambil_laporan_beasiswa();
+        $this->m_laporan_beasiswa->ambil_laporan_beasiswa(array($data));
         //set data bulan
         $data['bulan'] = array(
             '01' => 'Januari',
