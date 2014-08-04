@@ -69,8 +69,7 @@ class m_laporan_beasiswa extends CI_Model {
 
     //ambil total beasiswa pada bulan sekarang
     function get_total_beasiswa($params) {
-        $sql = "SELECT COUNT(id_beasiswa)'jumlah' FROM beasiswa
-                WHERE MONTH(tanggal_daftar) = ? AND YEAR(tanggal_daftar) = ?";
+        $sql = "SELECT COUNT(id_beasiswa)'jumlah' FROM beasiswa";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -90,6 +89,95 @@ class m_laporan_beasiswa extends CI_Model {
             $result = $query->result_array();
             $query->free_result();
             return $result;
+        } else {
+            return array();
+        }
+    }
+    //ambil total beasiswa PPA pada bulan sebelumnya
+    function get_total_ppa_last_month($params) {
+        $sql = "SELECT COUNT(beasiswa.id_beasiswa)'total' FROM beasiswa INNER JOIN jenis_beasiswa 
+                ON beasiswa.id_jb=jenis_beasiswa.id_jb
+                WHERE MONTH(beasiswa.tanggal_daftar) < ? AND YEAR(beasiswa.tanggal_daftar) <= ? AND jenis_beasiswa.id_jb LIKE '1'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
+    //ambil total pembelian pada bulan sekarang
+    function get_total_ppa_this_month($params) {
+        $sql = "SELECT COUNT(beasiswa.id_beasiswa)'total' FROM beasiswa INNER JOIN jenis_beasiswa 
+                ON beasiswa.id_jb=jenis_beasiswa.id_jb
+                WHERE MONTH(beasiswa.tanggal_daftar) = ? AND YEAR(beasiswa.tanggal_daftar) = ? 
+                AND jenis_beasiswa.id_jb LIKE '1'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
+    
+    //ambil total beasiswa PPA pada bulan sebelumnya
+    function get_total_bbp_last_month($params) {
+        $sql = "SELECT COUNT(beasiswa.id_beasiswa)'total' FROM beasiswa INNER JOIN jenis_beasiswa 
+                ON beasiswa.id_jb=jenis_beasiswa.id_jb
+                WHERE MONTH(beasiswa.tanggal_daftar) < ? AND YEAR(beasiswa.tanggal_daftar) <= ? AND jenis_beasiswa.id_jb LIKE '2'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
+    //ambil total pembelian pada bulan sekarang
+    function get_total_bbp_this_month($params) {
+        $sql = "SELECT COUNT(beasiswa.id_beasiswa)'total' FROM beasiswa INNER JOIN jenis_beasiswa 
+                ON beasiswa.id_jb=jenis_beasiswa.id_jb
+                WHERE MONTH(beasiswa.tanggal_daftar) = ? AND YEAR(beasiswa.tanggal_daftar) = ? 
+                AND jenis_beasiswa.id_jb LIKE '2'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
+    
+    //ambil total beasiswa PPA pada bulan sebelumnya
+    function get_total_muamalat_last_month($params) {
+        $sql = "SELECT COUNT(beasiswa.id_beasiswa)'total' FROM beasiswa INNER JOIN jenis_beasiswa 
+                ON beasiswa.id_jb=jenis_beasiswa.id_jb
+                WHERE MONTH(beasiswa.tanggal_daftar) < ? AND YEAR(beasiswa.tanggal_daftar) <= ? AND jenis_beasiswa.id_jb LIKE '3'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
+    //ambil total pembelian pada bulan sekarang
+    function get_total_muamalat_this_month($params) {
+        $sql = "SELECT COUNT(beasiswa.id_beasiswa)'total' FROM beasiswa INNER JOIN jenis_beasiswa 
+                ON beasiswa.id_jb=jenis_beasiswa.id_jb
+                WHERE MONTH(beasiswa.tanggal_daftar) = ? AND YEAR(beasiswa.tanggal_daftar) = ? 
+                AND jenis_beasiswa.id_jb LIKE '3'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
         } else {
             return array();
         }

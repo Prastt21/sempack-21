@@ -43,8 +43,7 @@ class m_laporan_aula extends CI_Model {
     }
     //ambil total peminjaman aula pada bulan sekarang
     function get_total_aula($params) {
-        $sql = "SELECT COUNT(id_pinjam_aula)'jumlah' FROM aula
-                WHERE MONTH(tanggal_daftar) = ? AND YEAR(tanggal_daftar) = ?";
+        $sql = "SELECT COUNT(id_pinjam_aula)'jumlah' FROM aula";
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -64,6 +63,32 @@ class m_laporan_aula extends CI_Model {
             $result = $query->result_array();
             $query->free_result();
             return $result;
+        } else {
+            return array();
+        }
+    }
+        //ambil total aula pada bulan sebelumnya
+    function get_total_aula_last_month($params) {
+        $sql = "SELECT COUNT(id_pinjam_aula)'total' FROM aula
+                WHERE MONTH(tanggal_daftar) < ? AND YEAR(tanggal_daftar) <= ?";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
+    //ambil total pembelian pada bulan sekarang
+    function get_total_aula_this_month($params) {
+        $sql = "SELECT COUNT(id_pinjam_aula)'total' FROM aula 
+                WHERE MONTH(tanggal_daftar) = ? AND YEAR(tanggal_daftar) = ?";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
         } else {
             return array();
         }

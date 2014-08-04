@@ -70,4 +70,58 @@ class m_laporan_asuransi extends CI_Model {
             return array();
         }
     }
+    
+        //ambil total aula pada bulan sebelumnya
+    function get_total_kecelakaan_last_month($params) {
+        $sql = "SELECT COUNT(id_asuransi)'total' FROM asuransi
+                WHERE MONTH(tanggal_daftar) < ? AND YEAR(tanggal_daftar) <= ? AND jenis_asuransi LIKE 'KECELAKAAN'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
+    //ambil total pembelian pada bulan sekarang
+    function get_total_kecelakaan_this_month($params) {
+        $sql = "SELECT COUNT(id_asuransi)'total' FROM asuransi 
+                WHERE MONTH(tanggal_daftar) = ? AND YEAR(tanggal_daftar) = ? AND jenis_asuransi LIKE 'KECELAKAAN' ";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
+        
+        //ambil total aula pada bulan sebelumnya
+    function get_total_sakit_last_month($params) {
+        $sql = "SELECT COUNT(id_asuransi)'total' FROM asuransi
+                WHERE MONTH(tanggal_daftar) < ? AND YEAR(tanggal_daftar) <= ? AND jenis_asuransi LIKE 'SAKIT'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
+    //ambil total pembelian pada bulan sekarang
+    function get_total_sakit_this_month($params) {
+        $sql = "SELECT COUNT(id_asuransi)'total' FROM asuransi 
+                WHERE MONTH(tanggal_daftar) = ? AND YEAR(tanggal_daftar) = ? AND jenis_asuransi LIKE 'SAKIT' ";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['total'];
+        } else {
+            return array();
+        }
+    }
 }

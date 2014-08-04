@@ -63,44 +63,44 @@
                                     <tr>
                                         <td></td>
                                         <td colspan="2">Total Beasiswa PPA Bulan sebelumnya</td>
-                                        <td align="right"><b></b></td>
+                                        <td align="center"><b><?php echo $total_ppa; ?></b></td>
                                     </tr>
                                     
                                     <tr>
                                         <td></td>
                                         <td>Beasiswa PPA Bulan Ini</td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="right"><b> </b></td>
+                                        <td align="center"><b><?php echo $total_ppa_ini; ?></b></td>
+                                        <td align="center"><b> </b></td>
                                     </tr>
                                     
                                     <tr>
                                         <td></td>
                                         <td colspan="2">Total Beasiswa BBP/PPA Bulan sebelumnya</td>
-                                        <td align="right"><b></b></td>
+                                        <td align="center"><b><?php echo $total_bbp; ?></b></td>
                                     </tr>
                                     
                                     <tr>
                                         <td></td>
                                         <td>Beasiswa BBP/PPA Bulan Ini</td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="right"><b> </b></td>
+                                        <td align="center"><b><?php echo $total_bbp_ini; ?> </b></td>
+                                        <td align="center"><b> </b></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td colspan="2">Total Beasiswa Muamalat Bulan sebelumnya</td>
-                                        <td align="right"><b></b></td>
+                                        <td align="center"><b><?php echo $total_muamalat; ?></b></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>Beasiswa Muamalat Bulan Ini</td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="right"><b> </b></td>
+                                        <td align="center"><b><?php echo $total_muamalat_ini; ?> </b></td>
+                                        <td align="center"><b> </b></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="left"><b>1000000 </b></td>
+                                        <td align="center"><b>Jumlah </b></td>
+                                        <td align="center"><b><?php echo $result_total; ?></b></td>
                                     </tr>
                                 </tbody>
                             </table>

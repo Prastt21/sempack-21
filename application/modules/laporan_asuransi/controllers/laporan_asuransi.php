@@ -5,19 +5,18 @@ if (!defined('BASEPATH'))
 require_once APPPATH . 'controllers/operator_base.php';
 
 class laporan_asuransi extends operator_base {
-
+    var $batas = 15;
     public function __construct() {
         parent::__construct();
         //load model
         $this->load->model('m_laporan_asuransi');
     }
 
-    public function index() {
+    public function index($offset = 0) {
         //control hak akses read
         $this->_set_page_role('r');
         //load model
         $this->load->model('m_laporan_asuransi');
-        $this->m_laporan_asuransi->ambil_laporan_asuransi();
         //set data bulan
         $data['bulan'] = array(
             '01' => 'Januari',
@@ -38,9 +37,14 @@ class laporan_asuransi extends operator_base {
         $data['tahun'] = $this->m_laporan_asuransi->get_tahun_asuransi();
         $data['bulan_skr'] = $pencarian_laporan_asuransi['bulan'] != '' ? $pencarian_laporan_asuransi['bulan'] : date('m');
         $data['tahun_skr'] = $pencarian_laporan_asuransi['tahun'] != '' ? $pencarian_laporan_asuransi['tahun'] : date('Y');
-        $parameter = array($data['bulan_skr'], $data['tahun_skr']);
+        $parameter = array($data['bulan_skr'], $data['tahun_skr'], intval($offset), $this->batas);
+        $data['rs_data'] = $this->m_laporan_asuransi->ambil_laporan_asuransi($parameter);
         //get total pembelian bulan sebelumnya
         $data['result_total'] = $this->m_laporan_asuransi->get_total_asuransi($parameter);
+        $data['total_kecelakaan']= $this->m_laporan_asuransi->get_total_kecelakaan_last_month($parameter);
+        $data['total_kecelakaan_ini']= $this->m_laporan_asuransi->get_total_kecelakaan_this_month($parameter);
+        $data['total_sakit']= $this->m_laporan_asuransi->get_total_sakit_last_month($parameter);
+        $data['total_sakit_ini']= $this->m_laporan_asuransi->get_total_sakit_this_month($parameter);
         parent::display('tampil_laporan_asuransi', $data);
     }
 
@@ -60,58 +64,90 @@ class laporan_asuransi extends operator_base {
     }
 
     function download() {
-        $this->load->model('m_laporan_asuransi');
-        $rs_laporan_asuransi->$this->m_laporan_asuransi->ambil_laporan_asuransi($id);
-        //load our new PHPExcel library
+        $this->_set_page_role('r');
+        //load library
         $this->load->library('excel');
-        //name the worksheet
-        $this->excel->getActiveSheet()->setTitle('LAPORAN RUJUKAN ASURANSI');
-
-        $this->excel->getActiveSheet()->setCellValue('B8', 'NO');
-        $this->excel->getActiveSheet()->setCellValue('C8', 'JENIS ASURANSI');
-        $this->excel->getActiveSheet()->setCellValue('D8', 'NAMA PERUJUK');
-        $this->excel->getActiveSheet()->setCellValue('E8', 'NAMA RUMAH SAKIT');
-        $this->excel->getActiveSheet()->setCellValue('F8', 'ALAMAT RUMAH SAKIT');
-        $this->excel->getActiveSheet()->setCellValue('G8', 'KRONOLOGI');
-        $this->excel->getActiveSheet()->setCellValue('H8', 'TANGGAL DAFTAR');
-        $this->excel->getActiveSheet()->setCellValue('I8', 'TANGGAL MASUK');
-        $this->excel->getActiveSheet()->setCellValue('J8', 'TANGGAL KELUAR');
-        $this->excel->getActiveSheet()->setCellValue('K8', 'TOTAL BIAYA');
-        $this->excel->getActiveSheet()->setCellValue('L8', 'SANTUNAN');
-        $this->excel->getActiveSheet()->setCellValue('M8', 'STATUS ASURANSI');
-
-        if (isset($rs_laporan_asuransi)) {
-            $a = isset($awal) ? $awal : 0;
-            foreach ($rs_laporan_asuransi as $dt_laporan_asuransi):
-                $this->excel->getActiveSheet()->setCellValue('B' . ++$a);
-                $this->excel->getActiveSheet()->setCellValue('C' . $dt_laporan_asuransi['Jenis_Asuransi']);
-                $this->excel->getActiveSheet()->setCellValue('D' . $dt_laporan_asuransi['NAMA_PENGGUNA']);
-                $this->excel->getActiveSheet()->setCellValue('E' . $dt_laporan_asuransi['Nama_RS']);
-                $this->excel->getActiveSheet()->setCellValue('F' . $dt_laporan_asuransi['Alamat_RS']);
-                $this->excel->getActiveSheet()->setCellValue('G' . $dt_laporan_asuransi['Kronologi']);
-                $this->excel->getActiveSheet()->setCellValue('H' . $dt_laporan_asuransi['Tanggal_Daftar']);
-                $this->excel->getActiveSheet()->setCellValue('I' . $dt_laporan_asuransi['Tanggal_Masuk']);
-                $this->excel->getActiveSheet()->setCellValue('J' . $dt_laporan_asuransi['Tanggal_Keluar']);
-                $this->excel->getActiveSheet()->setCellValue('K' . $dt_laporan_asuransi['Total_Biaya']);
-                $this->excel->getActiveSheet()->setCellValue('L' . $dt_laporan_asuransi['Santunan']);
-                $this->excel->getActiveSheet()->setCellValue('M' . $dt_laporan_asuransi['Status_Asuransi']);
-            endforeach;
+        // begin 
+        // create excel
+        //load template excel
+        $filepath = "document/template_laporan_asuransi.xlsx";
+        // ---
+        $objReader = PHPExcel_IOFactory::createReader('Excel2007');
+        $this->phpexcel = $objReader->load($filepath);
+        // set active sheet 1
+        $objWorksheet = $this->phpexcel->setActiveSheetIndex(0);
+        //load model
+        $this->load->model('m_laporan_asuransi');
+        $pencarian_laporan_asuransi = $this->session->userdata('cari_laporan_asuransi');
+        //get tahun beasiswa
+        $data['tahun'] = $this->m_laporan_asuransi->get_tahun_asuransi();
+        $data['bulan_skr'] = $pencarian_laporan_asuransi['bulan'] != '' ? $pencarian_laporan_asuransi['bulan'] : date('m');
+        $data['tahun_skr'] = $pencarian_laporan_asuransi['tahun'] != '' ? $pencarian_laporan_asuransi['tahun'] : date('Y');
+        $parameter = array($data['bulan_skr'], $data['tahun_skr'], 0, 10000);
+        $rs_asuransi = $this->m_laporan_asuransi->ambil_laporan_asuransi($parameter);
+        $sheet_name = 'Laporan Rujukan Asuransi';
+        $objWorksheet->setTitle($sheet_name);
+        if (!empty($rs_asuransi)) {
+            $no = 1;
+            $row = 9;
+            $jumlah = 0;
+            foreach ($rs_asuransi as $dt_asuransi) {
+                $objWorksheet->setCellValue('A' . $row, $no);
+                $objWorksheet->setCellValue('B' . $row, $dt_asuransi['Jenis_Asuransi']);
+                $objWorksheet->setCellValue('C' . $row, $dt_asuransi['Nama_Pengguna']);
+                $objWorksheet->setCellValue('D' . $row, $dt_asuransi['Nama_RS']);
+                $objWorksheet->setCellValue('E' . $row, $dt_asuransi['Alamat_RS']);
+                $objWorksheet->setCellValue('F' . $row, $dt_asuransi['Kronologi']);
+                $objWorksheet->setCellValue('G' . $row, $dt_asuransi['Tanggal_Daftar']);
+                $objWorksheet->setCellValue('H' . $row, $dt_asuransi['Tanggal_Masuk']);
+                $objWorksheet->setCellValue('I' . $row, $dt_asuransi['Tanggal_Keluar']);
+                $objWorksheet->setCellValue('J' . $row, $dt_asuransi['Total_Biaya']);
+                $objWorksheet->setCellValue('K' . $row, $dt_asuransi['Santunan']);
+                $objWorksheet->setCellValue('L' . $row, $dt_asuransi['Status_Asuransi']);
+                // insert
+                if (($row - 2) != count($rs_beasiswa)) {
+                    $objWorksheet->insertNewRowBefore(($row + 1), 1);
+                    // next row
+                    $row++;
+                    $no++;
+                }
+            }
         }
-
-        $filename = 'Laporan Asuransi.xlsx'; //save our workbook as this file name
-        header('Content-Type: application/vnd.ms-excel'); //mime type
-        header('Content-Disposition: attachment;filename="' . $filename . '"'); //tell browser what's the file name
-        header('Cache-Control: max-age=0'); //no cache
-        //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
-        //if you want to save it as .XLSX Excel 2007 format
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
-        //force user to download the Excel file without writing it to server's HD
-        $objWriter->save('php://output');
+        // output file
+        $file_name = 'laporan_asuransi_' . $data['bulan_skr'] . '_' . $data['tahun_skr'];
+        //--
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $file_name . '.xlsx');
+        header('Cache-Control: max-age=0');
+        // output
+        $obj_writer = PHPExcel_IOFactory::createWriter($this->phpexcel, 'Excel2007');
+        $obj_writer->save('php://output');
     }
 
-    function cetak($id) {
+    function cetak() {
         $this->load->model('m_laporan_asuransi');
-        $dataasuransibytanggal = $this->m_laporan_asuransi->ambil_laporan_asuransi($id);
+        //set data bulan
+        $data['bulan'] = array(
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember',
+        );
+        $pencarian_laporan_asuransi = $this->session->userdata('cari_laporan_asuransi');
+        //get tahun beasiswa
+        $data['tahun'] = $this->m_laporan_asuransi->get_tahun_asuransi();
+        $data['bulan_skr'] = $pencarian_laporan_asuransi['bulan'] != '' ? $pencarian_laporan_asuransi['bulan'] : date('m');
+        $data['tahun_skr'] = $pencarian_laporan_asuransi['tahun'] != '' ? $pencarian_laporan_asuransi['tahun'] : date('Y');
+        $parameter = array($data['bulan_skr'], $data['tahun_skr'], 0, 10000);
+        $dataasuransibytanggal = $this->m_laporan_asuransi->ambil_laporan_asuransi($parameter);
 
         $this->load->library('pdf');
         $this->pdf->SetCreator(PDF_CREATOR);
@@ -144,7 +180,6 @@ class laporan_asuransi extends operator_base {
         // add a page
         $this->pdf->AddPage('P', 'A4');
         ob_start();
-        require_once('assets/plugin/tanggal.php');
         ?>
         <hr>        
         <u><p style="text-align: center;">LAPORAN RUJUKAN ASURANSI</p></u>
@@ -242,7 +277,7 @@ class laporan_asuransi extends operator_base {
         ob_end_clean();
         $this->pdf->writeHTML($konten, true, false, true, false, '');
         $this->pdf->AddPage('P', 'A4');
-        $this->pdf->Output('Rujukan Asuransi_' . $dataasuransibytanggal->I . '.pdf', 'I');
+        $this->pdf->Output('Rujukan Asuransi_.pdf', 'I');
     }
 
 }
