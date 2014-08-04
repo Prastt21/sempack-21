@@ -27,6 +27,7 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         //load javascript + css untuk tanggal 
         $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
         $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
+        
         parent::display('tambah_pendaftaran_rujukan_asuransi');
     }
 
@@ -75,7 +76,8 @@ class pendaftaran_rujukan_asuransi extends operator_base {
             if ($this->m_pendaftaran_rujukan_asuransi->tambah_pendaftaran_rujukan_asuransi($parameter)) {
                 //jika sukses kirim pesan ke view
                 $this->notification('success', 'Rujukan Asuransi berhasil ditambahkan');
-                $this->cetak_pendaftaran_asuransi_by_id($asuransi);
+                
+                $this->cetak_pendaftaran_asuransi_by_id($parameter);
             } else {
                 //jika gagal kirim pesan ke view
                 $this->notification('error', 'Rujukan Asuransi gagal ditambahkan');
@@ -85,11 +87,11 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         redirect('pendaftaran_rujukan_asuransi');
     }
 
-    function cetak_pendaftaran_asuransi_by_id($asuransi='') {
+    function cetak_pendaftaran_asuransi_by_id($parameter) {
         //$data_login = $this->sesi->get_data_login('ID_PENGGUNA');
         $this->load->model('m_pendaftaran_rujukan_asuransi');
-        //$parameter = array($data_login['sesi_login'],$id);
-        $parameter['Id_Asuransi'] = $this->m_pendaftaran_rujukan_asuransi->get_pendaftaran_rujukan_asuransi_by_id($asuransi);
+        //$parameter['Id_Asuransi'] = $this->m_pendaftaran_rujukan_asuransi->get_pendaftaran_rujukan_asuransi_by_id($asuransi);
+        $parameter['result_pendaftaran_asuransi'] = $this->m_pendaftaran_rujukan_asuransi->get_pendaftaran_rujukan_asuransi_by_id($asuransi);
         $dt_asuransiid = $this->m_pendaftaran_rujukan_asuransi->hasil_pendaftaran_rujukan_asuransi($parameter);
         
         $this->load->library('pdf');
@@ -187,7 +189,7 @@ class pendaftaran_rujukan_asuransi extends operator_base {
        
         <br>
         <p style="text-align: center;">MENYATAKAN</p>
-        <p> Dengan ini mengajukan permohonan santunan asuransi terhadap yang tertera diatas. Berikut telah dilampirkan
+        <p>Dengan ini mengajukan permohonan santunan asuransi terhadap yang tertera diatas. Berikut telah dilampirkan
             beberapa persyaratan yang harus saya penuhi.
         </p>
 
