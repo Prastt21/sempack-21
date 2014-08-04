@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 01, 2014 at 01:56 PM
+-- Generation Time: Aug 04, 2014 at 10:09 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Status_Asuransi` enum('TERVERIFIKASI','WAITING') DEFAULT 'WAITING',
   PRIMARY KEY (`Id_Asuransi`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `asuransi`
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
 INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS`, `Alamat_RS`, `Kronologi`, `Tanggal_Daftar`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`, `Status_Asuransi`) VALUES
 (8, 'KECELAKAAN', 1, 'sdsdsdsdsds', 'ddsds', 'ddddd', '2014-07-01', '2014-07-23', '2014-07-26', 6, 67777, 'WAITING'),
 (9, 'KECELAKAAN', 2, 'csc', 'cscs', 'cscsc', '2014-07-25', '2014-07-25', '2014-07-25', 344444, 2, 'WAITING'),
-(10, 'KECELAKAAN', 3, 'RS Cipto Mangkuwanito', 'Kepooo banget sii luu gaes', 'yaa pokonya gtu laa', '2014-07-25', '2014-07-25', '2014-07-25', 300000, 0, '');
+(11, 'KECELAKAAN', 3, 'RS Abadi Kecelakaan', 'Jalan Abadi Yogyakart', 'Ya Gtu Dehh', '2014-08-01', '2014-08-01', '2014-08-01', 30000000, 0, '');
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Status_Penggunaan` enum('TERVERIFIKASI','WAITING','EXPIRED') DEFAULT 'WAITING',
   PRIMARY KEY (`Id_Pinjam_Aula`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `aula`
@@ -81,7 +81,12 @@ CREATE TABLE IF NOT EXISTS `aula` (
 INSERT INTO `aula` (`Id_Pinjam_Aula`, `Id_Pengguna`, `Nama_Kegiatan`, `Ketua_Organisasi`, `Peserta`, `Jml_Peserta`, `Tanggal_Daftar`, `Tanggal_Pinjam`, `Waktu_Pinjam`, `Tanggal_Selesai`, `Waktu_Selesai`, `Status_Penggunaan`) VALUES
 (1, 2, 'dfsdg', 'gsdg', 'gg', 14, '0000-00-00 00:00:00', '2014-07-24', '10:42:00', '2014-07-24', '10:42:00', 'TERVERIFIKASI'),
 (2, 3, 'Ngaji', 'Prast Ganteng', 'Ibu Ibu Khosidahan', 2000, '0000-00-00 00:00:00', '2014-07-27', '23:33:00', '2014-07-31', '23:33:00', ''),
-(3, 1, 'Ahmbohh', 'Nana Chon', 'Dedemit', 23, '2014-07-26 00:00:00', '2014-07-28', '00:42:00', '2014-07-31', '21:42:00', 'TERVERIFIKASI');
+(3, 1, 'Ahmbohh', 'Nana Chon', 'Dedemit', 23, '2014-07-26 00:00:00', '2014-07-28', '00:42:00', '2014-07-31', '21:42:00', 'TERVERIFIKASI'),
+(4, 3, 'Arisan', 'nana donk', 'angel jibril', 12, '2014-08-01 00:00:00', '2014-08-04', '10:00:00', '2014-08-05', '21:12:00', ''),
+(5, 3, 'f', 'f', 'f', 23, '2014-08-02 00:00:00', '2014-08-02', '09:51:00', '2014-08-02', '09:51:00', ''),
+(6, 3, '3', 'd', 'Dedemit', 33, '2014-08-02 00:00:00', '2014-08-02', '09:54:00', '2014-08-02', '09:54:00', ''),
+(7, 3, 'd', 'd', 'd', 4333, '2014-08-02 00:00:00', '2014-08-02', '09:54:00', '2014-08-02', '09:54:00', ''),
+(8, 3, '4', 'e', '4', 0, '2014-08-02 00:00:00', '2014-08-02', '09:55:00', '2014-08-02', '09:55:00', '');
 
 -- --------------------------------------------------------
 
@@ -109,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   KEY `Id_JB` (`Id_JB`),
   KEY `Id_Pengguna` (`Id_Pengguna`),
   KEY `Id_Jurusan` (`Id_Jurusan`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `beasiswa`
@@ -118,7 +123,8 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
 INSERT INTO `beasiswa` (`Id_Beasiswa`, `Id_JB`, `Id_Pengguna`, `Id_Jurusan`, `Jenjang`, `Alamat_Sekarang`, `Nama_PT`, `Semester`, `IPK`, `Prestasi`, `Alasan`, `BANK`, `No_Rekening`, `Tanggal_Daftar`, `Status_Beasiswa`) VALUES
 (6, 3, 1, 1, 'STRATA 1', 'errrrr', 'STMIK AMIKOM YOGYAKARTA', 2, '4', 'r', 't', 'MUAMALAT', 45555, '2014-07-24', 'WAITING'),
 (5, 2, 1, 1, 'DIPLOMA 3', 'dds', 'STMIK AMIKOM YOGYAKARTA', 4, '1', 'd', 'f', 'MUAMALAT', 3, '2014-07-24', 'TERVERIFIKASI'),
-(8, 3, 3, 1, 'DIPLOMA 3', 'f', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'vf', 'f', 'MUAMALAT', 44432322, '2014-07-26', 'WAITING');
+(8, 3, 3, 1, 'DIPLOMA 3', 'f', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'vf', 'f', 'MUAMALAT', 44432322, '2014-07-26', 'WAITING'),
+(9, 1, 3, 1, 'DIPLOMA 3', 'Amerika', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'Menyayi', 'Kepo bgt si', 'MUAMALAT', 1234567890, '2014-08-01', '');
 
 -- --------------------------------------------------------
 
@@ -142,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `informasi` (
 
 INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`, `Jenis_Info`, `Tanggal_info`) VALUES
 (1, 1, 'Informasi Pendaftaran Beasiswa PPA dan BBP/PPA', 'Informasi Pendaftaran Beasiswa PPA dan BBP/PPA', 'Beasiswa', '2014-08-01'),
-(2, 1, 'Prosedur Peminjaman Aula BSC', 'Prosedur Peminjaman Aula BSC', 'Aula', NULL),
+(2, 1, 'Prosedur Peminjaman Aula BSC', 'Prosedur Peminjaman Aula BSC', 'Aula', '2014-08-03'),
 (3, 1, 'Informasi Peminjaman Tanggal 21 Agustus 2014', 'Informasi Peminjaman Tanggal 21 Agustus 2014', 'Aula', '2014-07-23'),
 (4, 1, 'Prosedur Pendaftaran Rujukan Asuransi', 'Prosedur Pendaftaran Rujukan Asuransi', 'Asuransi', '2014-07-01'),
 (5, 2, 'Informasi Pendaftaran Beasiswa MUAMALAT 2014', 'Informasi Pendaftaran Beasiswa MUAMALAT 2014', 'Beasiswa', '2014-08-03'),
@@ -269,11 +275,11 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
 --
 
 INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_Ortu`, `Pekerjaan_Ortu`, `Penghasilan_Ortu`, `Jml_Tanggungan`, `Email`, `Online`, `Sesi`) VALUES
-(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', '', '', NULL, 'PNS', 0, 0, 'prastt21@gmail.com', 0, '0000-00-00 00:00:00'),
-(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', '', '', NULL, 'PNS', 0, 0, 'aku@masiyak.com', 0, '0000-00-00 00:00:00'),
-(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', '', '', NULL, 'PNS', 0, 0, '', 0, '0000-00-00 00:00:00'),
-(4, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '', '', 'PRIA', 0, '', '', '0000-00-00', '', '', NULL, 'PNS', 0, 0, '', 0, '0000-00-00 00:00:00'),
-(5, 2, 'Agus', 'MAHASISWA', 'agus', '63b573a282e7ac5a0a97cd7bc36fc528', 'PRIA', 2147483647, 'Jogja', 'Jogja', '1990-08-08', '', '', NULL, 'PNS', 0, 0, 'agus@amikom.ac.id', 0, '0000-00-00 00:00:00');
+(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', 'John Mayer', 'Yogyakarta', 2147483647, 'WIRASWASTA', 30000000, 2, 'prastt21@gmail.com', 1, '0000-00-00 00:00:00'),
+(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', 'Waljinah', 'Jakarta', 2147483647, 'NELAYAN/PETANI', 89990000, 0, 'aku@masiyak.com', 0, '0000-00-00 00:00:00'),
+(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', 'Tumini', 'Brebes', 27488990, 'TNI/POLRI', 10000000, 1, 'ratna@amikom.ac.id', 0, '0000-00-00 00:00:00'),
+(4, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '11.01.2816', '6662e946315fb964f16d5e5692348c1a', 'PRIA', 988899900, 'Tegal', 'Tegal', '1991-02-12', 'Warimin', 'Tegal', 2147483647, 'NELAYAN/PETANI', 67000000, 2, 'arga@amikom.ac.id', 0, '0000-00-00 00:00:00'),
+(5, 3, 'ITA WULANDARI\r\n', 'MAHASISWA', '11.01.2817', '8a2f53811f706df10327ccd2c863c8e5', 'PRIA', 908889000, 'Jogja', 'Jogja', '1990-08-08', 'Jumadi', 'Jakarta', 2147483647, 'TNI/POLRI', 2000000, 0, 'agus@amikom.ac.id', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -314,7 +320,7 @@ CREATE TABLE IF NOT EXISTS `sistem` (
 --
 
 INSERT INTO `sistem` (`Status_Sistem`, `Id_Periode`, `Pengumuman_Sistem`, `StatusRequest_Sistem`, `KarReq_Sistem`) VALUES
-('AKTIF', 2, 'A', 'AKTIF', 20000);
+('AKTIF', 2, 'Kalau Anda Mengalamai Kesulitan Dalam Penggunaan Sistem Ini, Silahkan Hubungi 085647993380 a.n Urip Tri Prastowo', 'AKTIF', 20000);
 
 -- --------------------------------------------------------
 
@@ -394,7 +400,7 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 (35, 2, 32, '0110'),
 (36, 2, 33, '1111'),
 (37, 2, 34, '1111'),
-(38, 2, 35, '1111'),
+(38, 2, 26, '1111'),
 (39, 3, 1, '0100'),
 (40, 3, 29, '0100'),
 (41, 3, 38, '1100'),
@@ -454,7 +460,7 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (23, 'Config Pengumuman', 1, 9, 0, 'Konfigurasi Pengumuman', 'config_pengumumancoba', '<i class= "fa fa-bullhorn"></i>', 1, NULL),
 (24, 'Manajemen Basisdata', 1, 10, 0, 'Manajemen Basisdata', 'manajemen_basisdata', '<i class= "fa fa-shield"></i>', 1, NULL),
 (25, 'More Pages', 1, 11, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
-(26, 'User Profile', 1, 1, 25, 'User Profil', 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL),
+(26, 'User Profile', 1, 1, 25, 'User Profil', 'profil', '<i class= "fa fa-user"></i>', 1, NULL),
 (27, 'Registrasi User', 1, 2, 25, 'login and Register', 'login_registers', '<i class= "fa fa-caret-square-o-right"></i>', 1, NULL),
 (28, 'Dashboard', 1, 1, 0, 'Dashboard Operator', 'dashboard', '<i class= "fa fa-dashboard"></i>', 1, NULL),
 (29, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', 'berita_dan_informasi', '<i class= "fa fa-building-o"></i>', 1, NULL),
@@ -466,7 +472,7 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (35, 'User Profil', 1, 8, 34, 'Profil Operator', 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL),
 (36, 'Dashboard', 1, 1, 0, 'Dashboard', 'dashboard', '<i class= "fa fa-dashboard"></i>', 1, NULL),
 (37, 'Berita dan Informasi', 1, 2, 0, 'Berita dan Informasi', 'informasi', '<i class= "fa fa-building-o"></i>', 1, NULL),
-(38, 'Submit Pendaftaran', 1, 3, 0, 'Submit Pendaftaran', NULL, NULL, 1, NULL),
+(38, 'Submit Pendaftaran', 1, 3, 0, 'Submit Pendaftaran', NULL, '<i class= "fa fa-toggle-right"></i>', 1, NULL),
 (39, 'Peminjaman Aula BSC', 1, 4, 38, 'Peminjaman Aula BSC', 'pendaftaran_peminjaman_aula', '<i class= "fa fa-credit-card"></i>', 1, NULL),
 (40, 'Pendaftaran Beasiswa', 1, 5, 38, 'Pendaftaran Beasiswa', 'pendaftaran_beasiswa', '<i class= "fa fa-gift"></i>', 1, NULL),
 (41, 'Pendaftaran Rujukan', 1, 6, 38, 'Pendaftaran Rujukan Asuransi', 'pendaftaran_rujukan_asuransi', '<i class= "fa fa-medkit"></i>', 1, NULL),
