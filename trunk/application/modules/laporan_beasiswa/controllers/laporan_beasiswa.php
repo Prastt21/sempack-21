@@ -173,7 +173,7 @@ class laporan_beasiswa extends operator_base {
         // add a page
         $this->pdf->AddPage('P', 'A4');
         ob_start();
-        require_once('assets/plugin/tanggal.php');
+        
         ?>
                 <hr>        
                 <u><p style="text-align: center;">LAPORAN DATA PENDAFTARAN BEASISWA <?php echo $databeasiswabytanggal->Jenis_Beasiswa; ?></p></u>
