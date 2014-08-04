@@ -6,6 +6,8 @@ if (!defined('BASEPATH'))
 require_once APPPATH . 'controllers/operator_base.php';
 
 class laporan_beasiswa extends operator_base {
+    
+    var $batas = 15;
 
     public function __construct() {
         parent::__construct();
@@ -13,7 +15,7 @@ class laporan_beasiswa extends operator_base {
         $this->load->model('m_laporan_beasiswa');
     }
 
-    public function index($offset = 0,$data=0) {
+   /* public function index($offset = 0,$data=0) {
         //control hak akses read
         $this->_set_page_role('r');
         //load model
@@ -40,6 +42,38 @@ class laporan_beasiswa extends operator_base {
         $data['bulan_skr'] = $pencarian_laporan_beasiswa['bulan'] != '' ? $pencarian_laporan_beasiswa['bulan'] : date('m');
         $data['tahun_skr'] = $pencarian_laporan_beasiswa['tahun'] != '' ? $pencarian_laporan_beasiswa['tahun'] : date('Y');
         $parameter = array($data['bulan_skr'], $data['tahun_skr']);
+        //get total pembelian bulan sebelumnya
+        $data['result_total'] = $this->m_laporan_beasiswa->get_total_beasiswa($parameter);
+        parent::display('tampil_laporan_beasiswa', $data);
+    } */
+    
+    public function index($offset = 0) {
+        //control hak akses read
+        $this->_set_page_role('r');
+        //load model
+        $this->load->model('m_laporan_beasiswa');
+        //set data bulan
+        $data['bulan'] = array(
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember',
+        );
+        $pencarian_laporan_beasiswa = $this->session->userdata('cari_laporan_beasiswa');
+        //get tahun beasiswa
+        $data['tahun'] = $this->m_laporan_beasiswa->get_tahun_beasiswa();
+        $data['bulan_skr'] = $pencarian_laporan_beasiswa['bulan'] != '' ? $pencarian_laporan_beasiswa['bulan'] : date('m');
+        $data['tahun_skr'] = $pencarian_laporan_beasiswa['tahun'] != '' ? $pencarian_laporan_beasiswa['tahun'] : date('Y');
+        $parameter = array($data['bulan_skr'], $data['tahun_skr'],  intval($offset),  $this->batas);
+        $this->m_laporan_beasiswa->ambil_laporan_beasiswa($parameter);
         //get total pembelian bulan sebelumnya
         $data['result_total'] = $this->m_laporan_beasiswa->get_total_beasiswa($parameter);
         parent::display('tampil_laporan_beasiswa', $data);

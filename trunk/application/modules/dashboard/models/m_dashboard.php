@@ -13,7 +13,7 @@ class m_dashboard extends CI_Model {
     //get total penjualan per hari
     function get_total_peminjaman_aula_by_day($params) {
         $sql = 'SELECT COUNT(id_pinjam_aula)"total" FROM aula WHERE DATE(tanggal_daftar) LIKE ?
-             AND id_pengguna  LIKE ?';
+             AND id_pengguna LIKE ?';
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
