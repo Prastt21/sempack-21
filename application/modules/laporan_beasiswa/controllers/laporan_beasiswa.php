@@ -13,40 +13,7 @@ class laporan_beasiswa extends operator_base {
         parent::__construct();
         //load model
         $this->load->model('m_laporan_beasiswa');
-    }
-
-   /* public function index($offset = 0,$data=0) {
-        //control hak akses read
-        $this->_set_page_role('r');
-        //load model
-        $this->load->model('m_laporan_beasiswa');
-        $this->m_laporan_beasiswa->ambil_laporan_beasiswa(array($data));
-        //set data bulan
-        $data['bulan'] = array(
-            '01' => 'Januari',
-            '02' => 'Februari',
-            '03' => 'Maret',
-            '04' => 'April',
-            '05' => 'Mei',
-            '06' => 'Juni',
-            '07' => 'Juli',
-            '08' => 'Agustus',
-            '09' => 'September',
-            '10' => 'Oktober',
-            '11' => 'November',
-            '12' => 'Desember',
-        );
-        $pencarian_laporan_beasiswa = $this->session->userdata('cari_laporan_beasiswa');
-        //get tahun beasiswa
-        $data['tahun'] = $this->m_laporan_beasiswa->get_tahun_beasiswa();
-        $data['bulan_skr'] = $pencarian_laporan_beasiswa['bulan'] != '' ? $pencarian_laporan_beasiswa['bulan'] : date('m');
-        $data['tahun_skr'] = $pencarian_laporan_beasiswa['tahun'] != '' ? $pencarian_laporan_beasiswa['tahun'] : date('Y');
-        $parameter = array($data['bulan_skr'], $data['tahun_skr']);
-        //get total pembelian bulan sebelumnya
-        $data['result_total'] = $this->m_laporan_beasiswa->get_total_beasiswa($parameter);
-        parent::display('tampil_laporan_beasiswa', $data);
-    } */
-    
+    }    
     public function index($offset = 0) {
         //control hak akses read
         $this->_set_page_role('r');
@@ -118,24 +85,24 @@ class laporan_beasiswa extends operator_base {
         $this->excel->getActiveSheet()->setCellValue('O8', 'TANGGAL DAFTAR');
         $this->excel->getActiveSheet()->setCellValue('P8', 'STATUS BEASISWA');
 
-        if (isset($rs_laporan_asuransi)) {
+        if (isset($rs_laporan_beasiswa)) {
             $a = isset($awal) ? $awal : 0;
-            foreach ($rs_laporan_asuransi as $dt_laporan_asuransi):
+            foreach ($rs_laporan_beasiswa as $dt_laporan_beassiswa):
                 $this->excel->getActiveSheet()->setCellValue('B' . ++$a);
-                $this->excel->getActiveSheet()->setCellValue('C' . $dt_laporan_asuransi['Jenis_Beasiswa']);
-                $this->excel->getActiveSheet()->setCellValue('D' . $dt_laporan_asuransi['Nama_Pengguna']);
-                $this->excel->getActiveSheet()->setCellValue('E' . $dt_laporan_asuransi['Jurusan']);
-                $this->excel->getActiveSheet()->setCellValue('F' . $dt_laporan_asuransi['Jenjang']);
-                $this->excel->getActiveSheet()->setCellValue('G' . $dt_laporan_asuransi['Alamat_Sekarang']);
-                $this->excel->getActiveSheet()->setCellValue('H' . $dt_laporan_asuransi['Perguruan Tinggi']);
-                $this->excel->getActiveSheet()->setCellValue('I' . $dt_laporan_asuransi['Semester']);
-                $this->excel->getActiveSheet()->setCellValue('J' . $dt_laporan_asuransi['IPK']);
-                $this->excel->getActiveSheet()->setCellValue('K' . $dt_laporan_asuransi['Prestasi']);
-                $this->excel->getActiveSheet()->setCellValue('L' . $dt_laporan_asuransi['Alasan']);
-                $this->excel->getActiveSheet()->setCellValue('M' . $dt_laporan_asuransi['BANK']);
-                $this->excel->getActiveSheet()->setCellValue('N' . $dt_laporan_asuransi['No_Rekening']);
-                $this->excel->getActiveSheet()->setCellValue('O' . $dt_laporan_asuransi['Tanggal_Daftar']);
-                $this->excel->getActiveSheet()->setCellValue('P' . $dt_laporan_asuransi['Status_Beasiswa']);
+                $this->excel->getActiveSheet()->setCellValue('C' . $dt_laporan_beassiswa['Jenis_Beasiswa']);
+                $this->excel->getActiveSheet()->setCellValue('D' . $dt_laporan_beassiswa['Nama_Pengguna']);
+                $this->excel->getActiveSheet()->setCellValue('E' . $dt_laporan_beassiswa['Jurusan']);
+                $this->excel->getActiveSheet()->setCellValue('F' . $dt_laporan_beassiswa['Jenjang']);
+                $this->excel->getActiveSheet()->setCellValue('G' . $dt_laporan_beassiswa['Alamat_Sekarang']);
+                $this->excel->getActiveSheet()->setCellValue('H' . $dt_laporan_beassiswa['Perguruan Tinggi']);
+                $this->excel->getActiveSheet()->setCellValue('I' . $dt_laporan_beassiswa['Semester']);
+                $this->excel->getActiveSheet()->setCellValue('J' . $dt_laporan_beassiswa['IPK']);
+                $this->excel->getActiveSheet()->setCellValue('K' . $dt_laporan_beassiswa['Prestasi']);
+                $this->excel->getActiveSheet()->setCellValue('L' . $dt_laporan_beassiswa['Alasan']);
+                $this->excel->getActiveSheet()->setCellValue('M' . $dt_laporan_beassiswa['BANK']);
+                $this->excel->getActiveSheet()->setCellValue('N' . $dt_laporan_beassiswa['No_Rekening']);
+                $this->excel->getActiveSheet()->setCellValue('O' . $dt_laporan_beassiswa['Tanggal_Daftar']);
+                $this->excel->getActiveSheet()->setCellValue('P' . $dt_laporan_beassiswa['Status_Beasiswa']);
             endforeach;
         }
 
@@ -150,10 +117,31 @@ class laporan_beasiswa extends operator_base {
         $objWriter->save('php://output');
     }
 
-    function cetak($id) {
+    function cetak($offset=0) {
         $this->load->model('m_laporan_beasiswa');
-        $databeasiswabytanggal = $this->m_laporan_beasiswa->ambil_laporan_beasiswa($id);
-
+         //set data bulan
+        $data['bulan'] = array(
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember',
+        );
+        $pencarian_laporan_beasiswa = $this->session->userdata('cari_laporan_beasiswa');
+        //get tahun beasiswa
+        $data['tahun'] = $this->m_laporan_beasiswa->get_tahun_beasiswa();
+        $data['bulan_skr'] = $pencarian_laporan_beasiswa['bulan'] != '' ? $pencarian_laporan_beasiswa['bulan'] : date('m');
+        $data['tahun_skr'] = $pencarian_laporan_beasiswa['tahun'] != '' ? $pencarian_laporan_beasiswa['tahun'] : date('Y');
+        $parameter = array($data['bulan_skr'], $data['tahun_skr'],  intval($offset),  $this->batas);
+        $databeasiswabytanggal = $this->m_laporan_beasiswa->ambil_laporan_beasiswa($parameter);
+        
         $this->load->library('pdf');
         $this->pdf->SetCreator(PDF_CREATOR);
         $this->pdf->SetAuthor('SEMPAK');
