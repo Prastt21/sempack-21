@@ -5,19 +5,18 @@ if (!defined('BASEPATH'))
 require_once APPPATH . 'controllers/operator_base.php';
 
 class laporan_aula extends operator_base {
-
+ var $batas = 15;
     public function __construct() {
         parent::__construct();
         //load model
         $this->load->model('m_laporan_aula');
     }
 
-    public function index() {
+    public function index($offset = 0) {
         //control hak akses read
         $this->_set_page_role('r');
         //load model
         $this->load->model('m_laporan_aula');
-        $this->m_laporan_aula->ambil_laporan_aula();
         //set data bulan
         $data['bulan'] = array(
             '01' => 'Januari',
@@ -38,9 +37,12 @@ class laporan_aula extends operator_base {
         $data['tahun'] = $this->m_laporan_aula->get_tahun_aula();
         $data['bulan_skr'] = $pencarian_laporan_aula['bulan'] != '' ? $pencarian_laporan_aula['bulan'] : date('m');
         $data['tahun_skr'] = $pencarian_laporan_aula['tahun'] != '' ? $pencarian_laporan_aula['tahun'] : date('Y');
-        $parameter = array($data['bulan_skr'], $data['tahun_skr']);
+        $parameter = array($data['bulan_skr'], $data['tahun_skr'],  intval($offset),  $this->batas);
+        $this->m_laporan_aula->ambil_laporan_aula($parameter);
         //get total pembelian bulan sebelumnya
         $data['result_total'] = $this->m_laporan_aula->get_total_aula($parameter);
+        $data['total_aula'] = $this->m_laporan_aula->get_total_aula_last_month($parameter);
+        $data['total_aula_ini'] = $this->m_laporan_aula->get_total_aula_this_month($parameter);
         parent::display('tampil_laporan_aula', $data);
     }
 
@@ -60,59 +62,91 @@ class laporan_aula extends operator_base {
     }
 
     function download() {
-        $this->load->model('m_laporan_aula');
-        $rs_laporan_aula->$this->m_laporan_aula->ambil_laporan_aula($id);
-        //load our new PHPExcel library
+        $this->_set_page_role('r');
+        //load library
         $this->load->library('excel');
-        //name the worksheet
-        $this->excel->getActiveSheet()->setTitle('LAPORAN PEMINJAMAN AULA BSC');
-
-        $this->excel->getActiveSheet()->setCellValue('B8', 'NO');
-        $this->excel->getActiveSheet()->setCellValue('C8', 'NAMA PEMINJAM');
-        $this->excel->getActiveSheet()->setCellValue('D8', 'NAMA KEGIATAN');
-        $this->excel->getActiveSheet()->setCellValue('E8', 'KETUA ORGANISASI');
-        $this->excel->getActiveSheet()->setCellValue('F8', 'PESERTA');
-        $this->excel->getActiveSheet()->setCellValue('G8', 'JUMLAH PESERTA');
-        $this->excel->getActiveSheet()->setCellValue('H8', 'TANGGAL DAFTAR');
-        $this->excel->getActiveSheet()->setCellValue('I8', 'TANGGAL PINJAM');
-        $this->excel->getActiveSheet()->setCellValue('J8', 'WAKTU PINJAM');
-        $this->excel->getActiveSheet()->setCellValue('K8', 'TANGGAL SELESAI');
-        $this->excel->getActiveSheet()->setCellValue('L8', 'WAKTU SELESAI');
-        $this->excel->getActiveSheet()->setCellValue('M8', 'STATUS PEMINJAMAN');
-
-        if (isset($rs_laporan_aula)) {
-            $a = isset($awal) ? $awal : 0;
-            foreach ($rs_laporan_aula as $dt_laporan_aula):
-                $this->excel->getActiveSheet()->setCellValue('B' . ++$a);
-                $this->excel->getActiveSheet()->setCellValue('C' . $dt_laporan_aula['Nama_Pengguna']);
-                $this->excel->getActiveSheet()->setCellValue('D' . $dt_laporan_aula['Nama_Kegiatan']);
-                $this->excel->getActiveSheet()->setCellValue('E' . $dt_laporan_aula['Ketua_Orma']);
-                $this->excel->getActiveSheet()->setCellValue('F' . $dt_laporan_aula['Peserta']);
-                $this->excel->getActiveSheet()->setCellValue('G' . $dt_laporan_aula['Jml_Peserta']);
-                $this->excel->getActiveSheet()->setCellValue('H' . $dt_laporan_aula['Tanggal_Daftar']);
-                $this->excel->getActiveSheet()->setCellValue('I' . $dt_laporan_aula['Tanggal_Pinjam']);
-                $this->excel->getActiveSheet()->setCellValue('J' . $dt_laporan_aula['Waktu_Pinjam']);
-                $this->excel->getActiveSheet()->setCellValue('K' . $dt_laporan_aula['Tanggal_Selesai']);
-                $this->excel->getActiveSheet()->setCellValue('L' . $dt_laporan_aula['Waktu_Selesai']);
-                $this->excel->getActiveSheet()->setCellValue('M' . $dt_laporan_aula['Status_Penggunaan']);
-            endforeach;
+        // begin 
+        // create excel
+        //load template excel
+        $filepath = "document/template_laporan_aula.xlsx";
+        // ---
+        $objReader = PHPExcel_IOFactory::createReader('Excel2007');
+        $this->phpexcel = $objReader->load($filepath);
+        // set active sheet 1
+        $objWorksheet = $this->phpexcel->setActiveSheetIndex(0);
+        //load model
+        $this->load->model('m_laporan_aula');
+        $pencarian_laporan_aula = $this->session->userdata('cari_laporan_aula');
+        //get tahun beasiswa
+        $data['tahun'] = $this->m_laporan_aula->get_tahun_aula();
+        $data['bulan_skr'] = $pencarian_laporan_aula['bulan'] != '' ? $pencarian_laporan_aula['bulan'] : date('m');
+        $data['tahun_skr'] = $pencarian_laporan_aula['tahun'] != '' ? $pencarian_laporan_aula['tahun'] : date('Y');
+        $parameter = array($data['bulan_skr'], $data['tahun_skr'], 0, 10000);
+        $rs_aula = $this->m_laporan_aula->ambil_laporan_aula($parameter);
+        $sheet_name = 'Laporan Peminjaman Aula';
+        $objWorksheet->setTitle($sheet_name);
+        if (!empty($rs_aula)) {
+            $no = 1;
+            $row = 9;
+            $jumlah = 0;
+            foreach ($rs_aula as $dt_aula) {
+                $objWorksheet->setCellValue('A' . $row, $no);
+                $objWorksheet->setCellValue('B' . $row, $dt_aula['Nama_Pengguna']);
+                $objWorksheet->setCellValue('C' . $row, $dt_aula['Nama_Kegiatan']);
+                $objWorksheet->setCellValue('D' . $row, $dt_aula['Ketua_Organisasi']);
+                $objWorksheet->setCellValue('E' . $row, $dt_aula['Peserta']);
+                $objWorksheet->setCellValue('F' . $row, $dt_aula['Jml_Peserta']);
+                $objWorksheet->setCellValue('G' . $row, $dt_aula['Tanggal_Daftar']);
+                $objWorksheet->setCellValue('H' . $row, $dt_aula['Tanggal_Pinjam']);
+                $objWorksheet->setCellValue('I' . $row, $dt_aula['Waktu_Pinjam']);
+                $objWorksheet->setCellValue('J' . $row, $dt_aula['Tanggal_Selesai']);
+                $objWorksheet->setCellValue('K' . $row, $dt_aula['Waktu_Selesai']);
+                $objWorksheet->setCellValue('L' . $row, $dt_aula['Status_Penggunaan']);
+                // insert
+                if (($row - 2) != count($rs_aula)) {
+                    $objWorksheet->insertNewRowBefore(($row + 1), 1);
+                    // next row
+                    $row++;
+                    $no++;
+                }
+            }
         }
-
-        $filename = 'Laporan Peminjaman Aula.xlsx'; //save our workbook as this file name
-        header('Content-Type: application/vnd.ms-excel'); //mime type
-        header('Content-Disposition: attachment;filename="' . $filename . '"'); //tell browser what's the file name
-        header('Cache-Control: max-age=0'); //no cache
-        //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
-        //if you want to save it as .XLSX Excel 2007 format
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
-        //force user to download the Excel file without writing it to server's HD
-        $objWriter->save('php://output');
+        // output file
+        $file_name = 'laporan_aula_' . $data['bulan_skr'] . '_' . $data['tahun_skr'];
+        //--
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $file_name . '.xlsx');
+        header('Cache-Control: max-age=0');
+        // output
+        $obj_writer = PHPExcel_IOFactory::createWriter($this->phpexcel, 'Excel2007');
+        $obj_writer->save('php://output');
     }
 
-    function cetak($id) {
+    function cetak() {
         $this->load->model('m_laporan_aula');
-        $dataaulabytanggal = $this->m_laporan_aula->ambil_laporan_aula($id);
-
+       //set data bulan
+        $data['bulan'] = array(
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember',
+        );
+        $pencarian_laporan_aula = $this->session->userdata('cari_laporan_aula');
+        //get tahun beasiswa
+        $data['tahun'] = $this->m_laporan_aula->get_tahun_aula();
+        $data['bulan_skr'] = $pencarian_laporan_aula['bulan'] != '' ? $pencarian_laporan_aula['bulan'] : date('m');
+        $data['tahun_skr'] = $pencarian_laporan_aula['tahun'] != '' ? $pencarian_laporan_aula['tahun'] : date('Y');
+        $parameter = array($data['bulan_skr'], $data['tahun_skr'], 0, 10000);
+        $dataaulabytanggal = $this->m_laporan_aula->ambil_laporan_aula($parameter);
+        
         $this->load->library('pdf');
         $this->pdf->SetCreator(PDF_CREATOR);
         $this->pdf->SetAuthor('SEMPAK');
@@ -144,7 +178,6 @@ class laporan_aula extends operator_base {
         // add a page
         $this->pdf->AddPage('P', 'A4');
         ob_start();
-        require_once('assets/plugin/tanggal.php');
         ?>
         <hr>        
         <u><p style="text-align: center;">LAPORAN PEMINJAMAN AULA BSC</p></u>
@@ -154,15 +187,15 @@ class laporan_aula extends operator_base {
                 <tr>
                     <td align="center"><b>NO</b></td>
                     <td align="center"><b>PEMINJAM</b></td>
-                    <td align="center"><b>NAMA KEGIATAN</b></td>
-                    <td align="center"><b>KETUA ORGANISASI</b></td>
+                    <td align="center"><b>KEGIATAN</b></td>
+                    <td align="center"><b>KETUA ORMA</b></td>
                     <td align="center"><b>PESERTA</b></td>
-                    <td align="center"><b>JML PESERTA</b></td>
-                    <td align="center"><b>TANGGAL DAFTAR</b></td>
-                    <td align="center"><b>TANGGAL PINJAM</b></td>
-                    <td align="center"><b>WAKTU PINJAM</b></td>
-                    <td align="center"><b>TANGGAL SELESAI</b></td>
-                    <td align="center"><b>WAKTU SELESAI</b></td>
+                    <td align="center"><b>JML</b></td>
+                    <td align="center"><b>TGL DAFTAR</b></td>
+                    <td align="center"><b>TGL PINJAM</b></td>
+                    <td align="center"><b>WKT PINJAM</b></td>
+                    <td align="center"><b>TGL SELESAI</b></td>
+                    <td align="center"><b>WKT SELESAI</b></td>
                     <td align="center"><b>STATUS</b></td>
                 </tr>
             </thead>
@@ -241,7 +274,7 @@ class laporan_aula extends operator_base {
             ob_end_clean();
             $this->pdf->writeHTML($konten, true, false, true, false, '');
             $this->pdf->AddPage('P', 'A4');
-            $this->pdf->Output('Peminjaman Aula BSC_' . $dataaulabytanggal->I . '.pdf', 'I');
+            $this->pdf->Output('Peminjaman Aula BSC_.pdf' , 'I');
         }
     }
 }

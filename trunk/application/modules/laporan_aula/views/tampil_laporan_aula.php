@@ -63,33 +63,20 @@
                                     <tr>
                                         <td></td>
                                         <td colspan="2">Total Peminjaman Aula BSC Bulan sebelumnya</td>
-                                        <td align="right"><b></b></td>
+                                        <td align="center"><b><?php echo $total_aula ?></b></td>
                                     </tr>
                                     
                                     <tr>
                                         <td></td>
                                         <td>Peminjaman Aula BSC Bulan Ini</td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="right"><b> </b></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="2">Total Peminjaman Aula BSC Bulan sebelumnya</td>
-                                        <td align="right"><b></b></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td></td>
-                                        <td>Peminjaman Aula BSC Bulan Ini</td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="right"><b> </b></td>
+                                        <td align="center"><b><?php echo $total_aula_ini ?></b></td>
+                                        <td align="center"><b> </b></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="left"><b>20 </b></td>
+                                        <td align="center"><b>Jumlah </b></td>
+                                        <td align="center"><b><?php echo $result_total ?> </b></td>
                                     </tr>
                                 </tbody>
                             </table>

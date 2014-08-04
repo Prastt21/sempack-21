@@ -53,7 +53,7 @@
                                         <td width="5%">No.</td>
                                         <td width="65%">Jenis Rujukan Asuransi</td>
                                         <td width="15%">Jumlah</td>
-                                        <td width="15%">Total Keseluruhan</td>
+                                        <td width="15%">Total</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,33 +63,33 @@
                                     <tr>
                                         <td></td>
                                         <td colspan="2">Total Rujukan Asuransi KECELAKAAN Bulan sebelumnya</td>
-                                        <td align="right"><b></b></td>
+                                        <td align="center"><b><?php echo $total_kecelakaan ?></b></td>
                                     </tr>
                                     
                                     <tr>
                                         <td></td>
                                         <td>Rujukan Asuransi KECELAKAAN Bulan Ini</td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="right"><b> </b></td>
+                                        <td align="center"><?php echo $total_kecelakaan_ini ?><b> </b></td>
+                                        <td align="center"><b> </b></td>
                                     </tr>
                                     
                                     <tr>
                                         <td></td>
                                         <td colspan="2">Total Rujukan Asuransi SAKIT Bulan sebelumnya</td>
-                                        <td align="right"><b></b></td>
+                                        <td align="center"><b> <?php echo $total_sakit ?></b></td>
                                     </tr>
                                     
                                     <tr>
                                         <td></td>
                                         <td>Rujukan Asuransi SAKIT Bulan Ini</td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="right"><b> </b></td>
+                                        <td align="center"><b> <?php echo $total_sakit_ini ?></b></td>
+                                        <td align="center"><b> </b></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td align="right"><b> </b></td>
-                                        <td align="left"><b>1000000 </b></td>
+                                        <td align="center"><b>Jumlah</b></td>
+                                        <td align="center"><b><?php echo $result_total ?> </b></td>
                                     </tr>
                                 </tbody>
                             </table>
