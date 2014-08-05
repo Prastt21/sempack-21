@@ -27,11 +27,11 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         //load javascript + css untuk tanggal 
         $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
         $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
-        
+
         parent::display('tambah_pendaftaran_rujukan_asuransi');
     }
 
-    function proses_tambah_pendaftaran_rujukan_asuransi($asuransi='') {
+    function proses_tambah_pendaftaran_rujukan_asuransi() {
         //validasi tombol simpan, jika tidak ditekan maka redirect ke tampilan tambah informasi
         if ($this->input->post('simpan') == null)
             redirect('pendaftaran_rujukan_asuransi/tambah_pendaftaran_rujukan_asuransi');
@@ -74,9 +74,11 @@ class pendaftaran_rujukan_asuransi extends operator_base {
                 $this->input->post('status_asuransi')
             );
             if ($this->m_pendaftaran_rujukan_asuransi->tambah_pendaftaran_rujukan_asuransi($parameter)) {
+                $id = $this->m_pendaftaran_rujukan_asuransi->get_last_id();
                 //jika sukses kirim pesan ke view
-                $this->notification('success', 'Rujukan Asuransi berhasil ditambahkan');                
-                $this->cetak_pendaftaran_asuransi_by_id($asuransi);
+//                $this->notification('success', 'Rujukan Asuransi berhasil ditambahkan');
+                redirect('pendaftaran_rujukan_asuransi/cetak_pendaftaran_asuransi_by_id/' . $id);
+//                $this->cetak_pendaftaran_asuransi_by_id($asuransi);
             } else {
                 //jika gagal kirim pesan ke view
                 $this->notification('error', 'Rujukan Asuransi gagal ditambahkan');
@@ -86,11 +88,12 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         redirect('pendaftaran_rujukan_asuransi');
     }
 
-    function cetak_pendaftaran_asuransi_by_id($asuransi='') {
+    function cetak_pendaftaran_asuransi_by_id($asuransi = '') {
         $this->load->model('m_pendaftaran_rujukan_asuransi');
-        $parameter['result_pendaftaran_asuransi'] = $this->m_pendaftaran_rujukan_asuransi->get_pendaftaran_rujukan_asuransi_by_id($asuransi);
-        $dt_asuransiid = $this->m_pendaftaran_rujukan_asuransi->hasil_pendaftaran_rujukan_asuransi($parameter);
-        
+//        $parameter['result_pendaftaran_asuransi'] = $this->m_pendaftaran_rujukan_asuransi->get_pendaftaran_rujukan_asuransi_by_id($asuransi);
+//        $dt_asuransiid = $this->m_pendaftaran_rujukan_asuransi->hasil_pendaftaran_rujukan_asuransi($parameter);
+        $dt_asuransiid = $this->m_pendaftaran_rujukan_asuransi->hasil_pendaftaran_rujukan_asuransi($asuransi);
+
         $this->load->library('pdf');
         $this->pdf->SetCreator(PDF_CREATOR);
         $this->pdf->SetAuthor('SEMPAK');
@@ -126,64 +129,64 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         <hr>        
         <u><p style="text-align: center;">LEMBAR PENDAFTARAN RUJUKAN ASURANSI</p></u>
         <br><br>
-            <table style="width: 100%;">
-                    <tr>
-                        <td width="25%">ID Pendaftaran</td>
-                        <td width="2%">:</td>
-                        <td width="73%"><?php echo '<b>' . $dt_asuransiid['Id_Asuransi'] . '</b>'; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Nama Perujuk Asuransi</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Nama_Pengguna']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Jenis Rujukan Asuransi</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Jenis_Asuransi']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Nama Rumah Sakit</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Nama_RS']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Alamat Rumah Sakit</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Alamat_RS']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Kronologi Kejadian</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Kronologi']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Masuk</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Tanggal_Masuk']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Keluar</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Tanggal_Keluar']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Total Biaya</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Total_Biaya']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Santunan</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Santunan']; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Status Rujukan Asuransi</td>
-                        <td>:</td>
-                        <td><?php echo $dt_asuransiid['Status_Asuransi']; ?></td>
-                    </tr>
-                </table>
-       
+        <table style="width: 100%;">
+            <tr>
+                <td width="25%">ID Pendaftaran</td>
+                <td width="2%">:</td>
+                <td width="73%"><?php echo '<b>' . $dt_asuransiid['Id_Asuransi'] . '</b>'; ?></td>
+            </tr>
+            <tr>
+                <td>Nama Perujuk Asuransi</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Nama_Pengguna']; ?></td>
+            </tr>
+            <tr>
+                <td>Jenis Rujukan Asuransi</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Jenis_Asuransi']; ?></td>
+            </tr>
+            <tr>
+                <td>Nama Rumah Sakit</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Nama_RS']; ?></td>
+            </tr>
+            <tr>
+                <td>Alamat Rumah Sakit</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Alamat_RS']; ?></td>
+            </tr>
+            <tr>
+                <td>Kronologi Kejadian</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Kronologi']; ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Masuk</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Tanggal_Masuk']; ?></td>
+            </tr>
+            <tr>
+                <td>Tanggal Keluar</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Tanggal_Keluar']; ?></td>
+            </tr>
+            <tr>
+                <td>Total Biaya</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Total_Biaya']; ?></td>
+            </tr>
+            <tr>
+                <td>Santunan</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Santunan']; ?></td>
+            </tr>
+            <tr>
+                <td>Status Rujukan Asuransi</td>
+                <td>:</td>
+                <td><?php echo $dt_asuransiid['Status_Asuransi']; ?></td>
+            </tr>
+        </table>
+
         <br>
         <p style="text-align: center;">MENYATAKAN</p>
         <p>Dengan ini mengajukan permohonan santunan asuransi terhadap yang tertera diatas. Berikut telah dilampirkan

@@ -36,21 +36,20 @@ class laporan_beasiswa extends operator_base {
         );
         $pencarian_laporan_beasiswa = $this->session->userdata('cari_laporan_beasiswa');
         //get tahun beasiswa
-        
         $data['tahun'] = $this->m_laporan_beasiswa->get_tahun_beasiswa();
         $data['bulan_skr'] = $pencarian_laporan_beasiswa['bulan'] != '' ? $pencarian_laporan_beasiswa['bulan'] : date('m');
         $data['tahun_skr'] = $pencarian_laporan_beasiswa['tahun'] != '' ? $pencarian_laporan_beasiswa['tahun'] : date('Y');
         $parameter = array($data['bulan_skr'], $data['tahun_skr'], intval($offset), $this->batas);
         $data['rs_data'] = $this->m_laporan_beasiswa->ambil_laporan_beasiswa($parameter);
-       
+
         //get total pembelian bulan sebelumnya
         $data['result_total'] = $this->m_laporan_beasiswa->get_total_beasiswa($parameter);
-        $data['total_ppa']= $this->m_laporan_beasiswa->get_total_ppa_last_month($parameter);
-        $data['total_ppa_ini']= $this->m_laporan_beasiswa->get_total_ppa_this_month($parameter);
-        $data['total_bbp']= $this->m_laporan_beasiswa->get_total_bbp_last_month($parameter);
-        $data['total_bbp_ini']= $this->m_laporan_beasiswa->get_total_bbp_this_month($parameter);
-        $data['total_muamalat']= $this->m_laporan_beasiswa->get_total_muamalat_last_month($parameter);
-        $data['total_muamalat_ini']= $this->m_laporan_beasiswa->get_total_muamalat_this_month($parameter);
+        $data['total_ppa'] = $this->m_laporan_beasiswa->get_total_ppa_last_month($parameter);
+        $data['total_ppa_ini'] = $this->m_laporan_beasiswa->get_total_ppa_this_month($parameter);
+        $data['total_bbp'] = $this->m_laporan_beasiswa->get_total_bbp_last_month($parameter);
+        $data['total_bbp_ini'] = $this->m_laporan_beasiswa->get_total_bbp_this_month($parameter);
+        $data['total_muamalat'] = $this->m_laporan_beasiswa->get_total_muamalat_last_month($parameter);
+        $data['total_muamalat_ini'] = $this->m_laporan_beasiswa->get_total_muamalat_this_month($parameter);
         parent::display('tampil_laporan_beasiswa', $data);
     }
 

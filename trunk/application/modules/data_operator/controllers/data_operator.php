@@ -214,7 +214,7 @@ class data_operator extends operator_base {
 
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'data_operator/index');
-        $data['data_operator'] = $rs_data_operator;
+        $data['rs_operator'] = $rs_data_operator;
         $data['total_data'] = $rs_total;
         $data['jml_data'] = count($rs_data_operator);
         $data['awal'] = $offset;

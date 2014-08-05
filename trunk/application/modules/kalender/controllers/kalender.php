@@ -16,7 +16,8 @@ class kalender extends operator_base {
         $this->load->model('m_kalender');
         $this->load_css('assets/css/fullcalendar/fullcalendar.css');
         $this->load_css('assets/css/fullcalendar/fullcalendar.print.css');
-        $this->load_js('assets/js/plugins/fullcalendar/fullcalendar.min.js');       
-        parent::display('tampil_kalender');
+        $this->load_js('assets/js/plugins/fullcalendar/fullcalendar.min.js');
+        parent::display('tampil_kalender', null, 'footer_tampil_kalender');
     }
+
 }

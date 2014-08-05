@@ -48,6 +48,7 @@ class autentifikasi extends CI_Controller {
                     $this->sesi->set_nama_level($r_login['Nama_Level']);
                     $this->sesi->set_portal($r_login['Portal_Level']);
                     $this->sesi->do_login();
+                    $this->m_autentifikasi->set_login_time($r_login['Id_Pengguna']);
                     redirect($r_login['Portal_Level']);
                 } else {
                     $data['pesan'] = '<span class="alert-login">Autentifikasi gagal.<br>Nama Pengguna dan Kata Kunci tidak terdaftar dalam sistem.</span>';
