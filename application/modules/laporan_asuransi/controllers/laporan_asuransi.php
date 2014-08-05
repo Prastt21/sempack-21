@@ -105,7 +105,7 @@ class laporan_asuransi extends operator_base {
                 $objWorksheet->setCellValue('K' . $row, $dt_asuransi['Santunan']);
                 $objWorksheet->setCellValue('L' . $row, $dt_asuransi['Status_Asuransi']);
                 // insert
-                if (($row - 2) != count($rs_beasiswa)) {
+                if (($row - 2) != count($rs_asuransi)) {
                     $objWorksheet->insertNewRowBefore(($row + 1), 1);
                     // next row
                     $row++;

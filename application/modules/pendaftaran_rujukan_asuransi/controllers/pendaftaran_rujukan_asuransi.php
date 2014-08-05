@@ -8,7 +8,7 @@ class pendaftaran_rujukan_asuransi extends operator_base {
 
     var $batas = 15;
 
-    public function index($offset = 0) {
+    public function index() {
         //control hak akses read
         $this->_set_page_role('r');
         //load model
@@ -75,9 +75,8 @@ class pendaftaran_rujukan_asuransi extends operator_base {
             );
             if ($this->m_pendaftaran_rujukan_asuransi->tambah_pendaftaran_rujukan_asuransi($parameter)) {
                 //jika sukses kirim pesan ke view
-                $this->notification('success', 'Rujukan Asuransi berhasil ditambahkan');
-                
-                $this->cetak_pendaftaran_asuransi_by_id($parameter);
+                $this->notification('success', 'Rujukan Asuransi berhasil ditambahkan');                
+                $this->cetak_pendaftaran_asuransi_by_id($asuransi);
             } else {
                 //jika gagal kirim pesan ke view
                 $this->notification('error', 'Rujukan Asuransi gagal ditambahkan');
@@ -87,10 +86,8 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         redirect('pendaftaran_rujukan_asuransi');
     }
 
-    function cetak_pendaftaran_asuransi_by_id($parameter) {
-        //$data_login = $this->sesi->get_data_login('ID_PENGGUNA');
+    function cetak_pendaftaran_asuransi_by_id($asuransi='') {
         $this->load->model('m_pendaftaran_rujukan_asuransi');
-        //$parameter['Id_Asuransi'] = $this->m_pendaftaran_rujukan_asuransi->get_pendaftaran_rujukan_asuransi_by_id($asuransi);
         $parameter['result_pendaftaran_asuransi'] = $this->m_pendaftaran_rujukan_asuransi->get_pendaftaran_rujukan_asuransi_by_id($asuransi);
         $dt_asuransiid = $this->m_pendaftaran_rujukan_asuransi->hasil_pendaftaran_rujukan_asuransi($parameter);
         
