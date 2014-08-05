@@ -55,17 +55,9 @@
                     <div class="box-body">
                         <table class="table" width="100%">
                             <tr>
-                            <?php
-                            if (isset($rs_pengumuman)) {                                
-                                foreach ($rs_pengumuman as $dt_pengumuman):
-                                    ?>
-                                    <tr>                                        
-                                        <td><?php echo $dt_pengumuman['Pengumuman_Sistem']; ?></td>
-                                    </tr>
-                                    <?php
-                                endforeach;
-                            }                            
-                            ?>
+                            <tr>                                        
+                                <td><?php echo $rs_pengumuman['Pengumuman_Sistem']; ?></td>
+                            </tr>
                             </tr>                            
                         </table>
                     </div>
@@ -78,19 +70,17 @@
                     </div>
                     <div class="box-body">
                         <table class="table" width="100%">
-                            <tr>
                             <?php
-                            if (isset($rs_pengumuman)) {                                
-                                foreach ($rs_pengumuman as $dt_pengumuman):
+                            if (isset($rs_last_login)) {
+                                foreach ($rs_last_login as $dt_login) {
                                     ?>
                                     <tr>                                        
-                                        <td><?php echo $dt_pengumuman['Pengumuman_Sistem']; ?></td>
-                                    </tr>
+                                        <td><?php echo $dt_login['Nama_Pengguna']; ?></td>
+                                    </tr> 
                                     <?php
-                                endforeach;
-                            }                            
+                                }
+                            }
                             ?>
-                            </tr>                            
                         </table>
                     </div>
                 </div>

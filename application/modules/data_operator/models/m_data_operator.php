@@ -83,7 +83,9 @@ class m_data_operator extends CI_Model {
     }
     //get data
     function get_list_data($params) {
-        $sql = 'SELECT * FROM pengguna WHERE nama_pengguna LIKE ?  AND id_pengguna LIKE 1 OR id_pengguna LIKE 2
+        $sql = 'SELECT a.*,b.Nama_Level  FROM pengguna a 
+                INNER JOIN sys_level b ON a.Id_Level = b.Id_Level
+                WHERE nama_pengguna LIKE ?
                 ORDER BY nama_pengguna ASC LIMIT ?,?';
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
@@ -97,7 +99,7 @@ class m_data_operator extends CI_Model {
 
 //count search data
     function count_search_data($params) {
-        $sql = 'SELECT count(id_pengguna) as jumlah FROM pengguna WHERE nama_pengguna LIKE ? LIMIT 1';
+        $sql = 'SELECT count(id_pengguna) as jumlah FROM pengguna WHERE nama_pengguna LIKE ?';
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();

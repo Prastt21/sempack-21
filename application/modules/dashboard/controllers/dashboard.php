@@ -25,6 +25,7 @@ class dashboard extends operator_base {
         $data['rs_pengumuman'] = $this->m_dashboard->get_pengumuman_sistem();
         $data['total_peminjaman_aula_by_day'] = $this->m_dashboard->get_total_peminjaman_aula_by_day(array(date('m'), date('Y'), $this->sesi->get_data_login('id_pengguna')));
         $data['total_peminjaman_aula_by_month'] = $this->m_dashboard->get_total_peminjaman_aula_by_month(array(date('m'), date('Y'), $this->sesi->get_data_login('id_pengguna')));
+        $data['rs_last_login'] = $this->m_dashboard->get_list_last_login();
         $data['id_pengguna'] = $this->sesi->get_data_login('id_pengguna');
         $this->load->library('Form_validation');
         //$data['tpl_footer'] = 'footer_dashboard';

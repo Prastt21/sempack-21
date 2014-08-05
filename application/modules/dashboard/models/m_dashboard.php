@@ -1,6 +1,5 @@
 <?php
 
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -41,7 +40,7 @@ class m_dashboard extends CI_Model {
 
     //get pengumuman sistem
     function get_pengumuman_sistem() {
-        $sql = 'SELECT pengumuman_sistem from sistem';
+        $sql = 'SELECT Pengumuman_Sistem FROM sistem';
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -64,4 +63,17 @@ class m_dashboard extends CI_Model {
             return array();
         }
     }
+
+    function get_list_last_login() {
+        $sql = 'SELECT Nama_Pengguna FROM Pengguna ORDER BY sesi DESC LIMIT 5';
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
 }

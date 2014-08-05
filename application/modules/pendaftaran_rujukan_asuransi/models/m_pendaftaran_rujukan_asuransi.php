@@ -49,10 +49,11 @@ class m_pendaftaran_rujukan_asuransi extends CI_Model {
             return false;
         }
     }
-    
+
     function hasil_pendaftaran_rujukan_asuransi($parameter) {
         $sql = 'SELECT a.*,b.* FROM asuransi a
-                INNER JOIN pengguna b ON b.Id_Pengguna = a.Id_Pengguna';
+                INNER JOIN pengguna b ON b.Id_Pengguna = a.Id_Pengguna
+                WHERE a.Id_Asuransi = ?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
@@ -62,4 +63,9 @@ class m_pendaftaran_rujukan_asuransi extends CI_Model {
             return false;
         }
     }
+
+    function get_last_id() {
+        return $this->db->insert_id();
+    }
+
 }
