@@ -10,25 +10,24 @@ class config_sistem extends operator_base {
     public function index() {
         $this->_set_page_role('u');
         $this->load->model('m_config_sistem');       
-        $data['rs_periode'] = $this->m_config_sistem->ambil_data_periode();
+        $data['rs_periode_ku'] = $this->m_config_sistem->ambil_data_periode();
         $this->load->library('Form_validation');
         
         parent::display('v_config_sistem', $data);
     }
     
-    function ubah_sistem($id) {
+    function ubah_sistem() {
         //control hak akses update
         $this->_set_page_role('u');
-        //set validasi id
-        if (empty($id))
+        //set validasi id        
             redirect('config_sistem');
         //load library form validation
         $this->load->library('form_validation');
         //load model
-        $this->load->model('m_config_sistem');  
-        $data['result_sistem'] = $this->m_config_sistem->get_sistem_by_id($id);
+        $this->load->model('m_config_sistem');
+        $data['rs_periode_ku'] = $this->m_config_sistem->ambil_data_periode();
         //jika tidak dipencet
-        parent::display('ubah_config_sistem',$data);
+        parent::display('v_config_sistem',$data);
     }
 
     function proses_ubah_sistem() {
@@ -53,7 +52,7 @@ class config_sistem extends operator_base {
             $this->load->model('m_config_sistem');
             $parameter = array(
                 $this->input->post('status_sistem'),
-                $this->input->post('id_periode')
+                $this->input->post('periode_sistem')
             );
             if ($this->m_config_sistem->ubah_sistem($parameter)) {
                 //jika berhasil insert

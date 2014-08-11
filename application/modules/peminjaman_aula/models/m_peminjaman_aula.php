@@ -64,8 +64,8 @@ class m_peminjaman_aula extends CI_Model {
     }
     //get data
     function get_list_data($params) {
-        $sql = 'SELECT * FROM aula 
-                WHERE nama_kegiatan LIKE ? ORDER BY nama_kegiatan ASC LIMIT ?,?';
+        $sql = 'SELECT a.*,b.* FROM aula a INNER JOIN pengguna b ON a.id_pengguna=b.id_pengguna 
+                WHERE a.nama_kegiatan LIKE ? ORDER BY a.nama_kegiatan ASC LIMIT ?,?';
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

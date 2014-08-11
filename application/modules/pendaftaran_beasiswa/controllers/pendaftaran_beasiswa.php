@@ -6,6 +6,8 @@ require_once APPPATH . 'controllers/operator_base.php';
 
 class pendaftaran_beasiswa extends operator_base {
 
+    var $batas = 15;
+
     public function __construct() {
         parent::__construct();
     }
@@ -22,6 +24,7 @@ class pendaftaran_beasiswa extends operator_base {
         $data['rs_jenis_beasiswa'] = $this->m_pendaftaran_beasiswa->ambil_jenis_beasiswa();
         //get data jurusan
         $data['rs_jurusan'] = $this->m_pendaftaran_beasiswa->ambil_jurusan();
+        $data['result_periode_sistem'] = $this->m_pendaftaran_beasiswa->get_periode_sistem();
         parent::display('tambah_pendaftaran_beasiswa', $data);
     }
 
@@ -34,16 +37,12 @@ class pendaftaran_beasiswa extends operator_base {
         $this->load->library('form_validation');
         //load model
         $this->load->model('m_pendaftaran_beasiswa');
-        //get data jenis beasiswa
-        $data['rs_jenis_beasiswa'] = $this->m_pendaftaran_beasiswa->ambil_jenis_beasiswa();
-        //get data jurusan
-        $data['rs_jurusan'] = $this->m_pendaftaran_beasiswa->ambil_jurusan();
-        parent::display('tambah_pendaftaran_beasiswa', $data);
+        parent::display('tambah_pendaftaran_beasiswa');
     }
 
-    function proses_tambah_pendaftaran_beasiswa($id) {
+    function proses_tambah_pendaftaran_beasiswa() {
         if ($this->input->post('simpan') == null)
-            redirect('pendaftaran_beasiswa');
+            redirect('pendaftaran_beasiswa/tambah_pendaftaran_beasiswa');
         //load library form validation
         $this->load->library('form_validation');
         //set validasi form
@@ -73,6 +72,7 @@ class pendaftaran_beasiswa extends operator_base {
                 $this->input->post('jenis_beasiswa'),
                 $this->sesi->get_data_login('ID_PENGGUNA'),
                 $this->input->post('jurusan'),
+                $this->input->post('periode'),
                 $this->input->post('jenjang'),
                 $this->input->post('alamat_sekarang'),
                 $this->input->post('nama_pt'),
@@ -86,27 +86,26 @@ class pendaftaran_beasiswa extends operator_base {
                 $this->input->post('status_beasiswa')
             );
             if ($this->m_pendaftaran_beasiswa->cek_pendaftaran_beasiswa_by_id_pengguna($parameter)) {
+                //set notifikasi gagal
+                $this->notification('error', 'Anda Sudah Melakukan Pendaftaran Beasiswa Periode Ini');
+            } else {
                 //set notifikasi berhasil
                 if ($this->m_pendaftaran_beasiswa->tambah_pendaftaran_beasiswa($parameter)) {
                     //set notifikasi berhasil
-                    $this->notification('success', 'Data berhasil ditambahkan');
-                    $this->cetak_pendaftaran_beasiswa_by_id($id);
+                    $id = $this->m_pendaftaran_beasiswa->get_last_id();
+                    redirect('pendaftaran_beasiswa/cetak_pendaftaran_beasiswa_by_id/' . $id);
                 } else {
                     //set notifikasi gagal
                     $this->notification('error', 'Data gagal ditambahkan');
                 }
-            } else {
-                //set notifikasi gagal
-                $this->notification('error', 'Anda Sudah Melakukan Pendaftaran Beasiswa Periode Ini');
             }
             redirect('pendaftaran_beasiswa');
         }
     }
 
-    function cetak_pendaftaran_beasiswa_by_id($id) {
-        $data_login = $this->session->userdata('sesi_login');
+    function cetak_pendaftaran_beasiswa_by_id($beasiswa = '') {
         $this->load->model('m_pendaftaran_beasiswa');
-        $databeasiswabyid = $this->m_pendaftaran_beasiswa->ambil_pendaftaran_beasiswa($id);
+        $databeasiswabyid = $this->m_pendaftaran_beasiswa->hasil_pendaftaran_beasiswa($beasiswa);
 
         $this->load->library('pdf');
         $this->pdf->SetCreator(PDF_CREATOR);
@@ -139,17 +138,16 @@ class pendaftaran_beasiswa extends operator_base {
         // add a page
         $this->pdf->AddPage('P', 'A4');
         ob_start();
-        require_once('assets/plugin/tanggal.php');
         ?>
         <hr>        
-        <u><p style="text-align: center;">LEMBAR PENDAFTARAN BEASISWA <?php echo $databeasiswabyid->Jenis_Beasiswa; ?></p></u>
+        <u><p style="text-align: center;">LEMBAR PENDAFTARAN BEASISWA <?php echo $databeasiswabyid['Jenis_Beasiswa']; ?></p></u>
         <br><br>
 
         <table style="width: 100%;">            
             <tr>
                 <td width="25%">ID Pendaftaran</td>
                 <td width="2%">:</td>
-                <td width="73%"><?php echo '<b>' . $databeasiswabyid->Id_Beasiswa . '</b>'; ?></td>
+                <td width="73%"><?php echo '<b>' . $databeasiswabyid['Id_Beasiswa'] . '</b>'; ?></td>
             </tr>
             <tr>Kepada : </tr>
             <tr>Yth.	: Direktur Jenderal Pendidikan Tinggi</tr>
@@ -164,57 +162,57 @@ class pendaftaran_beasiswa extends operator_base {
             <tr>
                 <td>Nama Pendaftar Beasiswa</td>
                 <td>:</td>
-                <td><?php echo $data_login->NAMA_PENGGUNA; ?></td>
+                <td><?php echo $databeasiswabyid['Nama_Pengguna']; ?></td>
             </tr>
             <tr>
                 <td>Jurusan</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Nama_Jurusan; ?></td>
+                <td><?php echo $databeasiswabyid['Jurusan']; ?></td>
             </tr>
             <tr>
-                <td>Nama Rumah Sakit</td>
+                <td>Jenjang</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Jenjang; ?></td>
+                <td><?php echo $databeasiswabyid['Jenjang']; ?></td>
             </tr>
             <tr>
                 <td>Alamat Sekarang</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Alamat_Sekarang; ?></td>
+                <td><?php echo $databeasiswabyid['Alamat_Sekarang']; ?></td>
             </tr>
             <tr>
                 <td>Perguruan Tinggi</td>
                 <td>:</td>
-                <td><?php echo $$databeasiswabyid->Nama_PT; ?></td>
+                <td><?php echo $databeasiswabyid['Nama_PT']; ?></td>
             </tr>
             <tr>
                 <td>Semester</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Semester; ?></td>
+                <td><?php echo $databeasiswabyid['Semester']; ?></td>
             </tr>
             <tr>
                 <td>Indeks Prestasi Komulatif</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->IPK; ?></td>
+                <td><?php echo $databeasiswabyid['IPK']; ?></td>
             </tr>
             <tr>
                 <td>Prestasi</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Prestasi; ?></td>
+                <td><?php echo $databeasiswabyid['Prestasi']; ?></td>
             </tr>
             <tr>
                 <td>Alasan Mengajukan Beasiswa</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Alasan; ?></td>
+                <td><?php echo $databeasiswabyid['Alasan']; ?></td>
             </tr>
             <tr>
                 <td>Nama Bank Transfer</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->BANK; ?></td>
+                <td><?php echo $databeasiswabyid['BANK']; ?></td>
             </tr>
             <tr>
                 <td>No Rekening</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->No_Rekening; ?></td>
+                <td><?php echo $databeasiswabyid['No_Rekening']; ?></td>
             </tr>
             <tr>
                 <td>KETERANGAN ORANG TUA / WALI</td>
@@ -224,32 +222,32 @@ class pendaftaran_beasiswa extends operator_base {
             <tr>
                 <td>Nama Orang Tua</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Nama_Ortu; ?></td>
+                <td><?php echo $databeasiswabyid['Nama_Ortu']; ?></td>
             </tr>
             <tr>
                 <td>Alamat Orang Tua</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Alamat_Ortu; ?></td>
+                <td><?php echo $databeasiswabyid['Alamat_Ortu']; ?></td>
             </tr>
             <tr>
                 <td>Pekerjaan Orang Tua</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Pekerjaan_Ortu; ?></td>
+                <td><?php echo $databeasiswabyid['Pekerjaan_Ortu']; ?></td>
             </tr>
             <tr>
                 <td>Penghasilan Orang Tua</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Penghasilan_Ortu; ?></td>
+                <td><?php echo $databeasiswabyid['Penghasilan_Ortu']; ?></td>
             </tr>
             <tr>
                 <td>Jumlah Tanggungan</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid->Jml_Tanggungan; ?></td>
+                <td><?php echo $databeasiswabyid['Jml_Tanggungan']; ?></td>
             </tr>
         </table>
         <br>
         <p style="text-align: justify;">
-            Sehubungan dengan hal tersebut, saya mengajukan permohonan beasiswa : <?php echo $databeasiswabyid->Jenis_Beasiswa; ?> tahun 2014 melalui Bapak Koordinator Kopertis Wilayah V Yogyakarta<br>
+            Sehubungan dengan hal tersebut, saya mengajukan permohonan beasiswa : <?php echo $databeasiswabyid['Jenis_Beasiswa']; ?> tahun 2014 melalui Bapak Koordinator Kopertis Wilayah V Yogyakarta<br>
             Bersama ini saya lampirkan berkas persyaratan permohonan untuk menjadikan pertimbangan dan apabila saya memalsukan data persyaratan tersebut saya bersedia menerima sanksi sesuai ketentuan yang berlaku.<br>
             Atas perhatian dan bantuan Bapak, saya ucapkan terima kasih<br>
         </p>
@@ -258,7 +256,7 @@ class pendaftaran_beasiswa extends operator_base {
             <tr>
                 <td width="25%"></td>
                 <td width="50%"></td>
-                <td width="25%"><p style="text-align: center;">Yogyakarta, <?php echo $databeasiswabyid->Tanggal_Daftar; ?></p></td>
+                <td width="25%"><p style="text-align: center;">Yogyakarta, <?php echo $databeasiswabyid['Tanggal_Daftar']; ?></p></td>
             </tr>
             <tr>
                 <td width="25%"><p style="text-align: center;">Mengetahui/menyetujui,</p></td>
@@ -293,12 +291,12 @@ class pendaftaran_beasiswa extends operator_base {
             <tr>
                 <td width="25%"><p style="text-align: center;"><?php echo 'Prof. Dr. M. Suyanto, MM'; ?></p></td>
                 <td width="50%"></td>
-                <td width="25%"><p style="text-align: center;"><?php echo $data_login->NAMA_PENGGUNA; ?></p></td>
+                <td width="25%"><p style="text-align: center;"><?php echo $databeasiswabyid['Nama_Pengguna']; ?></p></td>
             </tr>
             <tr>
                 <td width="25%"><p style="text-align: center;"><?php echo 'NIK. 190.302.001'; ?></p></td>
                 <td width="50%"></td>
-                <td width="25%"><p style="text-align: center;"><?php echo $databeasiswabyid->NIK_NIM; ?></p></td>
+                <td width="25%"><p style="text-align: center;"><?php echo $databeasiswabyid['NIK_NIM']; ?></p></td>
             </tr>
         </table>    
         <?php
@@ -306,7 +304,7 @@ class pendaftaran_beasiswa extends operator_base {
         ob_end_clean();
         $this->pdf->writeHTML($konten, true, false, true, false, '');
         $this->pdf->AddPage('P', 'A4');
-        $this->pdf->Output('Pendaftaran Beasiswa_' . $databeasiswabyid->I . '.pdf', 'I');
+        $this->pdf->Output('Pendaftaran Beasiswa_.pdf', 'I');
     }
 
 }

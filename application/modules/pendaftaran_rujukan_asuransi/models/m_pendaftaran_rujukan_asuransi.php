@@ -7,9 +7,20 @@ class m_pendaftaran_rujukan_asuransi extends CI_Model {
     }
 
     function tambah_pendaftaran_rujukan_asuransi($parameter) {
-        $sql = 'INSERT INTO asuransi (Jenis_Asuransi,Id_Pengguna,Nama_RS,Alamat_RS,Kronologi,Tanggal_Daftar,
-            Tanggal_Masuk,Tanggal_Keluar,Total_Biaya,Santunan,Status_Asuransi) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
+        $sql = 'INSERT INTO asuransi (Jenis_Asuransi,Id_Pengguna,Id_Periode,Nama_RS,Alamat_RS,Kronologi,Tanggal_Daftar,
+            Tanggal_Masuk,Tanggal_Keluar,Total_Biaya,Santunan,Status_Asuransi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
         return $this->db->query($sql, $parameter);
+    }
+    function get_periode_sistem() {
+        $sql = "SELECT Id_Periode FROM sistem";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return false;
+        }
     }
 
     function ambil_pendaftaran_rujukan_asuransi($parameter) {

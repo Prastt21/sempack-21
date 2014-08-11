@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <label for="nama-pt" class="col-lg-3 control-label">Perguruan Tinggi</label>
                             <div class="col-lg-5">
-                                <input type="text" name="nama_pt" maxlength="100" value="STMIK AMIKOM YOGYAKARTA"  disabled="" class="form-control input-sm" placeholder="Nama_PT" value="<?php echo set_value('nama_pt'); ?>">
+                                <input type="text" name="nama_pt" maxlength="100" value="STMIK AMIKOM YOGYAKARTA"   class="form-control input-sm" placeholder="Nama_PT" value="<?php echo set_value('nama_pt'); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>
@@ -116,7 +116,7 @@
                         <div class="form-group">
                             <label for="bank-beasiswa" class="col-lg-3 control-label">BANK Rekening</label>
                             <div class="col-lg-5">
-                                <input type="text" name="bank" maxlength="100" value="MUAMALAT" disabled="" class="form-control input-sm" placeholder="Bank" value="<?php echo set_value('bank'); ?>">
+                                <input type="text" name="bank" maxlength="100" value="MUAMALAT"  class="form-control input-sm" placeholder="Bank" value="<?php echo set_value('bank'); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>

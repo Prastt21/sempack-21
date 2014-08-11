@@ -52,18 +52,6 @@ class data_beasiswa extends operator_base {
         //load library form validation
         $this->load->library('form_validation');
         //set validasi form
-        $this->form_validation->set_rules('jenis_beasiswa', 'Jenis Beasiswa', 'required');
-        $this->form_validation->set_rules('jurusan', 'Jurusan', 'required');
-        $this->form_validation->set_rules('jenjang', 'Jenjang', 'required');
-        $this->form_validation->set_rules('alamat_sekarang', 'Alamat Sekarang', 'required');
-        $this->form_validation->set_rules('nama_pt', 'Nama Pergururan Tinggi', 'required');
-        $this->form_validation->set_rules('semester', 'Semester', 'required');
-        $this->form_validation->set_rules('ipk', 'IPK', 'required');
-        $this->form_validation->set_rules('prestasi', 'Prestasi', 'required');
-        $this->form_validation->set_rules('alasan', 'Alasan', 'required');
-        $this->form_validation->set_rules('bank', 'Bank', 'required');
-        $this->form_validation->set_rules('no_rekening', 'No Rekening', 'required');
-        $this->form_validation->set_rules('tanggal_daftar', 'Tanggal Daftar', 'required');
         $this->form_validation->set_rules('status_beasiswa', 'Status Beasiswa', 'required');
         $this->form_validation->set_rules('id_beasiswa', 'ID Beasiswa', 'required');        
        
@@ -76,19 +64,6 @@ class data_beasiswa extends operator_base {
         } else {
             $this->load->model('m_data_beasiswa');
             $parameter = array(
-                $this->input->post('jenis_beasiswa'),
-                $this->sesi->get_data_login('ID_PENGGUNA'),
-                $this->input->post('jurusan'),
-                $this->input->post('jenjang'),
-                $this->input->post('alamat_sekarang'),
-                $this->input->post('nama_pt'),
-                $this->input->post('semester'),
-                $this->input->post('ipk'),
-                $this->input->post('prestasi'),
-                $this->input->post('alasan'),
-                $this->input->post('bank'),
-                $this->input->post('no_rekening'),
-                $this->input->post('tanggal_daftar'),
                 $this->input->post('status_beasiswa'),
                 $this->input->post('id_beasiswa')
             );
@@ -124,6 +99,33 @@ class data_beasiswa extends operator_base {
         }
         //kembalikan ke halaman list informasi
         redirect('data_beasiswa');
+    }
+    function cari($offset = 0) {
+        $this->_set_page_role('r');
+        //load library untuk pagination
+        $this->load->library('bagi_halaman');
+        //load model
+        $this->load->model('m_data_beasiswa');
+        if ($this->input->post() != null) {
+            $keyword = $this->input->post('keyword_text', true);
+            $this->session->set_userdata('keyword_cari', $keyword);
+        } else {
+            $keyword = $this->session->userdata('keyword_cari');
+        }
+        $parameter = array('%' . $keyword . '%', $offset, $this->batas);
+        //ambil data dari database
+        $rs_data_beasiswa = $this->m_data_beasiswa->get_list_data($parameter);
+        //menghitung jumlah data tabel keseluruhan
+        $rs_total = $this->m_data_beasiswa->count_search_data($parameter);
+
+        //ambil nilai untuk dikirim ke view
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'data_beasiswa/index');
+        $data['rs_data_beasiswa'] = $rs_data_beasiswa;
+        $data['total_data'] = $rs_total;
+        $data['jml_data'] = count($rs_data_beasiswa);
+        $data['awal'] = $offset;
+        $data['keyword'] = $keyword;
+        parent::display('tampil_data_beasiswa', $data);
     }
 
 }

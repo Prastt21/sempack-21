@@ -106,7 +106,7 @@ class m_beasiswa extends CI_Model {
                 FROM beasiswa JOIN jenis_beasiswa ON beasiswa.id_jb=jenis_beasiswa.id_jb
                 JOIN pengguna ON beasiswa.id_pengguna=pengguna.id_pengguna		
 		JOIN jurusan ON beasiswa.id_jurusan=jurusan.id_jurusan
-                WHERE pengguna.nama_pengguna LIKE ? ORDER BY nama_pengguna ASC LIMIT ?,?';
+                WHERE pengguna.nama_pengguna LIKE ? ORDER BY pengguna.nama_pengguna ASC LIMIT ?,?';
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

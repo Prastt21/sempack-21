@@ -175,7 +175,7 @@ class jenis_beasiswa extends operator_base {
 
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'jenis_beasiswa/index');
-        $data['jenis_beasiswa'] = $rs_jenis_beasiswa;
+        $data['rs_jenis_beasiswa'] = $rs_jenis_beasiswa;
         $data['total_data'] = $rs_total;
         $data['jml_data'] = count($rs_jenis_beasiswa);
         $data['awal'] = $offset;

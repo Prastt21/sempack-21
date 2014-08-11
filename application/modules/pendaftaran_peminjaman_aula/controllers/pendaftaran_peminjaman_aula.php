@@ -9,13 +9,12 @@ class pendaftaran_peminjaman_aula extends operator_base {
 
     var $batas = 15;
 
-    public function index($offset = 0) {
+    public function index() {
         //control hak akses read
         $this->_set_page_role('r');
         //load model
         $this->load->model('m_pendaftaran_peminjaman_aula');
         //load library
-        $this->load->library('bagi_halaman');
         $this->load->library('Form_validation');
         //load javascript + css untuk tanggal 
         $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
@@ -83,8 +82,8 @@ class pendaftaran_peminjaman_aula extends operator_base {
                 //jika gagal kirim pesan ke view
                 if ($this->m_pendaftaran_peminjaman_aula->tambah_pendaftaran_peminjaman_aula($parameter)) {
                     //jika sukses kirim pesan ke view
-                    $this->notification('success', 'Peminjaman Aula berhasil ditambahkan');
-                    $this->cetak_pendaftaran_aula_by_id();
+                    $id = $this->m_pendaftaran_peminjaman_aula->get_last_id();
+                    redirect('pendaftaran_peminjaman_aula/cetak_pendaftaran_aula_by_id/' . $id);
                 } else {
                     //jika gagal kirim pesan ke view
                     $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
@@ -95,10 +94,9 @@ class pendaftaran_peminjaman_aula extends operator_base {
         //redirect ke form
         redirect('pendaftaran_peminjaman_aula');
     }
-    function cetak_pendaftaran_aula_by_id($id) {
-        $data_login = $this->session->userdata('sesi_login');
+    function cetak_pendaftaran_aula_by_id($aula) {
         $this->load->model('m_pendaftaran_peminjaman_aula');        
-        $dataaulabyid = $this->m_pendaftaran_peminjaman_aula->ambil_pendaftaran_peminjaman_aula($id);
+        $dataaulabyid = $this->m_pendaftaran_peminjaman_aula->hasil_pendaftaran_peminjaman_aula($aula);
 
         $this->load->library('pdf');
         $this->pdf->SetCreator(PDF_CREATOR);
@@ -131,7 +129,6 @@ class pendaftaran_peminjaman_aula extends operator_base {
         // add a page
         $this->pdf->AddPage('P', 'A4');
         ob_start();
-        require_once('assets/plugin/tanggal.php');
         ?>
         <hr>        
         <u><p style="text-align: center;">LEMBAR PENDAFTARAN PEMINJAMAN AULA BSC</p></u>
@@ -140,7 +137,7 @@ class pendaftaran_peminjaman_aula extends operator_base {
             <tr>
                 <td width="25%">ID Pendaftaran</td>
                 <td width="2%">:</td>
-                <td width="73%"><?php echo '<b>' . $dataaulabyid->Id_Pinjam_Aula . '</b>'; ?></td>
+                <td width="73%"><?php echo '<b>' . $dataaulabyid['Id_Pinjam_Aula'] . '</b>'; ?></td>
             </tr>
             <tr>
                 <td>Lampiran</td>
@@ -155,57 +152,57 @@ class pendaftaran_peminjaman_aula extends operator_base {
             <tr>
                 <td>Nama Penanggungjawab</td>
                 <td>:</td>
-                <td><?php echo $data_login->NAMA_PENGGUNA; ?></td>
+                <td><?php echo $dataaulabyid['Nama_Pengguna']; ?></td>
             </tr>
             <tr>
                 <td>Nama Kegiatan</td>
                 <td>:</td>
-                <td><?php echo $dataaulabyid->Nama_Kegiatan; ?></td>
+                <td><?php echo $dataaulabyid['Nama_Kegiatan']; ?></td>
             </tr>
             <tr>
                 <td>Ketua Organisasi</td>
                 <td>:</td>
-                <td><?php echo $dataaulabyid->Ketua_Organisasi; ?></td>
+                <td><?php echo $dataaulabyid['Ketua_Organisasi']; ?></td>
             </tr>
             <tr>
                 <td>Peserta</td>
                 <td>:</td>
-                <td><?php echo $$dataaulabyid->Peserta; ?></td>
+                <td><?php echo $dataaulabyid['Peserta']; ?></td>
             </tr>
             <tr>
                 <td>Jumlah Peserta</td>
                 <td>:</td>
-                <td><?php echo $dataaulabyid->Jml_Peserta; ?></td>
+                <td><?php echo $dataaulabyid['Jml_Peserta']; ?></td>
             </tr>
             <tr>
                 <td>Tanggal Pendaftaran</td>
                 <td>:</td>
-                <td><?php echo $dataaulabyid->Tanggal_Daftar; ?></td>
+                <td><?php echo $dataaulabyid['Tanggal_Daftar']; ?></td>
             </tr>
             <tr>
                 <td>Tanggal Pinjam</td>
                 <td>:</td>
-                <td><?php echo $dataaulabyid->Tanggal_Pinjam; ?></td>
+                <td><?php echo $dataaulabyid['Tanggal_Pinjam']; ?></td>
             </tr>
             <tr>
                 <td>Waktu Pinjam</td>
                 <td>:</td>
-                <td><?php echo $dataaulabyid->Waktu_Pinjam; ?></td>
+                <td><?php echo $dataaulabyid['Waktu_Pinjam']; ?></td>
             </tr>
             <tr>
                 <td>Tanggal Selesai</td>
                 <td>:</td>
-                <td><?php echo $dataaulabyid->Tanggal_Selesai; ?></td>
+                <td><?php echo $dataaulabyid['Tanggal_Selesai']; ?></td>
             </tr>
             <tr>
                 <td>Waktu Selesai</td>
                 <td>:</td>
-                <td><?php echo $dataaulabyid->Waktu_Selesai; ?></td>
+                <td><?php echo $dataaulabyid['Waktu_Selesai']; ?></td>
             </tr>
             <tr>
                 <td>Status Peminjaman</td>
                 <td>:</td>
-                <td><?php echo $dataaulabyid->Status_Penggunaan; ?></td>
+                <td><?php echo $dataaulabyid['Status_Penggunaan']; ?></td>
             </tr>
         </table>
         <br>
@@ -244,7 +241,7 @@ class pendaftaran_peminjaman_aula extends operator_base {
             <tr>
                 <td width="25%"><p style="text-align: center;"><?php echo '....................'; ?></p></td>
                 <td width="50%"></td>
-                <td width="25%"><p style="text-align: center;"><?php echo $dataaulabyid->Ketua_Orma; ?></p></td>
+                <td width="25%"><p style="text-align: center;"><?php echo $dataaulabyid['Ketua_Organisasi']; ?></p></td>
             </tr>
             <tr>
                 <td width="25%"></td>
@@ -292,7 +289,7 @@ class pendaftaran_peminjaman_aula extends operator_base {
         ob_end_clean();
         $this->pdf->writeHTML($konten, true, false, true, false, '');
         $this->pdf->AddPage('P', 'A4');       
-        $this->pdf->Output('Peminjaman Aula BSC_'.$dataaulabyid->I.'.pdf', 'I');
+        $this->pdf->Output('Peminjaman Aula BSC_.pdf', 'I');
     }
 
 }

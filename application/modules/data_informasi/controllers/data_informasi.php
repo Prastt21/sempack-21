@@ -178,7 +178,7 @@ class data_informasi extends operator_base {
 
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'data_informasi/index');
-        $data['data_informasi'] = $rs_data_informasi;
+        $data['rs_data_informasi'] = $rs_data_informasi;
         $data['total_data'] = $rs_total;
         $data['jml_data'] = count($rs_data_informasi);
         $data['awal'] = $offset;

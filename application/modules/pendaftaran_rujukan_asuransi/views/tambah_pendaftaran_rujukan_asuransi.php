@@ -29,7 +29,8 @@
                                 </select>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                                              
+                        </div>
+                        <input type="hidden" name="periode" maxlength="100" class="form-control input-sm" placeholder="Periode" value="<?php echo set_value('periode',$result_periode_sistem['Id_Periode']); ?>">
                         <div class="form-group">
                             <label for="nama-rs" class="col-lg-3 control-label">Nama Rumah Sakit</label>
                             <div class="col-lg-5">

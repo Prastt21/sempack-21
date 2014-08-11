@@ -43,6 +43,8 @@ class laporan_aula extends operator_base {
         $data['result_total'] = $this->m_laporan_aula->get_total_aula($parameter);
         $data['total_aula'] = $this->m_laporan_aula->get_total_aula_last_month($parameter);
         $data['total_aula_ini'] = $this->m_laporan_aula->get_total_aula_this_month($parameter);
+        $data['total_aula_terverifikasi'] = $this->m_laporan_aula->get_total_aula_verifikasi($parameter);
+        $data['total_aula_waiting'] = $this->m_laporan_aula->get_total_aula_waiting($parameter);
         parent::display('tampil_laporan_aula', $data);
     }
 
@@ -185,18 +187,13 @@ class laporan_aula extends operator_base {
         <table style="width: 100%;">
             <thead>
                 <tr>
-                    <td align="center"><b>NO</b></td>
-                    <td align="center"><b>PEMINJAM</b></td>
-                    <td align="center"><b>KEGIATAN</b></td>
-                    <td align="center"><b>KETUA ORMA</b></td>
-                    <td align="center"><b>PESERTA</b></td>
-                    <td align="center"><b>JML</b></td>
-                    <td align="center"><b>TGL DAFTAR</b></td>
-                    <td align="center"><b>TGL PINJAM</b></td>
-                    <td align="center"><b>WKT PINJAM</b></td>
-                    <td align="center"><b>TGL SELESAI</b></td>
-                    <td align="center"><b>WKT SELESAI</b></td>
-                    <td align="center"><b>STATUS</b></td>
+                    <td width="5%" align="center"><b>NO</b></td>
+                    <td width="20%" align="center"><b>PEMINJAM</b></td>
+                    <td width="30%" align="center"><b>KEGIATAN</b></td>
+                    <td width="13%" align="center"><b>TGL PINJAM</b></td>
+                    <td width="12%" align="center"><b>WKT PINJAM</b></td>
+                    <td width="13%" align="center"><b>TGL SELESAI</b></td>
+                    <td width="13%" align="center"><b>WKT SELESAI</b></td>
                 </tr>
             </thead>
             <tbody>
@@ -206,18 +203,13 @@ class laporan_aula extends operator_base {
                     foreach ($dataaulabytanggal as $dt_peminjaman_aula):
                         ?>
                         <tr>
-                            <td align="center"><?php echo++$a ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Nama_Pengguna']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Nama_Kegiatan']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Ketua_Organisasi']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Peserta']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Jml_Peserta']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Tanggal_Daftar']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Tanggal_Pinjam']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Waktu_Pinjam']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Tanggal_Selesai']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Waktu_Selesai']; ?></td>
-                            <td><?php echo $dt_peminjaman_aula['Status_Penggunaan']; ?></td>                                        
+                            <td width="5%" align="center"><?php echo++$a ?></td>
+                            <td width="20%" ><?php echo $dt_peminjaman_aula['Nama_Pengguna']; ?></td>
+                            <td width="30%"><?php echo $dt_peminjaman_aula['Nama_Kegiatan']; ?></td>
+                            <td width="13%" align="center"><?php echo $dt_peminjaman_aula['Tanggal_Pinjam']; ?></td>
+                            <td width="12%" align="center"><?php echo $dt_peminjaman_aula['Waktu_Pinjam']; ?></td>
+                            <td width="13%" align="center"><?php echo $dt_peminjaman_aula['Tanggal_Selesai']; ?></td>
+                            <td width="13%" align="center"><?php echo $dt_peminjaman_aula['Waktu_Selesai']; ?></td>                                       
                         </tr>
                         <?php
                     endforeach;

@@ -17,7 +17,8 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
         $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
         $this->load->library('Form_validation');
-        parent::display('tambah_pendaftaran_rujukan_asuransi');
+        $data['result_periode_sistem'] = $this->m_pendaftaran_rujukan_asuransi->get_periode_sistem();
+        parent::display('tambah_pendaftaran_rujukan_asuransi',$data);
     }
 
     function tambah_pendaftaran_rujukan_asuransi() {
@@ -27,7 +28,7 @@ class pendaftaran_rujukan_asuransi extends operator_base {
         //load javascript + css untuk tanggal 
         $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
         $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
-
+        
         parent::display('tambah_pendaftaran_rujukan_asuransi');
     }
 
@@ -63,6 +64,7 @@ class pendaftaran_rujukan_asuransi extends operator_base {
             $parameter = array(
                 $this->input->post('jenis_asuransi'),
                 $this->sesi->get_data_login('ID_PENGGUNA'),
+                $this->input->post('periode'),
                 $this->input->post('nama_rs'),
                 $this->input->post('alamat_rs'),
                 $this->input->post('kronologi'),

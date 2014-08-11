@@ -24,5 +24,32 @@ class jadwal_peminjaman_aula extends operator_base {
         $data['halaman'] = $this->bagi_halaman->paging($data['total_data'], $this->batas, 'jadwal_peminjaman_aula/index');
 
         parent::display('tampil_jadwal_peminjaman_aula', $data);
-    }    
+    }  
+    function cari($offset = 0) {
+        $this->_set_page_role('r');
+        //load library untuk pagination
+        $this->load->library('bagi_halaman');
+        //load model
+        $this->load->model('m_jadwal_peminjaman_aula');
+        if ($this->input->post() != null) {
+            $keyword = $this->input->post('keyword_text', true);
+            $this->session->set_userdata('keyword_cari', $keyword);
+        } else {
+            $keyword = $this->session->userdata('keyword_cari');
+        }
+        $parameter = array('%' . $keyword . '%', $offset, $this->batas);
+        //ambil data dari database
+        $rs_jadwal_peminjaman_aula = $this->m_jadwal_peminjaman_aula->get_list_data($parameter);
+        //menghitung jumlah data tabel keseluruhan
+        $rs_total = $this->m_jadwal_peminjaman_aula->count_search_data($parameter);
+
+        //ambil nilai untuk dikirim ke view
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'jadwal_peminjaman_aula/index');
+        $data['rs_jadwal_peminjaman_aula'] = $rs_jadwal_peminjaman_aula;
+        $data['total_data'] = $rs_total;
+        $data['jml_data'] = count($rs_jadwal_peminjaman_aula);
+        $data['awal'] = $offset;
+        $data['keyword'] = $keyword;
+        parent::display('tampil_jadwal_peminjaman_aula', $data);
+    }
 }

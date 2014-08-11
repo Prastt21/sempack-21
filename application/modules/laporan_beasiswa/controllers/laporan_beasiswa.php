@@ -196,21 +196,16 @@ class laporan_beasiswa extends operator_base {
         <table style="width: 100%; font-size: 10px;">                
             <thead>
                 <tr>
-                    <td align="center"><b>NO</b></td>
-                    <td align="center"><b>JENIS BEASISWA</b></td>
-                    <td align="center"><b>NAMA PENDAFTAR</b></td>                                
-                    <td align="center"><b>JURUSAN</b></td>
-                    <td align="center"><b>JENJANG</b></td>
-                    <td align="center"><b>ALAMAT SEKARANG</b></td>
-                    <td align="center"><b>PERGURUAN TINGGI</b></td>
-                    <td align="center"><b>SEMESTER</b></td>
-                    <td align="center"><b>IPK</b></td>
-                    <td align="center"><b>PRESTASI</b></td>
-                    <td align="center"><b>ALASAN</b></td>
-                    <td align="center"><b>NAMA BANK</b></td>
-                    <td align="center"><b>NO REKENING</b></td>
-                    <td align="center"><b>TANGGAL DAFTAR</b></td>
-                    <td align="center"><b>STATUS </b></td> 
+                    <td width="5%" align="center"><b>NO</b></td>
+                    <td width="10%" align="center"><b>BEASISWA</b></td>
+                    <td width="20%" align="center"><b>PENDAFTAR</b></td>                                
+                    <td width="10%" align="center"><b>JURUSAN</b></td>
+                    <td width="15%" align="center"><b>ALAMAT</b></td>
+                    <td width="7%"align="center"><b>SMT</b></td>
+                    <td width="7%" align="center"><b>IPK</b></td>
+                    <td width="8%" align="center"><b>BANK</b></td>
+                    <td width="8%" align="center"><b>REKENING</b></td>
+                    <td width="10%" align="center"><b>TGL DAFTAR</b></td>
 
                 </tr>
             </thead>
@@ -221,21 +216,16 @@ class laporan_beasiswa extends operator_base {
                     foreach ($databeasiswabytanggal as $dt_beasiswa):
                         ?>
                         <tr>
-                            <td align="center"><?php echo++$a ?></td>
-                            <td><?php echo $dt_beasiswa['Jenis_Beasiswa']; ?></td>
-                            <td><?php echo $dt_beasiswa['Nama_Pengguna']; ?></td>                                        
-                            <td><?php echo $dt_beasiswa['Nama_Jurusan']; ?></td>
-                            <td><?php echo $dt_beasiswa['Jenjang']; ?></td>
-                            <td><?php echo $dt_beasiswa['Alamat_Sekarang']; ?></td>
-                            <td><?php echo $dt_beasiswa['Nama_PT']; ?></td>
-                            <td><?php echo $dt_beasiswa['Semester']; ?></td>
-                            <td><?php echo $dt_beasiswa['IPK']; ?></td>
-                            <td><?php echo $dt_beasiswa['Prestasi']; ?></td>
-                            <td><?php echo $dt_beasiswa['Alasan']; ?></td>
-                            <td><?php echo $dt_beasiswa['BANK']; ?></td>
-                            <td><?php echo $dt_beasiswa['No_Rekening']; ?></td>
-                            <td><?php echo $dt_beasiswa['Tanggal_Daftar']; ?></td>
-                            <td><?php echo $dt_beasiswa['Status_Beasiswa']; ?></td>
+                            <td width="5%" align="center"><?php echo++$a ?></td>
+                            <td width="10%" align="center"><?php echo $dt_beasiswa['Jenis_Beasiswa']; ?></td>
+                            <td width="20%"><?php echo $dt_beasiswa['Nama_Pengguna']; ?></td>                                        
+                            <td width="10%"><?php echo $dt_beasiswa['Nama_Jurusan']; ?></td>
+                            <td width="15%" align="right"><?php echo $dt_beasiswa['Alamat_Sekarang']; ?></td>
+                            <td width="7%" align="center"><?php echo $dt_beasiswa['Semester']; ?></td>
+                            <td width="7%" align="center"><?php echo $dt_beasiswa['IPK']; ?></td>
+                            <td width="8%" align="center"><?php echo $dt_beasiswa['BANK']; ?></td>
+                            <td width="8%" align="center"><?php echo $dt_beasiswa['No_Rekening']; ?></td>
+                            <td width="10%" align="center"><?php echo $dt_beasiswa['Tanggal_Daftar']; ?></td>
                         </tr>
                         <?php
                     endforeach;

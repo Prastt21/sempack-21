@@ -45,7 +45,7 @@ class keterangan_orang_tua extends operator_base {
 
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'keterangan_orang_tua/index');
-        $data['keterangan_orang_tua'] = $rs_keterangan_orang_tua;
+        $data['rs_keterangan_orang_tua'] = $rs_keterangan_orang_tua;
         $data['total_data'] = $rs_total;
         $data['jml_data'] = count($rs_keterangan_orang_tua);
         $data['awal'] = $offset;

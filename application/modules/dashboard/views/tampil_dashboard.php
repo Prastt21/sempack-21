@@ -11,15 +11,6 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-8">
-            <p>
-                <a class="btn btn-app" href="<?php echo base_url('jadwal_peminjaman_aula'); ?>"><i class="fa fa-shopping-cart"></i> JADWAL PEMINJAMAN AULA</a>
-                <a class="btn btn-app" href="<?php echo base_url('pendaftar_beasiswa'); ?>"><i class="fa fa-truck"></i> LIST PENDAFTAR BEASISWA</a>
-                <a class="btn btn-app" href="<?php echo base_url(); ?>"><i class="fa fa-truck"></i> LIST PENDAFTAR ASURANSI</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-8">
             <div class="box box-info">
                 <div class="box-header">
                     <h3 class="box-title">Statistik Operasional Sistem</h3>
@@ -45,7 +36,7 @@
                 <div class="overlay loading-process"></div>
                 <div class="loading-img loading-process"></div>
             </div><!-- /.box -->
-        </div>
+        </div>        
         <div class="col-xs-4">
             <div class="row">
                 <div class="box box-info">
@@ -57,6 +48,22 @@
                             <tr>
                             <tr>                                        
                                 <td><?php echo $rs_pengumuman['Pengumuman_Sistem']; ?></td>
+                            </tr>
+                            </tr>                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <span class="box-title">Chat Request</span>
+                    </div>
+                    <div class="box-body">
+                        <table class="table" width="100%">
+                            <tr>
+                            <tr>                                        
+                                <td align="center"><a href="ymsgr:sendim?prastt21" target="_blank"><img src="http://opi.yahoo.com/online?u=prastt21&amp;m=g&amp;t=14" /></a><br /></td>
                             </tr>
                             </tr>                            
                         </table>

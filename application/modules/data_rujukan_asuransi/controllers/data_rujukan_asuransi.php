@@ -51,15 +51,6 @@ class data_rujukan_asuransi extends operator_base {
             redirect('data_rujukan_asuransi');
         //load library form validation
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('jenis_asuransi', 'Jenis Asuransi', 'required|trim');
-        //$this->form_validation->set_rules('nama_perujuk', 'Nama Perujuk', 'required|trim');
-        $this->form_validation->set_rules('nama_rs', 'Nama Rumah Sakit', 'required|trim');
-        $this->form_validation->set_rules('alamat_rs', 'Alamat Rumah Sakit', 'required|trim');
-        $this->form_validation->set_rules('kronologi', 'Kronologi', 'required|trim');
-        $this->form_validation->set_rules('tanggal_daftar', 'Tanggal Daftar', 'required|trim');
-        $this->form_validation->set_rules('tanggal_masuk', 'Tanggal Masuk', 'required|trim');
-        $this->form_validation->set_rules('tanggal_keluar', 'Tanggal Keluar', 'required|trim');
-        $this->form_validation->set_rules('total_biaya', 'Total Biaya', 'required|trim');
         $this->form_validation->set_rules('santunan', 'Santunan', 'required|trim');
         $this->form_validation->set_rules('status_asuransi', 'Status Asuransi', 'required|trim');
         $this->form_validation->set_rules('id_asuransi', 'ID Asuransi', 'required');
@@ -74,16 +65,7 @@ class data_rujukan_asuransi extends operator_base {
         } else {
             //jika validasi sukses
             $this->load->model('m_data_rujukan_asuransi');
-            $parameter = array(                
-                $this->input->post('jenis_asuransi'),
-                $this->sesi->get_data_login('ID_PENGGUNA'),
-                $this->input->post('nama_rs'),
-                $this->input->post('alamat_rs'),
-                $this->input->post('kronologi'),
-                $this->input->post('tanggal_daftar'),
-                $this->input->post('tanggal_masuk'),
-                $this->input->post('tanggal_keluar'),
-                $this->input->post('total_biaya'),
+            $parameter = array(
                 $this->input->post('santunan'),
                 $this->input->post('status_asuransi'),
                 $this->input->post('id_asuransi')
@@ -119,6 +101,33 @@ class data_rujukan_asuransi extends operator_base {
         }
         //kembalikan ke halaman list informasi
         redirect('data_rujukan_asuransi');
+    }
+    function cari($offset = 0) {
+        $this->_set_page_role('r');
+        //load library untuk pagination
+        $this->load->library('bagi_halaman');
+        //load model
+        $this->load->model('m_data_rujukan_asuransi');
+        if ($this->input->post() != null) {
+            $keyword = $this->input->post('keyword_text', true);
+            $this->session->set_userdata('keyword_cari', $keyword);
+        } else {
+            $keyword = $this->session->userdata('keyword_cari');
+        }
+        $parameter = array('%' . $keyword . '%', $offset, $this->batas);
+        //ambil data dari database
+        $rs_data_rujukan_asuransi = $this->m_data_rujukan_asuransi->get_list_data($parameter);
+        //menghitung jumlah data tabel keseluruhan
+        $rs_total = $this->m_data_rujukan_asuransi->count_search_data($parameter);
+
+        //ambil nilai untuk dikirim ke view
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'data_rujukan_asuransi/index');
+        $data['rs_data_rujukan_asuransi'] = $rs_data_rujukan_asuransi;
+        $data['total_data'] = $rs_total;
+        $data['jml_data'] = count($rs_data_rujukan_asuransi);
+        $data['awal'] = $offset;
+        $data['keyword'] = $keyword;
+        parent::display('tampil_data_rujukan_asuransi', $data);
     }
 
 }

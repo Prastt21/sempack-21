@@ -50,20 +50,6 @@ class m_dashboard extends CI_Model {
             return array();
         }
     }
-
-    //get item laris
-    function get_pengguna_pengunjung($params) {
-        $sql = " LIMIT ?";
-        $query = $this->db->query($sql, $params);
-        if ($query->num_rows() > 0) {
-            $result = $query->result_array();
-            $query->free_result();
-            return $result;
-        } else {
-            return array();
-        }
-    }
-
     function get_list_last_login() {
         $sql = 'SELECT Nama_Pengguna FROM Pengguna ORDER BY sesi DESC LIMIT 5';
         $query = $this->db->query($sql);
@@ -75,5 +61,4 @@ class m_dashboard extends CI_Model {
             return array();
         }
     }
-
 }

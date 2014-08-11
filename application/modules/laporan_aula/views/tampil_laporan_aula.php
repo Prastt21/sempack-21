@@ -93,16 +93,13 @@
                         <div class="col-xs-12">
                             <table border="0">
                                 <tr>
-                                    <td colspan="2"><b>Peminjaman Aula BSC</b> </td>
+                                    <td colspan="3"><b>Peminjaman Aula BSC</b> </td>
                                 </tr>
                                 <tr>
-                                    <td width="55%">Total Peminjaman Aula BSC </td>
-                                    <td width="45%"></td>
-                                </tr>
-                                <tr>
-                                    <td>Total Peminjaman </td>
-                                    <td></td>
-                                </tr>                                
+                                    <td >Total Peminjaman Aula BSC </td>
+                                    <td >:</td>
+                                    <td ><?php echo $result_total ?></td>
+                                </tr>                               
                             </table>
                         </div>
                     </div>
@@ -110,15 +107,17 @@
                         <div class="col-xs-12" style="padding-top: 10px;">
                             <table border="0">
                                 <tr>
-                                    <td colspan="2"><b> Jumlah Peminjaman Aula BSC</b> </td>
+                                    <td colspan="3"><b> Jumlah Peminjaman Aula BSC</b> </td>
                                 </tr>
                                 <tr>
-                                    <td width="65%">Total Waiting </td>
-                                    <td width="35%"></td>
+                                    <td>Total Waiting </td>
+                                    <td>:</td>
+                                    <td><?php echo $total_aula_waiting ;?></td>
                                 </tr>
                                 <tr>
-                                    <td width="65%">Total Terverifikasi </td>
-                                    <td width="35%"></td>
+                                    <td>Total Terverifikasi </td>
+                                    <td>:</td>
+                                    <td><?php echo $total_aula_terverifikasi ;?></td>
                                 </tr>                                
                             </table>
                         </div>

@@ -45,7 +45,7 @@ class pengguna extends operator_base {
 
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'pengguna/index');
-        $data['pengguna'] = $rs_pengguna;
+        $data['rs_pengguna'] = $rs_pengguna;
         $data['total_data'] = $rs_total;
         $data['jml_data'] = count($rs_pengguna);
         $data['awal'] = $offset;
