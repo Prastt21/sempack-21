@@ -204,8 +204,8 @@ class rujukan_asuransi extends operator_base {
         $rs_total = $this->m_rujukan_asuransi->count_search_data($parameter);
 
         //ambil nilai untuk dikirim ke view
-        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'satuan/index');
-        $data['rujukan_asuransi'] = $rs_rujukan_asuransi;
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'rujukan_asuransi/index');
+        $data['rs_rujukan_asuransi'] = $rs_rujukan_asuransi;
         $data['total_data'] = $rs_total;
         $data['jml_data'] = count($rs_rujukan_asuransi);
         $data['awal'] = $offset;

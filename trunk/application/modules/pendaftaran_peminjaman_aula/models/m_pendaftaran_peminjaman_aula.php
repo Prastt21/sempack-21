@@ -61,5 +61,22 @@ class m_pendaftaran_peminjaman_aula extends CI_Model {
         } else {
             return false;
         }
-    }   
+    }
+    function hasil_pendaftaran_peminjaman_aula($parameter) {
+        $sql = 'SELECT a.*,b.* FROM aula a
+                INNER JOIN pengguna b ON b.Id_Pengguna = a.Id_Pengguna
+                WHERE a.Id_pinjam_aula = ?';
+        $query = $this->db->query($sql, $parameter);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
+        } else {
+            return false;
+        }
+    }
+    function get_last_id() {
+        return $this->db->insert_id();
+    }
+
 }

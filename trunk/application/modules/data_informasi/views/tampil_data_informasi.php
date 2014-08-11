@@ -55,9 +55,9 @@
                         </thead>
                         <tbody>
                             <?php
-                            if (isset($rs_informasi)) {
+                            if (isset($rs_data_informasi)) {
                                 $a = isset($awal) ? $awal : 0;
-                                foreach ($rs_informasi as $dt_informasi):
+                                foreach ($rs_data_informasi as $dt_informasi):
                                     ?>
                                     <tr>
                                         <td align="center"><?php echo++$a ?></td>

@@ -171,7 +171,7 @@ class periode extends operator_base {
 
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'satuan/index');
-        $data['periode'] = $rs_periode;
+        $data['rs_periode'] = $rs_periode;
         $data['total_data'] = $rs_total;
         $data['jml_data'] = count($rs_periode);
         $data['awal'] = $offset;

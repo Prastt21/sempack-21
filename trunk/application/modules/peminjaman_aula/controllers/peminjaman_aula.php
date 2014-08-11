@@ -206,7 +206,7 @@ class peminjaman_aula extends operator_base {
 
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'peminjaman_aula/index');
-        $data['peminjaman_aula'] = $rs_peminjaman_aula;
+        $data['rs_peminjaman_aula'] = $rs_peminjaman_aula;
         $data['total_data'] = $rs_total;
         $data['jml_data'] = count($rs_peminjaman_aula);
         $data['awal'] = $offset;

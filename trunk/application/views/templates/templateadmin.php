@@ -30,7 +30,7 @@
         echo isset($FILE_CSS) ? $FILE_CSS : '';
         ?>
     </head>
-    <body class="skin-blue">
+    <body class="skin-orange">
         <header class="header">
             <a href="#" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->

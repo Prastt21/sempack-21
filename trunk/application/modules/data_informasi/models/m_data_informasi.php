@@ -60,7 +60,7 @@ class m_data_informasi extends CI_Model {
     }
     //get data
     function get_list_data($params) {
-        $sql = 'SELECT * FROM informasi WHERE judul_info LIKE ? ORDER BY judul_info ASC LIMIT ?,?';
+        $sql = 'SELECT a.*,b.* FROM informasi a INNER JOIN pengguna b ON a.id_pengguna=b.id_pengguna WHERE a.judul_info LIKE ? ORDER BY a.judul_info ASC LIMIT ?,?';
         $query = $this->db->query($sql, $params);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

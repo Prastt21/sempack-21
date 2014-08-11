@@ -6,7 +6,8 @@ class m_laporan_aula extends CI_Model {
         parent::__construct();
     }
     function ambil_laporan_aula($parameter) {
-        $sql = 'SELECT a.*,b.* FROM aula a INNER JOIN pengguna b WHERE MONTH(tanggal_daftar) = ? 
+        $sql = 'SELECT a.*,b.* FROM aula a INNER JOIN pengguna b ON a.id_pengguna=b.id_pengguna
+                WHERE MONTH(tanggal_daftar) = ? 
                     AND YEAR(tanggal_daftar) = ? LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
@@ -89,6 +90,29 @@ class m_laporan_aula extends CI_Model {
             $result = $query->row_array();
             $query->free_result();
             return $result['total'];
+        } else {
+            return array();
+        }
+    }
+    //ambil total peminjaman aula pada bulan sekarang
+    function get_total_aula_verifikasi($params) {
+        $sql = "SELECT COUNT(id_pinjam_aula)'jumlah' FROM aula WHERE status_penggunaan = 'TERVERIFIKASI'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
+        } else {
+            return array();
+        }
+    }
+    function get_total_aula_waiting($params) {
+        $sql = "SELECT COUNT(id_pinjam_aula)'jumlah' FROM aula WHERE status_penggunaan = 'WAITING'";
+        $query = $this->db->query($sql, $params);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result['jumlah'];
         } else {
             return array();
         }

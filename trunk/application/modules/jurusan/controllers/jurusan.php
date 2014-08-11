@@ -174,7 +174,7 @@ class jurusan extends operator_base {
 
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'satuan/index');
-        $data['jurusan'] = $rs_jurusan;
+        $data['rs_jurusan'] = $rs_jurusan;
         $data['total_data'] = $rs_total;
         $data['jml_data'] = count($rs_jurusan);
         $data['awal'] = $offset;

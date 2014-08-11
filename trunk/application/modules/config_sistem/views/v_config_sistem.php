@@ -44,10 +44,10 @@
                                 <select name="periode_sistem" class="form-control input-sm" style="width: 150px;">
                                     <option></option>
                                     <?php
-                                    if (isset($rs_periode)):
-                                        foreach ($rs_periode as $dt_periode):
+                                    if (isset($rs_periode_ku)):
+                                        foreach ($rs_periode_ku as $dt_periode_ku):
                                             ?>
-                                            <option value="<?php echo $dt_periode['Id_Periode']; ?>"><?php echo $dt_periode['Tahun']; ?></option>
+                                            <option value="<?php echo $dt_periode_ku['Id_Periode']; ?>" <?php echo set_value('periode_sistem') == $dt_periode_ku['Id_Periode'] ? 'selected = "selected"' : ''; ?>><?php echo $dt_periode_ku['Tahun']; ?></option>
                                             <?php
                                         endforeach;
                                     endif;

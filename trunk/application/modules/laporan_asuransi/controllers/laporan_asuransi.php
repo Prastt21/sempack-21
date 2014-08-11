@@ -187,18 +187,12 @@ class laporan_asuransi extends operator_base {
         <table class="table table-bordered table-condensed table-hover">
             <thead>
                 <tr>
-                    <td width="3%" align="center"><b>NO</b></td>
-                    <td width="8%" align="center"><b>JENIS ASURANSI</b></td>
-                    <td width="12%" align="center"><b>NAMA PERUJUK</b></td>
-                    <td width="11%" align="center"><b>NAMA RUMAH SAKIT</b></td>
-                    <td width="12%" align="center"><b>ALAMAT RUMAH SAKIT</b></td>
-                    <td width="8%" align="center"><b>KRONOLOGI</b></td>
-                    <td width="8%" align="center"><b>TANGGAL DAFTAR</b></td>
-                    <td width="8%" align="center"><b>TANGGAL MASUK</b></td>
-                    <td width="8%" align="center"><b>TANGGAL KELUAR</b></td>
-                    <td width="8%" align="center"><b>TOTAL BIAYA</b></td>
-                    <td width="8%" align="center"><b>SANTUNAN</b></td>
-                    <td width="9%" align="center"><b>STATUS</b></td>
+                    <td width="5%" align="center"><b>NO</b></td>
+                    <td width="20%" align="center"><b>JENIS ASURANSI</b></td>
+                    <td width="25%" align="center"><b>NAMA PERUJUK</b></td>
+                    <td width="15%" align="center"><b>TANGGAL DAFTAR</b></td>
+                    <td width="15%" align="center"><b>TOTAL BIAYA</b></td>
+                    <td width="15%" align="center"><b>SANTUNAN</b></td>
                 </tr>
             </thead>
             <tbody>
@@ -208,18 +202,12 @@ class laporan_asuransi extends operator_base {
                     foreach ($dataasuransibytanggal as $dt_rujukan_asuransi):
                         ?>
                         <tr>
-                            <td align="center"><?php echo++$a ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Jenis_Asuransi']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Nama_Pengguna']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Nama_RS']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Alamat_RS']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Kronologi']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Tanggal_Daftar']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Tanggal_Masuk']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Tanggal_Keluar']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Total_Biaya']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Santunan']; ?></td>
-                            <td><?php echo $dt_rujukan_asuransi['Status_Asuransi']; ?></td>
+                            <td width="5%" align="center"><?php echo++$a ?></td>
+                            <td width="20%" align="center"><?php echo $dt_rujukan_asuransi['Jenis_Asuransi']; ?></td>
+                            <td width="25%"><?php echo $dt_rujukan_asuransi['Nama_Pengguna']; ?></td>
+                            <td width="15%" align="center"><?php echo $dt_rujukan_asuransi['Tanggal_Daftar']; ?></td>
+                            <td width="15%" align="center"><?php echo $dt_rujukan_asuransi['Total_Biaya']; ?></td>
+                            <td width="15%" align="center"><?php echo $dt_rujukan_asuransi['Santunan']; ?></td>
                         </tr>
                         <?php
                     endforeach;

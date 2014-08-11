@@ -7,8 +7,8 @@ class m_laporan_asuransi extends CI_Model {
     }
 
     function ambil_laporan_asuransi($parameter) {
-        $sql = 'SELECT a.*,b.* FROM asuransi a INNER JOIN pengguna b WHERE MONTH(tanggal_daftar) = ? 
-                    AND YEAR(tanggal_daftar) = ? LIMIT ?,?';
+        $sql = 'SELECT a.*,b.* FROM asuransi a INNER JOIN pengguna b ON a.id_pengguna=b.id_pengguna 
+                WHERE MONTH(tanggal_daftar) = ? AND YEAR(tanggal_daftar) = ? LIMIT ?,?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->result_array();

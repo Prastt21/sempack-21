@@ -51,14 +51,7 @@ class data_peminjaman_aula extends operator_base {
             redirect('data_peminjaman_aula');
         //load library form validation
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('nama_kegiatan', 'Nama Kegiatan', 'required|trim');
-        $this->form_validation->set_rules('ketua_organisasi', 'Ketua Organisasi', 'required|trim');
-        $this->form_validation->set_rules('peserta', 'Peserta', 'required|trim');
-        $this->form_validation->set_rules('jml_peserta', 'Jumlah Peserta', 'required|trim');
-        $this->form_validation->set_rules('tanggal_pinjam', 'Tanggal Pinjam', 'required|trim');
-        $this->form_validation->set_rules('waktu_pinjam', 'Waktu Pinjam', 'required|trim');
-        $this->form_validation->set_rules('tanggal_selesai', 'Tanggal Selesai', 'required|trim');
-        $this->form_validation->set_rules('waktu_selesai', 'Waktu Selesai', 'required|trim');
+        
         $this->form_validation->set_rules('status_penggunaan', 'Status Penggunaan', 'required|trim');
         $this->form_validation->set_rules('id_pinjam_aula', 'ID Pinjam Aula', 'required');
 
@@ -73,15 +66,6 @@ class data_peminjaman_aula extends operator_base {
             //jika validasi sukses
             $this->load->model('m_data_peminjaman_aula');
             $parameter = array(                
-            $this->sesi->get_data_login('ID_PENGGUNA'),
-            $this->input->post('nama_kegiatan'),
-            $this->input->post('ketua_organisasi'),
-            $this->input->post('peserta'),
-            $this->input->post('jml_peserta'),
-            $this->input->post('tanggal_pinjam'),
-            $this->input->post('waktu_pinjam'),
-            $this->input->post('tanggal_selesai'),
-            $this->input->post('waktu_selesai'),
             $this->input->post('status_penggunaan'),
             $this->input->post('id_pinjam_aula')
             );
@@ -117,5 +101,33 @@ class data_peminjaman_aula extends operator_base {
         //kembalikan ke halaman list informasi
         redirect('data_peminjaman_aula');
     }
+    function cari($offset = 0) {
+        $this->_set_page_role('r');
+        //load library untuk pagination
+        $this->load->library('bagi_halaman');
+        //load model
+        $this->load->model('m_data_peminjaman_aula');
+        if ($this->input->post() != null) {
+            $keyword = $this->input->post('keyword_text', true);
+            $this->session->set_userdata('keyword_cari', $keyword);
+        } else {
+            $keyword = $this->session->userdata('keyword_cari');
+        }
+        $parameter = array('%' . $keyword . '%', $offset, $this->batas);
+        //ambil data dari database
+        $rs_data_peminjaman_aula = $this->m_data_peminjaman_aula->get_list_data($parameter);
+        //menghitung jumlah data tabel keseluruhan
+        $rs_total = $this->m_data_peminjaman_aula->count_search_data($parameter);
+
+        //ambil nilai untuk dikirim ke view
+        $data['halaman'] = $this->bagi_halaman->paging($rs_total, $this->batas, 'data_peminjaman_aula/index');
+        $data['rs_data_peminjaman_aula'] = $rs_data_peminjaman_aula;
+        $data['total_data'] = $rs_total;
+        $data['jml_data'] = count($rs_data_peminjaman_aula);
+        $data['awal'] = $offset;
+        $data['keyword'] = $keyword;
+        parent::display('tampil_data_peminjaman_aula_op', $data);
+    }
+
 
 }

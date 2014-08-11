@@ -33,7 +33,7 @@ class config_pengumumancoba extends operator_base {
         //load model
         $this->load->model('m_config_pengumuman');
         //ambil data informasi berdasarkan id informasi
-        $data['result_config_pengumuman'] = $this->m_config_pengumuman->get_config_pengumuman_by_id($id);
+        $data['result_config_pengumuman'] = $this->m_config_pengumuman->get_pengumuman_by_id($id);
         //jika tidak dipencet
         parent::display('ubah_config_pengumuman', $data);
     }

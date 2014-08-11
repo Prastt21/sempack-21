@@ -30,9 +30,9 @@ class m_config_sistem extends CI_Model {
         }
     }
 
-    function ubah_sistem() {
-        $sql = ("UPDATE sistem SET Status_Sistem=?, Id_Periode =?");
-        return $this->db->query($sql);
+    function ubah_sistem($parameter) {
+        $sql = "UPDATE sistem SET Status_Sistem=?, Id_Periode =?";
+        return $this->db->query($sql,$parameter);
     }
 
     function get_sistem_by_id($parameter) {
