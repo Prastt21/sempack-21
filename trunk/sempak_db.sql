@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 04, 2014 at 10:09 AM
+-- Generation Time: Aug 16, 2014 at 11:09 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Id_Asuransi` int(10) NOT NULL AUTO_INCREMENT,
   `Jenis_Asuransi` enum('KECELAKAAN','SAKIT') NOT NULL,
   `Id_Pengguna` int(10) NOT NULL,
+  `Id_Periode` int(10) NOT NULL,
   `Nama_RS` varchar(100) NOT NULL,
   `Alamat_RS` varchar(150) NOT NULL,
   `Kronologi` text NOT NULL,
@@ -37,19 +38,21 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Tanggal_Keluar` date NOT NULL,
   `Total_Biaya` int(15) NOT NULL,
   `Santunan` int(15) DEFAULT NULL,
-  `Status_Asuransi` enum('TERVERIFIKASI','WAITING') DEFAULT 'WAITING',
+  `Status_Asuransi` enum('WAITING','TERVERIFIKASI') NOT NULL DEFAULT 'WAITING',
   PRIMARY KEY (`Id_Asuransi`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `asuransi`
 --
 
-INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Nama_RS`, `Alamat_RS`, `Kronologi`, `Tanggal_Daftar`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`, `Status_Asuransi`) VALUES
-(8, 'KECELAKAAN', 1, 'sdsdsdsdsds', 'ddsds', 'ddddd', '2014-07-01', '2014-07-23', '2014-07-26', 6, 67777, 'WAITING'),
-(9, 'KECELAKAAN', 2, 'csc', 'cscs', 'cscsc', '2014-07-25', '2014-07-25', '2014-07-25', 344444, 2, 'WAITING'),
-(11, 'KECELAKAAN', 3, 'RS Abadi Kecelakaan', 'Jalan Abadi Yogyakart', 'Ya Gtu Dehh', '2014-08-01', '2014-08-01', '2014-08-01', 30000000, 0, '');
+INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Id_Periode`, `Nama_RS`, `Alamat_RS`, `Kronologi`, `Tanggal_Daftar`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`, `Status_Asuransi`) VALUES
+(1, 'KECELAKAAN', 3, 2, 'Cipto Mangun kusumo', 'Jakarta', 'Panjang Critanya', '2014-08-09', '2014-08-09', '2014-08-09', 445000, 44500, 'TERVERIFIKASI'),
+(2, 'KECELAKAAN', 2, 2, 'fsfs', 'fsfsf', 'fsfs', '2014-08-09', '2014-08-09', '2014-08-09', 500000, 0, 'TERVERIFIKASI'),
+(3, 'SAKIT', 4, 2, 'Dr. Sarjito', 'Jalan UGM Berjaya', 'Segalanya sudah Ada yang mengatur', '2014-08-11', '2014-08-08', '2014-08-09', 450000, NULL, 'WAITING'),
+(4, 'SAKIT', 5, 2, 'RS Condong Catur', 'Condong Catur', 'Keserempet Mobil', '2014-08-08', '2014-08-04', '2014-08-06', 230000, 230000, 'WAITING'),
+(5, 'KECELAKAAN', 5, 2, 'Bethesda', 'Sagan Lor', 'Ketilang dan jatuh sakit', '2014-08-12', '2014-08-10', '2014-08-11', 1000000, 1000000, 'TERVERIFIKASI');
 
 -- --------------------------------------------------------
 
@@ -69,24 +72,34 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Waktu_Pinjam` time NOT NULL,
   `Tanggal_Selesai` date NOT NULL,
   `Waktu_Selesai` time NOT NULL,
-  `Status_Penggunaan` enum('TERVERIFIKASI','WAITING','EXPIRED') DEFAULT 'WAITING',
-  PRIMARY KEY (`Id_Pinjam_Aula`),
-  KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `Status_Penggunaan` enum('WAITING','TERVERIFIKASI','EXPIRED') DEFAULT NULL,
+  PRIMARY KEY (`Id_Pinjam_Aula`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `aula`
 --
 
 INSERT INTO `aula` (`Id_Pinjam_Aula`, `Id_Pengguna`, `Nama_Kegiatan`, `Ketua_Organisasi`, `Peserta`, `Jml_Peserta`, `Tanggal_Daftar`, `Tanggal_Pinjam`, `Waktu_Pinjam`, `Tanggal_Selesai`, `Waktu_Selesai`, `Status_Penggunaan`) VALUES
-(1, 2, 'dfsdg', 'gsdg', 'gg', 14, '0000-00-00 00:00:00', '2014-07-24', '10:42:00', '2014-07-24', '10:42:00', 'TERVERIFIKASI'),
-(2, 3, 'Ngaji', 'Prast Ganteng', 'Ibu Ibu Khosidahan', 2000, '0000-00-00 00:00:00', '2014-07-27', '23:33:00', '2014-07-31', '23:33:00', ''),
-(3, 1, 'Ahmbohh', 'Nana Chon', 'Dedemit', 23, '2014-07-26 00:00:00', '2014-07-28', '00:42:00', '2014-07-31', '21:42:00', 'TERVERIFIKASI'),
-(4, 3, 'Arisan', 'nana donk', 'angel jibril', 12, '2014-08-01 00:00:00', '2014-08-04', '10:00:00', '2014-08-05', '21:12:00', ''),
-(5, 3, 'f', 'f', 'f', 23, '2014-08-02 00:00:00', '2014-08-02', '09:51:00', '2014-08-02', '09:51:00', ''),
-(6, 3, '3', 'd', 'Dedemit', 33, '2014-08-02 00:00:00', '2014-08-02', '09:54:00', '2014-08-02', '09:54:00', ''),
-(7, 3, 'd', 'd', 'd', 4333, '2014-08-02 00:00:00', '2014-08-02', '09:54:00', '2014-08-02', '09:54:00', ''),
-(8, 3, '4', 'e', '4', 0, '2014-08-02 00:00:00', '2014-08-02', '09:55:00', '2014-08-02', '09:55:00', '');
+(1, 3, 'Pelantikan BEM', 'Welly Tri W', 'Anggota BEM', 30, '2014-08-15 00:00:00', '2014-08-16', '10:00:00', '2014-08-16', '12:00:00', ''),
+(2, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-16', '10:00:00', '2014-08-16', '12:00:00', ''),
+(3, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:06:00', '2014-08-15', '22:06:00', ''),
+(4, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:16:00', '2014-08-15', '22:16:00', ''),
+(5, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:16:00', '2014-08-15', '22:16:00', ''),
+(6, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:18:00', '2014-08-15', '22:18:00', ''),
+(7, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:18:00', '2014-08-15', '22:18:00', ''),
+(8, 3, 'dsds', 'dsds', 'dsds', 0, '2014-08-15 00:00:00', '2014-08-15', '22:18:00', '2014-08-15', '22:18:00', ''),
+(9, 3, 'adada', 'dada', 'dadad', 0, '2014-08-15 00:00:00', '2014-08-15', '22:32:00', '2014-08-15', '22:32:00', ''),
+(10, 3, 'adada', 'dada', 'dadad', 0, '2014-08-15 00:00:00', '2014-08-15', '22:32:00', '2014-08-15', '22:32:00', ''),
+(11, 3, 'adada', 'dada', 'dadad', 0, '2014-08-15 00:00:00', '2014-08-15', '22:32:00', '2014-08-15', '22:32:00', ''),
+(12, 3, 'ddadad', 'Adida', 'dadad', 3, '2014-08-15 00:00:00', '2014-08-15', '22:00:00', '2014-08-15', '22:00:00', ''),
+(13, 3, 'adada', 'dada', 'dadad', 4, '2014-08-15 00:00:00', '2014-08-15', '22:00:00', '2014-08-15', '22:00:00', ''),
+(17, 3, 'fsfs', 'fsfs', 'fsfs', 4, '2014-08-16 00:00:00', '2014-08-16', '08:51:00', '2014-08-16', '08:51:00', ''),
+(18, 3, 'rere', 'fefe', 'fefef', 4, '2014-08-16 00:00:00', '2014-08-16', '08:51:00', '2014-08-16', '08:51:00', ''),
+(19, 3, 'd', 'dd', 'd', 5, '2014-08-16 00:00:00', '2014-08-16', '09:51:00', '2014-08-16', '09:51:00', ''),
+(20, 3, 'fdkkabfkajbk', 'f', 'fefef', 5, '2014-08-16 00:00:00', '2014-08-16', '09:51:00', '2014-08-16', '09:51:00', ''),
+(21, 3, 'fdhfjh', 'jbjhb', 'kjkjnk', 45, '2014-08-16 00:00:00', '2014-08-16', '10:05:00', '2014-08-16', '10:05:00', ''),
+(22, 3, 'cjdsbskjbckj', 'jnkjnkj', 'nknkjnkj', 56, '2014-08-16 00:00:00', '2014-08-16', '10:05:00', '2014-08-16', '10:05:00', '');
 
 -- --------------------------------------------------------
 
@@ -99,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   `Id_JB` int(10) NOT NULL,
   `Id_Pengguna` int(10) NOT NULL,
   `Id_Jurusan` int(10) NOT NULL,
+  `Id_Periode` int(10) NOT NULL,
   `Jenjang` enum('DIPLOMA 3','STRATA 1') NOT NULL,
   `Alamat_Sekarang` varchar(150) NOT NULL,
   `Nama_PT` set('STMIK AMIKOM YOGYAKARTA') NOT NULL,
@@ -114,17 +128,19 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   KEY `Id_JB` (`Id_JB`),
   KEY `Id_Pengguna` (`Id_Pengguna`),
   KEY `Id_Jurusan` (`Id_Jurusan`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `beasiswa`
 --
 
-INSERT INTO `beasiswa` (`Id_Beasiswa`, `Id_JB`, `Id_Pengguna`, `Id_Jurusan`, `Jenjang`, `Alamat_Sekarang`, `Nama_PT`, `Semester`, `IPK`, `Prestasi`, `Alasan`, `BANK`, `No_Rekening`, `Tanggal_Daftar`, `Status_Beasiswa`) VALUES
-(6, 3, 1, 1, 'STRATA 1', 'errrrr', 'STMIK AMIKOM YOGYAKARTA', 2, '4', 'r', 't', 'MUAMALAT', 45555, '2014-07-24', 'WAITING'),
-(5, 2, 1, 1, 'DIPLOMA 3', 'dds', 'STMIK AMIKOM YOGYAKARTA', 4, '1', 'd', 'f', 'MUAMALAT', 3, '2014-07-24', 'TERVERIFIKASI'),
-(8, 3, 3, 1, 'DIPLOMA 3', 'f', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'vf', 'f', 'MUAMALAT', 44432322, '2014-07-26', 'WAITING'),
-(9, 1, 3, 1, 'DIPLOMA 3', 'Amerika', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'Menyayi', 'Kepo bgt si', 'MUAMALAT', 1234567890, '2014-08-01', '');
+INSERT INTO `beasiswa` (`Id_Beasiswa`, `Id_JB`, `Id_Pengguna`, `Id_Jurusan`, `Id_Periode`, `Jenjang`, `Alamat_Sekarang`, `Nama_PT`, `Semester`, `IPK`, `Prestasi`, `Alasan`, `BANK`, `No_Rekening`, `Tanggal_Daftar`, `Status_Beasiswa`) VALUES
+(23, 3, 5, 5, 2, 'STRATA 1', 'Solo', '', 6, '3', 'Juara Lomba Nyanyi', 'Meringankan Beban Ortu', '', 2147483647, '2014-08-11', 'WAITING'),
+(24, 3, 4, 4, 2, 'STRATA 1', 'Bantul', '', 4, '4', 'Juara Melukis', 'Meringankan beban Ortu', '', 2147483647, '2014-08-10', 'WAITING'),
+(25, 1, 1, 5, 2, 'DIPLOMA 3', 'Sleman', '', 2, '2', 'Lomba Speaking', 'Meringankan Beban Ortu', '', 2147483647, '2014-08-12', 'WAITING'),
+(26, 2, 2, 6, 2, 'STRATA 1', 'Mlati', '', 3, '4', 'Juara Melukis', 'Meringankan beban Ortu', '', 676655567, '2014-08-13', 'WAITING'),
+(32, 1, 3, 1, 2, 'DIPLOMA 3', 'dfd', 'STMIK AMIKOM YOGYAKARTA', 2, '5', 'dsds', 'dsds', 'MUAMALAT', 4555555, '2014-08-15', ''),
+(31, 1, 3, 1, 2, 'DIPLOMA 3', 'dddd', 'STMIK AMIKOM YOGYAKARTA', 2, '4', 'ddd', 'ddd', 'MUAMALAT', 4555555, '2014-08-15', '');
 
 -- --------------------------------------------------------
 
@@ -275,11 +291,11 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
 --
 
 INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_Ortu`, `Pekerjaan_Ortu`, `Penghasilan_Ortu`, `Jml_Tanggungan`, `Email`, `Online`, `Sesi`) VALUES
-(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', 'John Mayer', 'Yogyakarta', 2147483647, 'WIRASWASTA', 30000000, 2, 'prastt21@gmail.com', 1, '0000-00-00 00:00:00'),
-(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', 'Waljinah', 'Jakarta', 2147483647, 'NELAYAN/PETANI', 89990000, 0, 'aku@masiyak.com', 0, '0000-00-00 00:00:00'),
-(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', 'Tumini', 'Brebes', 27488990, 'TNI/POLRI', 10000000, 1, 'ratna@amikom.ac.id', 0, '0000-00-00 00:00:00'),
-(4, 3, 'ARGA SAPUTRA\r\n', 'MAHASISWA', '11.01.2816', '6662e946315fb964f16d5e5692348c1a', 'PRIA', 988899900, 'Tegal', 'Tegal', '1991-02-12', 'Warimin', 'Tegal', 2147483647, 'NELAYAN/PETANI', 67000000, 2, 'arga@amikom.ac.id', 0, '0000-00-00 00:00:00'),
-(5, 3, 'ITA WULANDARI\r\n', 'MAHASISWA', '11.01.2817', '8a2f53811f706df10327ccd2c863c8e5', 'PRIA', 908889000, 'Jogja', 'Jogja', '1990-08-08', 'Jumadi', 'Jakarta', 2147483647, 'TNI/POLRI', 2000000, 0, 'agus@amikom.ac.id', 0, '0000-00-00 00:00:00');
+(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', 'John Mayer', 'Yogyakarta', 2147483647, 'WIRASWASTA', 30000000, 2, 'prastt21@gmail.com', 1, '2014-08-16 08:47:54'),
+(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', 'Waljinah', 'Jakarta', 2147483647, 'NELAYAN/PETANI', 89990000, 0, 'aku@masiyak.com', 0, '2014-08-12 00:02:39'),
+(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', 'Tumini', 'Brebes', 27488990, 'TNI/POLRI', 10000000, 1, 'ratna@amikom.ac.id', 0, '2014-08-16 08:54:06'),
+(4, 3, 'Arga Saputra\r\n', 'MAHASISWA', '11.01.2816', '6662e946315fb964f16d5e5692348c1a', 'PRIA', 988899900, 'Tegal', 'Tegal', '1991-02-12', 'Warimin', 'Tegal', 2147483647, 'NELAYAN/PETANI', 67000000, 2, 'arga@amikom.ac.id', 0, '0000-00-00 00:00:00'),
+(5, 3, 'Ita Wulandari\r\n', 'MAHASISWA', '11.01.2817', '8a2f53811f706df10327ccd2c863c8e5', 'PRIA', 908889000, 'Jogja', 'Jogja', '1990-08-08', 'Jumadi', 'Jakarta', 2147483647, 'TNI/POLRI', 2000000, 0, 'agus@amikom.ac.id', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -320,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `sistem` (
 --
 
 INSERT INTO `sistem` (`Status_Sistem`, `Id_Periode`, `Pengumuman_Sistem`, `StatusRequest_Sistem`, `KarReq_Sistem`) VALUES
-('AKTIF', 2, 'Kalau Anda Mengalamai Kesulitan Dalam Penggunaan Sistem Ini, Silahkan Hubungi 085647993380 a.n Urip Tri Prastowo', 'AKTIF', 20000);
+('TIDAK AKTIF', 2, 'Jika Ada Kesulitan dalam menggunakan sistem ini silahkan hubungi Urip Tri Prastowo, 085647993380', 'AKTIF', 45000);
 
 -- --------------------------------------------------------
 
@@ -359,7 +375,7 @@ CREATE TABLE IF NOT EXISTS `sys_level_menu` (
   PRIMARY KEY (`id_level_menu`),
   KEY `fk_level_menu_menu1_idx` (`id_menu`),
   KEY `fk_level_menu_level1_idx` (`id_level`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `sys_level_menu`
@@ -381,7 +397,6 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 (16, 1, 13, '1111'),
 (17, 1, 14, '1111'),
 (18, 1, 15, '1111'),
-(19, 1, 16, '1111'),
 (20, 1, 17, '1111'),
 (21, 1, 18, '1111'),
 (22, 1, 19, '1111'),
@@ -392,13 +407,11 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 (27, 1, 24, '1111'),
 (28, 1, 25, '1111'),
 (29, 1, 26, '1111'),
-(30, 1, 27, '1111'),
 (31, 2, 1, '1111'),
 (32, 2, 29, '1111'),
 (33, 2, 30, '0111'),
 (34, 2, 31, '0110'),
 (35, 2, 32, '0110'),
-(36, 2, 33, '1111'),
 (37, 2, 34, '1111'),
 (38, 2, 26, '1111'),
 (39, 3, 1, '0100'),
@@ -407,8 +420,7 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 (42, 3, 39, '1100'),
 (43, 3, 40, '1100'),
 (44, 3, 41, '1100'),
-(45, 3, 42, '1111'),
-(46, 3, 43, '1111');
+(50, 3, 44, '0100');
 
 -- --------------------------------------------------------
 
@@ -428,7 +440,7 @@ CREATE TABLE IF NOT EXISTS `sys_menu` (
   `mdb` int(11) DEFAULT '1',
   `mdd` datetime DEFAULT NULL,
   PRIMARY KEY (`id_menu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `sys_menu`
@@ -476,8 +488,7 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (39, 'Peminjaman Aula BSC', 1, 4, 38, 'Peminjaman Aula BSC', 'pendaftaran_peminjaman_aula', '<i class= "fa fa-credit-card"></i>', 1, NULL),
 (40, 'Pendaftaran Beasiswa', 1, 5, 38, 'Pendaftaran Beasiswa', 'pendaftaran_beasiswa', '<i class= "fa fa-gift"></i>', 1, NULL),
 (41, 'Pendaftaran Rujukan', 1, 6, 38, 'Pendaftaran Rujukan Asuransi', 'pendaftaran_rujukan_asuransi', '<i class= "fa fa-medkit"></i>', 1, NULL),
-(42, 'More Pages', 1, 7, 0, 'More Pages', 'more_pages', '<i class= "fa fa-clipboard"></i>', 1, NULL),
-(43, 'User Profil', 1, 8, 42, NULL, 'user_profil', '<i class= "fa fa-user"></i>', 1, NULL);
+(44, 'Jadwal Aula', 1, 2, 0, 'Jadwal Peminjaman Aula', 'jadwal_peminjaman_aula', NULL, 1, NULL);
 
 --
 -- Constraints for dumped tables
@@ -488,12 +499,6 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 --
 ALTER TABLE `asuransi`
   ADD CONSTRAINT `asuransi_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
-
---
--- Constraints for table `aula`
---
-ALTER TABLE `aula`
-  ADD CONSTRAINT `aula_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
 
 --
 -- Constraints for table `pendaftaran_asuransi`

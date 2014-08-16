@@ -105,7 +105,9 @@ class pendaftaran_beasiswa extends operator_base {
 
     function cetak_pendaftaran_beasiswa_by_id($beasiswa = '') {
         $this->load->model('m_pendaftaran_beasiswa');
-        $databeasiswabyid = $this->m_pendaftaran_beasiswa->hasil_pendaftaran_beasiswa($beasiswa);
+//        $parameter['result_pendaftaran_asuransi'] = $this->m_pendaftaran_rujukan_asuransi->get_pendaftaran_rujukan_asuransi_by_id($asuransi);
+//        $dt_asuransiid = $this->m_pendaftaran_rujukan_asuransi->hasil_pendaftaran_rujukan_asuransi($parameter);
+        $dt_asuransiid = $this->m_pendaftaran_beasiswa->hasil_pendaftaran_beasiswa($beasiswa);
 
         $this->load->library('pdf');
         $this->pdf->SetCreator(PDF_CREATOR);
@@ -140,114 +142,112 @@ class pendaftaran_beasiswa extends operator_base {
         ob_start();
         ?>
         <hr>        
-        <u><p style="text-align: center;">LEMBAR PENDAFTARAN BEASISWA <?php echo $databeasiswabyid['Jenis_Beasiswa']; ?></p></u>
+        <u><p style="text-align: center;">LEMBAR PENDAFTARAN BEASISWA <?php echo $dt_asuransiid['Jenis_Beasiswa']; ?></p></u>
         <br><br>
-
-        <table style="width: 100%;">            
+        <table style="width: 100%;">
             <tr>
                 <td width="25%">ID Pendaftaran</td>
                 <td width="2%">:</td>
-                <td width="73%"><?php echo '<b>' . $databeasiswabyid['Id_Beasiswa'] . '</b>'; ?></td>
+                <td width="73%"><?php echo '<b>' . $dt_asuransiid['Id_Beasiswa'] . '</b>'; ?></td>
             </tr>
-            <tr>Kepada : </tr>
-            <tr>Yth.	: Direktur Jenderal Pendidikan Tinggi</tr>
-            <tr>Melalui Koordinator Kopertis Wilayah V DIY</tr>
-            <tr>Jalan Tentara Pelajar 13 Yogyakarta</tr>
-            <br>
+            <p>
+                Kepada : <br>
+                Yth.	: Direktur Jenderal Pendidikan Tinggi <br>
+                Melalui Koordinator Kopertis Wilayah V DIY <br>
+                Jalan Tentara Pelajar 13 Yogyakarta <br>
+            </p>
             <tr>
                 <td>Dengan Hormat, </td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <td>Nama Pendaftar Beasiswa</td>
+                <td>Nama Perujuk Asuransi</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Nama_Pengguna']; ?></td>
+                <td><?php echo $dt_asuransiid['Nama_Pengguna']; ?></td>
             </tr>
             <tr>
                 <td>Jurusan</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Jurusan']; ?></td>
+                <td><?php echo $dt_asuransiid['Nama_Jurusan']; ?></td>
             </tr>
             <tr>
                 <td>Jenjang</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Jenjang']; ?></td>
+                <td><?php echo $dt_asuransiid['Jenjang']; ?></td>
             </tr>
             <tr>
                 <td>Alamat Sekarang</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Alamat_Sekarang']; ?></td>
+                <td><?php echo $dt_asuransiid['Alamat_Sekarang']; ?></td>
             </tr>
             <tr>
                 <td>Perguruan Tinggi</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Nama_PT']; ?></td>
+                <td><?php echo $dt_asuransiid['Nama_PT']; ?></td>
             </tr>
             <tr>
                 <td>Semester</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Semester']; ?></td>
+                <td><?php echo $dt_asuransiid['Semester']; ?></td>
             </tr>
             <tr>
                 <td>Indeks Prestasi Komulatif</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['IPK']; ?></td>
+                <td><?php echo $dt_asuransiid['IPK']; ?></td>
             </tr>
             <tr>
                 <td>Prestasi</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Prestasi']; ?></td>
+                <td><?php echo $dt_asuransiid['Prestasi']; ?></td>
             </tr>
             <tr>
                 <td>Alasan Mengajukan Beasiswa</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Alasan']; ?></td>
+                <td><?php echo $dt_asuransiid['Alasan']; ?></td>
             </tr>
             <tr>
                 <td>Nama Bank Transfer</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['BANK']; ?></td>
+                <td><?php echo $dt_asuransiid['BANK']; ?></td>
             </tr>
             <tr>
                 <td>No Rekening</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['No_Rekening']; ?></td>
+                <td><?php echo $dt_asuransiid['No_Rekening']; ?></td>
             </tr>
             <tr>
-                <td>KETERANGAN ORANG TUA / WALI</td>
-                <td>:</td>
-                <td></td>
+                <td colspan="3"><b>KETERANGAN ORANG TUA / WALI</b></td>                
             </tr>
             <tr>
                 <td>Nama Orang Tua</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Nama_Ortu']; ?></td>
+                <td><?php echo $dt_asuransiid['Nama_Ortu']; ?></td>
             </tr>
             <tr>
                 <td>Alamat Orang Tua</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Alamat_Ortu']; ?></td>
+                <td><?php echo $dt_asuransiid['Alamat_Ortu']; ?></td>
             </tr>
             <tr>
                 <td>Pekerjaan Orang Tua</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Pekerjaan_Ortu']; ?></td>
+                <td><?php echo $dt_asuransiid['Pekerjaan_Ortu']; ?></td>
             </tr>
             <tr>
                 <td>Penghasilan Orang Tua</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Penghasilan_Ortu']; ?></td>
+                <td><?php echo $dt_asuransiid['Penghasilan_Ortu']; ?></td>
             </tr>
             <tr>
                 <td>Jumlah Tanggungan</td>
                 <td>:</td>
-                <td><?php echo $databeasiswabyid['Jml_Tanggungan']; ?></td>
+                <td><?php echo $dt_asuransiid['Jml_Tanggungan']; ?></td>
             </tr>
         </table>
         <br>
         <p style="text-align: justify;">
-            Sehubungan dengan hal tersebut, saya mengajukan permohonan beasiswa : <?php echo $databeasiswabyid['Jenis_Beasiswa']; ?> tahun 2014 melalui Bapak Koordinator Kopertis Wilayah V Yogyakarta<br>
+            Sehubungan dengan hal tersebut, saya mengajukan permohonan beasiswa <?php echo $dt_asuransiid['Jenis_Beasiswa']; ?> tahun 2014 melalui Bapak Koordinator Kopertis Wilayah V Yogyakarta<br>
             Bersama ini saya lampirkan berkas persyaratan permohonan untuk menjadikan pertimbangan dan apabila saya memalsukan data persyaratan tersebut saya bersedia menerima sanksi sesuai ketentuan yang berlaku.<br>
             Atas perhatian dan bantuan Bapak, saya ucapkan terima kasih<br>
         </p>
@@ -256,7 +256,7 @@ class pendaftaran_beasiswa extends operator_base {
             <tr>
                 <td width="25%"></td>
                 <td width="50%"></td>
-                <td width="25%"><p style="text-align: center;">Yogyakarta, <?php echo $databeasiswabyid['Tanggal_Daftar']; ?></p></td>
+                <td width="25%"><p style="text-align: center;">Yogyakarta, <?php echo $dt_asuransiid['Tanggal_Daftar']; ?></p></td>
             </tr>
             <tr>
                 <td width="25%"><p style="text-align: center;">Mengetahui/menyetujui,</p></td>
@@ -284,27 +284,22 @@ class pendaftaran_beasiswa extends operator_base {
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
                 <td width="25%"><p style="text-align: center;"><?php echo 'Prof. Dr. M. Suyanto, MM'; ?></p></td>
                 <td width="50%"></td>
-                <td width="25%"><p style="text-align: center;"><?php echo $databeasiswabyid['Nama_Pengguna']; ?></p></td>
+                <td width="25%"><p style="text-align: center;"><?php echo $dt_asuransiid['Nama_Pengguna']; ?></p></td>
             </tr>
             <tr>
                 <td width="25%"><p style="text-align: center;"><?php echo 'NIK. 190.302.001'; ?></p></td>
                 <td width="50%"></td>
-                <td width="25%"><p style="text-align: center;"><?php echo $databeasiswabyid['NIK_NIM']; ?></p></td>
+                <td width="25%"><p style="text-align: center;"><?php echo $dt_asuransiid['NIK_NIM']; ?></p></td>
             </tr>
-        </table>    
+        </table>
         <?php
         $konten = ob_get_contents();
         ob_end_clean();
         $this->pdf->writeHTML($konten, true, false, true, false, '');
         $this->pdf->AddPage('P', 'A4');
-        $this->pdf->Output('Pendaftaran Beasiswa_.pdf', 'I');
+        $this->pdf->Output('Pendaftaran_Beasiswa_.pdf', 'I');
     }
 
 }

@@ -52,7 +52,7 @@ class m_peminjaman_aula extends CI_Model {
     }
 
     function ubah_peminjaman_aula($parameter) {
-        $sql = 'UPDATE aula SET Id_Pengguna=?, Nama_Kegiatan=?, Ketua_Organisasi=?, Peserta=?,
+        $sql = 'UPDATE aula SET Nama_Kegiatan=?, Ketua_Organisasi=?, Peserta=?,
                 Jml_Peserta=?, Tanggal_Daftar=?,Tanggal_Pinjam=?, Waktu_Pinjam=?,Tanggal_Selesai=?,Waktu_Selesai=?,
                 Status_Penggunaan=? WHERE Id_Pinjam_Aula = ?';
         return $this->db->query($sql, $parameter);

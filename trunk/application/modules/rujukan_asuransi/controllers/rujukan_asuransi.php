@@ -141,7 +141,6 @@ class rujukan_asuransi extends operator_base {
             $this->load->model('m_rujukan_asuransi');
             $parameter = array(                
                 $this->input->post('jenis_asuransi'),
-                $this->sesi->get_data_login('ID_PENGGUNA'),
                 $this->input->post('nama_rs'),
                 $this->input->post('alamat_rs'),
                 $this->input->post('kronologi'),

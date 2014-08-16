@@ -97,11 +97,10 @@ class m_pendaftaran_beasiswa extends CI_Model {
         }
     }
     function hasil_pendaftaran_beasiswa($parameter) {
-        $sql = 'SELECT a.*, b.*,c.*,d.* 
-                FROM beasiswa a JOIN jenis_beasiswa b ON a.id_jb=b.id_jb
-                JOIN pengguna c ON a.id_pengguna=c.id_pengguna		
-		JOIN jurusan d ON a.id_jurusan=d.id_jurusan
-                WHERE a.Id_Beasiswa = ?';
+        $sql = 'SELECT a.*,b.*,c.*,d.* FROM beasiswa a
+                INNER JOIN pengguna b ON b.Id_Pengguna = a.Id_Pengguna
+                INNER JOIN jurusan c ON c.id_jurusan=a.id_jurusan 
+                INNER JOIN jenis_beasiswa d ON d.id_jb=a.id_jb WHERE a.Id_Beasiswa = ?';
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
             $result = $query->row_array();

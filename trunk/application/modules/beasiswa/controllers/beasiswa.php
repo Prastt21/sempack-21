@@ -147,7 +147,6 @@ class beasiswa extends operator_base {
             $this->load->model('m_beasiswa');
             $parameter = array(
                 $this->input->post('jenis_beasiswa'),
-                $this->sesi->get_data_login('ID_PENGGUNA'),
                 $this->input->post('jurusan'),
                 $this->input->post('jenjang'),
                 $this->input->post('alamat_sekarang'),
