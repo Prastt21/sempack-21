@@ -51,7 +51,7 @@ class m_rujukan_asuransi extends CI_Model {
     }
 
     function ubah_rujukan_asuransi($parameter) {
-        $sql = 'UPDATE asuransi SET Jenis_Asuransi=?, Id_Pengguna=?, Nama_RS=?, Alamat_RS=?, Kronologi=?, 
+        $sql = 'UPDATE asuransi SET Jenis_Asuransi=?, Nama_RS=?, Alamat_RS=?, Kronologi=?, 
                 Tanggal_Daftar=?, Tanggal_Masuk=?, Tanggal_Keluar=?, Total_Biaya=?, Santunan=?,
                 Status_Asuransi=? WHERE Id_Asuransi = ?';
         return $this->db->query($sql, $parameter);

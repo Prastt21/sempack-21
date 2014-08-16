@@ -140,8 +140,7 @@ class peminjaman_aula extends operator_base {
         } else {
             //jika validasi sukses
             $this->load->model('m_peminjaman_aula');
-            $parameter = array(                
-            $this->sesi->get_data_login('ID_PENGGUNA'),
+            $parameter = array(
             $this->input->post('nama_kegiatan'),
             $this->input->post('ketua_organisasi'),
             $this->input->post('peserta'),

@@ -51,13 +51,12 @@ class m_pendaftaran_peminjaman_aula extends CI_Model {
         }
     }
     function cek_pendaftaran_aula_by_tglPinjam($parameter) {
-        $sql = "SELECT Tanggal_Pinjam, Waktu_Pinjam FROM aula WHERE Tanggal_Pinjam = 'tanggal_pinjam' AND 
-                Waktu_Pinjam ='waktu_pinjam' ";
+        $sql = "SELECT * FROM aula WHERE tanggal_pinjam LIKE ? AND waktu_pinjam LIKE ? ";
         $query = $this->db->query($sql, $parameter);
         if ($query->num_rows() > 0) {
-            $result = $query->row_array();
+            $result = $query->result_array();
             $query->free_result();
-            return $result;
+            return true;
         } else {
             return false;
         }

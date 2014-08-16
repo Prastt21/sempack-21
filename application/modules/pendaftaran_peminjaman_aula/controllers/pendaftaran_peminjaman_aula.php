@@ -74,10 +74,13 @@ class pendaftaran_peminjaman_aula extends operator_base {
                 $this->input->post('waktu_selesai'),
                 $this->input->post('status_penggunaan')
             );
-            if ($this->m_pendaftaran_peminjaman_aula->cek_pendaftaran_aula_by_tglPinjam($parameter)) {
+            if ($this->m_pendaftaran_peminjaman_aula->cek_pendaftaran_aula_by_tglPinjam(array($this->input->post('tanggal_pinjam'),$this->input->post('waktu_pinjam')))) {                
                 //jika sukses kirim pesan ke view
                 $this->notification('error', 'Tanggal Dan Waktu Pinjam Sudah Digunakan, 
                                     Silahkan Ganti Tanggal Dan Waktu Pinjam');
+                $this->form_validation->keep_data();
+                redirect('pendaftaran_peminjaman_aula/tambah_pendaftaran_peminjaman_aula');
+                
             } else {
                 //jika gagal kirim pesan ke view
                 if ($this->m_pendaftaran_peminjaman_aula->tambah_pendaftaran_peminjaman_aula($parameter)) {
@@ -88,8 +91,10 @@ class pendaftaran_peminjaman_aula extends operator_base {
                     //jika gagal kirim pesan ke view
                     $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
                 }
-                                
-            }            
+            }
+            if($_POST('tanggal_pinjam') < $_POST('tanggal_selesai') && $_POST('waktu_pinjam') <= $_POST('waktu_selesai')){
+                $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
+            }
         }
         //redirect ke form
         redirect('pendaftaran_peminjaman_aula');

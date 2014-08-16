@@ -124,7 +124,7 @@
                         <div class="form-group">
                             <label for="no-rekening" class="col-lg-3 control-label">No Rekening</label>
                             <div class="col-lg-5">
-                                <input type="text" name="no_rekening" maxlength="100" class="form-control input-sm" placeholder="No Rekening" value="<?php echo set_value('no_rekening'); ?>">
+                                <input type="text" name="no_rekening" maxlength="10" class="form-control input-sm" placeholder="No Rekening" value="<?php echo set_value('no_rekening'); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
                         </div>

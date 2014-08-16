@@ -76,7 +76,7 @@ class m_beasiswa extends CI_Model {
     }
 
     function ubah_beasiswa($parameter) {
-        $sql = 'UPDATE beasiswa SET Id_JB=?,Id_Pengguna=?,Id_Jurusan=?,Jenjang=?,Alamat_Sekarang=?,
+        $sql = 'UPDATE beasiswa SET Id_JB=?,Id_Jurusan=?,Jenjang=?,Alamat_Sekarang=?,
             Nama_PT=?,Semester=?,IPK=?,Prestasi=?,Alasan=?,BANK=?,No_Rekening=?,Tanggal_Daftar=?,Status_Beasiswa=?
             WHERE Id_Beasiswa = ?';
         return $this->db->query($sql, $parameter);
