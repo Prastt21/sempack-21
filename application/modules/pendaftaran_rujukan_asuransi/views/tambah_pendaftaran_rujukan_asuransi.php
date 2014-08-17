@@ -79,7 +79,8 @@
                                 <input type="text" name="total_biaya" maxlength="20" class="form-control input-sm" placeholder="Total Biaya" value="<?php echo set_value('total_biaya'); ?>">
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div>                     
+                        </div>
+                        <input type="hidden" name="status_asuransi" maxlength="100" value="WAITING"  class="form-control input-sm" value="<?php echo set_value('status_asuransi'); ?>">
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>

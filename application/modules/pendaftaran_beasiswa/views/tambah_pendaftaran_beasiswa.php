@@ -134,7 +134,8 @@
                                 <div class="bfh-datepicker" data-name="tanggal_daftar" data-placeholder='tanggal' data-format="y-m-d" data-date="today"></div>
                             </div>
                             <div class="col-lg-3"><small><em>Harus diisi!</em></small></div>
-                        </div> 
+                        </div>
+                        <input type="hidden" name="status_beasiswa" maxlength="100" value="WAITING"  class="form-control input-sm" value="<?php echo set_value('status_beasiswa'); ?>">
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-5">
                                 <button type="submit" class="btn btn-primary btn-sm" name="simpan" id="simpan" value="simpan">Simpan</button>
