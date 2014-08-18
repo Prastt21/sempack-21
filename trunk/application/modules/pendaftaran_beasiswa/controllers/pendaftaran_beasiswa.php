@@ -14,6 +14,7 @@ class pendaftaran_beasiswa extends operator_base {
 
     function index() {
         $this->_set_page_role('r');
+        error_reporting(0);
         $this->load->model('m_pendaftaran_beasiswa');
         //load javascript + css untuk tanggal 
         $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
@@ -30,6 +31,7 @@ class pendaftaran_beasiswa extends operator_base {
 
     function tambah_pendaftaran_beasiswa() {
         $this->_set_page_role('c');
+        error_reporting(0);
         //load javascript + css untuk tanggal 
         $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
         $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
@@ -41,6 +43,7 @@ class pendaftaran_beasiswa extends operator_base {
     }
 
     function proses_tambah_pendaftaran_beasiswa() {
+        error_reporting(0);
         if ($this->input->post('simpan') == null)
             redirect('pendaftaran_beasiswa/tambah_pendaftaran_beasiswa');
         //load library form validation
@@ -85,9 +88,11 @@ class pendaftaran_beasiswa extends operator_base {
                 $this->input->post('tanggal_daftar'),
                 $this->input->post('status_beasiswa')
             );
-            if ($this->m_pendaftaran_beasiswa->cek_pendaftaran_beasiswa_by_id_pengguna($parameter)) {
+            if ($this->m_pendaftaran_beasiswa->cek_pendaftaran_beasiswa_by_id_pengguna(array($this->sesi->get_data_login('ID_PENGGUNA')))) {
                 //set notifikasi gagal
                 $this->notification('error', 'Anda Sudah Melakukan Pendaftaran Beasiswa Periode Ini');
+                $this->form_validation->keep_data();
+                redirect('pendaftaran_beasiswa/tambah_pendaftaran_beasiswa');
             } else {
                 //set notifikasi berhasil
                 if ($this->m_pendaftaran_beasiswa->tambah_pendaftaran_beasiswa($parameter)) {

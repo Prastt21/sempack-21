@@ -91,7 +91,7 @@ class pendaftaran_peminjaman_aula extends operator_base {
                 }
             }
             if ($_POST('tanggal_pinjam') < $_POST('tanggal_selesai') && $_POST('waktu_pinjam') <= $_POST('waktu_selesai')) {
-                $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
+                $this->notification('error', 'Harap Sesuiakan Waktu Pinjam');
             }
         }
         //redirect ke form
