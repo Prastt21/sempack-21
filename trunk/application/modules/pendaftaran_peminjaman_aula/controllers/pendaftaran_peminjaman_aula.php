@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -39,17 +38,17 @@ class pendaftaran_peminjaman_aula extends operator_base {
         //load form validation
         $this->load->library('Form_validation');
         //set aturan validasi
-            //$this->form_validation->set_rules('nama_peminjam', 'Nama Peminjam', 'required|trim');
-            $this->form_validation->set_rules('nama_kegiatan', 'Nama Kegiatan', 'required|trim');
-            $this->form_validation->set_rules('ketua_organisasi', 'Ketua Organisasi', 'required|trim');
-            $this->form_validation->set_rules('peserta', 'Peserta', 'required|trim');
-            $this->form_validation->set_rules('jml_peserta', 'Jumlah Peserta', 'required|trim');
-            $this->form_validation->set_rules('tanggal_daftar', 'Tanggal Daftar', 'required|trim');
-            $this->form_validation->set_rules('tanggal_pinjam', 'Tanggal Pinjam', 'required|trim');
-            $this->form_validation->set_rules('waktu_pinjam', 'Waktu Pinjam', 'required|trim');
-            $this->form_validation->set_rules('tanggal_selesai', 'Tanggal Selesai', 'required|trim');
-            $this->form_validation->set_rules('waktu_selesai', 'Waktu Selesai', 'required|trim');
-            //$this->form_validation->set_rules('status_penggunaan', 'Status Penggunaan', 'required|trim');           
+        //$this->form_validation->set_rules('nama_peminjam', 'Nama Peminjam', 'required|trim');
+        $this->form_validation->set_rules('nama_kegiatan', 'Nama Kegiatan', 'required|trim');
+        $this->form_validation->set_rules('ketua_organisasi', 'Ketua Organisasi', 'required|trim');
+        $this->form_validation->set_rules('peserta', 'Peserta', 'required|trim');
+        $this->form_validation->set_rules('jml_peserta', 'Jumlah Peserta', 'required|trim');
+        $this->form_validation->set_rules('tanggal_daftar', 'Tanggal Daftar', 'required|trim');
+        $this->form_validation->set_rules('tanggal_pinjam', 'Tanggal Pinjam', 'required|trim');
+        $this->form_validation->set_rules('waktu_pinjam', 'Waktu Pinjam', 'required|trim');
+        $this->form_validation->set_rules('tanggal_selesai', 'Tanggal Selesai', 'required|trim');
+        $this->form_validation->set_rules('waktu_selesai', 'Waktu Selesai', 'required|trim');
+        //$this->form_validation->set_rules('status_penggunaan', 'Status Penggunaan', 'required|trim');           
         //menjalankan validasi
         if ($this->form_validation->run() === FALSE) {
             //jika validasi ada yang eror, kirim notifikasi ke view
@@ -74,13 +73,12 @@ class pendaftaran_peminjaman_aula extends operator_base {
                 $this->input->post('waktu_selesai'),
                 $this->input->post('status_penggunaan')
             );
-            if ($this->m_pendaftaran_peminjaman_aula->cek_pendaftaran_aula_by_tglPinjam(array($this->input->post('tanggal_pinjam'),$this->input->post('waktu_pinjam')))) {                
+            if ($this->m_pendaftaran_peminjaman_aula->cek_pendaftaran_aula_by_tglPinjam(array($this->input->post('tanggal_pinjam'), $this->input->post('waktu_pinjam') . ':00'))) {
                 //jika sukses kirim pesan ke view
                 $this->notification('error', 'Tanggal Dan Waktu Pinjam Sudah Digunakan, 
                                     Silahkan Ganti Tanggal Dan Waktu Pinjam');
                 $this->form_validation->keep_data();
                 redirect('pendaftaran_peminjaman_aula/tambah_pendaftaran_peminjaman_aula');
-                
             } else {
                 //jika gagal kirim pesan ke view
                 if ($this->m_pendaftaran_peminjaman_aula->tambah_pendaftaran_peminjaman_aula($parameter)) {
@@ -92,15 +90,16 @@ class pendaftaran_peminjaman_aula extends operator_base {
                     $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
                 }
             }
-            if($_POST('tanggal_pinjam') < $_POST('tanggal_selesai') && $_POST('waktu_pinjam') <= $_POST('waktu_selesai')){
+            if ($_POST('tanggal_pinjam') < $_POST('tanggal_selesai') && $_POST('waktu_pinjam') <= $_POST('waktu_selesai')) {
                 $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
             }
         }
         //redirect ke form
         redirect('pendaftaran_peminjaman_aula');
     }
+
     function cetak_pendaftaran_aula_by_id($aula) {
-        $this->load->model('m_pendaftaran_peminjaman_aula');        
+        $this->load->model('m_pendaftaran_peminjaman_aula');
         $dataaulabyid = $this->m_pendaftaran_peminjaman_aula->hasil_pendaftaran_peminjaman_aula($aula);
 
         $this->load->library('pdf');
@@ -215,7 +214,7 @@ class pendaftaran_peminjaman_aula extends operator_base {
         <p> Akan menjaga dan menaati segala ketentuan dalam tata tertib Peminjaman AULA Bussiness Student 
             Center STMIK AMIKOM YOGYAKARTA. Dan Apabila saya melanggar, saya siap dikenakan sanksi dan 
             bertanggungjawab atas pelanggaran yang saya lakukan sebagaimana tertera dalam aturan tersebut diatas</p>
-        
+
         <div style="min-height: 350px"></div>
         <table>
             <tr>
@@ -293,7 +292,7 @@ class pendaftaran_peminjaman_aula extends operator_base {
         $konten = ob_get_contents();
         ob_end_clean();
         $this->pdf->writeHTML($konten, true, false, true, false, '');
-        $this->pdf->AddPage('P', 'A4');       
+        $this->pdf->AddPage('P', 'A4');
         $this->pdf->Output('Peminjaman Aula BSC_.pdf', 'I');
     }
 
