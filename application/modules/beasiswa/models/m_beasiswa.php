@@ -50,7 +50,17 @@ class m_beasiswa extends CI_Model {
             return false;
         }
     }
-
+    function cek_pendaftaran_beasiswa_by_id_pengguna($parameter) {
+        $sql = "SELECT id_pengguna FROM beasiswa WHERE id_pengguna LIKE ?";
+        $query = $this->db->query($sql, $parameter);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return true;
+        } else {
+            return false;
+        }
+    }
     function count_all_data() {
         $sql = "SELECT COUNT(Id_Beasiswa)'total' FROM beasiswa";
         $query = $this->db->query($sql);

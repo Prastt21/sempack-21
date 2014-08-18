@@ -9,7 +9,7 @@ class m_peminjaman_aula extends CI_Model {
     function tambah_peminjaman_aula($parameter) {
         $sql = 'INSERT INTO aula (Id_Pengguna,Nama_Kegiatan,Ketua_Organisasi,Peserta,
                 Jml_Peserta,Tanggal_Daftar,Tanggal_Pinjam,Waktu_Pinjam,Tanggal_Selesai,Waktu_Selesai,Status_Penggunaan) 
-                VALUES (?,?,?,?,?,?,?,?,?,?)';
+                VALUES (?,?,?,?,?,?,?,?,?,?,?)';
         return $this->db->query($sql, $parameter);
     }
 
@@ -87,6 +87,17 @@ class m_peminjaman_aula extends CI_Model {
             return $result['jumlah'];
         } else {
             return array();
+        }
+    }
+    function cek_pendaftaran_aula_by_tglPinjam($parameter) {
+        $sql = "SELECT * FROM aula WHERE tanggal_pinjam LIKE ? AND waktu_pinjam LIKE ? ";
+        $query = $this->db->query($sql, $parameter);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            $query->free_result();
+            return true;
+        } else {
+            return false;
         }
     }
 }

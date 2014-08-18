@@ -85,13 +85,22 @@ class beasiswa extends operator_base {
                 $this->input->post('tanggal_daftar'),
                 $this->input->post('status_beasiswa')
             );
-            if ($this->m_beasiswa->tambah_beasiswa($parameter)) {
-                //set notifikasi berhasil
-                $this->notification('success', 'Data berhasil ditambahkan');
-            } else {
+            if ($this->m_beasiswa->cek_pendaftaran_beasiswa_by_id_pengguna(array($this->sesi->get_data_login('ID_PENGGUNA')))) {
                 //set notifikasi gagal
-                $this->notification('error', 'Data gagal ditambahkan');
+                $this->notification('error', 'Anda Sudah Melakukan Pendaftaran Beasiswa Periode Ini');
+                $this->form_validation->keep_data();
+                redirect('beasiswa/tambah_beasiswa');
+            } else {
+                //set notifikasi berhasil
+                if ($this->m_beasiswa->tambah_beasiswa($parameter)) {
+                    //set notifikasi berhasil
+                    $this->notification('success', 'Data berhasil ditambahkan');
+                } else {
+                    //set notifikasi gagal
+                    $this->notification('error', 'Data gagal ditambahkan');
+                }
             }
+
             redirect('beasiswa');
         }
     }
@@ -135,8 +144,8 @@ class beasiswa extends operator_base {
         $this->form_validation->set_rules('no_rekening', 'No Rekening', 'required');
         $this->form_validation->set_rules('tanggal_daftar', 'Tanggal Daftar', 'required');
         $this->form_validation->set_rules('status_beasiswa', 'Status Beasiswa', 'required');
-        $this->form_validation->set_rules('id_beasiswa', 'ID Beasiswa', 'required');        
-       
+        $this->form_validation->set_rules('id_beasiswa', 'ID Beasiswa', 'required');
+
         if ($this->form_validation->run() === FALSE) {
             //set notifikasi
             $this->notification('error', validation_errors());
@@ -176,7 +185,7 @@ class beasiswa extends operator_base {
             redirect('beasiswa');
         }
     }
-    
+
     function hapus_beasiswa($id = '') {
         //control hak akses delete
         $this->_set_page_role('d');
@@ -194,7 +203,7 @@ class beasiswa extends operator_base {
         //kembalikan ke halaman list informasi
         redirect('beasiswa');
     }
-    
+
     function cari($offset = 0) {
         $this->_set_page_role('r');
         //load library untuk pagination
@@ -222,6 +231,5 @@ class beasiswa extends operator_base {
         $data['keyword'] = $keyword;
         parent::display('tampil_beasiswa', $data);
     }
-
 
 }

@@ -56,7 +56,7 @@ class peminjaman_aula extends operator_base {
             $this->form_validation->set_rules('waktu_pinjam', 'Waktu Pinjam', 'required|trim');
             $this->form_validation->set_rules('tanggal_selesai', 'Tanggal Selesai', 'required|trim');
             $this->form_validation->set_rules('waktu_selesai', 'Waktu Selesai', 'required|trim');
-            //$this->form_validation->set_rules('status_penggunaan', 'Status Penggunaan', 'required|trim');           
+            $this->form_validation->set_rules('status_penggunaan', 'Status Penggunaan', 'required|trim');           
         //menjalankan validasi
         if ($this->form_validation->run() === FALSE) {
             //jika validasi ada yang eror, kirim notifikasi ke view
@@ -81,13 +81,22 @@ class peminjaman_aula extends operator_base {
                 $this->input->post('waktu_selesai'),
                 $this->input->post('status_penggunaan')
             );
-            if ($this->m_peminjaman_aula->tambah_peminjaman_aula($parameter)) {
+            if ($this->m_peminjaman_aula->cek_pendaftaran_aula_by_tglPinjam(array($this->input->post('tanggal_pinjam'), $this->input->post('waktu_pinjam') . ':00'))) {
+                //jika sukses kirim pesan ke view
+                $this->notification('error', 'Tanggal Dan Waktu Pinjam Sudah Digunakan, 
+                                    Silahkan Ganti Tanggal Dan Waktu Pinjam');
+                $this->form_validation->keep_data();
+                redirect('peminjaman_aula/tambah_peminjaman_aula');
+            } else {
+                //jika gagal kirim pesan ke view
+                if ($this->m_peminjaman_aula->tambah_peminjaman_aula($parameter)) {
                 //jika sukses kirim pesan ke view
                 $this->notification('success', 'Peminjaman Aula berhasil ditambahkan');
             } else {
                 //jika gagal kirim pesan ke view
                 $this->notification('error', 'Peminjaman Aula gagal ditambahkan');
             }
+            }            
         }
         //redirect ke list informasi
         redirect('peminjaman_aula');
