@@ -7,9 +7,9 @@ class m_beasiswa extends CI_Model {
     }
 
     function tambah_beasiswa($parameter) {
-        $sql = 'INSERT INTO beasiswa (Id_JB,Id_Pengguna,Id_Jurusan,Jenjang,Alamat_Sekarang,
+        $sql = 'INSERT INTO beasiswa (Id_JB,Id_Pengguna,Id_Jurusan,Id_Periode,Jenjang,Alamat_Sekarang,
                 Nama_PT,Semester,IPK,Prestasi,Alasan,BANK,No_Rekening,Tanggal_Daftar,Status_Beasiswa) 
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
         return $this->db->query($sql, $parameter);
     }
 
@@ -57,6 +57,17 @@ class m_beasiswa extends CI_Model {
             $result = $query->result_array();
             $query->free_result();
             return true;
+        } else {
+            return false;
+        }
+    }
+    function get_periode_sistem() {
+        $sql = "SELECT Id_Periode FROM sistem";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $result = $query->row_array();
+            $query->free_result();
+            return $result;
         } else {
             return false;
         }

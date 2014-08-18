@@ -20,14 +20,16 @@ class beasiswa extends operator_base {
         $data['rs_beasiswa'] = $this->m_beasiswa->ambil_beasiswa(array(intval($offset), $this->batas));
         $data['total_data'] = $this->m_beasiswa->count_all_data();
         $data['jml_data'] = count($data['rs_beasiswa']);
+        $data['result_periode_sistem'] = $this->m_beasiswa->get_periode_sistem();
         //ambil nilai untuk dikirim ke view
         $data['halaman'] = $this->bagi_halaman->paging($data['total_data'], $this->batas, 'beasiswa/index');
-
+        error_reporting(0);
         parent::display('tampil_beasiswa', $data);
     }
 
     function tambah_beasiswa() {
         $this->_set_page_role('c');
+        error_reporting(0);
         //load javascript + css untuk tanggal 
         $this->load_css('assets/css/form-helper/bootstrap-formhelpers.min.css');
         $this->load_js('assets/js/plugins/form-helper/bootstrap-formhelpers.min.js');
@@ -35,6 +37,7 @@ class beasiswa extends operator_base {
         $this->load->library('form_validation');
         //load model
         $this->load->model('m_beasiswa');
+        $data['result_periode_sistem'] = $this->m_beasiswa->get_periode_sistem();
         //get data jenis beasiswa
         $data['rs_jenis_beasiswa'] = $this->m_beasiswa->ambil_jenis_beasiswa();
         //get data jurusan
@@ -43,6 +46,7 @@ class beasiswa extends operator_base {
     }
 
     function proses_tambah_beasiswa() {
+        error_reporting(0);
         if ($this->input->post('simpan') == null)
             redirect('beasiswa');
         //load library form validation
@@ -73,6 +77,7 @@ class beasiswa extends operator_base {
                 $this->input->post('jenis_beasiswa'),
                 $this->sesi->get_data_login('ID_PENGGUNA'),
                 $this->input->post('jurusan'),
+                $this->input->post('periode'),
                 $this->input->post('jenjang'),
                 $this->input->post('alamat_sekarang'),
                 $this->input->post('nama_pt'),
