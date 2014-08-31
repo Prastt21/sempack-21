@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 16, 2014 at 11:09 AM
--- Server version: 5.1.41
--- PHP Version: 5.3.1
+-- Waktu pembuatan: 31. Agustus 2014 jam 19:53
+-- Versi Server: 5.1.41
+-- Versi PHP: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -22,7 +22,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asuransi`
+-- Struktur dari tabel `asuransi`
 --
 
 CREATE TABLE IF NOT EXISTS `asuransi` (
@@ -41,23 +41,36 @@ CREATE TABLE IF NOT EXISTS `asuransi` (
   `Status_Asuransi` enum('WAITING','TERVERIFIKASI') NOT NULL DEFAULT 'WAITING',
   PRIMARY KEY (`Id_Asuransi`),
   KEY `Id_Pengguna` (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
--- Dumping data for table `asuransi`
+-- Dumping data untuk tabel `asuransi`
 --
 
 INSERT INTO `asuransi` (`Id_Asuransi`, `Jenis_Asuransi`, `Id_Pengguna`, `Id_Periode`, `Nama_RS`, `Alamat_RS`, `Kronologi`, `Tanggal_Daftar`, `Tanggal_Masuk`, `Tanggal_Keluar`, `Total_Biaya`, `Santunan`, `Status_Asuransi`) VALUES
-(1, 'KECELAKAAN', 3, 2, 'Cipto Mangun kusumo', 'Jakarta', 'Panjang Critanya', '2014-08-09', '2014-08-09', '2014-08-09', 445000, 44500, 'TERVERIFIKASI'),
-(2, 'KECELAKAAN', 2, 2, 'fsfs', 'fsfsf', 'fsfs', '2014-08-09', '2014-08-09', '2014-08-09', 500000, 0, 'TERVERIFIKASI'),
-(3, 'SAKIT', 4, 2, 'Dr. Sarjito', 'Jalan UGM Berjaya', 'Segalanya sudah Ada yang mengatur', '2014-08-11', '2014-08-08', '2014-08-09', 450000, NULL, 'WAITING'),
-(4, 'SAKIT', 5, 2, 'RS Condong Catur', 'Condong Catur', 'Keserempet Mobil', '2014-08-08', '2014-08-04', '2014-08-06', 230000, 230000, 'WAITING'),
-(5, 'KECELAKAAN', 5, 2, 'Bethesda', 'Sagan Lor', 'Ketilang dan jatuh sakit', '2014-08-12', '2014-08-10', '2014-08-11', 1000000, 1000000, 'TERVERIFIKASI');
+(6, 'SAKIT', 3, 2, 'RSU Dr Sardjito', 'Jalan Akasia UGM', 'Sakit Tipes, Telat Makan', '2014-08-01', '2014-07-30', '2014-07-31', 200000, 200000, 'TERVERIFIKASI'),
+(7, 'KECELAKAAN', 4, 2, 'RSU Dr Sardjito', 'Jalan Akasia UGM', 'Ketika Posisi Belok Diserempet Motor Sampe Meninggal', '2014-08-03', '2014-07-01', '2014-08-06', 5000000, 0, 'WAITING'),
+(8, 'KECELAKAAN', 5, 2, 'Rs Bethesda', 'Jalan Sagan Lor', 'Melarikan diri dari Tilangan polisi eh malah ketabrak mobil', '2014-08-02', '2014-07-02', '2014-07-08', 35000000, 0, 'WAITING'),
+(9, 'KECELAKAAN', 7, 2, 'RS Condong Catur', 'Jalan Condong Kanan', 'Tabrakan Guys', '2014-08-03', '2014-08-01', '2014-08-02', 4000000, 0, 'WAITING'),
+(10, 'SAKIT', 8, 2, 'RSU Dr Sardjito', 'Jalan Akasia UGM', 'Sakit Tipus', '2014-08-12', '2014-08-03', '2014-08-06', 230000, 0, 'WAITING'),
+(11, 'SAKIT', 9, 2, 'RS Condong Catur', 'Jalan Condong Ke Kanan', 'Sakit Tipus', '2014-08-10', '2014-08-04', '2014-08-06', 200500, 0, 'WAITING'),
+(12, 'KECELAKAAN', 10, 2, 'Rs Bethesda', 'Jalan Sagan Lor', 'Nabrak Pohon', '2014-08-03', '2014-08-01', '2014-08-02', 300000, 0, 'WAITING'),
+(13, 'KECELAKAAN', 11, 2, 'RSU Dr Sardjito', 'Jalan Akasia UGM', 'Keserempet Mobil', '2014-08-06', '2014-08-03', '2014-08-04', 1000000, 0, 'WAITING'),
+(14, 'SAKIT', 12, 2, 'Rs Bethesda', 'Jalan Sagan Lor', 'Sakit Hati', '2014-08-10', '2014-08-07', '2014-08-09', 200000, 0, 'WAITING'),
+(15, 'SAKIT', 13, 2, 'RS Condong Catur', 'Jalan Condong Ke Kanan', 'Sakit Jiwa', '2014-08-03', '2014-07-06', '2014-07-10', 1500000, 0, 'WAITING'),
+(16, 'KECELAKAAN', 14, 2, 'RS Condong Catur', 'Jalan Condong Ke kanan', 'Terjatuh dari motor', '2014-08-05', '2014-08-03', '2014-08-03', 40000, 0, 'WAITING'),
+(17, 'SAKIT', 15, 2, 'Rs Bethesda', 'Jalan Sagan Lor', 'Sakit Karena Mantan', '2014-08-04', '2014-08-01', '2014-08-03', 38900000, 0, 'WAITING'),
+(18, 'KECELAKAAN', 16, 2, 'RS Condong Catur', 'Jalan Condong Ke Kanan', 'Waktu Belok Eh Malah Mbelok', '2014-06-02', '2014-06-01', '2014-06-01', 250000, 0, 'WAITING'),
+(19, 'SAKIT', 17, 2, 'Rs Bethesda', 'Jalan Sagan Lor', 'Sakit Hati', '2014-08-04', '2014-08-01', '2014-08-03', 4500000, 0, 'WAITING'),
+(20, 'SAKIT', 18, 2, 'RS Condong Catur', 'Jalan Condong Ke kanan', 'Sakit Flu', '2014-07-09', '2014-07-03', '2014-07-07', 60000000, 0, 'WAITING'),
+(21, 'KECELAKAAN', 19, 2, 'RSU Dr Sardjito', 'Jalan Akasia UGM', 'Selalu Saja Nabrak', '2014-07-23', '2014-07-20', '2014-07-23', 53000000, 0, 'WAITING'),
+(22, 'SAKIT', 20, 2, 'RS Condong Catur', 'Jalan Condong Ke Kanan', 'Sakit Jantung', '2014-08-11', '2014-08-07', '2014-08-09', 4340000, 0, 'WAITING'),
+(23, 'KECELAKAAN', 25, 3, 'fafasfa', 'fasfasfa', 'fasfasf', '2014-08-19', '2014-08-19', '2014-08-19', 5000000, 0, 'WAITING');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aula`
+-- Struktur dari tabel `aula`
 --
 
 CREATE TABLE IF NOT EXISTS `aula` (
@@ -74,37 +87,37 @@ CREATE TABLE IF NOT EXISTS `aula` (
   `Waktu_Selesai` time NOT NULL,
   `Status_Penggunaan` enum('WAITING','TERVERIFIKASI','EXPIRED') DEFAULT NULL,
   PRIMARY KEY (`Id_Pinjam_Aula`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
--- Dumping data for table `aula`
+-- Dumping data untuk tabel `aula`
 --
 
 INSERT INTO `aula` (`Id_Pinjam_Aula`, `Id_Pengguna`, `Nama_Kegiatan`, `Ketua_Organisasi`, `Peserta`, `Jml_Peserta`, `Tanggal_Daftar`, `Tanggal_Pinjam`, `Waktu_Pinjam`, `Tanggal_Selesai`, `Waktu_Selesai`, `Status_Penggunaan`) VALUES
-(1, 3, 'Pelantikan BEM', 'Welly Tri W', 'Anggota BEM', 30, '2014-08-15 00:00:00', '2014-08-16', '10:00:00', '2014-08-16', '12:00:00', ''),
-(2, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-16', '10:00:00', '2014-08-16', '12:00:00', ''),
-(3, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:06:00', '2014-08-15', '22:06:00', ''),
-(4, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:16:00', '2014-08-15', '22:16:00', ''),
-(5, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:16:00', '2014-08-15', '22:16:00', ''),
-(6, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:18:00', '2014-08-15', '22:18:00', ''),
-(7, 3, 'Pelantikan AMCC', 'Slamet Susanto', 'Member AMCC', 45, '2014-08-15 00:00:00', '2014-08-15', '22:18:00', '2014-08-15', '22:18:00', ''),
-(8, 3, 'dsds', 'dsds', 'dsds', 0, '2014-08-15 00:00:00', '2014-08-15', '22:18:00', '2014-08-15', '22:18:00', ''),
-(9, 3, 'adada', 'dada', 'dadad', 0, '2014-08-15 00:00:00', '2014-08-15', '22:32:00', '2014-08-15', '22:32:00', ''),
-(10, 3, 'adada', 'dada', 'dadad', 0, '2014-08-15 00:00:00', '2014-08-15', '22:32:00', '2014-08-15', '22:32:00', ''),
-(11, 3, 'adada', 'dada', 'dadad', 0, '2014-08-15 00:00:00', '2014-08-15', '22:32:00', '2014-08-15', '22:32:00', ''),
-(12, 3, 'ddadad', 'Adida', 'dadad', 3, '2014-08-15 00:00:00', '2014-08-15', '22:00:00', '2014-08-15', '22:00:00', ''),
-(13, 3, 'adada', 'dada', 'dadad', 4, '2014-08-15 00:00:00', '2014-08-15', '22:00:00', '2014-08-15', '22:00:00', ''),
-(17, 3, 'fsfs', 'fsfs', 'fsfs', 4, '2014-08-16 00:00:00', '2014-08-16', '08:51:00', '2014-08-16', '08:51:00', ''),
-(18, 3, 'rere', 'fefe', 'fefef', 4, '2014-08-16 00:00:00', '2014-08-16', '08:51:00', '2014-08-16', '08:51:00', ''),
-(19, 3, 'd', 'dd', 'd', 5, '2014-08-16 00:00:00', '2014-08-16', '09:51:00', '2014-08-16', '09:51:00', ''),
-(20, 3, 'fdkkabfkajbk', 'f', 'fefef', 5, '2014-08-16 00:00:00', '2014-08-16', '09:51:00', '2014-08-16', '09:51:00', ''),
-(21, 3, 'fdhfjh', 'jbjhb', 'kjkjnk', 45, '2014-08-16 00:00:00', '2014-08-16', '10:05:00', '2014-08-16', '10:05:00', ''),
-(22, 3, 'cjdsbskjbckj', 'jnkjnkj', 'nknkjnkj', 56, '2014-08-16 00:00:00', '2014-08-16', '10:05:00', '2014-08-16', '10:05:00', '');
+(36, 16, 'Breafing Acara Basket', 'Rivaldo', 'Anggota UKM', 20, '2014-08-13 00:00:00', '2014-08-15', '20:00:00', '2014-08-15', '22:00:00', 'TERVERIFIKASI'),
+(35, 15, 'Rapat HMJTI', 'Eko Supeno', 'HMJTI', 54, '2014-08-06 00:00:00', '2014-08-08', '19:00:00', '2014-08-08', '23:00:00', 'WAITING'),
+(34, 14, 'Rapat Himmsi Tahunan', 'Surya  Ananta', 'Seluruh HIMMSI', 40, '2014-08-11 00:00:00', '2014-08-12', '20:15:00', '2014-08-12', '21:15:00', 'WAITING'),
+(33, 13, 'Breafing Panitia Junkis', 'Selviana', 'Panitia', 20, '2014-08-17 00:00:00', '2014-08-18', '20:00:00', '2014-08-18', '20:30:00', 'TERVERIFIKASI'),
+(32, 12, 'Stand Up Comedy', 'Jumadi', 'Umum', 58, '2014-08-17 00:00:00', '2014-08-21', '20:06:00', '2014-08-21', '21:06:00', 'WAITING'),
+(31, 11, 'Pesta Budaya', 'Sutrisno', 'Umum', 120, '2014-08-10 00:00:00', '2014-08-15', '20:00:00', '2014-08-15', '23:00:00', 'WAITING'),
+(30, 10, 'Belajar Bersama UAS', 'Niken Larasati', 'Anggota Himmsi', 60, '2014-08-10 00:00:00', '2014-08-13', '19:00:00', '2014-08-13', '21:00:00', 'WAITING'),
+(29, 9, 'Gathering Pengurus Senat', 'Febri Jatmiko', 'Senator Kelas', 50, '2014-08-04 00:00:00', '2014-08-05', '20:00:00', '2014-08-05', '21:00:00', 'WAITING'),
+(28, 8, 'Stand Up Comedy', 'Pace Sukece', 'Mahasiswa AMIKOM', 50, '2014-08-04 00:00:00', '2014-08-05', '12:00:00', '2014-08-05', '14:00:00', 'WAITING'),
+(27, 7, 'Pelantikan Pengurus Jashtis', 'Budi Setiawan', 'Calon Pengurus', 20, '2014-08-04 00:00:00', '2014-08-05', '07:00:00', '2014-08-05', '10:00:00', 'WAITING'),
+(26, 5, 'Koma Under Word', 'Titin Nurjanah', 'Mahasiswa AMIKOM', 23, '2014-08-17 00:00:00', '2014-08-04', '15:00:00', '2014-08-05', '15:00:00', 'WAITING'),
+(25, 4, 'Gathering  AMCC', 'Slamet Budi Projo', 'Member dan Pengurus AMCC', 45, '2014-08-02 00:00:00', '2014-08-02', '15:00:00', '2014-08-02', '17:00:00', 'WAITING'),
+(24, 3, 'Upgrading AEC', 'Alvin Dwi Putra', 'Panitia AEC', 45, '2014-08-01 00:00:00', '2014-08-02', '09:00:00', '2014-08-02', '12:00:00', 'WAITING'),
+(37, 17, 'Syukuran Tahunan', 'Budi Ristanto', 'Anggota UKM JAstish', 45, '2014-07-14 00:00:00', '2014-07-15', '20:00:00', '2014-07-15', '22:00:00', 'WAITING'),
+(38, 18, 'Upgrading Koma', 'Selviana', 'Anggota Koma', 35, '2014-07-28 00:00:00', '2014-07-29', '15:00:00', '2014-07-29', '17:00:00', 'WAITING'),
+(39, 19, 'Grand Opening UKM', 'Juanda Alsoino', 'Seluruh Mahasiswa Amikom', 65, '2014-07-10 00:00:00', '2014-07-11', '09:00:00', '2014-07-11', '17:00:00', 'WAITING'),
+(40, 20, 'Move On Dari PAcar Gue', 'Anna Maritana', 'Jomblowan Jomblowati', 50, '2014-08-18 00:00:00', '2014-08-19', '20:00:00', '2014-08-19', '21:00:00', 'WAITING'),
+(44, 3, 'adada', 'Adida', 'Anggota BEM', 2, '2014-08-18 00:00:00', '2014-08-18', '11:22:00', '2014-08-18', '12:22:00', 'WAITING'),
+(45, 3, 'adada', 'Adida', 'Anggota BEM', 2, '2014-08-18 00:00:00', '2014-08-18', '11:23:00', '2014-08-18', '12:23:00', 'WAITING');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `beasiswa`
+-- Struktur dari tabel `beasiswa`
 --
 
 CREATE TABLE IF NOT EXISTS `beasiswa` (
@@ -128,24 +141,54 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   KEY `Id_JB` (`Id_JB`),
   KEY `Id_Pengguna` (`Id_Pengguna`),
   KEY `Id_Jurusan` (`Id_Jurusan`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
 
 --
--- Dumping data for table `beasiswa`
+-- Dumping data untuk tabel `beasiswa`
 --
 
 INSERT INTO `beasiswa` (`Id_Beasiswa`, `Id_JB`, `Id_Pengguna`, `Id_Jurusan`, `Id_Periode`, `Jenjang`, `Alamat_Sekarang`, `Nama_PT`, `Semester`, `IPK`, `Prestasi`, `Alasan`, `BANK`, `No_Rekening`, `Tanggal_Daftar`, `Status_Beasiswa`) VALUES
-(23, 3, 5, 5, 2, 'STRATA 1', 'Solo', '', 6, '3', 'Juara Lomba Nyanyi', 'Meringankan Beban Ortu', '', 2147483647, '2014-08-11', 'WAITING'),
-(24, 3, 4, 4, 2, 'STRATA 1', 'Bantul', '', 4, '4', 'Juara Melukis', 'Meringankan beban Ortu', '', 2147483647, '2014-08-10', 'WAITING'),
-(25, 1, 1, 5, 2, 'DIPLOMA 3', 'Sleman', '', 2, '2', 'Lomba Speaking', 'Meringankan Beban Ortu', '', 2147483647, '2014-08-12', 'WAITING'),
-(26, 2, 2, 6, 2, 'STRATA 1', 'Mlati', '', 3, '4', 'Juara Melukis', 'Meringankan beban Ortu', '', 676655567, '2014-08-13', 'WAITING'),
-(32, 1, 3, 1, 2, 'DIPLOMA 3', 'dfd', 'STMIK AMIKOM YOGYAKARTA', 2, '5', 'dsds', 'dsds', 'MUAMALAT', 4555555, '2014-08-15', ''),
-(31, 1, 3, 1, 2, 'DIPLOMA 3', 'dddd', 'STMIK AMIKOM YOGYAKARTA', 2, '4', 'ddd', 'ddd', 'MUAMALAT', 4555555, '2014-08-15', '');
+(37, 2, 8, 1, 2, 'STRATA 1', 'Ngemplak', 'STMIK AMIKOM YOGYAKARTA', 4, '4', 'Juara Lomba Menyanyi', 'Meringankan Beban Orang Tua', 'MUAMALAT', 2110999199, '2014-08-02', 'WAITING'),
+(36, 2, 7, 6, 2, 'DIPLOMA 3', 'Condong Catur', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'Juara Lari Nasional', 'Meringankan Beban Orang Tua', 'MUAMALAT', 2089991891, '2014-08-01', 'WAITING'),
+(35, 3, 5, 4, 2, 'STRATA 1', 'Bantul', 'STMIK AMIKOM YOGYAKARTA', 6, '3', 'Lomba Karauke', 'Meringankan Beban Orang Tua', 'MUAMALAT', 1243554322, '2014-08-01', 'WAITING'),
+(34, 1, 4, 6, 2, 'DIPLOMA 3', 'Amerika', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'Jurara Olimpiade Matematika', 'Meringankan Beban Orang Tua', 'MUAMALAT', 1342345342, '2014-08-17', 'WAITING'),
+(33, 1, 3, 5, 2, 'DIPLOMA 3', 'Yogyakarta', 'STMIK AMIKOM YOGYAKARTA', 6, '4', 'Juara 1 Lomba Paduan Suara', 'Meringankan Beban Orang Tua', 'MUAMALAT', 1234567890, '2014-08-01', 'WAITING'),
+(38, 1, 9, 1, 2, 'STRATA 1', 'Kalasan', 'STMIK AMIKOM YOGYAKARTA', 4, '2', 'Juara Nyanyi', 'Meringannkan Beban Orang Tua', 'MUAMALAT', 1098900991, '2014-08-01', 'WAITING'),
+(39, 3, 10, 5, 2, 'DIPLOMA 3', 'Kalasan', 'STMIK AMIKOM YOGYAKARTA', 2, '4', 'Lomba Juara Nyanyi', 'Meringankan Beban Ortu', 'MUAMALAT', 1123123112, '2014-08-03', 'WAITING'),
+(40, 2, 11, 5, 2, 'DIPLOMA 3', 'Candi Gebang', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'Juara Lari Nasional', 'Membahagiakan Orang Tua', 'MUAMALAT', 2109090111, '2014-08-02', 'WAITING'),
+(41, 3, 12, 5, 2, 'DIPLOMA 3', 'Ngemplak', 'STMIK AMIKOM YOGYAKARTA', 4, '4', 'Juara Menyanyi', 'Meringankan beban Orang Tua', 'MUAMALAT', 1232122123, '2014-08-01', 'WAITING'),
+(42, 2, 13, 6, 2, 'DIPLOMA 3', 'Candi Indah', 'STMIK AMIKOM YOGYAKARTA', 6, '3', 'Juara menyanyi', 'Meringankan Beban Orang Tua', 'MUAMALAT', 2111090911, '2014-08-02', 'WAITING'),
+(43, 3, 14, 5, 2, 'DIPLOMA 3', 'Kaliurang', 'STMIK AMIKOM YOGYAKARTA', 4, '4', 'Juara Menynenyi', 'Meringankan Beban Ortu', 'MUAMALAT', 1212220901, '2014-08-01', 'WAITING'),
+(44, 2, 15, 5, 2, 'DIPLOMA 3', 'Ngemplak', 'STMIK AMIKOM YOGYAKARTA', 4, '4', 'Juara Menyanyi', 'Meringankan beban Orang Tua', 'MUAMALAT', 2110901111, '2014-08-02', 'WAITING'),
+(45, 2, 16, 4, 2, 'STRATA 1', 'Yogyakarta', 'STMIK AMIKOM YOGYAKARTA', 6, '3', 'Lomba Lari NAsional', 'Meringaknan Bebean Orang Tua', 'MUAMALAT', 2112122111, '2014-08-02', 'WAITING'),
+(46, 2, 17, 5, 2, 'DIPLOMA 3', 'Ngemplak', 'STMIK AMIKOM YOGYAKARTA', 4, '4', 'Juara menyanyi', 'Meringankan Beabn Orang Tua', 'MUAMALAT', 2111090911, '2014-08-02', 'WAITING'),
+(47, 1, 18, 1, 2, 'STRATA 1', 'Kalasan', 'STMIK AMIKOM YOGYAKARTA', 2, '2', 'Tidak Punya Prestasi', 'Meringankan Beban Orang tua', 'MUAMALAT', 1212322111, '2014-08-02', 'WAITING'),
+(48, 3, 19, 4, 2, 'STRATA 1', 'Mlati', 'STMIK AMIKOM YOGYAKARTA', 2, '4', 'Tidak ada', 'Meringankan beban Orang Tua', 'MUAMALAT', 1223221122, '2014-08-02', 'WAITING'),
+(49, 3, 20, 1, 2, 'STRATA 1', 'Minomartani', 'STMIK AMIKOM YOGYAKARTA', 4, '4', 'Ga ada', 'Meringankan Beban Orang Tua', 'MUAMALAT', 2112121112, '2014-08-02', 'WAITING'),
+(56, 3, 25, 1, 2, 'STRATA 1', 'xxx', 'STMIK AMIKOM YOGYAKARTA', 4, '3', 'xx', 'xx', 'MUAMALAT', 22, '2014-08-19', 'WAITING');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `informasi`
+-- Struktur dari tabel `histori_pendaftaran`
+--
+
+CREATE TABLE IF NOT EXISTS `histori_pendaftaran` (
+  `Id_Pengguna` int(10) NOT NULL,
+  `Id_Periode` int(10) NOT NULL,
+  `Id_Beasiswa` int(10) NOT NULL,
+  `Id_Asuransi` int(10) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `histori_pendaftaran`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `informasi`
 --
 
 CREATE TABLE IF NOT EXISTS `informasi` (
@@ -159,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `informasi` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
--- Dumping data for table `informasi`
+-- Dumping data untuk tabel `informasi`
 --
 
 INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`, `Jenis_Info`, `Tanggal_info`) VALUES
@@ -174,7 +217,7 @@ INSERT INTO `informasi` (`Id_Informasi`, `Id_Pengguna`, `Judul_Info`, `Isi_Info`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jenis_beasiswa`
+-- Struktur dari tabel `jenis_beasiswa`
 --
 
 CREATE TABLE IF NOT EXISTS `jenis_beasiswa` (
@@ -186,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `jenis_beasiswa` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `jenis_beasiswa`
+-- Dumping data untuk tabel `jenis_beasiswa`
 --
 
 INSERT INTO `jenis_beasiswa` (`Id_JB`, `Jenis_Beasiswa`, `Warna_Beasiswa`, `Keterangan`) VALUES
@@ -197,7 +240,7 @@ INSERT INTO `jenis_beasiswa` (`Id_JB`, `Jenis_Beasiswa`, `Warna_Beasiswa`, `Kete
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jurusan`
+-- Struktur dari tabel `jurusan`
 --
 
 CREATE TABLE IF NOT EXISTS `jurusan` (
@@ -209,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `jurusan` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `jurusan`
+-- Dumping data untuk tabel `jurusan`
 --
 
 INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna_Jurusan`) VALUES
@@ -221,45 +264,7 @@ INSERT INTO `jurusan` (`Id_Jurusan`, `Nama_Jurusan`, `Singkatan_Jurusan`, `Warna
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pendaftaran_asuransi`
---
-
-CREATE TABLE IF NOT EXISTS `pendaftaran_asuransi` (
-  `Id_Pengguna` int(10) NOT NULL,
-  `Id_Periode` int(10) NOT NULL,
-  `Id_Asuransi` int(10) NOT NULL,
-  KEY `Id_Pengguna` (`Id_Pengguna`),
-  KEY `Id_Asuransi` (`Id_Asuransi`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pendaftaran_asuransi`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pendaftaran_beasiswa`
---
-
-CREATE TABLE IF NOT EXISTS `pendaftaran_beasiswa` (
-  `Id_Pengguna` int(10) NOT NULL,
-  `Id_Periode` int(10) NOT NULL,
-  `Id_Beasiswa` int(10) NOT NULL,
-  KEY `Id_Pengguna` (`Id_Pengguna`),
-  KEY `Id_Beasiswa` (`Id_Beasiswa`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pendaftaran_beasiswa`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pengguna`
+-- Struktur dari tabel `pengguna`
 --
 
 CREATE TABLE IF NOT EXISTS `pengguna` (
@@ -284,23 +289,43 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
   `Online` int(1) NOT NULL,
   `Sesi` datetime NOT NULL,
   PRIMARY KEY (`Id_Pengguna`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
--- Dumping data for table `pengguna`
+-- Dumping data untuk tabel `pengguna`
 --
 
 INSERT INTO `pengguna` (`Id_Pengguna`, `Id_Level`, `Nama_Pengguna`, `Status_Pengguna`, `NIK_NIM`, `Password`, `Gender`, `No_Telp`, `Alamat`, `Tempat_Lahir`, `Tanggal_Lahir`, `Nama_Ortu`, `Alamat_Ortu`, `No_Telp_Ortu`, `Pekerjaan_Ortu`, `Penghasilan_Ortu`, `Jml_Tanggungan`, `Email`, `Online`, `Sesi`) VALUES
-(1, 1, 'Urip Tri Prastowo', 'KARYAWAN', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Purbalingga', 'Purbalingga', '1993-04-21', 'John Mayer', 'Yogyakarta', 2147483647, 'WIRASWASTA', 30000000, 2, 'prastt21@gmail.com', 1, '2014-08-16 08:47:54'),
-(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', 'Waljinah', 'Jakarta', 2147483647, 'NELAYAN/PETANI', 89990000, 0, 'aku@masiyak.com', 0, '2014-08-12 00:02:39'),
-(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', 'Tumini', 'Brebes', 27488990, 'TNI/POLRI', 10000000, 1, 'ratna@amikom.ac.id', 0, '2014-08-16 08:54:06'),
-(4, 3, 'Arga Saputra\r\n', 'MAHASISWA', '11.01.2816', '6662e946315fb964f16d5e5692348c1a', 'PRIA', 988899900, 'Tegal', 'Tegal', '1991-02-12', 'Warimin', 'Tegal', 2147483647, 'NELAYAN/PETANI', 67000000, 2, 'arga@amikom.ac.id', 0, '0000-00-00 00:00:00'),
-(5, 3, 'Ita Wulandari\r\n', 'MAHASISWA', '11.01.2817', '8a2f53811f706df10327ccd2c863c8e5', 'PRIA', 908889000, 'Jogja', 'Jogja', '1990-08-08', 'Jumadi', 'Jakarta', 2147483647, 'TNI/POLRI', 2000000, 0, 'agus@amikom.ac.id', 0, '0000-00-00 00:00:00');
+(1, 1, 'Urip Tri Prastowo', 'MAHASISWA', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'PRIA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1993-04-21', 'John Mayer', 'Yogyakarta', 2147483647, 'WIRASWASTA', 30000000, 2, 'prastt21@gmail.com', 1, '2014-08-25 11:16:39'),
+(2, 2, 'Praditya Kurniawan', 'KARYAWAN', 'operator', '4b583376b2767b923c3e1da60d10de59', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1992-01-06', 'Waljinah', 'Jakarta', 2147483647, 'NELAYAN/PETANI', 89990000, 0, 'aku@masiyak.com', 0, '2014-08-17 21:56:30'),
+(3, 3, 'Ratnasari Handaningrum', 'MAHASISWA', '11.02.8042', '9c25e12ed01a7720613081442e598f0a', 'WANITA', 2147483647, 'Yogyakarta', 'Yogyakarta', '1989-07-04', 'Tumini', 'Brebes', 27488990, 'TNI/POLRI', 10000000, 1, 'ratna@amikom.ac.id', 0, '2014-08-18 12:21:32'),
+(4, 3, 'Arga Saputra\r\n', 'MAHASISWA', '11.01.2816', '1c874ae2c295e7d824a09d2df9535100', 'PRIA', 988899900, 'Tegal', 'Tegal', '1991-02-12', 'Warimin', 'Tegal', 2147483647, 'NELAYAN/PETANI', 67000000, 2, 'arga@amikom.ac.id', 0, '2014-08-17 16:33:02'),
+(5, 3, 'Ita Wulandari\r\n', 'MAHASISWA', '11.01.2817', '3544fdc22d5a3e224659d896ca719e52', 'PRIA', 908889000, 'Jogja', 'Jogja', '1990-08-08', 'Jumadi', 'Jakarta', 2147483647, 'TNI/POLRI', 2000000, 0, 'agus@amikom.ac.id', 0, '2014-08-17 22:00:44'),
+(7, 3, 'Hartanto', 'MAHASISWA', '11.01.2818', '9dc0e020b4c9e0299a97849451098f51', 'PRIA', 2147483647, 'Jember', 'Jember', '1990-08-01', 'Sarimin', 'Jember', 2147483647, 'PEGAWAI SWASTA', 45000000, 2, 'hartanto@amikom.ac.i', 1, '2014-08-17 20:16:29'),
+(8, 3, 'Gerry Hermawan', 'MAHASISWA', '11.01.2819', '9077f98d0d08b907866409f267067ba2', 'PRIA', 2147483647, 'Singkawang', 'Singkawang', '1989-03-16', 'Singa', 'Singkawang', 2147483647, 'WIRASWASTA', 5000000, 4, 'gerry@amikom.ac.id', 1, '2014-08-17 20:23:39'),
+(9, 3, 'ANTONIUS HERU WINDARTO', 'MAHASISWA', '11.01.2820', '05747d4cfe54165ac9717271f8799d14', 'PRIA', 2147483647, 'Sayegan', 'Sayegan', '1990-02-06', 'Jumadi', 'Sayegan', 2147483647, 'NELAYAN/PETANI', 450000, 2, 'anto@amikom.ac.id', 1, '2014-08-17 20:31:25'),
+(10, 3, 'Ridho Ilyasa', 'MAHASISWA', '11.01.2821', '00d8bd320975cd752f1dd3247e73c236', 'PRIA', 2147483647, 'Jogja', 'Belanda', '2014-08-01', 'Jumanji', 'Jogja', 2147483647, 'WIRASWASTA', 400000, 1, 'ridho@amikom.ac.id', 1, '2014-08-17 20:46:56'),
+(11, 3, 'Heri Nugraha', 'MAHASISWA', '11.02.7901', '5556cbe639707d8c747fe11710d26fa5', 'PRIA', 2147483647, 'Banjar', 'Banjar', '1990-08-12', 'Rani', 'Banjar', 2147483647, 'LAINNYA', 300000, 3, 'heri@amikom.ac.id', 1, '2014-08-17 20:54:27'),
+(12, 3, 'M.Thoriq Fauzi', 'MAHASISWA', '11.02.7902', '3bc0e458b4efd1ad901865901b9cacb4', 'PRIA', 2147483647, 'Kebumen', 'Kebumen', '1990-08-20', 'Jumadi', 'Kebumen', 2147483647, 'WIRASWASTA', 23445000, 5, 'Thoriq@amikom.ac.id', 1, '2014-08-17 21:06:24'),
+(13, 3, 'Juldy Armin', 'MAHASISWA', '11.02.7905', '23f0b6a56872edb0cac1314c5ad06638', 'WANITA', 2147483647, 'Johor Baru', 'Johor Baru', '1992-08-11', 'Huda', 'Johor Baru', 2147483647, 'PEGAWAI SWASTA', 8000000, 2, 'juldy@amikom.ac.id', 1, '2014-08-17 21:10:52'),
+(14, 3, 'Agus Setiawan', 'MAHASISWA', '11.02.7909', 'ef9a2eaed093211af9b23b7aa825b292', 'PRIA', 2147483647, 'Gamping', 'Gamping', '1993-08-01', 'Gajah Seno', 'Gamping', 2147483647, 'TNI/POLRI', 6000000, 3, 'agus@amikom.ac.id', 1, '2014-08-17 21:15:06'),
+(15, 3, 'Catur Ragil', 'MAHASISWA', '11.02.7910', 'a3378f028bb9248765db15faa462e53a', 'WANITA', 2147483647, 'Sayegan', 'Sayegan', '1996-08-23', 'Sayenan', 'Jogjakarta', 2147483647, 'PEGAWAI SWASTA', 4000000, 2, 'catur@amikom.ac.id', 1, '2014-08-17 21:21:27'),
+(16, 3, 'Hartini', 'MAHASISWA', '11.02.7916', '8b8f0660d25c935298d52bf7962c4785', 'WANITA', 2147483647, 'Jogja', 'Jogja', '1989-08-03', 'Jarudin', 'Jogja', 2147483647, 'TNI/POLRI', 5000000, 4, 'hartiini@amikom.ac.i', 1, '2014-08-17 21:26:38'),
+(17, 3, 'Reza Purnama', 'MAHASISWA', '11.02.7922', '5014e0701b9ff7e8669d0ee73042f504', 'PRIA', 2147483647, 'Ngemplak', 'Ngemplak', '1992-08-02', 'Huriah', 'Ngemplak', 2147483647, 'LAINNYA', 3000000, 5, 'reza@amikom.ac.id', 1, '2014-08-17 21:34:18'),
+(18, 3, 'Ella Oktaria', 'MAHASISWA', '11.02.7930', '12232e6a87efaa9f9a153802f27646ab', 'PRIA', 5667, 'Purwokerto', 'Purwokerto', '1995-08-02', 'Imam', 'Purwokerto', 2147483647, 'PEGAWAI SWASTA', 37000000, 3, 'ella@amikom.ac.id', 1, '2014-08-17 21:41:21'),
+(19, 3, 'Panji Priambodo', 'MAHASISWA', '11.02.7933', 'c4f7db0dd1f437e0ce25621965dd76e2', 'WANITA', 2147483647, 'Maos', 'Maos', '1997-08-20', 'Musa', 'Yogyakarta', 2147483647, 'TNI/POLRI', 40000000, 4, 'panji@amikom.ac.id', 1, '2014-08-17 21:48:11'),
+(20, 3, 'Anna Rubiyanti', 'MAHASISWA', '11.02.7936', '7d1538de8aee555294391ab8eb3b2972', 'WANITA', 67555, 'Cilacap', 'Cilacap', '1997-08-14', 'Rubiyantos', 'Cilacap', 455676554, 'TNI/POLRI', 50000000, 1, 'anna@amikom.ac.id', 0, '2014-08-17 21:52:15'),
+(21, 3, 'Suyatmi Sulaeman', 'KARYAWAN', '190302019', '6e9a660b0fe52f497be2c4a3b37bae59', 'WANITA', 2147483647, 'Maguwoharjo', 'Cilacap', '1989-08-18', 'Suyar', 'Cilacap', 2147483647, 'LAINNYA', 2300000, 0, 'suyatmi@amikomac.id', 1, '2014-08-12 14:59:24'),
+(22, 3, 'Kusnawi', 'KARYAWAN', '190302112', '485f73aa8550b3b122c37ef1dc91daf1', 'PRIA', 2147483647, 'Sagan', 'Sagan', '1989-08-02', 'Kusnawi', 'Sagan', 1221313, 'LAINNYA', 2900000, 0, 'kusnawi@amikom.ac.id', 1, '2014-08-11 15:02:50'),
+(23, 3, 'Heri Sismoro', 'KARYAWAN', '190302057', '7b805f09639b2aba9206666f1aef9327', 'PRIA', 2147483647, 'Jogja', 'Jogja', '1989-08-01', 'Heri', 'Jogja', 2147483647, 'LAINNYA', 23000000, 1, 'heris@amikom.ac.id', 1, '2014-08-18 16:06:51'),
+(24, 3, 'Rendy Yoga', 'MAHASISWA', '11.12.6315', 'b6bf4ead10e598e2ed937debab4f61b4', 'PRIA', 31314124, 'Ponorogo', 'Ponorogo', '1993-08-04', 'Reog', 'Ponorogo', 2147483647, 'PNS', 3000000, 2, 'rendyyoga@amikom.ac,', 1, '2014-08-08 15:16:10'),
+(25, 3, 'Akbar Habibulloh', 'MAHASISWA', '11.12.6313', 'b715d6170823703a145b41360c8b57da', 'PRIA', 2147483647, 'Wonogiri', 'Wonogiri', '1993-08-02', 'Khalis', 'Wonogiri', 2147483647, 'PEGAWAI SWASTA', 4000000, 2, 'akbar@amikom.ac.id', 1, '2014-08-19 10:11:17'),
+(26, 3, 'Devi Rakhmawati', 'MAHASISWA', '11.12.6306', 'e95aba5b8a19ba572a5cab6c0457a474', 'WANITA', 2147483647, 'Magelang', 'Magelang', '1990-08-07', 'Juminah', 'Magelang', 2147483647, 'PEGAWAI SWASTA', 1000000, 1, 'devi@amikom.ac.id', 1, '2014-08-06 15:19:13');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `periode`
+-- Struktur dari tabel `periode`
 --
 
 CREATE TABLE IF NOT EXISTS `periode` (
@@ -308,19 +333,20 @@ CREATE TABLE IF NOT EXISTS `periode` (
   `Tahun` int(4) NOT NULL,
   `Keterangan` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`Id_Periode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `periode`
+-- Dumping data untuk tabel `periode`
 --
 
 INSERT INTO `periode` (`Id_Periode`, `Tahun`, `Keterangan`) VALUES
-(2, 2014, 'Tahun Pemilu');
+(2, 2014, 'Tahun Pemilu'),
+(3, 2015, 'zdfhajhfba');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sistem`
+-- Struktur dari tabel `sistem`
 --
 
 CREATE TABLE IF NOT EXISTS `sistem` (
@@ -332,16 +358,16 @@ CREATE TABLE IF NOT EXISTS `sistem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sistem`
+-- Dumping data untuk tabel `sistem`
 --
 
 INSERT INTO `sistem` (`Status_Sistem`, `Id_Periode`, `Pengumuman_Sistem`, `StatusRequest_Sistem`, `KarReq_Sistem`) VALUES
-('TIDAK AKTIF', 2, 'Jika Ada Kesulitan dalam menggunakan sistem ini silahkan hubungi Urip Tri Prastowo, 085647993380', 'AKTIF', 45000);
+('AKTIF', 3, 'Jika Ada Kesulitan dalam menggunakan sistem ini silahkan hubungi Urip Tri Prastowo, 085647993380', 'AKTIF', 45000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_level`
+-- Struktur dari tabel `sys_level`
 --
 
 CREATE TABLE IF NOT EXISTS `sys_level` (
@@ -353,7 +379,7 @@ CREATE TABLE IF NOT EXISTS `sys_level` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `sys_level`
+-- Dumping data untuk tabel `sys_level`
 --
 
 INSERT INTO `sys_level` (`Id_Level`, `Nama_Level`, `Deskripsi_Level`, `Portal_Level`) VALUES
@@ -364,7 +390,7 @@ INSERT INTO `sys_level` (`Id_Level`, `Nama_Level`, `Deskripsi_Level`, `Portal_Le
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_level_menu`
+-- Struktur dari tabel `sys_level_menu`
 --
 
 CREATE TABLE IF NOT EXISTS `sys_level_menu` (
@@ -378,7 +404,7 @@ CREATE TABLE IF NOT EXISTS `sys_level_menu` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
--- Dumping data for table `sys_level_menu`
+-- Dumping data untuk tabel `sys_level_menu`
 --
 
 INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VALUES
@@ -412,7 +438,6 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 (33, 2, 30, '0111'),
 (34, 2, 31, '0110'),
 (35, 2, 32, '0110'),
-(37, 2, 34, '1111'),
 (38, 2, 26, '1111'),
 (39, 3, 1, '0100'),
 (40, 3, 29, '0100'),
@@ -425,7 +450,7 @@ INSERT INTO `sys_level_menu` (`id_level_menu`, `id_level`, `id_menu`, `hak`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sys_menu`
+-- Struktur dari tabel `sys_menu`
 --
 
 CREATE TABLE IF NOT EXISTS `sys_menu` (
@@ -443,7 +468,7 @@ CREATE TABLE IF NOT EXISTS `sys_menu` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
--- Dumping data for table `sys_menu`
+-- Dumping data untuk tabel `sys_menu`
 --
 
 INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`, `deskripsi`, `link`, `icon`, `mdb`, `mdd`) VALUES
@@ -491,29 +516,17 @@ INSERT INTO `sys_menu` (`id_menu`, `nama_menu`, `tampil`, `urutan`, `parent_id`,
 (44, 'Jadwal Aula', 1, 2, 0, 'Jadwal Peminjaman Aula', 'jadwal_peminjaman_aula', NULL, 1, NULL);
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `asuransi`
+-- Ketidakleluasaan untuk tabel `asuransi`
 --
 ALTER TABLE `asuransi`
   ADD CONSTRAINT `asuransi_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
 
 --
--- Constraints for table `pendaftaran_asuransi`
---
-ALTER TABLE `pendaftaran_asuransi`
-  ADD CONSTRAINT `pendaftaran_asuransi_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
-
---
--- Constraints for table `pendaftaran_beasiswa`
---
-ALTER TABLE `pendaftaran_beasiswa`
-  ADD CONSTRAINT `pendaftaran_beasiswa_ibfk_1` FOREIGN KEY (`Id_Pengguna`) REFERENCES `pengguna` (`Id_Pengguna`);
-
---
--- Constraints for table `sys_level_menu`
+-- Ketidakleluasaan untuk tabel `sys_level_menu`
 --
 ALTER TABLE `sys_level_menu`
   ADD CONSTRAINT `sys_level_menu_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `sys_menu` (`id_menu`),
